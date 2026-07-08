@@ -16,6 +16,8 @@ import { SpiritArt } from './SpiritArt'
 
 const spirits = spiritsData as Spirit[]
 const COMPLEXITIES: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
+/** Deliberately narrow: three picks plus a wildcard, not a menu to agonise over. */
+const SHORTLIST_SIZE = 3
 
 function RandomChooser({ onBack }: { onBack: () => void }) {
   const [complexityCeiling, setComplexityCeiling] = useState<Complexity | ''>('')
@@ -66,25 +68,26 @@ function RandomChooser({ onBack }: { onBack: () => void }) {
 function RecommendedCard({
   spirit,
   score,
-  showWhyYou,
   weights,
 }: {
   spirit: Spirit
   score: number
-  showWhyYou: boolean
   weights: Weights
 }) {
   const [showAspects, setShowAspects] = useState(false)
   const nudge = findAspectNudge(spirit, weights)
 
   return (
-    <li className={showWhyYou ? 'emphasized' : undefined}>
-      <OcfduRadar ratings={spirit.ratings} />
-      <div>
-        <p>
-          {spirit.name} — score {score.toFixed(1)}
+    <li className="rec-card">
+      <SpiritArt spirit={spirit} className="rec-card-art" />
+      <div className="rec-card-body">
+        <h3>{spirit.name}</h3>
+        <p className="meta">
+          {spirit.expansion} · {spirit.complexity} · score {score.toFixed(1)}
         </p>
-        {showWhyYou && <p className="why-you">{whyYou(spirit, weights)}</p>}
+        <p className="why-you">{whyYou(spirit, weights)}</p>
+        <p>{spirit.summary}</p>
+        <OcfduRadar ratings={spirit.ratings} />
         {spirit.notes && <p className="notes">{spirit.notes}</p>}
         {nudge && <p className="aspect-nudge">{nudge.message}</p>}
         {spirit.aspects.length > 0 && (
@@ -279,7 +282,7 @@ function ResultsBoard({
       }),
     [prefs, effectiveWeights],
   )
-  const shortlist = ranked.slice(0, 5)
+  const shortlist = ranked.slice(0, SHORTLIST_SIZE)
   const wildcard = useMemo(
     () => selectWildcard(ranked, effectiveWeights, prefs.complexityCeiling, wildcardOffset),
     [ranked, effectiveWeights, prefs, wildcardOffset],
@@ -287,16 +290,10 @@ function ResultsBoard({
 
   return (
     <section>
-      <h2>Your shortlist</h2>
-      <ol>
-        {shortlist.map(({ spirit, score }, i) => (
-          <RecommendedCard
-            key={spirit.id}
-            spirit={spirit}
-            score={score}
-            showWhyYou={i < 3}
-            weights={effectiveWeights}
-          />
+      <h2>Your top {SHORTLIST_SIZE}</h2>
+      <ol className="rec-list">
+        {shortlist.map(({ spirit, score }) => (
+          <RecommendedCard key={spirit.id} spirit={spirit} score={score} weights={effectiveWeights} />
         ))}
       </ol>
 
@@ -310,12 +307,20 @@ function ResultsBoard({
       {wildcard && (
         <div className="wildcard">
           <h3>Wildcard</h3>
-          <OcfduRadar ratings={wildcard.ratings} />
-          <p>{wildcard.name}</p>
-          <p>{wildcard.summary}</p>
-          <button type="button" onClick={() => setWildcardOffset((n) => n + 1)}>
-            Reroll wildcard
-          </button>
+          <div className="rec-card">
+            <SpiritArt spirit={wildcard} className="rec-card-art" />
+            <div className="rec-card-body">
+              <h4>{wildcard.name}</h4>
+              <p className="meta">
+                {wildcard.expansion} · {wildcard.complexity}
+              </p>
+              <p>{wildcard.summary}</p>
+              <OcfduRadar ratings={wildcard.ratings} />
+              <button type="button" onClick={() => setWildcardOffset((n) => n + 1)}>
+                Reroll wildcard
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
