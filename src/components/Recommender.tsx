@@ -5,6 +5,7 @@ import { answersToWeights, type Answers } from '../domain/answersToWeights'
 import { findAspectNudge } from '../domain/aspectNudge'
 import { complexityStore } from '../domain/complexityStore'
 import { expand, type Configuration } from '../domain/configurations'
+import { gameLog } from '../domain/gameLog'
 import { QUESTIONS } from '../domain/questionnaire'
 import { drawRandom } from '../domain/randomChoose'
 import { dedupeBySpirit, recommend, type Weights } from '../domain/recommend'
@@ -112,20 +113,23 @@ function useRanking() {
     () => (tuned ? tuneTowardGaps(prefs.weights, roleGaps) : prefs.weights),
     [prefs.weights, roleGaps, tuned],
   )
-  const ranked = useMemo(
-    () =>
-      dedupeBySpirit(
-        recommend(expand(spirits, complexityStore.getAll()), weights, {
-          tempo: prefs.tempo,
-          boardControl: prefs.boardControl,
-          complexityImportance: prefs.complexityImportance,
-          complexityCeiling: prefs.complexityCeiling,
-          tierPrior: tierStore.getAll(),
-          tierKnob: prefs.tierKnob,
-        }),
-      ),
-    [prefs, weights],
-  )
+  const ranked = useMemo(() => {
+    const configsForRanking = expand(spirits, complexityStore.getAll())
+    const timesPlayed = Object.fromEntries(
+      configsForRanking.map((c) => [c.configId, gameLog.timesPlayed(c.configId)]),
+    )
+    return dedupeBySpirit(
+      recommend(configsForRanking, weights, {
+        tempo: prefs.tempo,
+        boardControl: prefs.boardControl,
+        complexityImportance: prefs.complexityImportance,
+        complexityCeiling: prefs.complexityCeiling,
+        tierPrior: tierStore.getAll(),
+        tierKnob: prefs.tierKnob,
+        timesPlayed,
+      }),
+    )
+  }, [prefs, weights])
   const wildcard = useMemo(
     () => selectWildcard(ranked, weights, prefs.complexityCeiling, wildcardOffset),
     [ranked, weights, prefs.complexityCeiling, wildcardOffset],

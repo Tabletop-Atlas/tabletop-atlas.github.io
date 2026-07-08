@@ -13,8 +13,12 @@ export interface RecommendOptions {
   complexityCeiling?: Complexity
   /** configId -> tier, e.g. from tiers.json. Missing entries fall back to a neutral prior. */
   tierPrior?: Record<string, Tier>
-  /** 0..1 knob (from questionnaire Q10 / a live control); scales up to ALPHA_MAX. */
+  /** 0..1 knob (from questionnaire Q10 / a live control); scales up to ALPHA_MAX. 1 = raw
+   * power (favour tier), 0 = something fresh (favour never-played configurations instead). */
   tierKnob?: number
+  /** configId -> games played, e.g. from gameLog.timesPlayed. Missing entries are treated as
+   * 0 (never played). The only fact the game log feeds into scoring - never outcomes. */
+  timesPlayed?: Record<string, number>
 }
 
 export interface RankedConfiguration {
@@ -32,6 +36,10 @@ const NEUTRAL_TIER_VALUE = 4
 // Max weight the tier prior can contribute, kept below fit's full 0..1 range so a
 // configuration with the single best fit in the pool can never be outranked by tier alone.
 const ALPHA_MAX = 0.5
+
+// Max weight the novelty knob can contribute at its "something fresh" end (tierKnob = 0);
+// same ceiling as ALPHA_MAX so fit can never be fully overridden by play count either.
+const NOVELTY_MAX = 0.5
 
 // Scales how steeply complexity above the stated ceiling buries a configuration's score.
 const COMPLEXITY_PENALTY_SCALE = 5
@@ -103,8 +111,11 @@ export function recommend(
     complexityCeiling,
     tierPrior,
     tierKnob = 0,
+    timesPlayed,
   } = options
   const alpha = tierKnob * ALPHA_MAX
+  // The novelty end of the same knob: strongest when tierKnob is at its "fresh" (0) end.
+  const beta = (1 - tierKnob) * NOVELTY_MAX
 
   const scored = configs.map((config) => ({
     config,
@@ -113,15 +124,18 @@ export function recommend(
       tagBoost(config, tempo, boardControl) -
       complexityPenalty(config, complexityCeiling, complexityImportance),
     tierValue: tierPrior?.[config.configId] ? TIER_VALUE[tierPrior[config.configId]] : NEUTRAL_TIER_VALUE,
+    // Negated so normalizing puts never-played configurations (0 plays) at the high end.
+    noveltyValue: -(timesPlayed?.[config.configId] ?? 0),
   }))
 
   const normalizedFit = minMaxNormalize(scored.map((s) => s.fit))
   const normalizedTier = minMaxNormalize(scored.map((s) => s.tierValue))
+  const normalizedNovelty = minMaxNormalize(scored.map((s) => s.noveltyValue))
 
   return scored
     .map((s, i) => ({
       config: s.config,
-      score: normalizedFit[i] + alpha * normalizedTier[i],
+      score: normalizedFit[i] + alpha * normalizedTier[i] + beta * normalizedNovelty[i],
       tierValue: s.tierValue,
     }))
     .sort(
