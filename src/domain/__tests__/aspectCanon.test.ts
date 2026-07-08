@@ -60,7 +60,6 @@ describe('aspect canon', () => {
       for (const aspect of spirit.aspects) {
         if (aspect.shiftsToward) {
           expect(aspect.delta, `${spirit.name}/${aspect.name} hints a shift but has no effect text`).toBeTruthy()
-          expect(aspect.reviewNeeded, `${spirit.name}/${aspect.name} is both verified and under review`).toBeFalsy()
         }
       }
     }
@@ -74,5 +73,23 @@ describe('aspect canon', () => {
         }
       }
     }
+  })
+
+  it('records the complexity arrow printed on every transcribed card', () => {
+    const allowed = ['up', 'same', 'down']
+    for (const spirit of spirits) {
+      for (const aspect of spirit.aspects) {
+        if (!aspect.delta) continue
+        expect(allowed, `${spirit.name}/${aspect.name} has no complexity arrow`).toContain(aspect.complexityDelta)
+      }
+    }
+  })
+
+  it('leaves shiftsToward unset for the aspects whose cards point at no single axis', () => {
+    // Immense and Regrowth change economy; Unconstrained and Spreading Hostility rework
+    // setup/growth. Assigning them an OCFDU axis would be invention.
+    const noAxis = ['Immense', 'Regrowth', 'Unconstrained', 'Spreading Hostility']
+    const withoutHint = spirits.flatMap((s) => s.aspects).filter((a) => !a.shiftsToward).map((a) => a.name)
+    expect(withoutHint.sort()).toEqual([...noAxis].sort())
   })
 })

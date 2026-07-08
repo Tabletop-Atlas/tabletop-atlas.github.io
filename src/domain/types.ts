@@ -13,13 +13,19 @@ export interface OCFDU {
   utility: number
 }
 
+/** Printed on the aspect card as an up/level/down arrow. */
+export type ComplexityDelta = 'up' | 'same' | 'down'
+
 export interface Aspect {
   name: string
-  /** One-line description of how the aspect changes play. Absent until transcribed from the card. */
+  /** One-line effect, transcribed from the aspect card. Absent until transcribed. */
   delta?: string
+  /** Fact: the complexity arrow printed on the card. */
+  complexityDelta?: ComplexityDelta
   /**
-   * Lightweight axis hint, e.g. "+utility". Not a full OCFDU delta.
-   * Absent means the aspect nudge will not fire for it — silence beats a guess.
+   * Judgment: which OCFDU axis the card's rules text pushes the spirit toward, e.g. "+utility".
+   * Not a full OCFDU delta. Absent where the card changes economy or tempo rather than an
+   * axis — the aspect nudge stays silent for those, because silence beats a guess.
    */
   shiftsToward?: string
   /** The aspect exists (wiki-verified) but its effect has not been transcribed yet. */
