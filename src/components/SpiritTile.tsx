@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import type { Spirit } from '../domain/types'
-import { PlaceholderArt } from './PlaceholderArt'
+import { SpiritArt } from './SpiritArt'
 
 export function SpiritTile({ spirit }: { spirit: Spirit }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
     <li className="spirit-tile">
-      <PlaceholderArt spirit={spirit} />
+      <SpiritArt spirit={spirit} />
       <h3>{spirit.name}</h3>
       <p className="meta">
         {spirit.expansion} · {spirit.complexity}

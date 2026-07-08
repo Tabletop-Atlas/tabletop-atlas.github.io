@@ -109,3 +109,22 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.spirit-art,
+.placeholder-art {
+  display: block;
+  width: 100%;
+  max-width: 256px;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #222;
+}
+
+.placeholder-art {
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+}

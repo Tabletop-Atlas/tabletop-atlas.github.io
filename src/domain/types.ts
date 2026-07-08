@@ -1,6 +1,9 @@
 export type Complexity = 'Low' | 'Moderate' | 'High' | 'Very High'
 
-export type Tier = 'S' | 'A' | 'B' | 'C' | 'D'
+/** Tier vocabulary, strongest first. Matches the owner's source tier list (X sits above S). */
+export const TIERS = ['X', 'S', 'A', 'B', 'C', 'D', 'F'] as const
+
+export type Tier = (typeof TIERS)[number]
 
 export interface OCFDU {
   offense: number

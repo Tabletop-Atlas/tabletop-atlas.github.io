@@ -24,8 +24,9 @@ export interface RankedSpirit {
 const AXES: (keyof OCFDU)[] = ['offense', 'control', 'fear', 'defense', 'utility']
 
 const COMPLEXITY_LEVEL: Record<Complexity, number> = { Low: 1, Moderate: 2, High: 3, 'Very High': 4 }
-const TIER_VALUE: Record<Tier, number> = { S: 5, A: 4, B: 3, C: 2, D: 1 }
-const NEUTRAL_TIER_VALUE = 3
+const TIER_VALUE: Record<Tier, number> = { X: 7, S: 6, A: 5, B: 4, C: 3, D: 2, F: 1 }
+// Mid-scale, so an untiered spirit is neither promoted nor buried by the prior.
+const NEUTRAL_TIER_VALUE = 4
 
 // Max weight the tier prior can contribute, kept below fit's full 0..1 range so a
 // spirit with the single best fit in the pool can never be outranked by tier alone.

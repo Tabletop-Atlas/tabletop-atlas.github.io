@@ -12,7 +12,7 @@ import type { Complexity, Spirit } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
 import { whyYou } from '../domain/whyYou'
 import { OcfduRadar } from './OcfduRadar'
-import { PlaceholderArt } from './PlaceholderArt'
+import { SpiritArt } from './SpiritArt'
 
 const spirits = spiritsData as Spirit[]
 const COMPLEXITIES: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
@@ -45,7 +45,7 @@ function RandomChooser({ onBack }: { onBack: () => void }) {
 
       {drawn ? (
         <div className="drawn-spirit">
-          <PlaceholderArt spirit={drawn} />
+          <SpiritArt spirit={drawn} />
           <h3>{drawn.name}</h3>
           <p>{drawn.summary}</p>
         </div>

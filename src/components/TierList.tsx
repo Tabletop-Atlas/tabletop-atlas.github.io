@@ -1,18 +1,18 @@
 import { useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
 import { tierStore } from '../domain/tierStore'
+import { TIERS } from '../domain/types'
 import type { Spirit, Tier } from '../domain/types'
-import { PlaceholderArt } from './PlaceholderArt'
+import { SpiritArt } from './SpiritArt'
 
 const spirits = spiritsData as Spirit[]
-const TIERS: Tier[] = ['S', 'A', 'B', 'C', 'D']
 
 export function TierList() {
   const [version, setVersion] = useState(0)
 
   const grouped = useMemo(() => {
     const all = tierStore.getAll()
-    const groups: Record<Tier, Spirit[]> = { S: [], A: [], B: [], C: [], D: [] }
+    const groups = Object.fromEntries(TIERS.map((tier) => [tier, [] as Spirit[]])) as Record<Tier, Spirit[]>
     for (const spirit of spirits) {
       const tier = all[spirit.id] ?? 'B'
       groups[tier].push(spirit)
@@ -44,7 +44,7 @@ export function TierList() {
           <ul className="spirit-grid">
             {grouped[tier].map((spirit) => (
               <li key={spirit.id} className="spirit-tile">
-                <PlaceholderArt spirit={spirit} />
+                <SpiritArt spirit={spirit} />
                 <h4>{spirit.name}</h4>
                 <select
                   value={tier}

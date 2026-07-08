@@ -1,14 +1,14 @@
+import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import spiritsData from '../../data/spirits.json'
 import tiersData from '../../data/tiers.json'
-import { ELEMENTS } from '../types'
+import { ELEMENTS, TIERS } from '../types'
 import type { Complexity, Spirit, Tier } from '../types'
 
 const spirits = spiritsData as Spirit[]
 const tiers = tiersData.tiers as Record<string, Tier>
 
 const COMPLEXITIES: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
-const TIERS: Tier[] = ['S', 'A', 'B', 'C', 'D']
 const AXES = ['offense', 'control', 'fear', 'defense', 'utility'] as const
 
 // The printed reference sheet uses a 1-6 scale (e.g. Ember-Eyed Behemoth's offense is 6).
@@ -76,6 +76,18 @@ describe('spirits.json integrity', () => {
       if (spirit.reviewNeeded) {
         expect(spirit.ratingsSource, `${spirit.name} is under review but not marked an estimate`).toBe('estimate')
       }
+    }
+  })
+})
+
+describe('spirit artwork', () => {
+  it('ships an art file for every spirit at its slug', () => {
+    // SpiritArt resolves public/spirits/<image ?? id>.webp. A renamed id or a missing
+    // download would otherwise degrade silently to a placeholder tile.
+    for (const spirit of spirits) {
+      const slug = spirit.image ?? spirit.id
+      const path = new URL(`../../../public/spirits/${slug}.webp`, import.meta.url)
+      expect(existsSync(path), `${spirit.name} has no artwork at public/spirits/${slug}.webp`).toBe(true)
     }
   })
 })

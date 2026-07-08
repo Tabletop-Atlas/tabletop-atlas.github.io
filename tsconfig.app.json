@@ -4,7 +4,9 @@
     "target": "es2023",
     "lib": ["ES2023", "DOM"],
     "module": "esnext",
-    "types": ["vite/client"],
+    // "node" is here so the data-integrity test can read public/ off disk. Tests live under
+    // src/**/__tests__ and are typechecked by this project; they are never bundled.
+    "types": ["vite/client", "node"],
     "allowArbitraryExtensions": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,

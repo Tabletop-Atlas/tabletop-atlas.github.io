@@ -393,13 +393,12 @@
     "name": "Devouring Teeth Lurk Underfoot",
     "expansion": "Horizons",
     "complexity": "Low",
-    "ratings": { "offense": 4, "control": 2, "fear": 2, "defense": 3, "utility": 2 },
+    "ratings": { "offense": 5, "control": 2, "fear": 2, "defense": 1, "utility": 1 },
     "elements": ["Fire", "Animal", "Earth"],
     "summary": "Wants to share lands with Invaders, punishing them with cheap short-range Powers and a permanent damage boost.",
     "tags": ["aggressive"],
     "aspects": [],
     "ratingsSource": "estimate",
-    "reviewNeeded": true,
     "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel."
   },
   {
@@ -407,13 +406,12 @@
     "name": "Eyes Watch From the Trees",
     "expansion": "Horizons",
     "complexity": "Low",
-    "ratings": { "offense": 2, "control": 4, "fear": 3, "defense": 2, "utility": 3 },
+    "ratings": { "offense": 2, "control": 3, "fear": 4, "defense": 5, "utility": 1 },
     "elements": ["Moon", "Plant", "Air"],
     "summary": "Sees Invader plans coming and redirects or punishes them before they land.",
     "tags": ["board-control"],
     "aspects": [],
     "ratingsSource": "estimate",
-    "reviewNeeded": true,
     "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel."
   },
   {
@@ -421,13 +419,12 @@
     "name": "Fathomless Mud of the Swamp",
     "expansion": "Horizons",
     "complexity": "Low",
-    "ratings": { "offense": 2, "control": 3, "fear": 1, "defense": 5, "utility": 2 },
+    "ratings": { "offense": 3, "control": 2, "fear": 3, "defense": 3, "utility": 2 },
     "elements": ["Water", "Moon", "Earth", "Plant"],
     "summary": "A slow, defensive spirit that mires Invaders in place, spreading a defensive mud across the island.",
     "tags": ["board-control"],
     "aspects": [],
     "ratingsSource": "estimate",
-    "reviewNeeded": true,
     "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel."
   },
   {
@@ -435,13 +432,12 @@
     "name": "Rising Heat of Stone and Sand",
     "expansion": "Horizons",
     "complexity": "Low",
-    "ratings": { "offense": 5, "control": 1, "fear": 2, "defense": 2, "utility": 2 },
+    "ratings": { "offense": 5, "control": 2, "fear": 1, "defense": 1, "utility": 2 },
     "elements": ["Fire", "Earth"],
     "summary": "A straightforward offensive spirit that bakes lands with heat, dealing steady damage.",
     "tags": ["aggressive"],
     "aspects": [],
     "ratingsSource": "estimate",
-    "reviewNeeded": true,
     "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel. Elements wiki-confirmed."
   },
   {
@@ -449,13 +445,12 @@
     "name": "Sun-Bright Whirlwind",
     "expansion": "Horizons",
     "complexity": "Low",
-    "ratings": { "offense": 2, "control": 4, "fear": 1, "defense": 2, "utility": 3 },
+    "ratings": { "offense": 2, "control": 5, "fear": 1, "defense": 1, "utility": 2 },
     "elements": ["Sun", "Air"],
     "summary": "A highly mobile spirit that pushes and repositions Invaders rather than destroying them outright.",
     "tags": ["board-control"],
     "aspects": [],
     "ratingsSource": "estimate",
-    "reviewNeeded": true,
     "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel. Elements wiki-confirmed."
   }
 ]
