@@ -17,17 +17,24 @@ export interface Aspect {
   shiftsToward?: string
 }
 
+/** The eight canonical Spirit Island elements. */
+export const ELEMENTS = ['Sun', 'Moon', 'Fire', 'Air', 'Water', 'Earth', 'Plant', 'Animal'] as const
+
+export type Element = (typeof ELEMENTS)[number]
+
 export interface Spirit {
   id: string
   name: string
   expansion: string
   complexity: Complexity
   ratings: OCFDU
-  elements: string[]
+  elements: Element[]
   summary: string
   tags: string[]
   aspects: Aspect[]
   notes?: string
   image?: string
+  /** Absent means the OCFDU came off the printed reference sheet. "estimate" means nobody has verified them. */
+  ratingsSource?: 'estimate'
   reviewNeeded?: boolean
 }

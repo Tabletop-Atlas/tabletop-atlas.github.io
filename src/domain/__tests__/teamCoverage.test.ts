@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { analyzeTeam, tuneTowardGaps } from '../teamCoverage'
-import type { Spirit } from '../types'
+import type { Element, Spirit } from '../types'
 
-function offenseSpirit(id: string, elements: string[]): Spirit {
+function offenseSpirit(id: string, elements: Element[]): Spirit {
   return {
     id,
     name: id,

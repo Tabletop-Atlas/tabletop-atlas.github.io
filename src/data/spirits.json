@@ -223,12 +223,11 @@
     "expansion": "Jagged Earth",
     "complexity": "Moderate",
     "ratings": { "offense": 5, "control": 1, "fear": 2, "defense": 1, "utility": 3 },
-    "elements": ["Fire", "Earth", "Air"],
-    "summary": "A slow-building offensive spirit that leans on heavy Presence in mountain lands.",
+    "elements": ["Fire", "Earth"],
+    "summary": "Builds heavy Presence in mountain lands, then destroys it to erupt for damage and Fear — at the risk of spreading Blight.",
     "tags": ["ramping-economy", "aggressive"],
     "aspects": [],
-    "reviewNeeded": true,
-    "notes": "TODO(review): complexity cell was blank on the owner's reference sheet; provisionally set to Moderate, verify against print."
+    "notes": "Complexity confirmed Moderate against the Spirit Island wiki (the cell was blank on the owner's reference sheet)."
   },
   {
     "id": "shroud-of-silent-mist",
@@ -315,12 +314,11 @@
     "expansion": "Nature Incarnate",
     "complexity": "Moderate",
     "ratings": { "offense": 1, "control": 3, "fear": 3, "defense": 5, "utility": 2 },
-    "elements": ["Plant", "Earth"],
-    "summary": "Protects the land it occupies and slowly grows an Incarnate presence there.",
+    "elements": ["Sun", "Plant", "Earth", "Moon"],
+    "summary": "Guards its lands with Vitality tokens that soak up Blight, growing an Incarna that anchors the defense.",
     "tags": ["incarnate", "board-control"],
     "aspects": [],
-    "reviewNeeded": true,
-    "notes": "TODO(review): HANDOFF icon interpretation marked uncertain (\"[Vitality?]\"); verify against wiki."
+    "notes": "Vitality tokens confirmed against the wiki (each prevents 1 Blight, then is removed)."
   },
   {
     "id": "ember-eyed-behemoth",
@@ -328,12 +326,11 @@
     "expansion": "Nature Incarnate",
     "complexity": "Moderate",
     "ratings": { "offense": 6, "control": 1, "fear": 1, "defense": 1, "utility": 2 },
-    "elements": ["Fire", "Animal"],
-    "summary": "An extremely mobile, high-damage Incarnate spirit built around token generation.",
+    "elements": ["Fire", "Earth", "Plant"],
+    "summary": "Stomps the island as a highly mobile Incarna, flattening whatever it reaches with raw damage.",
     "tags": ["incarnate", "aggressive"],
     "aspects": [],
-    "reviewNeeded": true,
-    "notes": "TODO(review): HANDOFF icon interpretation marked uncertain (\"[Wilds?]\"); verify against wiki."
+    "notes": "Uses no Wilds tokens — the reference sheet's \"[Wilds?]\" reading was wrong. Its mechanic is Incarna mobility (wiki-verified)."
   },
   {
     "id": "relentless-gaze-of-the-sun",
@@ -385,12 +382,11 @@
     "expansion": "Nature Incarnate",
     "complexity": "Very High",
     "ratings": { "offense": 4, "control": 1, "fear": 1, "defense": 2, "utility": 3 },
-    "elements": ["Earth", "Fire"],
+    "elements": ["Moon", "Fire", "Earth"],
     "summary": "A slow-building, anticipation-based spirit that detonates delayed Quake-token effects.",
     "tags": ["incarnate", "token-heavy"],
     "aspects": [],
-    "reviewNeeded": true,
-    "notes": "TODO(review): HANDOFF icon interpretation marked uncertain (\"[Quake?]\"); verify against wiki."
+    "notes": "Quake tokens confirmed against the wiki."
   },
   {
     "id": "devouring-teeth-lurk-underfoot",
@@ -398,12 +394,13 @@
     "expansion": "Horizons",
     "complexity": "Low",
     "ratings": { "offense": 4, "control": 2, "fear": 2, "defense": 3, "utility": 2 },
-    "elements": ["Earth", "Animal"],
+    "elements": ["Fire", "Animal", "Earth"],
     "summary": "Wants to share lands with Invaders, punishing them with cheap short-range Powers and a permanent damage boost.",
     "tags": ["aggressive"],
     "aspects": [],
+    "ratingsSource": "estimate",
     "reviewNeeded": true,
-    "notes": "TODO(review): OCFDU estimated from wiki strategy text, not the physical reference sheet (Horizons spirit, not in HANDOFF table) — verify."
+    "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel."
   },
   {
     "id": "eyes-watch-from-the-trees",
@@ -411,12 +408,13 @@
     "expansion": "Horizons",
     "complexity": "Low",
     "ratings": { "offense": 2, "control": 4, "fear": 3, "defense": 2, "utility": 3 },
-    "elements": ["Air", "Animal"],
+    "elements": ["Moon", "Plant", "Air"],
     "summary": "Sees Invader plans coming and redirects or punishes them before they land.",
     "tags": ["board-control"],
     "aspects": [],
+    "ratingsSource": "estimate",
     "reviewNeeded": true,
-    "notes": "TODO(review): OCFDU estimated, not sourced from official print (Horizons spirit, not in HANDOFF table) — verify."
+    "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel."
   },
   {
     "id": "fathomless-mud-of-the-swamp",
@@ -424,12 +422,13 @@
     "expansion": "Horizons",
     "complexity": "Low",
     "ratings": { "offense": 2, "control": 3, "fear": 1, "defense": 5, "utility": 2 },
-    "elements": ["Water", "Earth"],
+    "elements": ["Water", "Moon", "Earth", "Plant"],
     "summary": "A slow, defensive spirit that mires Invaders in place, spreading a defensive mud across the island.",
     "tags": ["board-control"],
     "aspects": [],
+    "ratingsSource": "estimate",
     "reviewNeeded": true,
-    "notes": "TODO(review): OCFDU estimated, not sourced from official print (Horizons spirit, not in HANDOFF table) — verify."
+    "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel."
   },
   {
     "id": "rising-heat-of-stone-and-sand",
@@ -441,8 +440,9 @@
     "summary": "A straightforward offensive spirit that bakes lands with heat, dealing steady damage.",
     "tags": ["aggressive"],
     "aspects": [],
+    "ratingsSource": "estimate",
     "reviewNeeded": true,
-    "notes": "TODO(review): OCFDU estimated, not sourced from official print (Horizons spirit, not in HANDOFF table) — verify."
+    "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel. Elements wiki-confirmed."
   },
   {
     "id": "sun-bright-whirlwind",
@@ -454,7 +454,8 @@
     "summary": "A highly mobile spirit that pushes and repositions Invaders rather than destroying them outright.",
     "tags": ["board-control"],
     "aspects": [],
+    "ratingsSource": "estimate",
     "reviewNeeded": true,
-    "notes": "TODO(review): OCFDU estimated, not sourced from official print (Horizons spirit, not in HANDOFF table) — verify."
+    "notes": "OCFDU are estimates. No numeric ratings exist on the wiki or the owner's reference sheet; verify against the physical Horizons panel. Elements wiki-confirmed."
   }
 ]
