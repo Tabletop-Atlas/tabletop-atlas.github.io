@@ -4,15 +4,64 @@ import { answersStore } from '../domain/answersStore'
 import { answersToWeights, type Answers } from '../domain/answersToWeights'
 import { findAspectNudge } from '../domain/aspectNudge'
 import { QUESTIONS } from '../domain/questionnaire'
+import { drawRandom } from '../domain/randomChoose'
 import { recommend, type Weights } from '../domain/recommend'
 import { analyzeTeam, tuneTowardGaps } from '../domain/teamCoverage'
 import { tierStore } from '../domain/tierStore'
-import type { Spirit } from '../domain/types'
+import type { Complexity, Spirit } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
 import { whyYou } from '../domain/whyYou'
 import { OcfduRadar } from './OcfduRadar'
+import { PlaceholderArt } from './PlaceholderArt'
 
 const spirits = spiritsData as Spirit[]
+const COMPLEXITIES: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
+
+function RandomChooser({ onBack }: { onBack: () => void }) {
+  const [complexityCeiling, setComplexityCeiling] = useState<Complexity | ''>('')
+  const [drawKey, setDrawKey] = useState(0)
+  const drawn = useMemo(
+    () => drawRandom(spirits, { complexityCeiling: complexityCeiling || undefined }),
+    [complexityCeiling, drawKey],
+  )
+
+  return (
+    <section>
+      <h2>Random chooser</h2>
+      <label>
+        Complexity ceiling
+        <select
+          value={complexityCeiling}
+          onChange={(e) => setComplexityCeiling(e.target.value as Complexity | '')}
+        >
+          <option value="">No limit</option>
+          {COMPLEXITIES.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {drawn ? (
+        <div className="drawn-spirit">
+          <PlaceholderArt spirit={drawn} />
+          <h3>{drawn.name}</h3>
+          <p>{drawn.summary}</p>
+        </div>
+      ) : (
+        <p>No spirits match that constraint.</p>
+      )}
+
+      <button type="button" onClick={() => setDrawKey((k) => k + 1)}>
+        Draw again
+      </button>
+      <button type="button" onClick={onBack}>
+        Back
+      </button>
+    </section>
+  )
+}
 
 function RecommendedCard({
   spirit,
@@ -123,6 +172,7 @@ function Wizard({
   onPlayerCount,
   onNext,
   onBack,
+  onRandom,
 }: {
   step: number
   answers: Answers
@@ -131,6 +181,7 @@ function Wizard({
   onPlayerCount: (n: number) => void
   onNext: () => void
   onBack: () => void
+  onRandom: () => void
 }) {
   if (step === 0) {
     return (
@@ -148,6 +199,12 @@ function Wizard({
             Next
           </button>
         </div>
+        <p>
+          Don't want to decide?{' '}
+          <button type="button" onClick={onRandom}>
+            Just pick one at random
+          </button>
+        </p>
       </section>
     )
   }
@@ -296,7 +353,9 @@ export function Recommender() {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>(restored ?? {})
   const [playerCount, setPlayerCount] = useState(2)
-  const [phase, setPhase] = useState<'wizard' | 'board'>(hasRestoredAnswers ? 'board' : 'wizard')
+  const [phase, setPhase] = useState<'wizard' | 'board' | 'random'>(
+    hasRestoredAnswers ? 'board' : 'wizard',
+  )
 
   useEffect(() => {
     answersStore.save(answers)
@@ -321,6 +380,10 @@ export function Recommender() {
     setPhase('wizard')
   }
 
+  if (phase === 'random') {
+    return <RandomChooser onBack={() => setPhase('wizard')} />
+  }
+
   if (phase === 'wizard') {
     return (
       <Wizard
@@ -331,6 +394,7 @@ export function Recommender() {
         onPlayerCount={setPlayerCount}
         onNext={handleNext}
         onBack={() => setStep((s) => Math.max(0, s - 1))}
+        onRandom={() => setPhase('random')}
       />
     )
   }
