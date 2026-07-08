@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
+import tiersData from '../data/tiers.json'
 import { answersToWeights, type Answers } from '../domain/answersToWeights'
 import { QUESTIONS } from '../domain/questionnaire'
 import { recommend } from '../domain/recommend'
-import type { Spirit } from '../domain/types'
+import type { Spirit, Tier } from '../domain/types'
 
 const spirits = spiritsData as Spirit[]
+const tierPrior = tiersData.tiers as Record<string, Tier>
 
 function Wizard({
   step,
@@ -91,7 +93,15 @@ function ResultsBoard({
 }) {
   const prefs = useMemo(() => answersToWeights(answers), [answers])
   const ranked = useMemo(
-    () => recommend(spirits, prefs.weights, { tempo: prefs.tempo, boardControl: prefs.boardControl }),
+    () =>
+      recommend(spirits, prefs.weights, {
+        tempo: prefs.tempo,
+        boardControl: prefs.boardControl,
+        complexityImportance: prefs.complexityImportance,
+        complexityCeiling: prefs.complexityCeiling,
+        tierPrior,
+        tierKnob: prefs.tierKnob,
+      }),
     [prefs],
   )
   const shortlist = ranked.slice(0, 5)
@@ -103,6 +113,7 @@ function ResultsBoard({
         {shortlist.map(({ spirit, score }, i) => (
           <li key={spirit.id} className={i < 3 ? 'emphasized' : undefined}>
             {spirit.name} — score {score.toFixed(1)}
+            {spirit.notes && <p className="notes">{spirit.notes}</p>}
           </li>
         ))}
       </ol>

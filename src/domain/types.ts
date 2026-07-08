@@ -1,5 +1,7 @@
 export type Complexity = 'Low' | 'Moderate' | 'High' | 'Very High'
 
+export type Tier = 'S' | 'A' | 'B' | 'C' | 'D'
+
 export interface OCFDU {
   offense: number
   control: number
