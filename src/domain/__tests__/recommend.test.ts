@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import type { Configuration } from '../configurations'
+import { createGameLog } from '../gameLog'
 import { dedupeBySpirit, recommend } from '../recommend'
+import { memoryStorage } from '../storage'
 import type { Complexity, Spirit } from '../types'
 
 let nextId = 0
@@ -244,6 +246,29 @@ describe('recommend', () => {
       const a = dedupeBySpirit(ranked).map((r) => r.config.configId)
       const b = dedupeBySpirit(ranked).map((r) => r.config.configId)
       expect(a).toEqual(b)
+    })
+  })
+
+  describe('game log independence (issue #06)', () => {
+    it('a logged loss leaves recommend() byte-identical - the log feeds nothing into scoring', () => {
+      // recommend() takes no game-log input at all, so this holds by construction; asserted
+      // explicitly per the PRD's hard constraint that outcomes are never scored.
+      const s1 = spirit()
+      const s2 = spirit()
+      const configs = [baseConfig(s1), baseConfig(s2)]
+      const before = recommend(configs, { offense: 1 })
+
+      const log = createGameLog(memoryStorage())
+      log.append({
+        date: '2026-01-01',
+        players: [{ name: 'Adam', configId: s1.id }],
+        adversary: 'England',
+        adversaryLevel: 4,
+        outcome: 'loss',
+      })
+
+      const after = recommend(configs, { offense: 1 })
+      expect(after).toEqual(before)
     })
   })
 })

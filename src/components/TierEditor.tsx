@@ -5,6 +5,7 @@ import { parse, serialise } from '../domain/backup'
 import type { KnownIds } from '../domain/backup'
 import { complexityStore } from '../domain/complexityStore'
 import { expand } from '../domain/configurations'
+import { gameLog } from '../domain/gameLog'
 import { QUESTIONS } from '../domain/questionnaire'
 import { groupByTier, tierStore } from '../domain/tierStore'
 import { COMPLEXITIES, TIERS } from '../domain/types'
@@ -15,8 +16,6 @@ import { TIER_COLOR } from './tierColors'
 const spirits = spiritsData as Spirit[]
 const configurations = expand(spirits)
 
-// Complexity overrides and the game log don't exist as stores yet (issues #05, #06) - the
-// backup format already declares both sections so this file only grows data, never a version.
 const KNOWN_IDS: KnownIds = {
   tierIds: new Set(configurations.map((c) => c.configId)),
   complexityIds: new Set(spirits.map((s) => s.id)),
@@ -75,7 +74,7 @@ export function TierEditor() {
       tiers: tierStore.getAll(),
       complexityOverrides: complexityStore.getAll(),
       answers: answersStore.load() ?? {},
-      log: [],
+      log: gameLog.list(),
     })
     downloadBackup(json)
   }
@@ -84,7 +83,7 @@ export function TierEditor() {
     setImportMessage(null)
     let result
     try {
-      result = parse(await file.text(), KNOWN_IDS)
+      result = parse(await file.text(), KNOWN_IDS, gameLog.list())
     } catch (err) {
       setImportMessage(err instanceof Error ? err.message : 'Could not read that backup file.')
       return
@@ -98,6 +97,7 @@ export function TierEditor() {
       complexityStore.setComplexity(spiritId, complexity as Complexity)
     }
     answersStore.save(result.state.answers)
+    gameLog.replaceAll(result.state.log)
     setVersion((v) => v + 1)
     setImportMessage(
       result.unresolved.length > 0
@@ -123,7 +123,8 @@ export function TierEditor() {
       <h3>Backup</h3>
       <p className="meta">
         Nothing here survives a cleared browser cache unless you export it. Import replaces your
-        tiers and answers; it never touches this browser's copy of your game log.
+        tiers, complexity overrides and answers; your game log is appended and de-duplicated by
+        id instead, so merging two devices' histories never loses a played game.
       </p>
       <p>
         <button type="button" onClick={handleExport}>

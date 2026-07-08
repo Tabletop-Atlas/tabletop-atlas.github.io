@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import { AppShell, type NavItem } from './components/AppShell'
 import { Browser } from './components/Browser'
+import { GameLog } from './components/GameLog'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from './components/Recommender'
 import { TierBoard } from './components/TierBoard'
 import { TierEditor } from './components/TierEditor'
 
-type Tab = 'recommender' | 'browser' | 'tiers' | 'customise'
+type Tab = 'recommender' | 'browser' | 'tiers' | 'customise' | 'log'
 
 const NAV: NavItem<Tab>[] = [
   { id: 'recommender', label: 'Recommend' },
   { id: 'browser', label: 'Browse' },
   { id: 'tiers', label: 'Tier list' },
   { id: 'customise', label: 'Customise tiers' },
+  { id: 'log', label: 'Log' },
 ]
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
         {tab === 'browser' && <Browser />}
         {tab === 'tiers' && <TierBoard />}
         {tab === 'customise' && <TierEditor />}
+        {tab === 'log' && <GameLog />}
       </AppShell>
     </RecommenderProvider>
   )
