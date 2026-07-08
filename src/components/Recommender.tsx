@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
 import { answersStore } from '../domain/answersStore'
 import { answersToWeights, type Answers } from '../domain/answersToWeights'
+import { findAspectNudge } from '../domain/aspectNudge'
 import { QUESTIONS } from '../domain/questionnaire'
-import { recommend } from '../domain/recommend'
+import { recommend, type Weights } from '../domain/recommend'
 import { tierStore } from '../domain/tierStore'
 import type { Spirit } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
@@ -11,6 +12,51 @@ import { whyYou } from '../domain/whyYou'
 import { OcfduRadar } from './OcfduRadar'
 
 const spirits = spiritsData as Spirit[]
+
+function RecommendedCard({
+  spirit,
+  score,
+  showWhyYou,
+  weights,
+}: {
+  spirit: Spirit
+  score: number
+  showWhyYou: boolean
+  weights: Weights
+}) {
+  const [showAspects, setShowAspects] = useState(false)
+  const nudge = findAspectNudge(spirit, weights)
+
+  return (
+    <li className={showWhyYou ? 'emphasized' : undefined}>
+      <OcfduRadar ratings={spirit.ratings} />
+      <div>
+        <p>
+          {spirit.name} — score {score.toFixed(1)}
+        </p>
+        {showWhyYou && <p className="why-you">{whyYou(spirit, weights)}</p>}
+        {spirit.notes && <p className="notes">{spirit.notes}</p>}
+        {nudge && <p className="aspect-nudge">{nudge.message}</p>}
+        {spirit.aspects.length > 0 && (
+          <>
+            <button type="button" onClick={() => setShowAspects((s) => !s)}>
+              {showAspects ? 'Hide' : 'Show'} aspects ({spirit.aspects.length})
+            </button>
+            {showAspects && (
+              <ul className="aspects">
+                {spirit.aspects.map((aspect) => (
+                  <li key={aspect.name}>
+                    <strong>{aspect.name}:</strong> {aspect.delta}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
+      </div>
+    </li>
+  )
+}
 
 function Wizard({
   step,
@@ -120,16 +166,13 @@ function ResultsBoard({
       <h2>Your shortlist</h2>
       <ol>
         {shortlist.map(({ spirit, score }, i) => (
-          <li key={spirit.id} className={i < 3 ? 'emphasized' : undefined}>
-            <OcfduRadar ratings={spirit.ratings} />
-            <div>
-              <p>
-                {spirit.name} — score {score.toFixed(1)}
-              </p>
-              {i < 3 && <p className="why-you">{whyYou(spirit, prefs.weights)}</p>}
-              {spirit.notes && <p className="notes">{spirit.notes}</p>}
-            </div>
-          </li>
+          <RecommendedCard
+            key={spirit.id}
+            spirit={spirit}
+            score={score}
+            showWhyYou={i < 3}
+            weights={prefs.weights}
+          />
         ))}
       </ol>
 

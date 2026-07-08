@@ -1,15 +1,6 @@
+import { AXES, AXIS_LABEL } from './axisLabels'
 import type { Weights } from './recommend'
-import type { OCFDU, Spirit } from './types'
-
-const AXES: (keyof OCFDU)[] = ['offense', 'control', 'fear', 'defense', 'utility']
-
-const AXIS_LABEL: Record<keyof OCFDU, string> = {
-  offense: 'aggression',
-  control: 'battlefield control',
-  fear: 'fear generation',
-  defense: 'staying power',
-  utility: 'flexibility',
-}
+import type { Spirit } from './types'
 
 /** Deterministic one-line "why you" explanation from the dominant weighted+rated axis. No LLM. */
 export function whyYou(spirit: Spirit, weights: Weights): string {
