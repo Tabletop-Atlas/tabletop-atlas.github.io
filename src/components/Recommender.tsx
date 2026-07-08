@@ -1,16 +1,16 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
-import tiersData from '../data/tiers.json'
+import { answersStore } from '../domain/answersStore'
 import { answersToWeights, type Answers } from '../domain/answersToWeights'
 import { QUESTIONS } from '../domain/questionnaire'
 import { recommend } from '../domain/recommend'
-import type { Spirit, Tier } from '../domain/types'
+import { tierStore } from '../domain/tierStore'
+import type { Spirit } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
 import { whyYou } from '../domain/whyYou'
 import { OcfduRadar } from './OcfduRadar'
 
 const spirits = spiritsData as Spirit[]
-const tierPrior = tiersData.tiers as Record<string, Tier>
 
 function Wizard({
   step,
@@ -104,7 +104,7 @@ function ResultsBoard({
         boardControl: prefs.boardControl,
         complexityImportance: prefs.complexityImportance,
         complexityCeiling: prefs.complexityCeiling,
-        tierPrior,
+        tierPrior: tierStore.getAll(),
         tierKnob: prefs.tierKnob,
       }),
     [prefs],
@@ -174,10 +174,16 @@ function ResultsBoard({
 }
 
 export function Recommender() {
+  const restored = useMemo(() => answersStore.load(), [])
+  const hasRestoredAnswers = !!restored && Object.keys(restored).length > 0
   const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState<Answers>({})
+  const [answers, setAnswers] = useState<Answers>(restored ?? {})
   const [playerCount, setPlayerCount] = useState(2)
-  const [phase, setPhase] = useState<'wizard' | 'board'>('wizard')
+  const [phase, setPhase] = useState<'wizard' | 'board'>(hasRestoredAnswers ? 'board' : 'wizard')
+
+  useEffect(() => {
+    answersStore.save(answers)
+  }, [answers])
 
   const handleAnswer = (questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
@@ -192,6 +198,7 @@ export function Recommender() {
   }
 
   const handleRestart = () => {
+    answersStore.clear()
     setStep(0)
     setAnswers({})
     setPhase('wizard')
