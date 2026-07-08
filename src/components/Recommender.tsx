@@ -6,10 +6,10 @@ import { findAspectNudge } from '../domain/aspectNudge'
 import { expand, type Configuration } from '../domain/configurations'
 import { QUESTIONS } from '../domain/questionnaire'
 import { drawRandom } from '../domain/randomChoose'
-import { recommend, type Weights } from '../domain/recommend'
+import { dedupeBySpirit, recommend, type Weights } from '../domain/recommend'
 import { analyzeTeam, tuneTowardGaps } from '../domain/teamCoverage'
 import { tierStore } from '../domain/tierStore'
-import type { Complexity, OCFDU, Spirit } from '../domain/types'
+import type { Complexity, OCFDU, Spirit, Tier } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
 import { whyYou } from '../domain/whyYou'
 import { OcfduRadar } from './OcfduRadar'
@@ -17,6 +17,10 @@ import { SpiritArt } from './SpiritArt'
 
 const spirits = spiritsData as Spirit[]
 const configurations = expand(spirits)
+const CONFIGS_BY_SPIRIT = configurations.reduce<Record<string, Configuration[]>>((acc, config) => {
+  ;(acc[config.spirit.id] ??= []).push(config)
+  return acc
+}, {})
 const COMPLEXITIES: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
 const AXES: (keyof OCFDU)[] = ['offense', 'control', 'fear', 'defense', 'utility']
 /** Deliberately narrow: three picks plus a wildcard, not a menu to agonise over. */
@@ -109,14 +113,16 @@ function useRanking() {
   )
   const ranked = useMemo(
     () =>
-      recommend(configurations, weights, {
-        tempo: prefs.tempo,
-        boardControl: prefs.boardControl,
-        complexityImportance: prefs.complexityImportance,
-        complexityCeiling: prefs.complexityCeiling,
-        tierPrior: tierStore.getAll(),
-        tierKnob: prefs.tierKnob,
-      }),
+      dedupeBySpirit(
+        recommend(configurations, weights, {
+          tempo: prefs.tempo,
+          boardControl: prefs.boardControl,
+          complexityImportance: prefs.complexityImportance,
+          complexityCeiling: prefs.complexityCeiling,
+          tierPrior: tierStore.getAll(),
+          tierKnob: prefs.tierKnob,
+        }),
+      ),
     [prefs, weights],
   )
   const wildcard = useMemo(
@@ -203,15 +209,18 @@ function ResultRow({
   score,
   rank,
   weights,
+  tiers,
 }: {
   config: Configuration
   score: number
   rank: number
   weights: Weights
+  tiers: Record<string, Tier>
 }) {
   const [open, setOpen] = useState(false)
   const { spirit, aspect } = config
   const nudge = findAspectNudge(spirit, weights)
+  const siblings = CONFIGS_BY_SPIRIT[spirit.id].filter((c) => c.configId !== config.configId)
 
   return (
     <li className="deck-row">
@@ -248,6 +257,18 @@ function ResultRow({
                 ))}
               </ul>
             )}
+            {siblings.length > 0 && (
+              <>
+                <p className="meta">Other configurations of {spirit.name}:</p>
+                <ul className="aspects">
+                  {siblings.map((sibling) => (
+                    <li key={sibling.configId}>
+                      {sibling.aspect ? sibling.aspect.name : 'Base'} — tier {tiers[sibling.configId] ?? '?'}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
           <OcfduRadar ratings={spirit.ratings} />
         </div>
@@ -260,6 +281,7 @@ function ResultsBoard() {
   const { setPhase, rerollWildcard } = useRecommender()
   const { weights, ranked, wildcard } = useRanking()
   const shortlist = ranked.slice(0, SHORTLIST_SIZE)
+  const tiers = tierStore.getAll()
 
   return (
     <>
@@ -272,7 +294,7 @@ function ResultsBoard() {
 
       <ol className="deck-rows">
         {shortlist.map(({ config, score }, i) => (
-          <ResultRow key={config.configId} config={config} score={score} rank={i + 1} weights={weights} />
+          <ResultRow key={config.configId} config={config} score={score} rank={i + 1} weights={weights} tiers={tiers} />
         ))}
       </ol>
       <p className="deck-hint">Change an answer in the sidebar — the ranking recomputes immediately.</p>

@@ -106,3 +106,25 @@ export function recommend(
     )
     .map(({ config, score }) => ({ config, score }))
 }
+
+/** Higher score wins; an exact tie breaks toward the base configuration (an aspect must earn
+ * its way past base via tier, complexity fit, or novelty - never win by coin flip); a further
+ * tie falls back to configId so ordering is deterministic across reloads. */
+function isBetter(a: RankedConfiguration, b: RankedConfiguration): boolean {
+  if (a.score !== b.score) return a.score > b.score
+  if (a.config.isBase !== b.config.isBase) return a.config.isBase
+  return a.config.configId < b.config.configId
+}
+
+/** At most one configuration per base spirit survives - the best-scoring one. Call this on
+ * `recommend`'s output before slicing a shortlist; ranked already sorted by score, but the
+ * dedup and its tie-break are computed independently of that order. */
+export function dedupeBySpirit(ranked: RankedConfiguration[]): RankedConfiguration[] {
+  const bestPerSpirit = new Map<string, RankedConfiguration>()
+  for (const entry of ranked) {
+    const spiritId = entry.config.spirit.id
+    const current = bestPerSpirit.get(spiritId)
+    if (!current || isBetter(entry, current)) bestPerSpirit.set(spiritId, entry)
+  }
+  return [...bestPerSpirit.values()].sort((a, b) => (isBetter(a, b) ? -1 : isBetter(b, a) ? 1 : 0))
+}

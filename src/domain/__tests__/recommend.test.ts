@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Configuration } from '../configurations'
-import { recommend } from '../recommend'
+import { dedupeBySpirit, recommend } from '../recommend'
 import type { Complexity, Spirit } from '../types'
 
 let nextId = 0
@@ -153,6 +153,52 @@ describe('recommend', () => {
       expect(ranked.map((r) => r.config.configId)).toEqual(
         recommend(configs, { offense: 1 }).map((r) => r.config.configId),
       )
+    })
+  })
+
+  describe('dedupeBySpirit (issue #04)', () => {
+    it('keeps at most one configuration per base spirit', () => {
+      const s = spirit()
+      const other = spirit()
+      const ranked = recommend(
+        [baseConfig(s), aspectConfig(s, 'A', 'Low'), aspectConfig(s, 'B', 'Low'), baseConfig(other)],
+        { offense: 1 },
+      )
+      const deduped = dedupeBySpirit(ranked)
+      const spiritIds = deduped.map((r) => r.config.spirit.id)
+      expect(new Set(spiritIds).size).toBe(spiritIds.length)
+      expect(spiritIds).toHaveLength(2)
+    })
+
+    it('breaks an exact tie toward the base configuration', () => {
+      const s = spirit()
+      // Identical fit (no weighted axis differs) and no tier prior -> siblings score exactly equal.
+      const ranked = recommend([baseConfig(s), aspectConfig(s, 'Sibling', 'Low')], { offense: 1 })
+      expect(ranked[0].score).toBe(ranked[1].score)
+      const deduped = dedupeBySpirit(ranked)
+      expect(deduped).toHaveLength(1)
+      expect(deduped[0].config.isBase).toBe(true)
+    })
+
+    it('a high-tier aspect earns its way past a low-tier base', () => {
+      const s = spirit({ ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const base = baseConfig(s)
+      const highTierAspect = aspectConfig(s, 'Better', 'Low')
+      const ranked = recommend([base, highTierAspect], { offense: 1 }, {
+        tierPrior: { [base.configId]: 'F', [highTierAspect.configId]: 'C' },
+        tierKnob: 1,
+      })
+      const deduped = dedupeBySpirit(ranked)
+      expect(deduped[0].config.configId).toBe(highTierAspect.configId)
+    })
+
+    it('produces a deterministic order across repeated calls', () => {
+      const s1 = spirit()
+      const s2 = spirit()
+      const ranked = recommend([baseConfig(s1), baseConfig(s2)], { offense: 1 })
+      const a = dedupeBySpirit(ranked).map((r) => r.config.configId)
+      const b = dedupeBySpirit(ranked).map((r) => r.config.configId)
+      expect(a).toEqual(b)
     })
   })
 })
