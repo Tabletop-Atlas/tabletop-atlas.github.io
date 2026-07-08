@@ -14,6 +14,24 @@ const lightningLike: Spirit = {
   aspects: [{ name: 'Wind', delta: 'Leans supportive instead of pure offense.', shiftsToward: '+utility' }],
 }
 
+describe('findAspectNudge — untranscribed aspects', () => {
+  it('stays silent for an aspect with no shiftsToward hint', () => {
+    // Real aspect, effect not yet read off the card. Silence beats guessing a direction.
+    const spirit = {
+      id: 's',
+      name: 'S',
+      expansion: 'Base',
+      complexity: 'Low',
+      ratings: { offense: 5, control: 1, fear: 1, defense: 1, utility: 1 },
+      elements: ['Fire'],
+      summary: '',
+      tags: [],
+      aspects: [{ name: 'Sparking', reviewNeeded: true }],
+    } as unknown as Parameters<typeof findAspectNudge>[0]
+    expect(findAspectNudge(spirit, { utility: 5 })).toBeUndefined()
+  })
+})
+
 describe('findAspectNudge', () => {
   it('fires when the base spirit is low on the top-weighted axis and a matching aspect exists', () => {
     const nudge = findAspectNudge(lightningLike, { utility: 5 })

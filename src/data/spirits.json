@@ -10,7 +10,9 @@
     "tags": ["fast-tempo", "aggressive"],
     "aspects": [
       { "name": "Pandemonium", "delta": "Trades some damage for extra Fear generation.", "shiftsToward": "+fear" },
-      { "name": "Sunshower", "delta": "Adds Plant-based growth and healing to the kit.", "shiftsToward": "+utility" }
+      { "name": "Wind", "reviewNeeded": true },
+      { "name": "Immense", "reviewNeeded": true },
+      { "name": "Sparking", "reviewNeeded": true }
     ],
     "notes": "Strong from turn one; less impactful late-game."
   },
@@ -25,7 +27,8 @@
     "tags": ["dahan-synergy", "board-control"],
     "aspects": [
       { "name": "Sunshine", "delta": "Leans harder into Sun element and direct damage.", "shiftsToward": "+offense" },
-      { "name": "Travel", "delta": "Gains extra range and movement instead of raw push power.", "shiftsToward": "+utility" }
+      { "name": "Travel", "delta": "Gains extra range and movement instead of raw push power.", "shiftsToward": "+utility" },
+      { "name": "Haven", "reviewNeeded": true }
     ],
     "notes": "Shines with high Dahan counts."
   },
@@ -40,7 +43,8 @@
     "tags": ["ramping-economy", "board-control"],
     "aspects": [
       { "name": "Resilience", "delta": "Trades some growth speed for sturdier Presence.", "shiftsToward": "+defense" },
-      { "name": "Regrowth", "delta": "Speeds up the early ramp at the cost of raw power later.", "shiftsToward": "+utility" }
+      { "name": "Might", "reviewNeeded": true },
+      { "name": "Nourishing", "reviewNeeded": true }
     ],
     "notes": "Weak opening hand; needs patience."
   },
@@ -54,8 +58,11 @@
     "summary": "Generates heavy Fear at relatively low damage, especially effective against Explorers.",
     "tags": ["fear-focused"],
     "aspects": [
+      { "name": "Madness", "reviewNeeded": true },
+      { "name": "Reach", "delta": "Extends range to threaten more of the board at once.", "shiftsToward": "+control" },
       { "name": "Amorphous", "delta": "Becomes more mobile and reactive across the board.", "shiftsToward": "+utility" },
-      { "name": "Reach", "delta": "Extends range to threaten more of the board at once.", "shiftsToward": "+control" }
+      { "name": "Foreboding", "reviewNeeded": true },
+      { "name": "Dark Fire", "reviewNeeded": true }
     ],
     "notes": "Best against low-terror-track adversaries early on."
   },
@@ -84,7 +91,8 @@
     "summary": "Grows fast and hits Towns hard while also holding the line as a solid all-around defender.",
     "tags": ["ramping-economy", "board-control"],
     "aspects": [
-      { "name": "Entangling", "delta": "Trades damage for stronger Invader-slowing effects.", "shiftsToward": "+control" }
+      { "name": "Regrowth", "reviewNeeded": true },
+      { "name": "Tangles", "reviewNeeded": true }
     ]
   },
   {
@@ -97,8 +105,7 @@
     "summary": "A powerful coastal attacker that devastates Towns and Cities but struggles far inland.",
     "tags": ["coastal", "aggressive"],
     "aspects": [
-      { "name": "Deeps", "delta": "Reaches further inland at some cost to peak coastal damage.", "shiftsToward": "+control" },
-      { "name": "Wrath", "delta": "Pushes damage output even higher along the coast.", "shiftsToward": "+offense" }
+      { "name": "Deeps", "delta": "Reaches further inland at some cost to peak coastal damage.", "shiftsToward": "+control" }
     ],
     "notes": "Weak on inland-heavy boards."
   },
@@ -112,8 +119,8 @@
     "summary": "Transforms damage into Fear and plays entirely on the terror level track.",
     "tags": ["fear-focused", "token-heavy"],
     "aspects": [
-      { "name": "Violence", "delta": "Leans into direct damage over Fear generation.", "shiftsToward": "+offense" },
-      { "name": "Reverie", "delta": "Slows the terror track for a steadier, more forgiving ramp.", "shiftsToward": "+utility" }
+      { "name": "Enticing", "reviewNeeded": true },
+      { "name": "Violence", "delta": "Leans into direct damage over Fear generation.", "shiftsToward": "+offense" }
     ],
     "notes": "Rewards table-wide Fear coordination."
   },
@@ -126,7 +133,10 @@
     "elements": ["Plant", "Animal"],
     "summary": "Relies on Beast tokens to strike and generate Fear, but weakens as Blight piles up.",
     "tags": ["token-heavy", "fear-focused", "blight-sensitive"],
-    "aspects": []
+    "aspects": [
+      { "name": "Encircle", "reviewNeeded": true },
+      { "name": "Unconstrained", "reviewNeeded": true }
+    ]
   },
   {
     "id": "keeper-of-the-forbidden-wilds",
@@ -137,7 +147,9 @@
     "elements": ["Earth", "Plant", "Animal"],
     "summary": "Uses Wilds tokens to choke Explorer progress while still hitting decently hard.",
     "tags": ["token-heavy", "board-control"],
-    "aspects": []
+    "aspects": [
+      { "name": "Spreading Hostility", "reviewNeeded": true }
+    ]
   },
   {
     "id": "heart-of-the-wildfire",
@@ -148,7 +160,9 @@
     "elements": ["Fire", "Earth"],
     "summary": "An aggressive spirit that feeds on Blight to grow stronger over time.",
     "tags": ["blight-positive", "aggressive"],
-    "aspects": []
+    "aspects": [
+      { "name": "Transforming", "reviewNeeded": true }
+    ]
   },
   {
     "id": "serpent-slumbering-beneath-the-island",
@@ -159,7 +173,9 @@
     "elements": ["Earth", "Water", "Animal"],
     "summary": "Starts glacially slow but becomes an unstoppable, versatile force late-game.",
     "tags": ["ramping-economy"],
-    "aspects": [],
+    "aspects": [
+      { "name": "Locus", "reviewNeeded": true }
+    ],
     "notes": "Very weak opening; needs a patient player and a forgiving early game."
   },
   {
@@ -182,7 +198,10 @@
     "elements": ["Moon", "Air", "Water"],
     "summary": "A defensive, Power-hoarding spirit that accumulates elemental tokens and Major Powers over time.",
     "tags": ["ramping-economy", "token-heavy"],
-    "aspects": []
+    "aspects": [
+      { "name": "Intensify", "reviewNeeded": true },
+      { "name": "Mentor", "reviewNeeded": true }
+    ]
   },
   {
     "id": "grinning-trickster-stirs-up-trouble",
@@ -204,7 +223,9 @@
     "elements": ["Earth", "Plant", "Animal"],
     "summary": "Piles Beast, Disease, Wilds, and Badlands tokens to strangle Explorer progress inland.",
     "tags": ["token-heavy"],
-    "aspects": []
+    "aspects": [
+      { "name": "Lair", "reviewNeeded": true }
+    ]
   },
   {
     "id": "many-minds-move-as-one",
@@ -238,7 +259,9 @@
     "elements": ["Air", "Moon", "Water"],
     "summary": "Places Presence broadly to strain Invaders and prevent their healing.",
     "tags": ["fear-focused", "token-heavy"],
-    "aspects": []
+    "aspects": [
+      { "name": "Stranded", "reviewNeeded": true }
+    ]
   },
   {
     "id": "vengeance-as-a-burning-plague",

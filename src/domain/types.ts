@@ -15,9 +15,15 @@ export interface OCFDU {
 
 export interface Aspect {
   name: string
-  delta: string
-  /** Lightweight axis hint derived from the wiki, e.g. "+utility". Not a full OCFDU delta. */
+  /** One-line description of how the aspect changes play. Absent until transcribed from the card. */
+  delta?: string
+  /**
+   * Lightweight axis hint, e.g. "+utility". Not a full OCFDU delta.
+   * Absent means the aspect nudge will not fire for it — silence beats a guess.
+   */
   shiftsToward?: string
+  /** The aspect exists (wiki-verified) but its effect has not been transcribed yet. */
+  reviewNeeded?: boolean
 }
 
 /** The eight canonical Spirit Island elements. */

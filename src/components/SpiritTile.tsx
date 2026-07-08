@@ -23,7 +23,8 @@ export function SpiritTile({ spirit }: { spirit: Spirit }) {
             <ul className="aspects">
               {spirit.aspects.map((aspect) => (
                 <li key={aspect.name}>
-                  <strong>{aspect.name}:</strong> {aspect.delta}
+                  <strong>{aspect.name}:</strong>{' '}
+                  {aspect.delta ?? <em className="meta">effect not transcribed yet</em>}
                 </li>
               ))}
             </ul>
