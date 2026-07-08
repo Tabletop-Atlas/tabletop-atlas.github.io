@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import spiritsData from '../data/spirits.json'
+import { expand } from '../domain/configurations'
 import { groupByTier, tierStore } from '../domain/tierStore'
 import { TIERS } from '../domain/types'
 import type { Spirit } from '../domain/types'
@@ -7,10 +8,11 @@ import { SpiritArt } from './SpiritArt'
 import { TIER_COLOR } from './tierColors'
 
 const spirits = spiritsData as Spirit[]
+const configurations = expand(spirits)
 
 /** Read-only visual tier board. Editing lives in the Customise tab. */
 export function TierBoard() {
-  const grouped = useMemo(() => groupByTier(spirits, tierStore.getAll()), [])
+  const grouped = useMemo(() => groupByTier(configurations, tierStore.getAll()), [])
   const customised = tierStore.isCustomised()
 
   return (
@@ -33,10 +35,13 @@ export function TierBoard() {
               {grouped[tier].length === 0 ? (
                 <p className="tier-empty">No spirits in this tier</p>
               ) : (
-                grouped[tier].map((spirit) => (
-                  <figure className="tier-tile" key={spirit.id} title={spirit.name}>
-                    <SpiritArt spirit={spirit} className="tier-tile-art" />
-                    <figcaption>{spirit.name}</figcaption>
+                grouped[tier].map((config) => (
+                  <figure className="tier-tile" key={config.configId} title={config.spirit.name}>
+                    <SpiritArt spirit={config.spirit} className="tier-tile-art" />
+                    <figcaption>
+                      {config.spirit.name}
+                      {config.aspect ? <span className="meta"> — {config.aspect.name}</span> : null}
+                    </figcaption>
                   </figure>
                 ))
               )}

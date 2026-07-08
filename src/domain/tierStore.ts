@@ -1,7 +1,8 @@
 import tiersData from '../data/tiers.json'
+import type { Configuration } from './configurations'
 import { defaultStorage, type KeyValueStorage } from './storage'
 import { TIERS } from './types'
-import type { Spirit, Tier } from './types'
+import type { Tier } from './types'
 
 const SEED = tiersData.tiers as Record<string, Tier>
 const STORAGE_KEY = 'spirit-island:tier-overrides'
@@ -77,14 +78,20 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage()) {
 
 export const tierStore = createTierStore()
 
-/** Tier shown for a spirit with no entry at all. Data integrity tests keep this unreachable. */
+/** Tier shown for a configuration with no entry at all. Data integrity tests keep this unreachable. */
 const FALLBACK_TIER: Tier = 'B'
 
-/** Buckets spirits into tier order. Shared so the board and the editor can never disagree. */
-export function groupByTier(spirits: Spirit[], tiers: Record<string, Tier>): Record<Tier, Spirit[]> {
-  const groups = Object.fromEntries(TIERS.map((tier) => [tier, [] as Spirit[]])) as Record<Tier, Spirit[]>
-  for (const spirit of spirits) {
-    groups[tiers[spirit.id] ?? FALLBACK_TIER].push(spirit)
+/** Buckets configurations into tier order. Shared so the board and the editor can never disagree. */
+export function groupByTier(
+  configs: Configuration[],
+  tiers: Record<string, Tier>,
+): Record<Tier, Configuration[]> {
+  const groups = Object.fromEntries(TIERS.map((tier) => [tier, [] as Configuration[]])) as Record<
+    Tier,
+    Configuration[]
+  >
+  for (const config of configs) {
+    groups[tiers[config.configId] ?? FALLBACK_TIER].push(config)
   }
   return groups
 }

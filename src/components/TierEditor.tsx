@@ -3,6 +3,7 @@ import spiritsData from '../data/spirits.json'
 import { answersStore } from '../domain/answersStore'
 import { parse, serialise } from '../domain/backup'
 import type { KnownIds } from '../domain/backup'
+import { expand } from '../domain/configurations'
 import { QUESTIONS } from '../domain/questionnaire'
 import { groupByTier, tierStore } from '../domain/tierStore'
 import { TIERS } from '../domain/types'
@@ -11,11 +12,12 @@ import { SpiritArt } from './SpiritArt'
 import { TIER_COLOR } from './tierColors'
 
 const spirits = spiritsData as Spirit[]
+const configurations = expand(spirits)
 
 // Complexity overrides and the game log don't exist as stores yet (issues #05, #06) - the
 // backup format already declares both sections so this file only grows data, never a version.
 const KNOWN_IDS: KnownIds = {
-  tierIds: new Set(spirits.map((s) => s.id)),
+  tierIds: new Set(configurations.map((c) => c.configId)),
   complexityIds: new Set(spirits.map((s) => s.id)),
   questionIds: new Set(QUESTIONS.map((q) => q.id)),
 }
@@ -36,7 +38,7 @@ export function TierEditor() {
   const [importMessage, setImportMessage] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
 
-  const grouped = useMemo(() => groupByTier(spirits, tierStore.getAll()), [version])
+  const grouped = useMemo(() => groupByTier(configurations, tierStore.getAll()), [version])
   const customised = tierStore.isCustomised()
 
   const handleSetTier = (id: string, tier: Tier) => {
@@ -136,13 +138,19 @@ export function TierEditor() {
             <span className="meta">{grouped[tier].length}</span>
           </h3>
           <ul className="spirit-grid">
-            {grouped[tier].map((spirit) => (
-              <li key={spirit.id} className="spirit-tile">
-                <SpiritArt spirit={spirit} />
-                <h4>{spirit.name}</h4>
+            {grouped[tier].map((config) => (
+              <li key={config.configId} className="spirit-tile">
+                <SpiritArt spirit={config.spirit} />
+                <h4>
+                  {config.spirit.name}
+                  {config.aspect ? <span className="meta"> — {config.aspect.name}</span> : null}
+                </h4>
                 <label>
-                  <span className="visually-hidden">Tier for {spirit.name}</span>
-                  <select value={tier} onChange={(e) => handleSetTier(spirit.id, e.target.value as Tier)}>
+                  <span className="visually-hidden">
+                    Tier for {config.spirit.name}
+                    {config.aspect ? ` — ${config.aspect.name}` : ''}
+                  </span>
+                  <select value={tier} onChange={(e) => handleSetTier(config.configId, e.target.value as Tier)}>
                     {TIERS.map((t) => (
                       <option key={t} value={t}>
                         {t}
