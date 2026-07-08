@@ -18,7 +18,13 @@ function spirit(overrides: Partial<Spirit> & Pick<Spirit, 'id' | 'name'>): Spiri
 }
 
 function baseConfig(s: Spirit): Configuration {
-  return { configId: s.id, spirit: s, isBase: true, effectiveComplexity: s.complexity }
+  return {
+    configId: s.id,
+    spirit: s,
+    isBase: true,
+    effectiveComplexity: s.complexity,
+    personalEffectiveComplexity: s.complexity,
+  }
 }
 
 describe('selectWildcard', () => {

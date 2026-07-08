@@ -36,6 +36,10 @@ const ALPHA_MAX = 0.5
 // Scales how steeply complexity above the stated ceiling buries a configuration's score.
 const COMPLEXITY_PENALTY_SCALE = 5
 
+// Scales the enjoyment-preference term. Kept well below COMPLEXITY_PENALTY_SCALE: the
+// newcomer ceiling is a safeguard and must dominate; personal taste is a gentle nudge.
+const PREFERENCE_PENALTY_SCALE = 1
+
 function fitScore(config: Configuration, weights: Weights): number {
   return AXES.reduce((sum, axis) => sum + (weights[axis] ?? 0) * config.spirit.ratings[axis], 0)
 }
@@ -49,10 +53,32 @@ function tagBoost(config: Configuration, tempo: number, boardControl: number): n
   return bonus
 }
 
-function complexityPenalty(level: Complexity, ceiling: Complexity | undefined, importance: number): number {
-  if (!ceiling || importance <= 0) return 0
-  const over = COMPLEXITY_LEVEL[level] - COMPLEXITY_LEVEL[ceiling]
-  return over > 0 ? importance * over * COMPLEXITY_PENALTY_SCALE : 0
+/**
+ * Two consumers, two complexity readings (the v2 split rule - see the PRD's "Personal
+ * complexity override" section):
+ *  - the newcomer ceiling is a safeguard for a stranger at the table, so it is always scored
+ *    against `effectiveComplexity` (printed base + aspect arrow) - a personal override must
+ *    never soften it.
+ *  - the enjoyment preference is the app owner's own taste, so it is scored against
+ *    `personalEffectiveComplexity` (override base + aspect arrow), independent of any ceiling.
+ *
+ * TODO(review): the issue specifies the split (which reading each consumer uses) but not the
+ * exact shape of the preference term, since the "how much complexity do you enjoy" question
+ * yields a scale (complexityImportance) rather than a ceiling of its own. Chosen here: a
+ * ceiling-independent term proportional to the personal level, scaled well below the ceiling
+ * penalty so the newcomer safeguard always dominates. Revisit if this doesn't feel right at
+ * the table.
+ */
+function complexityPenalty(config: Configuration, ceiling: Complexity | undefined, importance: number): number {
+  if (importance <= 0) return 0
+
+  const over = ceiling ? COMPLEXITY_LEVEL[config.effectiveComplexity] - COMPLEXITY_LEVEL[ceiling] : 0
+  const ceilingPenalty = over > 0 ? importance * over * COMPLEXITY_PENALTY_SCALE : 0
+
+  const preferencePenalty =
+    importance * COMPLEXITY_LEVEL[config.personalEffectiveComplexity] * PREFERENCE_PENALTY_SCALE
+
+  return ceilingPenalty + preferencePenalty
 }
 
 function minMaxNormalize(values: number[]): number[] {
@@ -85,7 +111,7 @@ export function recommend(
     fit:
       fitScore(config, weights) +
       tagBoost(config, tempo, boardControl) -
-      complexityPenalty(config.effectiveComplexity, complexityCeiling, complexityImportance),
+      complexityPenalty(config, complexityCeiling, complexityImportance),
     tierValue: tierPrior?.[config.configId] ? TIER_VALUE[tierPrior[config.configId]] : NEUTRAL_TIER_VALUE,
   }))
 

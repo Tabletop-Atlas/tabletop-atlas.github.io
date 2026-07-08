@@ -21,7 +21,13 @@ function spirit(overrides: Partial<Spirit> = {}): Spirit {
 }
 
 function baseConfig(s: Spirit): Configuration {
-  return { configId: s.id, spirit: s, isBase: true, effectiveComplexity: s.complexity }
+  return {
+    configId: s.id,
+    spirit: s,
+    isBase: true,
+    effectiveComplexity: s.complexity,
+    personalEffectiveComplexity: s.complexity,
+  }
 }
 
 function aspectConfig(s: Spirit, aspectName: string, effectiveComplexity: Complexity): Configuration {
@@ -31,6 +37,7 @@ function aspectConfig(s: Spirit, aspectName: string, effectiveComplexity: Comple
     aspect: { name: aspectName },
     isBase: false,
     effectiveComplexity,
+    personalEffectiveComplexity: effectiveComplexity,
   }
 }
 
@@ -114,6 +121,44 @@ describe('recommend', () => {
       const base = baseConfig(s)
       const raised = aspectConfig(s, 'Harder Aspect', 'Very High')
       const ranked = recommend([base, raised], { offense: 1 }, { complexityImportance: 0, complexityCeiling: 'Low' })
+      expect(ranked[0].score).toBe(ranked[1].score)
+    })
+  })
+
+  describe('personal complexity override / split rule (issue #05)', () => {
+    // A spirit the owner has overridden to Low, even though it's printed High.
+    function overriddenConfig(s: Spirit, personalLevel: Complexity): Configuration {
+      return {
+        configId: s.id,
+        spirit: s,
+        isBase: true,
+        effectiveComplexity: s.complexity,
+        personalEffectiveComplexity: personalLevel,
+      }
+    }
+
+    it('the newcomer ceiling ignores the override - still buried for a first-timer', () => {
+      const overridden = spirit({ complexity: 'High', ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const actuallyLow = spirit({ complexity: 'Low', ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const ranked = recommend(
+        [overriddenConfig(overridden, 'Low'), baseConfig(actuallyLow)],
+        { offense: 1 },
+        { complexityImportance: 1, complexityCeiling: 'Low' },
+      )
+      // Identical fit, but the printed-High config is still buried behind the truly Low one.
+      expect(ranked[0].config.configId).toBe(actuallyLow.id)
+      expect(ranked[1].config.configId).toBe(overridden.id)
+    })
+
+    it('the enjoyment preference honours the override - scores the same as an actually-Low spirit', () => {
+      const overridden = spirit({ complexity: 'High', ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const actuallyLow = spirit({ complexity: 'Low', ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      // No newcomer ceiling in play - just "keep it simple" (max importance, generous ceiling).
+      const ranked = recommend(
+        [overriddenConfig(overridden, 'Low'), baseConfig(actuallyLow)],
+        { offense: 1 },
+        { complexityImportance: 1, complexityCeiling: 'Very High' },
+      )
       expect(ranked[0].score).toBe(ranked[1].score)
     })
   })

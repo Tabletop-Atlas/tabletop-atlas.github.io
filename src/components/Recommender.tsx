@@ -3,12 +3,14 @@ import spiritsData from '../data/spirits.json'
 import { answersStore } from '../domain/answersStore'
 import { answersToWeights, type Answers } from '../domain/answersToWeights'
 import { findAspectNudge } from '../domain/aspectNudge'
+import { complexityStore } from '../domain/complexityStore'
 import { expand, type Configuration } from '../domain/configurations'
 import { QUESTIONS } from '../domain/questionnaire'
 import { drawRandom } from '../domain/randomChoose'
 import { dedupeBySpirit, recommend, type Weights } from '../domain/recommend'
 import { analyzeTeam, tuneTowardGaps } from '../domain/teamCoverage'
 import { tierStore } from '../domain/tierStore'
+import { COMPLEXITIES } from '../domain/types'
 import type { Complexity, OCFDU, Spirit, Tier } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
 import { whyYou } from '../domain/whyYou'
@@ -21,7 +23,6 @@ const CONFIGS_BY_SPIRIT = configurations.reduce<Record<string, Configuration[]>>
   ;(acc[config.spirit.id] ??= []).push(config)
   return acc
 }, {})
-const COMPLEXITIES: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
 const AXES: (keyof OCFDU)[] = ['offense', 'control', 'fear', 'defense', 'utility']
 /** Deliberately narrow: three picks plus a wildcard, not a menu to agonise over. */
 const SHORTLIST_SIZE = 3
@@ -114,7 +115,7 @@ function useRanking() {
   const ranked = useMemo(
     () =>
       dedupeBySpirit(
-        recommend(configurations, weights, {
+        recommend(expand(spirits, complexityStore.getAll()), weights, {
           tempo: prefs.tempo,
           boardControl: prefs.boardControl,
           complexityImportance: prefs.complexityImportance,

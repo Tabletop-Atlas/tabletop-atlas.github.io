@@ -3,11 +3,12 @@ import spiritsData from '../data/spirits.json'
 import { answersStore } from '../domain/answersStore'
 import { parse, serialise } from '../domain/backup'
 import type { KnownIds } from '../domain/backup'
+import { complexityStore } from '../domain/complexityStore'
 import { expand } from '../domain/configurations'
 import { QUESTIONS } from '../domain/questionnaire'
 import { groupByTier, tierStore } from '../domain/tierStore'
-import { TIERS } from '../domain/types'
-import type { Spirit, Tier } from '../domain/types'
+import { COMPLEXITIES, TIERS } from '../domain/types'
+import type { Complexity, Spirit, Tier } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
 import { TIER_COLOR } from './tierColors'
 
@@ -40,9 +41,21 @@ export function TierEditor() {
 
   const grouped = useMemo(() => groupByTier(configurations, tierStore.getAll()), [version])
   const customised = tierStore.isCustomised()
+  const complexityOverrides = complexityStore.getAll()
+  const complexityCustomised = complexityStore.isCustomised()
 
   const handleSetTier = (id: string, tier: Tier) => {
     tierStore.setTier(id, tier)
+    setVersion((v) => v + 1)
+  }
+
+  const handleSetComplexity = (spiritId: string, complexity: Complexity) => {
+    complexityStore.setComplexity(spiritId, complexity)
+    setVersion((v) => v + 1)
+  }
+
+  const handleResetComplexity = (spiritId: string) => {
+    complexityStore.reset(spiritId)
     setVersion((v) => v + 1)
   }
 
@@ -60,7 +73,7 @@ export function TierEditor() {
   const handleExport = () => {
     const json = serialise({
       tiers: tierStore.getAll(),
-      complexityOverrides: {},
+      complexityOverrides: complexityStore.getAll(),
       answers: answersStore.load() ?? {},
       log: [],
     })
@@ -79,6 +92,10 @@ export function TierEditor() {
     tierStore.reset()
     for (const [id, tier] of Object.entries(result.state.tiers)) {
       tierStore.setTier(id, tier as Tier)
+    }
+    complexityStore.resetAll()
+    for (const [spiritId, complexity] of Object.entries(result.state.complexityOverrides)) {
+      complexityStore.setComplexity(spiritId, complexity as Complexity)
     }
     answersStore.save(result.state.answers)
     setVersion((v) => v + 1)
@@ -128,6 +145,41 @@ export function TierEditor() {
         />
       </p>
       {importMessage ? <p className="meta">{importMessage}</p> : null}
+
+      <h3>Complexity overrides</h3>
+      <p className="meta">
+        Disagree with the printed Complexity? Override it here. This only changes your own{' '}
+        <em>enjoyment</em> preference score — a newcomer's safeguard always reads the printed
+        value, never your override. Aspects aren't individually overridable; their printed arrow
+        still applies on top. {complexityCustomised ? <span>You have overrides set.</span> : null}
+      </p>
+      <ul className="spirit-grid">
+        {spirits.map((spirit) => (
+          <li key={spirit.id} className="spirit-tile">
+            <SpiritArt spirit={spirit} />
+            <h4>{spirit.name}</h4>
+            <p className="meta">printed: {spirit.complexity}</p>
+            <label>
+              <span className="visually-hidden">Complexity override for {spirit.name}</span>
+              <select
+                value={complexityOverrides[spirit.id]}
+                onChange={(e) => handleSetComplexity(spirit.id, e.target.value as Complexity)}
+              >
+                {COMPLEXITIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {complexityOverrides[spirit.id] !== spirit.complexity && (
+              <button type="button" onClick={() => handleResetComplexity(spirit.id)}>
+                Reset
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
 
       {TIERS.map((tier) => (
         <div key={tier}>

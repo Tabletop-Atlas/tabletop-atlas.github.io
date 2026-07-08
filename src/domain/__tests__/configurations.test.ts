@@ -79,6 +79,40 @@ describe('configurations', () => {
     const config = expand(spirits).find((c) => c.spirit.id === 'lightnings-swift-strike' && c.isBase)
     expect(config?.effectiveComplexity).toBe(config?.spirit.complexity)
   })
+
+  describe('personal complexity override (issue #05)', () => {
+    it('defaults personalEffectiveComplexity to the printed value with no override', () => {
+      const config = expand(spirits).find((c) => c.spirit.id === 'lightnings-swift-strike' && c.isBase)
+      expect(config?.personalEffectiveComplexity).toBe(config?.spirit.complexity)
+    })
+
+    it('a base configuration reads the override for personalEffectiveComplexity, unmodified in effectiveComplexity', () => {
+      const shroud = spirits.find((s) => s.id === 'shroud-of-silent-mist')!
+      const configs = expand(spirits, { [shroud.id]: 'Low' })
+      const base = configs.find((c) => c.spirit.id === shroud.id && c.isBase)!
+      expect(base.effectiveComplexity).toBe(shroud.complexity) // printed complexity untouched
+      expect(base.personalEffectiveComplexity).toBe('Low')
+    })
+
+    it('composes the override with the aspect arrow: override base, then delta, then clamp', () => {
+      const shroud = spirits.find((s) => s.id === 'shroud-of-silent-mist')!
+      const stranded = shroud.aspects.find((a) => a.name === 'Stranded')!
+      expect(stranded.complexityDelta).toBe('down')
+      const configs = expand(spirits, { [shroud.id]: 'Low' })
+      const strandedConfig = configs.find((c) => c.configId === toConfigId(shroud.id, 'Stranded'))!
+      // Override says Low; "down" would go below the floor, so it clamps at Low - not the
+      // printed-base composition (High -> Moderate).
+      expect(strandedConfig.personalEffectiveComplexity).toBe('Low')
+      expect(strandedConfig.effectiveComplexity).toBe('Moderate')
+    })
+
+    it('spirits.json printed complexity is never mutated by an override', () => {
+      const shroud = spirits.find((s) => s.id === 'shroud-of-silent-mist')!
+      const before = shroud.complexity
+      expand(spirits, { [shroud.id]: 'Very High' })
+      expect(spirits.find((s) => s.id === shroud.id)!.complexity).toBe(before)
+    })
+  })
 })
 
 /**

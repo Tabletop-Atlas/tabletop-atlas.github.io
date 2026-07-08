@@ -1,4 +1,6 @@
-export type Complexity = 'Low' | 'Moderate' | 'High' | 'Very High'
+export const COMPLEXITIES = ['Low', 'Moderate', 'High', 'Very High'] as const
+
+export type Complexity = (typeof COMPLEXITIES)[number]
 
 /** Tier vocabulary, strongest first. Matches the owner's source tier list (X sits above S). */
 export const TIERS = ['X', 'S', 'A', 'B', 'C', 'D', 'F'] as const

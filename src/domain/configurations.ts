@@ -6,7 +6,13 @@ export interface Configuration {
   spirit: Spirit
   aspect?: Aspect
   isBase: boolean
+  /** Printed complexity + the aspect's arrow, clamped. Always reads the *printed* base level -
+   * this is what the newcomer ceiling scores, so a personal override can never soften the
+   * safeguard that decides what a stranger at the table gets handed. */
   effectiveComplexity: Complexity
+  /** Same composition, but the base level is the owner's complexityStore override (falling
+   * back to printed when there is none). This is what the enjoyment preference scores. */
+  personalEffectiveComplexity: Complexity
 }
 
 const COMPLEXITY_ORDER: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
@@ -24,15 +30,20 @@ export function toConfigId(spiritId: string, aspectName?: string): string {
 }
 
 /** Pure: a base configuration for every spirit, plus one per aspect. Fit is inherited from
- * the base spirit's OCFDU unmodified - aspects have no printed OCFDU and none will be invented. */
-export function expand(spirits: Spirit[]): Configuration[] {
+ * the base spirit's OCFDU unmodified - aspects have no printed OCFDU and none will be invented.
+ * `complexityOverrides` (spiritId -> Complexity, e.g. from complexityStore.getAll()) feeds only
+ * `personalEffectiveComplexity`; aspects are not individually overridable, so their own printed
+ * arrow is what shifts it away from the override. */
+export function expand(spirits: Spirit[], complexityOverrides: Record<string, Complexity> = {}): Configuration[] {
   const configurations: Configuration[] = []
   for (const spirit of spirits) {
+    const personalBase = complexityOverrides[spirit.id] ?? spirit.complexity
     configurations.push({
       configId: toConfigId(spirit.id),
       spirit,
       isBase: true,
       effectiveComplexity: spirit.complexity,
+      personalEffectiveComplexity: personalBase,
     })
     for (const aspect of spirit.aspects) {
       configurations.push({
@@ -41,6 +52,7 @@ export function expand(spirits: Spirit[]): Configuration[] {
         aspect,
         isBase: false,
         effectiveComplexity: applyDelta(spirit.complexity, aspect.complexityDelta),
+        personalEffectiveComplexity: applyDelta(personalBase, aspect.complexityDelta),
       })
     }
   }
