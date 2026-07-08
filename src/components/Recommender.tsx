@@ -5,6 +5,7 @@ import { answersToWeights, type Answers } from '../domain/answersToWeights'
 import { findAspectNudge } from '../domain/aspectNudge'
 import { QUESTIONS } from '../domain/questionnaire'
 import { recommend, type Weights } from '../domain/recommend'
+import { analyzeTeam, tuneTowardGaps } from '../domain/teamCoverage'
 import { tierStore } from '../domain/tierStore'
 import type { Spirit } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
@@ -55,6 +56,62 @@ function RecommendedCard({
         )}
       </div>
     </li>
+  )
+}
+
+function TeamPanel({
+  teamIds,
+  onAdd,
+  onRemove,
+  onTune,
+}: {
+  teamIds: string[]
+  onAdd: (id: string) => void
+  onRemove: (id: string) => void
+  onTune: () => void
+}) {
+  const team = spirits.filter((s) => teamIds.includes(s.id))
+  const { elementCoverage, roleGaps } = analyzeTeam(team)
+
+  return (
+    <div className="team-panel">
+      <h3>Team</h3>
+      <select value="" onChange={(e) => e.target.value && onAdd(e.target.value)}>
+        <option value="">Add a teammate's spirit...</option>
+        {spirits
+          .filter((s) => !teamIds.includes(s.id))
+          .map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.name}
+            </option>
+          ))}
+      </select>
+      <ul>
+        {team.map((s) => (
+          <li key={s.id}>
+            {s.name}{' '}
+            <button type="button" onClick={() => onRemove(s.id)}>
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {team.length > 0 && (
+        <div className="coverage">
+          <p>Element coverage: {elementCoverage.length > 0 ? elementCoverage.join(', ') : 'none'}</p>
+          <p>
+            Role gaps:{' '}
+            {roleGaps.length > 0 ? roleGaps.join(', ') : 'none — the team is well-rounded'}
+          </p>
+          {roleGaps.length > 0 && (
+            <button type="button" onClick={onTune}>
+              Tune toward the gaps
+            </button>
+          )}
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -141,11 +198,21 @@ function ResultsBoard({
   onRestart: () => void
 }) {
   const [wildcardOffset, setWildcardOffset] = useState(0)
+  const [teamIds, setTeamIds] = useState<string[]>([])
+  const [tuned, setTuned] = useState(false)
 
   const prefs = useMemo(() => answersToWeights(answers), [answers])
+  const roleGaps = useMemo(
+    () => analyzeTeam(spirits.filter((s) => teamIds.includes(s.id))).roleGaps,
+    [teamIds],
+  )
+  const effectiveWeights = useMemo(
+    () => (tuned ? tuneTowardGaps(prefs.weights, roleGaps) : prefs.weights),
+    [prefs.weights, roleGaps, tuned],
+  )
   const ranked = useMemo(
     () =>
-      recommend(spirits, prefs.weights, {
+      recommend(spirits, effectiveWeights, {
         tempo: prefs.tempo,
         boardControl: prefs.boardControl,
         complexityImportance: prefs.complexityImportance,
@@ -153,12 +220,12 @@ function ResultsBoard({
         tierPrior: tierStore.getAll(),
         tierKnob: prefs.tierKnob,
       }),
-    [prefs],
+    [prefs, effectiveWeights],
   )
   const shortlist = ranked.slice(0, 5)
   const wildcard = useMemo(
-    () => selectWildcard(ranked, prefs.weights, prefs.complexityCeiling, wildcardOffset),
-    [ranked, prefs, wildcardOffset],
+    () => selectWildcard(ranked, effectiveWeights, prefs.complexityCeiling, wildcardOffset),
+    [ranked, effectiveWeights, prefs, wildcardOffset],
   )
 
   return (
@@ -171,10 +238,17 @@ function ResultsBoard({
             spirit={spirit}
             score={score}
             showWhyYou={i < 3}
-            weights={prefs.weights}
+            weights={effectiveWeights}
           />
         ))}
       </ol>
+
+      <TeamPanel
+        teamIds={teamIds}
+        onAdd={(id) => setTeamIds((ids) => [...ids, id])}
+        onRemove={(id) => setTeamIds((ids) => ids.filter((existing) => existing !== id))}
+        onTune={() => setTuned(true)}
+      />
 
       {wildcard && (
         <div className="wildcard">
