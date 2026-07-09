@@ -182,7 +182,7 @@ export function RecommenderSide() {
         </label>
       ))}
 
-      <button type="button" className="deck-ghost" onClick={restart}>
+      <button type="button" className="deck-ghost deck-ghost-accent" onClick={restart}>
         Start over
       </button>
     </div>

@@ -158,6 +158,14 @@ button:disabled {
 .deck-ghost:hover {
   color: var(--deck-text);
 }
+.deck-ghost-accent {
+  border-color: var(--deck-accent);
+  color: var(--deck-accent);
+}
+.deck-ghost-accent:hover {
+  background: var(--deck-accent-bg);
+  color: var(--deck-accent);
+}
 
 /* --- result rows --- */
 .deck-rows {
