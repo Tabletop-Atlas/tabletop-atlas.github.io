@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import ownersBoard from '../../data/tier-lists/owners-board.json'
+import siaFavoritesFunSolo from '../../data/tier-lists/sia-favorites-fun-solo-2026.json'
 import spiritsData from '../../data/spirits.json'
 import { expand } from '../configurations'
 import type { Spirit, TierList } from '../types'
@@ -7,9 +8,9 @@ import type { Spirit, TierList } from '../types'
 const spirits = spiritsData as Spirit[]
 const configIds = new Set(expand(spirits).map((c) => c.configId))
 
-/** Every shipped tier list. Extend this array as new lists land (#08 and onward) - this test
- * is the tripwire that keeps every one of them honest, modelled on `aspectCanon.test.ts`. */
-const SHIPPED_LISTS: TierList[] = [ownersBoard as TierList]
+/** Every shipped tier list. Extend this array as new lists land - this test is the tripwire
+ * that keeps every one of them honest, modelled on `aspectCanon.test.ts`. */
+const SHIPPED_LISTS: TierList[] = [ownersBoard as TierList, siaFavoritesFunSolo as TierList]
 
 /**
  * A deliberate duplication of the owner's 68 expected keys, so drift in `owners-board.json`
@@ -123,5 +124,45 @@ describe('tier list canon', () => {
 
   it('the owner\'s board covers all 68 configurations (deliberate duplication - drift fails loudly)', () => {
     expect(Object.keys(ownersBoard.tiers).sort()).toEqual([...OWNERS_BOARD_EXPECTED_KEYS].sort())
+  })
+
+  describe('sia-favorites-fun-solo-2026 - the dash/"None" edge case', () => {
+    // The source video marks six spirits with a dash rather than a letter (it rated only their
+    // aspects, not the plain base). That is "the source declined to rate this", the same fact
+    // an absent key always represents - so those six configIds must have NO key at all, not a
+    // "None" tier. This is the edge case the owner supplied this list to test.
+    const DASH_MAPPED_TO_ABSENT = [
+      'river-surges-in-sunlight',
+      'lightnings-swift-strike',
+      'shadows-flicker-like-flame',
+      'bringer-of-dreams-and-nightmares',
+      'shifting-memory-of-ages',
+      'shroud-of-silent-mist',
+    ]
+
+    it('never carries the literal string "None" as a tier value', () => {
+      expect(Object.values(siaFavoritesFunSolo.tiers)).not.toContain('None')
+    })
+
+    it('omits the key entirely for every dash-marked base spirit', () => {
+      for (const configId of DASH_MAPPED_TO_ABSENT) {
+        expect(configId in siaFavoritesFunSolo.tiers, `${configId} should be absent, not "None"`).toBe(false)
+      }
+    })
+
+    it('still rates that spirit\'s aspects even though its own base is unrated', () => {
+      // river-surges-in-sunlight itself is absent, but the source did rate its three aspects.
+      expect(siaFavoritesFunSolo.tiers['river-surges-in-sunlight::Travel']).toBe('A')
+      expect(siaFavoritesFunSolo.tiers['river-surges-in-sunlight::Sunshine']).toBe('F')
+      expect(siaFavoritesFunSolo.tiers['river-surges-in-sunlight::Haven']).toBe('B')
+    })
+
+    it('covers exactly 62 of 68 configurations (68 minus the 6 dash-marked bases)', () => {
+      expect(Object.keys(siaFavoritesFunSolo.tiers)).toHaveLength(62)
+    })
+
+    it('uses only the four-band vocabulary the source actually printed (no C or D band)', () => {
+      expect(siaFavoritesFunSolo.tierLabels).toEqual(['S', 'A', 'B', 'F'])
+    })
   })
 })
