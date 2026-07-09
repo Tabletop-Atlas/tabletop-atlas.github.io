@@ -1,6 +1,21 @@
 # Handoff: Spirit Island Spirit Recommender
 
-**Next session purpose:** Grill the owner on remaining open points, produce a PRD, then build v1 of a local web app in Claude Code.
+> **⚠ Superseded. This document predates v1.** It is preserved for two things that are still
+> authoritative: the **transcribed OCFDU ratings table** below (from the owner's printed reference
+> sheet) and the **owner profile**. Everything else describes a plan, not the app.
+>
+> For what the app is now, read `.scratch/v2/PRD.md` and `.scratch/v2/README.md`.
+> v1's own record is `.scratch/spirit-recommender/PRD.md`.
+>
+> **Decisions below that v2 reversed — do not act on them:**
+> - *"Aspects … not first-class items."* v2 made the **configuration** (a base spirit, or that
+>   spirit with exactly one aspect) the unit of recommendation. The tier list ranks all 68.
+> - *"Persistence: any local state … or fully stateless v1."* Settled: `localStorage`, with a seed
+>   fingerprint that discards overrides when the shipped data changes, plus versioned export/import.
+> - *"LLM layer (v2, not v1): an Ask Claude button."* Deferred again, to v3.
+> - The open questions in the final section were all answered by v1's PRD. Read that instead.
+
+**Original next-session purpose (historical):** Grill the owner on remaining open points, produce a PRD, then build v1 of a local web app in Claude Code.
 
 ## What this is
 

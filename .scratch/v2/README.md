@@ -1,34 +1,52 @@
 # v2 — configurations, personal complexity, game log
 
+**Status: shipped.** All 39 user stories in `PRD.md` are implemented. 174 tests pass; `tsc -b` and
+`oxlint` are clean. What remains is listed under "Still open" below.
+
 Start here: read `PRD.md`, then `../../CLAUDE.md`. v1 context lives in
-`../spirit-recommender/PRD.md` and `../../HANDOFF_spirit_island_recommender.md`.
+`../spirit-recommender/PRD.md` and `../../HANDOFF_spirit_island_recommender.md` (the latter predates
+v1 and is marked superseded — read it for the transcribed ratings table, not for its decisions).
 
-Work issues in `issues/` in dependency order. Each issue's `Blocked by` names its prerequisites.
+Each issue file carries its own `Status:` line and a `## Comments` section recording how it was
+resolved. `grep '^Status:' issues/*.md` is the authoritative view of what is left.
 
-## ⚠ Hard sequencing constraint
+## What shipped
 
-**#01 (export/import) must land before #02 (68-key tier seed).**
+Issues **01–09** built v2 (see the PRD). Issues **10–20** fixed what two review passes found:
 
-Growing `tiers.json` from 37 to 68 keys changes its seed fingerprint, and `tierStore` discards
-overrides stamped with a stale fingerprint — deliberately, because that behaviour fixes a real bug
-where stale browser edits silently shadowed a new seed. Do #02 first and you destroy any tier edits
-made in a browser, permanently. This is not a preference.
+- **10** the newcomer ceiling was switched off whenever the enjoyment knob read zero — two questions
+  about two different people, sharing one multiplier
+- **11** export wrote the whole shipped seed, so importing marked an untouched app as customised
+- **12** import replaced tiers, overrides and answers without warning
+- **13** aspect rows displayed their base spirit's printed complexity
+- **14, 19** a malformed log entry imported successfully, then threw on every render of the
+  Recommend tab — the default tab, so the app was unrecoverable without clearing storage
+- **15** overrides discarded by a seed-fingerprint change vanished silently
+- **16** the adversary was free text, fragmenting the win-rate statistic on typos
+- **18, 20** cleanups
 
-## Pickup order
+## ⚠ The sequencing constraint that shaped v2 (historical, now satisfied)
 
-```
-01 export/import backup        (blocks everything that touches the seed)
-        │
-        ├── 02 configurations + 68-key tier seed
-        │        ├── 03 effective complexity (aspect arrows)
-        │        │        └── 05 personal complexity override + split rule
-        │        ├── 04 dedup + base-wins tie-break
-        │        └── 06 game log ──┬── 07 timesPlayed -> novelty knob
-        │                          └── 08 log statistics
-        └── (05 also needs 01 for the backup schema)
+**#01 (export/import) had to land before #02 (68-key tier seed).** Growing `tiers.json` from 37 to
+68 keys changes its seed fingerprint, and `tierStore` discards overrides stamped with a stale
+fingerprint — deliberately, because that behaviour fixes a real v1 bug where stale browser edits
+silently shadowed a new seed. Doing #02 first would have destroyed any tier edits made in a browser.
 
-09 playerCount surfaces notes   (independent — grab any time)
-```
+**This constraint is permanent, not spent.** Any future change to `tiers.json` or to a spirit's
+printed `complexity` moves the fingerprint and discards the owner's overrides. Since #15 the app at
+least *reports* the loss. v3 should assume it still applies.
+
+## Still open
+
+- **#17 — terror-level range** (`ready-for-human`). The log's terror-level input caps at 3. It may
+  need to be 4; reaching Terror Level 4 is believed to be a win condition. Deliberately not handed
+  to an agent — see the failure mode below. Needs someone to read the rulebook.
+- **#21 — the random drawer still draws base spirits** (`needs-triage`). It filters on printed
+  `complexity`, so it cannot see that Shadows–Reach is simpler than base Shadows. A design call:
+  no user story covers the drawer.
+- **#22 — the aspect nudge and the sibling list overlap** (`needs-triage`). Looks like a cleanup,
+  isn't: `findAspectNudge` is the *only* consumer of `shiftsToward`, which the PRD defers to a
+  follow-on phase. Deleting the nudge loses the hint.
 
 ## Principles (from the PRD and CLAUDE.md)
 
@@ -63,7 +81,17 @@ Rules for v2:
   images away — the rules text lives *in* those images. Download and read them directly. That is how
   all 31 aspect effects were transcribed.
 
+Rules added during v2:
+
+- **The adversary set** (`src/data/adversaries.json`) was transcribed one wiki page at a time and is
+  pinned by `adversaryCanon.test.ts`. Note what a tripwire written alongside its data actually
+  protects against: drift, not fabrication. Independent verification is still a human job.
+- **#17 exists because of this failure mode.** A reviewer was *fairly sure* about a rules detail.
+  Fairly sure is how the five fabricated aspects shipped.
+
 ## Waiting on the human
 
-Nothing blocks. Spot-check the 31 aspect tiers in #02 against `my-image.png` when convenient — they
-were transcribed and cross-checked against canon, but they are the owner's own data.
+- **#17** — read the rulebook, settle the terror-level range.
+- **#21, #22** — two design calls, neither urgent.
+- Spot-check the 31 aspect tiers in #02 against `my-image.png` when convenient — they were
+  transcribed and cross-checked against canon, but they are the owner's own data.
