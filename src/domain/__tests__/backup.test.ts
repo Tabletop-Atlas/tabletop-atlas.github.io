@@ -2,8 +2,12 @@ import { describe, expect, it } from 'vitest'
 import { CURRENT_SCHEMA_VERSION, parse, serialise } from '../backup'
 import type { BackupState, KnownIds, LogEntry } from '../backup'
 
+const OWNERS_LIST = 'owners-board'
+const FUN_LIST = 'personal-fun-abc123'
+
 const KNOWN: KnownIds = {
   tierIds: new Set(['lightnings-swift-strike', 'river-surges-in-sunlight']),
+  listIds: new Set([OWNERS_LIST, FUN_LIST]),
   complexityIds: new Set(['lightnings-swift-strike']),
   questionIds: new Set(['beatOpponents', 'tempo']),
 }
@@ -27,7 +31,7 @@ const entryB: LogEntry = {
 }
 
 const fullState: BackupState = {
-  tiers: { 'lightnings-swift-strike': 'S' },
+  tiers: { [OWNERS_LIST]: { 'lightnings-swift-strike': 'S' } },
   complexityOverrides: { 'lightnings-swift-strike': 'Moderate' },
   answers: { beatOpponents: 'force', tempo: 'fast' },
   log: [entryA],
@@ -41,52 +45,93 @@ describe('backup', () => {
     expect(unresolved).toEqual([])
   })
 
-  it('stamps the current schema version and an exportedAt timestamp', () => {
+  it('stamps the current schema version (2) and an exportedAt timestamp', () => {
     const bundle = JSON.parse(serialise(fullState))
     expect(bundle.schemaVersion).toBe(CURRENT_SCHEMA_VERSION)
+    expect(CURRENT_SCHEMA_VERSION).toBe(2)
     expect(typeof bundle.exportedAt).toBe('string')
   })
 
   it('replaces tiers, complexityOverrides and answers rather than merging with existing state', () => {
     const json = serialise(fullState)
-    // parse doesn't take "existing" tiers/answers at all - the caller applies the result
-    // wholesale, which is what "replace" means here.
     const { state } = parse(json, KNOWN)
-    expect(state.tiers).toEqual({ 'lightnings-swift-strike': 'S' })
+    expect(state.tiers).toEqual({ [OWNERS_LIST]: { 'lightnings-swift-strike': 'S' } })
     expect(state.answers).toEqual({ beatOpponents: 'force', tempo: 'fast' })
   })
 
-  it('appends and de-duplicates the log by id against existing entries', () => {
-    const json = serialise({ ...fullState, log: [entryA] })
-    const { state } = parse(json, KNOWN, [entryB])
-    expect(state.log).toHaveLength(2)
-    expect(state.log.map((e) => e.id).sort()).toEqual(['game-1', 'game-2'])
+  it('restores edits to several personal lists, each landing on its own list', () => {
+    const multiList: BackupState = {
+      ...fullState,
+      tiers: {
+        [OWNERS_LIST]: { 'lightnings-swift-strike': 'S' },
+        [FUN_LIST]: { 'river-surges-in-sunlight': 'X' },
+      },
+    }
+    const { state, unresolved } = parse(serialise(multiList), KNOWN)
+    expect(state.tiers[OWNERS_LIST]).toEqual({ 'lightnings-swift-strike': 'S' })
+    expect(state.tiers[FUN_LIST]).toEqual({ 'river-surges-in-sunlight': 'X' })
+    expect(unresolved).toEqual([])
   })
 
-  it('does not duplicate a log entry that exists on both sides', () => {
-    const json = serialise({ ...fullState, log: [entryA] })
-    const { state } = parse(json, KNOWN, [entryA, entryB])
-    expect(state.log).toHaveLength(2)
+  describe('v1 -> v2 migration', () => {
+    it('migrates a v1 flat tier map onto the owner\'s personal list', () => {
+      const v1Json = JSON.stringify({
+        schemaVersion: 1,
+        exportedAt: new Date().toISOString(),
+        tiers: { 'lightnings-swift-strike': 'S' },
+        complexityOverrides: {},
+        answers: {},
+        log: [],
+      })
+      const { state, unresolved } = parse(v1Json, KNOWN, [], OWNERS_LIST)
+      expect(state.tiers).toEqual({ [OWNERS_LIST]: { 'lightnings-swift-strike': 'S' } })
+      expect(unresolved).toEqual([])
+    })
+
+    it('a v1 backup with no tier edits migrates to an empty v2 tiers object, not an empty-keyed list', () => {
+      const v1Json = JSON.stringify({
+        schemaVersion: 1,
+        exportedAt: new Date().toISOString(),
+        tiers: {},
+        complexityOverrides: {},
+        answers: {},
+        log: [],
+      })
+      const { state } = parse(v1Json, KNOWN, [], OWNERS_LIST)
+      expect(state.tiers).toEqual({})
+    })
   })
 
   it('reports unknown keys as unresolved instead of dropping or throwing', () => {
     const stale: BackupState = {
-      tiers: { 'no-longer-exists': 'S' },
+      tiers: { [OWNERS_LIST]: { 'no-longer-exists': 'S' } },
       complexityOverrides: { 'no-longer-exists': 'Moderate' },
       answers: { unknownQuestion: 'x' },
       log: [],
     }
     const { state, unresolved } = parse(serialise(stale), KNOWN)
-    expect(state.tiers).toEqual({})
+    expect(state.tiers[OWNERS_LIST]).toEqual({})
     expect(state.complexityOverrides).toEqual({})
     expect(state.answers).toEqual({})
     expect(unresolved.sort()).toEqual(['no-longer-exists', 'no-longer-exists', 'unknownQuestion'])
+  })
+
+  it('an import naming an unknown list id lands in unresolved, applies nothing from it, and does not throw', () => {
+    const stale: BackupState = {
+      ...fullState,
+      tiers: { 'list-that-no-longer-exists': { 'lightnings-swift-strike': 'S' } },
+    }
+    expect(() => parse(serialise(stale), KNOWN)).not.toThrow()
+    const { state, unresolved } = parse(serialise(stale), KNOWN)
+    expect(state.tiers).toEqual({})
+    expect(unresolved).toContain('list-that-no-longer-exists')
   })
 
   it('a bundle exported against a smaller seed still imports its known keys losslessly into a larger one', () => {
     const json = serialise(fullState)
     const biggerSeed: KnownIds = {
       tierIds: new Set([...KNOWN.tierIds, 'new-spirit-config']),
+      listIds: KNOWN.listIds,
       complexityIds: KNOWN.complexityIds,
       questionIds: KNOWN.questionIds,
     }
@@ -124,6 +169,19 @@ describe('backup', () => {
     const { state, unresolved } = parse(json, KNOWN)
     expect(state.log).toEqual([])
     expect(unresolved.filter((u) => u === 'log entry with missing or invalid id')).toHaveLength(2)
+  })
+
+  it('appends and de-duplicates the log by id against existing entries', () => {
+    const json = serialise({ ...fullState, log: [entryA] })
+    const { state } = parse(json, KNOWN, [entryB])
+    expect(state.log).toHaveLength(2)
+    expect(state.log.map((e) => e.id).sort()).toEqual(['game-1', 'game-2'])
+  })
+
+  it('does not duplicate a log entry that exists on both sides', () => {
+    const json = serialise({ ...fullState, log: [entryA] })
+    const { state } = parse(json, KNOWN, [entryA, entryB])
+    expect(state.log).toHaveLength(2)
   })
 
   it('reports an unknown configId inside a log entry as unresolved, but still merges the entry', () => {
@@ -167,7 +225,6 @@ describe('backup', () => {
     })
     const { state, unresolved } = parse(json, KNOWN)
     expect(state.log).toEqual([])
-    // Not one push per character, and no `undefined` sneaking into unresolved via `.configId`.
     expect(unresolved).toEqual(['log entry with missing or invalid players'])
   })
 

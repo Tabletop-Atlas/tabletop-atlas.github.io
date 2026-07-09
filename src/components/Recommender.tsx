@@ -13,7 +13,7 @@ import { dedupeBySpirit, recommend, type Weights } from '../domain/recommend'
 import { analyzeTeam, tuneTowardGaps } from '../domain/teamCoverage'
 import { tierStore } from '../domain/tierStore'
 import { COMPLEXITIES } from '../domain/types'
-import type { Complexity, OCFDU, Spirit, Tier } from '../domain/types'
+import type { Complexity, OCFDU, Spirit } from '../domain/types'
 import { selectWildcard } from '../domain/wildcard'
 import { whyYou } from '../domain/whyYou'
 import { OcfduRadar } from './OcfduRadar'
@@ -51,7 +51,9 @@ interface RecommenderState {
 
 const Ctx = createContext<RecommenderState | null>(null)
 
-function useRecommender(): RecommenderState {
+/** Exported so other tabs (the tier board, the editor) can read the shared player count -
+ * see #06: player count filters which tier lists are selectable, everywhere, not just here. */
+export function useRecommender(): RecommenderState {
   const ctx = useContext(Ctx)
   if (!ctx) throw new Error('Recommender components must be inside <RecommenderProvider>')
   return ctx
@@ -129,7 +131,7 @@ function useRanking() {
         boardControl: prefs.boardControl,
         complexityImportance: prefs.complexityImportance,
         complexityCeiling: prefs.complexityCeiling,
-        tierPrior: tierStore.getAll(),
+        tierPrior: tierStore.getRankPrior(),
         tierKnob: prefs.tierKnob,
         timesPlayed,
       }),
@@ -247,7 +249,7 @@ function ResultRow({
   score: number
   rank: number
   weights: Weights
-  tiers: Record<string, Tier>
+  tiers: Record<string, string>
 }) {
   const [open, setOpen] = useState(false)
   const { playerCount } = useRecommender()
@@ -302,8 +304,8 @@ function ResultRow({
                 <ul className="aspects">
                   {siblings.map((sibling) => (
                     <li key={sibling.configId}>
-                      {sibling.aspect ? sibling.aspect.name : 'Base'} — tier {tiers[sibling.configId] ?? '?'} ·{' '}
-                      {sibling.effectiveComplexity}
+                      {sibling.aspect ? sibling.aspect.name : 'Base'} — tier{' '}
+                      {tiers[sibling.configId] ?? 'not rated by this list'} · {sibling.effectiveComplexity}
                     </li>
                   ))}
                 </ul>
@@ -331,6 +333,7 @@ function ResultsBoard() {
           Pick at random instead
         </button>
       </div>
+      <p className="meta">Scored against: {tierStore.getActiveList().name}</p>
 
       <ol className="deck-rows">
         {shortlist.map(({ config, score }, i) => (

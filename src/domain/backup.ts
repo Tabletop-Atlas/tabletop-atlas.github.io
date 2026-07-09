@@ -1,6 +1,6 @@
-import type { Complexity, Tier } from './types'
+import type { Complexity } from './types'
 
-export const CURRENT_SCHEMA_VERSION = 1
+export const CURRENT_SCHEMA_VERSION = 2
 
 /** Entry shape from the PRD's game log (Seam 6, issue #06). Declared here now so schema v1
  * ships every section it will ever need — later slices populate rather than force a version bump. */
@@ -16,8 +16,10 @@ export interface LogEntry {
   blightRemaining?: number
 }
 
+/** listId -> configId -> label. A flat map can no longer say which list an edit belongs to,
+ * now that there is more than one list (see #07). */
 export interface BackupState {
-  tiers: Record<string, Tier>
+  tiers: Record<string, Record<string, string>>
   complexityOverrides: Record<string, Complexity>
   answers: Record<string, string>
   log: LogEntry[]
@@ -32,6 +34,9 @@ interface Backup extends BackupState {
  * silently dropping or applying them. */
 export interface KnownIds {
   tierIds: Set<string>
+  /** Ids of the currently shipped/created tier lists - a listId a v2 backup names that no
+   * longer exists lands in `unresolved` rather than being dropped or applied. */
+  listIds: Set<string>
   complexityIds: Set<string>
   questionIds: Set<string>
 }
@@ -104,6 +109,34 @@ function mergeLog(
   return [...byId.values()]
 }
 
+/** A v1 backup's flat `configId -> Tier` map is attributed to `ownersListId` - the only list a
+ * v1 backup could ever have been describing, since lists didn't exist yet. */
+function migrateV1Tiers(
+  v1Tiers: Record<string, string> | undefined,
+  ownersListId: string,
+  known: KnownIds,
+  unresolved: string[],
+): Record<string, Record<string, string>> {
+  const inner = filterKnown(v1Tiers, known.tierIds, unresolved)
+  return Object.keys(inner).length > 0 ? { [ownersListId]: inner } : {}
+}
+
+function filterTiersV2(
+  raw: Record<string, Record<string, string>> | undefined,
+  known: KnownIds,
+  unresolved: string[],
+): Record<string, Record<string, string>> {
+  const result: Record<string, Record<string, string>> = {}
+  for (const [listId, inner] of Object.entries(raw ?? {})) {
+    if (!known.listIds.has(listId)) {
+      unresolved.push(listId)
+      continue
+    }
+    result[listId] = filterKnown(inner, known.tierIds, unresolved)
+  }
+  return result
+}
+
 /**
  * Parses and validates a backup file. `tiers` / `complexityOverrides` / `answers` are meant
  * to **replace** existing state (the caller applies that by using `state` as-is); `log` is
@@ -112,9 +145,12 @@ function mergeLog(
  *
  * Unknown ids (keys the current dataset no longer recognises) are reported in `unresolved`
  * rather than thrown or silently dropped — surfacing data loss beats hiding it.
+ *
+ * `ownersListId` is where a v1 backup's flat tier map lands (see `migrateV1Tiers`); v2 backups
+ * ignore it and key by the list id each edit already names.
  */
-export function parse(json: string, known: KnownIds, existingLog: LogEntry[] = []): ParseResult {
-  const parsed = JSON.parse(json) as Partial<Backup>
+export function parse(json: string, known: KnownIds, existingLog: LogEntry[] = [], ownersListId = ''): ParseResult {
+  const parsed = JSON.parse(json) as Partial<Backup> & { tiers?: unknown }
 
   if (typeof parsed.schemaVersion !== 'number' || parsed.schemaVersion > CURRENT_SCHEMA_VERSION) {
     throw new Error(
@@ -129,7 +165,10 @@ export function parse(json: string, known: KnownIds, existingLog: LogEntry[] = [
   }
 
   const unresolved: string[] = []
-  const tiers = filterKnown(parsed.tiers, known.tierIds, unresolved)
+  const tiers =
+    parsed.schemaVersion === 1
+      ? migrateV1Tiers(parsed.tiers as Record<string, string> | undefined, ownersListId, known, unresolved)
+      : filterTiersV2(parsed.tiers as Record<string, Record<string, string>> | undefined, known, unresolved)
   const complexityOverrides = filterKnown(parsed.complexityOverrides, known.complexityIds, unresolved)
   const answers = filterKnown(parsed.answers, known.questionIds, unresolved)
   const log = mergeLog(existingLog, parsed.log ?? [], known.tierIds, unresolved)

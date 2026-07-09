@@ -1,13 +1,13 @@
 import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import spiritsData from '../../data/spirits.json'
-import tiersData from '../../data/tiers.json'
+import ownersBoardData from '../../data/tier-lists/owners-board.json'
 import { expand } from '../configurations'
-import { ELEMENTS, TIERS } from '../types'
-import type { Complexity, Spirit, Tier } from '../types'
+import { ELEMENTS } from '../types'
+import type { Complexity, Spirit, TierList } from '../types'
 
 const spirits = spiritsData as Spirit[]
-const tiers = tiersData.tiers as Record<string, Tier>
+const ownersBoard = ownersBoardData as TierList
 const configurations = expand(spirits)
 
 const COMPLEXITIES: Complexity[] = ['Low', 'Moderate', 'High', 'Very High']
@@ -94,24 +94,24 @@ describe('spirit artwork', () => {
   })
 })
 
-describe('tiers.json integrity', () => {
+describe("owner's board integrity", () => {
   it('assigns exactly one valid tier to every configuration (68: 37 spirits + 31 aspects)', () => {
     expect(configurations).toHaveLength(68)
     for (const config of configurations) {
-      const tier = tiers[config.configId]
+      const tier = ownersBoard.tiers[config.configId]
       expect(tier, `${config.configId} has no tier entry`).toBeDefined()
-      expect(TIERS, `${config.configId} has bad tier "${tier}"`).toContain(tier)
+      expect(ownersBoard.tierLabels, `${config.configId} has bad tier "${tier}"`).toContain(tier)
     }
   })
 
   it('has no tier entries for configurations that do not exist', () => {
     const ids = new Set(configurations.map((c) => c.configId))
-    for (const id of Object.keys(tiers)) {
-      expect(ids, `tiers.json references unknown configuration "${id}"`).toContain(id)
+    for (const id of Object.keys(ownersBoard.tiers)) {
+      expect(ids, `owners-board.json references unknown configuration "${id}"`).toContain(id)
     }
   })
 
   it('has exactly 68 entries', () => {
-    expect(Object.keys(tiers)).toHaveLength(68)
+    expect(Object.keys(ownersBoard.tiers)).toHaveLength(68)
   })
 })

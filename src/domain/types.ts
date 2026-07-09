@@ -2,10 +2,48 @@ export const COMPLEXITIES = ['Low', 'Moderate', 'High', 'Very High'] as const
 
 export type Complexity = (typeof COMPLEXITIES)[number]
 
-/** Tier vocabulary, strongest first. Matches the owner's source tier list (X sits above S). */
-export const TIERS = ['X', 'S', 'A', 'B', 'C', 'D', 'F'] as const
+export const LIST_TYPES = ['strength', 'fun'] as const
 
-export type Tier = (typeof TIERS)[number]
+export type TierListType = (typeof LIST_TYPES)[number]
+
+export interface SourceCitation {
+  author: string
+  title: string
+  url: string
+  published?: string
+  retrievedAt: string
+  method: string
+}
+
+/**
+ * A tier list is a cited document, not a table of opinions: an author, a type, a player count
+ * it was made for, its own tier vocabulary, and a partial set of ratings. Contract published at
+ * `.scratch/v3/tier-list-schema.md`.
+ *
+ * `tiers` maps configId -> label. An absent key means the source never rated that configuration
+ * — never null, never a default, never inherited from another list.
+ */
+export interface TierList {
+  id: string
+  name: string
+  type: TierListType
+  /** The player count the source ranked FOR. Absent = source never said. Never inferred. */
+  players?: number
+  /** cited => immutable in-app; personal => editable. */
+  origin: 'cited' | 'personal'
+  /** This list's own vocabulary, strongest first. Rank is a label's position in this array. */
+  tierLabels: string[]
+  methodology: string
+  /** Required when origin is 'cited'. */
+  source?: SourceCitation
+  /** false until a human has checked the list against its source. */
+  verified: boolean
+  tiers: Record<string, string>
+  /** configIds the source rated but the scraper wasn't confident in. */
+  uncertain?: string[]
+  /** Names the source used that could not be resolved to a configId. */
+  unresolved?: { heard: string; at?: string }[]
+}
 
 export interface OCFDU {
   offense: number

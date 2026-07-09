@@ -1,7 +1,12 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
+import spiritsData from '../../data/spirits.json'
+import type { Spirit } from '../../domain/types'
 import App from '../../App'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
+import { SpiritDetail } from '../SpiritDetail'
+
+const spirits = spiritsData as Spirit[]
 
 /**
  * The UI is deliberately not unit-tested (it's glue over the four domain seams). This is the
@@ -35,5 +40,19 @@ describe('app smoke', () => {
       </RecommenderProvider>,
     )
     expect(html).toBe('')
+  })
+
+  it('renders the spirit detail view for a spirit without throwing, even with no panel or card images present', () => {
+    const spirit = spirits[0]
+    expect(() => renderToStaticMarkup(<SpiritDetail spirit={spirit} onClose={() => {}} />)).not.toThrow()
+    const html = renderToStaticMarkup(<SpiritDetail spirit={spirit} onClose={() => {}} />)
+    expect(html).toContain('spirit-detail')
+    expect(html).toContain(spirit.summary)
+  })
+
+  it('says a spirit is not rated by the active list when it has no tier entry', () => {
+    const unrated: Spirit = { ...spirits[0], id: 'a-spirit-no-list-has-ever-heard-of' }
+    const html = renderToStaticMarkup(<SpiritDetail spirit={unrated} onClose={() => {}} />)
+    expect(html).toContain('not rated by this list')
   })
 })

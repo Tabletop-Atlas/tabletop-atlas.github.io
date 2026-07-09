@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import spiritsData from '../../data/spirits.json'
-import tiersData from '../../data/tiers.json'
-import { parse, serialise } from '../backup'
+import ownersBoardData from '../../data/tier-lists/owners-board.json'
+import { parse } from '../backup'
 import type { KnownIds } from '../backup'
 import { expand, toConfigId } from '../configurations'
-import type { Spirit, Tier } from '../types'
+import type { Spirit, TierList } from '../types'
 
 const spirits = spiritsData as Spirit[]
-const seededTiers = tiersData.tiers as Record<string, Tier>
+const ownersBoard = ownersBoardData as TierList
+const seededTiers = ownersBoard.tiers
 
 describe('configurations', () => {
   it('produces exactly 68 configurations, 37 of them base', () => {
@@ -121,7 +122,7 @@ describe('configurations', () => {
  * discipline as aspectCanon.test.ts's spirit-to-aspect mapping: this is the tripwire against
  * a seed-file typo silently mistiering an aspect.
  */
-const ASPECT_TIER: Record<string, Tier> = {
+const ASPECT_TIER: Record<string, string> = {
   Regrowth: 'X',
   Intensify: 'S',
   Nourishing: 'S',
@@ -156,25 +157,34 @@ const ASPECT_TIER: Record<string, Tier> = {
 }
 
 describe('seed growth regression (issue #01 -> #02 ordering)', () => {
-  it('a backup exported against the old 37-key (spirit-only) seed imports losslessly into the 68-key seed', () => {
+  it('a v1 backup exported against the old 37-key (spirit-only) seed imports losslessly into the 68-key seed', () => {
     // Simulates a real backup taken before this seed grew: only base-spirit keys, no aspect
-    // configs. Every key must still resolve, and nothing should be reported unresolved -
-    // this is the exact scenario .scratch/v2/README.md's hard sequencing constraint protects.
-    const oldEditedTiers: Record<string, Tier> = {
+    // configs, and schema v1 (predates the TierList entity). Every key must still resolve, and
+    // nothing should be reported unresolved - the exact scenario .scratch/v2/README.md's hard
+    // sequencing constraint protects, now carried forward through the v1 -> v2 migration.
+    const oldEditedTiers: Record<string, string> = {
       'lightnings-swift-strike': 'S',
       'river-surges-in-sunlight': 'A',
     }
-    const json = serialise({ tiers: oldEditedTiers, complexityOverrides: {}, answers: {}, log: [] })
+    const json = JSON.stringify({
+      schemaVersion: 1,
+      exportedAt: new Date().toISOString(),
+      tiers: oldEditedTiers,
+      complexityOverrides: {},
+      answers: {},
+      log: [],
+    })
 
     const currentSeed: KnownIds = {
       tierIds: new Set(expand(spirits).map((c) => c.configId)),
+      listIds: new Set([ownersBoard.id]),
       complexityIds: new Set(spirits.map((s) => s.id)),
       questionIds: new Set(),
     }
-    const { state, unresolved } = parse(json, currentSeed)
+    const { state, unresolved } = parse(json, currentSeed, [], ownersBoard.id)
 
     expect(unresolved).toEqual([])
-    expect(state.tiers).toEqual(oldEditedTiers)
+    expect(state.tiers).toEqual({ [ownersBoard.id]: oldEditedTiers })
   })
 })
 

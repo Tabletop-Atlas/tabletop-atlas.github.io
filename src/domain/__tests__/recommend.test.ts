@@ -185,7 +185,8 @@ describe('recommend', () => {
     const higherFitLowerTier = spirit({ ratings: { offense: 5, control: 1, fear: 1, defense: 1, utility: 1 } })
     const lowerFitHigherTier = spirit({ ratings: { offense: 4.5, control: 1, fear: 1, defense: 1, utility: 1 } })
     const configs = [baseConfig(filler), baseConfig(higherFitLowerTier), baseConfig(lowerFitHigherTier)]
-    const tierPrior = { [higherFitLowerTier.id]: 'D', [lowerFitHigherTier.id]: 'S' } as const
+    // Rank: 0 = strongest, 1 = weakest.
+    const tierPrior = { [higherFitLowerTier.id]: 1, [lowerFitHigherTier.id]: 0 }
 
     it('alpha=0 (tierKnob=0) reproduces the pure-fit ranking', () => {
       const withTier = recommend(configs, { offense: 1 }, { tierPrior, tierKnob: 0 })
@@ -204,7 +205,7 @@ describe('recommend', () => {
       const bestFit = spirit({ ratings: { offense: 10, control: 1, fear: 1, defense: 1, utility: 1 } })
       const worstFit = spirit({ ratings: { offense: 1, control: 1, fear: 1, defense: 1, utility: 1 } })
       const ranked = recommend([baseConfig(bestFit), baseConfig(worstFit)], { offense: 1 }, {
-        tierPrior: { [bestFit.id]: 'D', [worstFit.id]: 'S' },
+        tierPrior: { [bestFit.id]: 1, [worstFit.id]: 0 },
         tierKnob: 1,
       })
       expect(ranked[0].config.configId).toBe(bestFit.id)
@@ -215,6 +216,41 @@ describe('recommend', () => {
       expect(ranked.map((r) => r.config.configId)).toEqual(
         recommend(configs, { offense: 1 }).map((r) => r.config.configId),
       )
+    })
+
+    it('a configuration absent from tierPrior scores identically to one sitting at the neutral rank (0.5)', () => {
+      const a = spirit({ ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const b = spirit({ ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const configsAB = [baseConfig(a), baseConfig(b)]
+      const withNeutralRank = recommend(configsAB, { offense: 1 }, { tierPrior: { [a.id]: 0.5 }, tierKnob: 1 })
+      const withNoEntry = recommend(configsAB, { offense: 1 }, { tierPrior: {}, tierKnob: 1 })
+      expect(withNeutralRank[0].score).toBe(withNeutralRank[1].score)
+      expect(withNoEntry[0].score).toBe(withNoEntry[1].score)
+    })
+
+    it('rank 0 (the strongest band) is not mistaken for a missing entry - the truthiness bug this domain is prone to', () => {
+      const strongest = spirit({ ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const unrated = spirit({ ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const ranked = recommend([baseConfig(strongest), baseConfig(unrated)], { offense: 1 }, {
+        tierPrior: { [strongest.id]: 0 },
+        tierKnob: 1,
+      })
+      expect(ranked[0].config.configId).toBe(strongest.id)
+    })
+
+    it('two lists with different tierLabels but the same position for a spirit produce the same prior', () => {
+      // A 7-band list's index-1 (rank 1/6) and a 6-band list's index-1 (rank 1/5) both feed
+      // recommend() as a pre-normalised number, so recommend() itself is vocabulary-agnostic;
+      // this pins that a caller who normalises differently changes nothing about scoring logic
+      // beyond the number handed in.
+      const s = spirit({ ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const other = spirit({ ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const configsSame = [baseConfig(s), baseConfig(other)]
+      const seven = recommend(configsSame, { offense: 1 }, { tierPrior: { [s.id]: 1 / 6 }, tierKnob: 1 })
+      const six = recommend(configsSame, { offense: 1 }, { tierPrior: { [s.id]: 1 / 5 }, tierKnob: 1 })
+      // Different absolute ranks, but both promote s over the unrated other - direction agrees.
+      expect(seven[0].config.configId).toBe(s.id)
+      expect(six[0].config.configId).toBe(s.id)
     })
   })
 
@@ -290,7 +326,7 @@ describe('recommend', () => {
       const base = baseConfig(s)
       const highTierAspect = aspectConfig(s, 'Better', 'Low')
       const ranked = recommend([base, highTierAspect], { offense: 1 }, {
-        tierPrior: { [base.configId]: 'F', [highTierAspect.configId]: 'C' },
+        tierPrior: { [base.configId]: 1, [highTierAspect.configId]: 0.3 },
         tierKnob: 1,
       })
       const deduped = dedupeBySpirit(ranked)

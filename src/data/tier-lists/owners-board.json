@@ -1,5 +1,19 @@
 {
-  "_note": "Owner's own tier list, transcribed from their TierMaker board (all Spirit Island spirits and aspects up to Nature Incarnate). Scale is X/S/A/B/C/D/F, X strongest. Editable in-app via the Tier list tab; user edits overlay this seed in localStorage. Grown to 68 keys in v2: base spirits plus one entry per aspect, keyed \"<spiritId>::<Aspect Name>\", so the tier list now faithfully reproduces the owner's full TierMaker board (spirits and aspects together).",
+  "id": "owners-board",
+  "name": "Owner's board",
+  "type": "strength",
+  "origin": "personal",
+  "tierLabels": [
+    "X",
+    "S",
+    "A",
+    "B",
+    "C",
+    "D",
+    "F"
+  ],
+  "methodology": "Transcribed from the owner's TierMaker board (all Spirit Island spirits and aspects up to Nature Incarnate). A personal read of raw power, not fact-checked against any published source. Grown to 68 keys in v2: base spirits plus one entry per aspect, keyed '<spiritId>::<Aspect Name>', so it faithfully reproduces the owner's full TierMaker board.",
+  "verified": true,
   "tiers": {
     "lightnings-swift-strike": "C",
     "river-surges-in-sunlight": "B",

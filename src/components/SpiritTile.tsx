@@ -2,13 +2,20 @@ import { useState } from 'react'
 import type { Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
 
-export function SpiritTile({ spirit }: { spirit: Spirit }) {
+export function SpiritTile({ spirit, onSelect }: { spirit: Spirit; onSelect?: (spirit: Spirit) => void }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
     <li className="spirit-tile">
-      <SpiritArt spirit={spirit} />
-      <h3>{spirit.name}</h3>
+      <button
+        type="button"
+        className="spirit-tile-open"
+        onClick={() => onSelect?.(spirit)}
+        aria-label={`View ${spirit.name} details`}
+      >
+        <SpiritArt spirit={spirit} />
+        <h3>{spirit.name}</h3>
+      </button>
       <p className="meta">
         {spirit.expansion} · {spirit.complexity}
       </p>

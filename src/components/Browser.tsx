@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
 import type { Complexity, OCFDU, Spirit } from '../domain/types'
+import { SpiritDetail } from './SpiritDetail'
 import { SpiritTile } from './SpiritTile'
 
 const spirits = spiritsData as Spirit[]
@@ -18,6 +19,7 @@ export function Browser() {
   const [complexity, setComplexity] = useState('')
   const [tag, setTag] = useState('')
   const [sortKey, setSortKey] = useState<SortKey>('name')
+  const [selected, setSelected] = useState<Spirit | null>(null)
 
   const shown = useMemo(() => {
     const filtered = spirits.filter(
@@ -87,9 +89,11 @@ export function Browser() {
 
       <ul className="spirit-grid">
         {shown.map((spirit) => (
-          <SpiritTile key={spirit.id} spirit={spirit} />
+          <SpiritTile key={spirit.id} spirit={spirit} onSelect={setSelected} />
         ))}
       </ul>
+
+      {selected && <SpiritDetail spirit={selected} onClose={() => setSelected(null)} />}
     </section>
   )
 }

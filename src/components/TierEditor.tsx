@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import spiritsData from '../data/spirits.json'
 import { answersStore } from '../domain/answersStore'
 import { parse, serialise } from '../domain/backup'
@@ -8,18 +8,28 @@ import { expand } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
 import { QUESTIONS } from '../domain/questionnaire'
 import { groupByTier, tierStore } from '../domain/tierStore'
-import { COMPLEXITIES, TIERS } from '../domain/types'
-import type { Complexity, Spirit, Tier } from '../domain/types'
+import { COMPLEXITIES } from '../domain/types'
+import type { Complexity, Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
-import { TIER_COLOR } from './tierColors'
+import { tierColor } from './tierColors'
+import { TierListControls } from './TierListControls'
 
 const spirits = spiritsData as Spirit[]
 const configurations = expand(spirits)
 
-const KNOWN_IDS: KnownIds = {
-  tierIds: new Set(configurations.map((c) => c.configId)),
-  complexityIds: new Set(spirits.map((s) => s.id)),
-  questionIds: new Set(QUESTIONS.map((q) => q.id)),
+// A function, not a module-level constant: list ids grow at runtime (#09's created lists), so
+// this must re-read tierStore on every import rather than freezing the set at module load.
+function knownIds(): KnownIds {
+  return {
+    tierIds: new Set(configurations.map((c) => c.configId)),
+    listIds: new Set(tierStore.getLists().map((l) => l.id)),
+    complexityIds: new Set(spirits.map((s) => s.id)),
+    questionIds: new Set(QUESTIONS.map((q) => q.id)),
+  }
+}
+
+function ownersListId(): string {
+  return tierStore.getLists().find((l) => l.origin === 'personal')?.id ?? ''
 }
 
 function downloadBackup(json: string) {
@@ -36,13 +46,14 @@ function downloadBackup(json: string) {
 
 /** Editable tier list. The read-only visual board lives in the Tier list tab. */
 export function TierEditor() {
-  const [version, setVersion] = useState(0)
+  const [, setVersion] = useState(0)
   const [importMessage, setImportMessage] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
 
-  // version is a deliberate re-run trigger for tierStore's mutable read, not a real dependency.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const grouped = useMemo(() => groupByTier(configurations, tierStore.getAll()), [version])
+  const bump = () => setVersion((v) => v + 1)
+  const active = tierStore.getActiveList()
+  const cited = active.origin === 'cited'
+  const grouped = groupByTier(configurations, tierStore.getAll(), active.tierLabels)
   const customised = tierStore.isCustomised()
   const complexityOverrides = complexityStore.getAll()
   const complexityCustomised = complexityStore.isCustomised()
@@ -52,22 +63,22 @@ export function TierEditor() {
   const handleDismissDiscardNotice = (store: 'tiers' | 'complexity overrides') => {
     if (store === 'tiers') tierStore.dismissDiscardNotice()
     else complexityStore.dismissDiscardNotice()
-    setVersion((v) => v + 1)
+    bump()
   }
 
-  const handleSetTier = (id: string, tier: Tier) => {
+  const handleSetTier = (id: string, tier: string) => {
     tierStore.setTier(id, tier)
-    setVersion((v) => v + 1)
+    bump()
   }
 
   const handleSetComplexity = (spiritId: string, complexity: Complexity) => {
     complexityStore.setComplexity(spiritId, complexity)
-    setVersion((v) => v + 1)
+    bump()
   }
 
   const handleResetComplexity = (spiritId: string) => {
     complexityStore.reset(spiritId)
-    setVersion((v) => v + 1)
+    bump()
   }
 
   const handleReset = () => {
@@ -78,12 +89,17 @@ export function TierEditor() {
     )
     if (!ok) return
     tierStore.reset()
-    setVersion((v) => v + 1)
+    bump()
   }
 
   const handleExport = () => {
+    const tiers: Record<string, Record<string, string>> = {}
+    for (const list of tierStore.getPersonalLists()) {
+      const overrides = tierStore.getOverridesForList(list.id)
+      if (Object.keys(overrides).length > 0) tiers[list.id] = overrides
+    }
     const json = serialise({
-      tiers: tierStore.getOverrides(),
+      tiers,
       complexityOverrides: complexityStore.getOverrides(),
       answers: answersStore.load() ?? {},
       log: gameLog.list(),
@@ -95,14 +111,14 @@ export function TierEditor() {
     setImportMessage(null)
     let result
     try {
-      result = parse(await file.text(), KNOWN_IDS, gameLog.list())
+      result = parse(await file.text(), knownIds(), gameLog.list(), ownersListId())
     } catch (err) {
       setImportMessage(err instanceof Error ? err.message : 'Could not read that backup file.')
       return
     }
 
     const hasExistingData =
-      tierStore.isCustomised() ||
+      tierStore.hasAnyPersonalEdits() ||
       complexityStore.isCustomised() ||
       Object.keys(answersStore.load() ?? {}).length > 0 ||
       gameLog.list().length > 0
@@ -116,17 +132,17 @@ export function TierEditor() {
       if (!ok) return
     }
 
-    tierStore.reset()
-    for (const [id, tier] of Object.entries(result.state.tiers)) {
-      tierStore.setTier(id, tier as Tier)
+    for (const list of tierStore.getPersonalLists()) {
+      tierStore.resetList(list.id)
     }
+    tierStore.importOverrides(result.state.tiers)
     complexityStore.resetAll()
     for (const [spiritId, complexity] of Object.entries(result.state.complexityOverrides)) {
       complexityStore.setComplexity(spiritId, complexity as Complexity)
     }
     answersStore.save(result.state.answers)
     gameLog.replaceAll(result.state.log)
-    setVersion((v) => v + 1)
+    bump()
     setImportMessage(
       result.unresolved.length > 0
         ? `Imported. Could not resolve ${result.unresolved.length} id(s): ${result.unresolved.join(', ')}`
@@ -137,6 +153,7 @@ export function TierEditor() {
   return (
     <section>
       <h2>Customise tiers</h2>
+      <TierListControls totalConfigs={configurations.length} allowCreate onChange={bump} />
       {tierDiscarded && (
         <p className="notice">
           Your saved tier edits were discarded because the shipped tier list has changed since you
@@ -155,10 +172,17 @@ export function TierEditor() {
           </button>
         </p>
       )}
-      <p>
-        Reassign any spirit. Your edits are saved in this browser and override the shipped list —
-        they change how the recommender's <em>raw power</em> slider ranks spirits.
-      </p>
+      {cited ? (
+        <p className="notice">
+          {active.name} is a citation, not your opinion — editing it would misattribute someone
+          else's ranking to you. Switch to a personal list above to make edits.
+        </p>
+      ) : (
+        <p>
+          Reassign any spirit. Your edits are saved in this browser and override the shipped list —
+          they change how the recommender's <em>raw power</em> slider ranks spirits.
+        </p>
+      )}
       <p>
         <button type="button" onClick={handleReset} disabled={!customised}>
           Reset to the shipped tier list
@@ -168,8 +192,9 @@ export function TierEditor() {
 
       <h3>Backup</h3>
       <p className="meta">
-        Nothing here survives a cleared browser cache unless you export it. Import replaces your
-        tiers, complexity overrides and answers; your game log is appended and de-duplicated by
+        Nothing here survives a cleared browser cache unless you export it. Export carries your
+        edits to every personal list, not just the one shown here. Import replaces those edits,
+        your complexity overrides and your answers; your game log is appended and de-duplicated by
         id instead, so merging two devices' histories never loses a played game.
       </p>
       <p>
@@ -228,16 +253,16 @@ export function TierEditor() {
         ))}
       </ul>
 
-      {TIERS.map((tier) => (
-        <div key={tier}>
+      {active.tierLabels.map((label, i) => (
+        <div key={label}>
           <h3>
-            <span className="tier-chip" style={{ backgroundColor: TIER_COLOR[tier] }}>
-              {tier}
+            <span className="tier-chip" style={{ backgroundColor: tierColor(i) }}>
+              {label}
             </span>{' '}
-            <span className="meta">{grouped[tier].length}</span>
+            <span className="meta">{grouped.labeled[label].length}</span>
           </h3>
           <ul className="spirit-grid">
-            {grouped[tier].map((config) => (
+            {grouped.labeled[label].map((config) => (
               <li key={config.configId} className="spirit-tile">
                 <SpiritArt spirit={config.spirit} />
                 <h4>
@@ -249,8 +274,13 @@ export function TierEditor() {
                     Tier for {config.spirit.name}
                     {config.aspect ? ` — ${config.aspect.name}` : ''}
                   </span>
-                  <select value={tier} onChange={(e) => handleSetTier(config.configId, e.target.value as Tier)}>
-                    {TIERS.map((t) => (
+                  <select
+                    value={label}
+                    disabled={cited}
+                    title={cited ? 'A citation cannot be edited.' : undefined}
+                    onChange={(e) => handleSetTier(config.configId, e.target.value)}
+                  >
+                    {active.tierLabels.map((t) => (
                       <option key={t} value={t}>
                         {t}
                       </option>
@@ -262,6 +292,43 @@ export function TierEditor() {
           </ul>
         </div>
       ))}
+
+      <div>
+        <h3>Unrated</h3>
+        <p className="meta">Not rated by this source — {grouped.unrated.length} configurations.</p>
+        <ul className="spirit-grid">
+          {grouped.unrated.map((config) => (
+            <li key={config.configId} className="spirit-tile">
+              <SpiritArt spirit={config.spirit} />
+              <h4>
+                {config.spirit.name}
+                {config.aspect ? <span className="meta"> — {config.aspect.name}</span> : null}
+              </h4>
+              <label>
+                <span className="visually-hidden">
+                  Tier for {config.spirit.name}
+                  {config.aspect ? ` — ${config.aspect.name}` : ''}
+                </span>
+                <select
+                  value=""
+                  disabled={cited}
+                  title={cited ? 'A citation cannot be edited.' : undefined}
+                  onChange={(e) => handleSetTier(config.configId, e.target.value)}
+                >
+                  <option value="" disabled>
+                    Unrated
+                  </option>
+                  {active.tierLabels.map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )
 }

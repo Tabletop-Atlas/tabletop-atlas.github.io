@@ -1,5 +1,5 @@
 import type { Configuration } from './configurations'
-import type { Complexity, OCFDU, Tier } from './types'
+import type { Complexity, OCFDU } from './types'
 
 export type Weights = Partial<OCFDU>
 
@@ -11,8 +11,12 @@ export interface RecommendOptions {
   /** 0..1: how heavily to penalize complexity above complexityCeiling. */
   complexityImportance?: number
   complexityCeiling?: Complexity
-  /** configId -> tier, e.g. from tiers.json. Missing entries fall back to a neutral prior. */
-  tierPrior?: Record<string, Tier>
+  /** configId -> normalised rank (0 strongest .. 1 weakest), e.g. from
+   * `tierStore.getRankPrior()`. This module does not know what a tier letter is - two lists
+   * with different vocabularies but the same *position* for a spirit produce the same prior.
+   * Missing entries fall back to a neutral prior; that is a display concern this module never
+   * touches. */
+  tierPrior?: Record<string, number>
   /** 0..1 knob (from questionnaire Q10 / a live control); scales up to ALPHA_MAX. 1 = raw
    * power (favour tier), 0 = something fresh (favour never-played configurations instead). */
   tierKnob?: number
@@ -29,9 +33,9 @@ export interface RankedConfiguration {
 const AXES: (keyof OCFDU)[] = ['offense', 'control', 'fear', 'defense', 'utility']
 
 const COMPLEXITY_LEVEL: Record<Complexity, number> = { Low: 1, Moderate: 2, High: 3, 'Very High': 4 }
-const TIER_VALUE: Record<Tier, number> = { X: 7, S: 6, A: 5, B: 4, C: 3, D: 2, F: 1 }
-// Mid-scale, so an untiered configuration is neither promoted nor buried by the prior.
-const NEUTRAL_TIER_VALUE = 4
+// Mid-scale on the 0 (strongest) .. 1 (weakest) rank domain, so an untiered configuration is
+// neither promoted nor buried by the prior.
+const NEUTRAL_TIER_VALUE = 0.5
 
 // Max weight the tier prior can contribute, kept below fit's full 0..1 range so a
 // configuration with the single best fit in the pool can never be outranked by tier alone.
@@ -123,7 +127,11 @@ export function recommend(
       fitScore(config, weights) +
       tagBoost(config, tempo, boardControl) -
       complexityPenalty(config, complexityCeiling, complexityImportance),
-    tierValue: tierPrior?.[config.configId] ? TIER_VALUE[tierPrior[config.configId]] : NEUTRAL_TIER_VALUE,
+    // Rank is 0 (strongest) .. 1 (weakest); tierValue wants the opposite direction (higher is
+    // better) so a stronger tier normalises toward a higher score, same as the old letter
+    // table did. `!== undefined` rather than truthiness: rank 0 (the strongest band) is a
+    // legal, common, falsy value.
+    tierValue: tierPrior?.[config.configId] !== undefined ? 1 - tierPrior[config.configId] : NEUTRAL_TIER_VALUE,
     // Negated so normalizing puts never-played configurations (0 plays) at the high end.
     noveltyValue: -(timesPlayed?.[config.configId] ?? 0),
   }))
