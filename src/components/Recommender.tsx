@@ -29,7 +29,7 @@ const AXES: (keyof OCFDU)[] = ['offense', 'control', 'fear', 'defense', 'utility
 /** Deliberately narrow: three picks plus a wildcard, not a menu to agonise over. */
 const SHORTLIST_SIZE = 3
 
-type Phase = 'wizard' | 'board' | 'random'
+type Phase = 'wizard' | 'board' | 'random' | 'resume'
 
 interface RecommenderState {
   phase: Phase
@@ -61,7 +61,7 @@ export function RecommenderProvider({ children }: { children: ReactNode }) {
   const restored = useMemo(() => answersStore.load(), [])
   const hasRestored = !!restored && Object.keys(restored).length > 0
 
-  const [phase, setPhase] = useState<Phase>(hasRestored ? 'board' : 'wizard')
+  const [phase, setPhase] = useState<Phase>(hasRestored ? 'resume' : 'wizard')
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>(restored ?? {})
   const [playerCount, setPlayerCount] = useState(2)
@@ -195,7 +195,29 @@ export function RecommenderMain() {
   const { phase } = useRecommender()
   if (phase === 'random') return <RandomChooser />
   if (phase === 'wizard') return <Wizard />
+  if (phase === 'resume') return <ResumePrompt />
   return <ResultsBoard />
+}
+
+/** Shown once on load when answers were restored from a previous visit, instead of silently
+ * jumping to results - the player explicitly chooses to continue or retake the questionnaire. */
+function ResumePrompt() {
+  const { setPhase, restart } = useRecommender()
+
+  return (
+    <section className="deck-wizard">
+      <h2>Welcome back</h2>
+      <p>You've got saved answers from last time.</p>
+      <div className="deck-wizard-actions">
+        <button type="button" onClick={() => setPhase('board')}>
+          Continue with my saved answers
+        </button>
+        <button type="button" className="deck-ghost" onClick={restart}>
+          Retake the questionnaire
+        </button>
+      </div>
+    </section>
+  )
 }
 
 function HeatStrip({ ratings, weights }: { ratings: OCFDU; weights: Weights }) {
