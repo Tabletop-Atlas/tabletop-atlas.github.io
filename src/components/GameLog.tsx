@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
 import { expand } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
+import { computeLogStats, type RateStat } from '../domain/logStats'
 import type { Spirit } from '../domain/types'
 
 const spirits = spiritsData as Spirit[]
@@ -11,6 +12,13 @@ function configLabel(configId: string): string {
   const config = configurations.find((c) => c.configId === configId)
   if (!config) return configId
   return config.aspect ? `${config.spirit.name} — ${config.aspect.name}` : config.spirit.name
+}
+
+/** "60% (3/5)", or just the count below the small-sample threshold. */
+function formatRate(stat: RateStat): string {
+  return stat.rate === undefined
+    ? `${stat.wins}/${stat.total} (too few games for a rate)`
+    : `${Math.round(stat.rate * 100)}% (${stat.wins}/${stat.total})`
 }
 
 interface PlayerRow {
@@ -33,6 +41,7 @@ export function GameLog() {
   const [blightRemaining, setBlightRemaining] = useState('')
 
   const entries = useMemo(() => [...gameLog.list()].reverse(), [version])
+  const stats = useMemo(() => computeLogStats(gameLog.list(), spirits), [version])
 
   const canSubmit = adversary.trim().length > 0 && players.every((p) => p.name.trim() && p.configId)
 
@@ -157,6 +166,45 @@ export function GameLog() {
           Record game
         </button>
       </p>
+
+      <h3>Statistics</h3>
+      <p className="meta">
+        Descriptive only — read these yourself; nothing here adjusts a tier, a weight, or a
+        complexity override.
+      </p>
+      {stats.gamesPlayed === 0 ? (
+        <p className="meta">No games logged yet.</p>
+      ) : (
+        <>
+          <p>
+            Games played: {stats.gamesPlayed} · Overall win rate: {formatRate(stats.overall)}
+          </p>
+          <p className="meta">Win rate by configuration:</p>
+          <ul>
+            {Object.entries(stats.byConfiguration).map(([configId, stat]) => (
+              <li key={configId}>
+                {configLabel(configId)}: {formatRate(stat)}
+              </li>
+            ))}
+          </ul>
+          <p className="meta">Win rate by effective complexity:</p>
+          <ul>
+            {Object.entries(stats.byComplexity).map(([complexity, stat]) => (
+              <li key={complexity}>
+                {complexity}: {formatRate(stat)}
+              </li>
+            ))}
+          </ul>
+          <p className="meta">Win rate by adversary:</p>
+          <ul>
+            {Object.entries(stats.byAdversary).map(([adversaryName, stat]) => (
+              <li key={adversaryName}>
+                {adversaryName}: {formatRate(stat)}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
       <h3>History ({entries.length})</h3>
       {entries.length === 0 ? (
