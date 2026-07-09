@@ -1,0 +1,13 @@
+{
+  "_note": "Transcribed from the Spirit Island Wiki's adversary pages (spiritislandwiki.com), one fetch per adversary, 2026-07-09. Every adversary's level range is 0 (base difficulty) through 6, confirmed individually on each adversary's own wiki page rather than assumed from one. See docs/agents or the #16 issue comment for the fetch trail.",
+  "adversaries": [
+    { "name": "Brandenburg-Prussia", "expansion": "Base", "minLevel": 0, "maxLevel": 6 },
+    { "name": "England", "expansion": "Base", "minLevel": 0, "maxLevel": 6 },
+    { "name": "Sweden", "expansion": "Base", "minLevel": 0, "maxLevel": 6 },
+    { "name": "France", "expansion": "Branch and Claw", "minLevel": 0, "maxLevel": 6 },
+    { "name": "Habsburg Monarchy", "expansion": "Jagged Earth", "minLevel": 0, "maxLevel": 6 },
+    { "name": "Russia", "expansion": "Jagged Earth", "minLevel": 0, "maxLevel": 6 },
+    { "name": "Scotland", "expansion": "Promo Pack 2 / Feather and Flame", "minLevel": 0, "maxLevel": 6 },
+    { "name": "Habsburg Mining Expedition", "expansion": "Nature Incarnate", "minLevel": 0, "maxLevel": 6 }
+  ]
+}

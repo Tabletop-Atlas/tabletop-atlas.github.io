@@ -95,9 +95,21 @@ describe('recommend', () => {
       expect(ranked.some((r) => r.config.configId === veryHigh.id)).toBe(true)
     })
 
-    it('applies no penalty when complexityImportance is 0', () => {
+    it('still buries an over-ceiling configuration when complexityImportance is 0 - the ceiling is a safeguard, not a taste knob', () => {
       const ranked = recommend(configs, { offense: 1 }, { complexityImportance: 0, complexityCeiling: 'Low' })
+      expect(ranked[0].config.configId).toBe(simple.id)
+    })
+
+    it('applies no penalty at all when there is no ceiling, even at importance 0', () => {
+      const ranked = recommend(configs, { offense: 1 }, { complexityImportance: 0 })
       expect(ranked[0].config.configId).toBe(veryHigh.id)
+    })
+
+    it('pins the interaction: complete newcomer + "bring on the bookkeeping" still buries a Very High configuration', () => {
+      // complexityImportance: 0 mirrors the `bring-it` option of the enjoyment question;
+      // complexityCeiling: 'Low' mirrors "Complete newcomer" - two different questions.
+      const ranked = recommend(configs, { offense: 1 }, { complexityImportance: 0, complexityCeiling: 'Low' })
+      expect(ranked[0].config.configId).toBe(simple.id)
     })
   })
 
@@ -118,12 +130,20 @@ describe('recommend', () => {
       expect(ranked[0].config.configId).toBe(base.configId)
     })
 
-    it('with complexity importance at 0, effective complexity changes no ranking', () => {
+    it('with complexity importance at 0 and no ceiling, effective complexity changes no ranking', () => {
+      const s = spirit({ complexity: 'Moderate', ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
+      const base = baseConfig(s)
+      const raised = aspectConfig(s, 'Harder Aspect', 'Very High')
+      const ranked = recommend([base, raised], { offense: 1 }, { complexityImportance: 0 })
+      expect(ranked[0].score).toBe(ranked[1].score)
+    })
+
+    it('a ceiling still buries a complexity-raising configuration even at importance 0', () => {
       const s = spirit({ complexity: 'Moderate', ratings: { offense: 3, control: 1, fear: 1, defense: 1, utility: 1 } })
       const base = baseConfig(s)
       const raised = aspectConfig(s, 'Harder Aspect', 'Very High')
       const ranked = recommend([base, raised], { offense: 1 }, { complexityImportance: 0, complexityCeiling: 'Low' })
-      expect(ranked[0].score).toBe(ranked[1].score)
+      expect(ranked[0].config.configId).toBe(base.configId)
     })
   })
 

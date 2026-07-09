@@ -291,6 +291,12 @@ button:disabled {
   color: #d8c48b;
   font-size: 13px;
 }
+.notice {
+  border-left: 2px solid var(--deck-warn);
+  padding-left: 0.7rem;
+  color: #d8c48b;
+  font-size: 13px;
+}
 .aspects {
   margin: 0.5rem 0 0;
   padding-left: 1rem;

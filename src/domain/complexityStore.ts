@@ -23,25 +23,6 @@ interface StoredOverrides {
   overrides: Record<string, Complexity>
 }
 
-/** Same staleness guard as tierStore: an override edited against a since-changed printed
- * complexity would silently misjudge the newcomer ceiling, so it's discarded, not carried over. */
-function readOverrides(storage: KeyValueStorage): Record<string, Complexity> {
-  const raw = storage.getItem(STORAGE_KEY)
-  if (!raw) return {}
-  let parsed: unknown
-  try {
-    parsed = JSON.parse(raw)
-  } catch {
-    return {}
-  }
-  const stored = parsed as Partial<StoredOverrides>
-  if (stored?.seed !== SEED_FINGERPRINT || !stored.overrides) {
-    storage.removeItem(STORAGE_KEY)
-    return {}
-  }
-  return stored.overrides
-}
-
 function writeOverrides(storage: KeyValueStorage, overrides: Record<string, Complexity>): void {
   const payload: StoredOverrides = { seed: SEED_FINGERPRINT, overrides }
   storage.setItem(STORAGE_KEY, JSON.stringify(payload))
@@ -54,17 +35,40 @@ function writeOverrides(storage: KeyValueStorage, overrides: Record<string, Comp
  * this is keyed by spirit id, not configId.
  */
 export function createComplexityStore(storage: KeyValueStorage = defaultStorage()) {
+  // Sticky for the life of this store instance - see tierStore's identical guard for why.
+  let discardedOnLoad = false
+
+  /** Same staleness guard as tierStore: an override edited against a since-changed printed
+   * complexity would silently misjudge the newcomer ceiling, so it's discarded, not carried over. */
+  function readOverrides(): Record<string, Complexity> {
+    const raw = storage.getItem(STORAGE_KEY)
+    if (!raw) return {}
+    let parsed: unknown
+    try {
+      parsed = JSON.parse(raw)
+    } catch {
+      return {}
+    }
+    const stored = parsed as Partial<StoredOverrides>
+    if (stored?.seed !== SEED_FINGERPRINT || !stored.overrides) {
+      storage.removeItem(STORAGE_KEY)
+      discardedOnLoad = true
+      return {}
+    }
+    return stored.overrides
+  }
+
   return {
     getComplexity(spiritId: string): Complexity | undefined {
-      return readOverrides(storage)[spiritId] ?? SEED[spiritId]
+      return readOverrides()[spiritId] ?? SEED[spiritId]
     },
     setComplexity(spiritId: string, complexity: Complexity): void {
-      const overrides = readOverrides(storage)
+      const overrides = readOverrides()
       overrides[spiritId] = complexity
       writeOverrides(storage, overrides)
     },
     reset(spiritId: string): void {
-      const overrides = readOverrides(storage)
+      const overrides = readOverrides()
       delete overrides[spiritId]
       writeOverrides(storage, overrides)
     },
@@ -72,10 +76,24 @@ export function createComplexityStore(storage: KeyValueStorage = defaultStorage(
       storage.removeItem(STORAGE_KEY)
     },
     getAll(): Record<string, Complexity> {
-      return { ...SEED, ...readOverrides(storage) }
+      return { ...SEED, ...readOverrides() }
+    },
+    /** Only the user's edits (keys whose value differs from the seed) - what a backup export
+     * should carry, as distinct from `getAll()`'s merged view the recommender depends on. */
+    getOverrides(): Record<string, Complexity> {
+      return readOverrides()
     },
     isCustomised(): boolean {
-      return Object.keys(readOverrides(storage)).length > 0
+      return Object.keys(readOverrides()).length > 0
+    },
+    /** True once a fingerprint mismatch has discarded stored overrides this session. */
+    wasDiscarded(): boolean {
+      readOverrides()
+      return discardedOnLoad
+    },
+    /** Silences the discard notice for the rest of this session. */
+    dismissDiscardNotice(): void {
+      discardedOnLoad = false
     },
   }
 }

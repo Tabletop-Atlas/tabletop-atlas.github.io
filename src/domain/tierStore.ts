@@ -24,29 +24,6 @@ interface StoredOverrides {
   overrides: Record<string, Tier>
 }
 
-/**
- * Overrides are stamped with a fingerprint of the seed they were edited against.
- * When the shipped tier list changes, previously-saved edits would silently shadow
- * it — so they are discarded rather than masking the new seed. Payloads without a
- * fingerprint are from the pre-versioning format and are treated as stale.
- */
-function readOverrides(storage: KeyValueStorage): Record<string, Tier> {
-  const raw = storage.getItem(STORAGE_KEY)
-  if (!raw) return {}
-  let parsed: unknown
-  try {
-    parsed = JSON.parse(raw)
-  } catch {
-    return {}
-  }
-  const stored = parsed as Partial<StoredOverrides>
-  if (stored?.seed !== SEED_FINGERPRINT || !stored.overrides) {
-    storage.removeItem(STORAGE_KEY)
-    return {}
-  }
-  return stored.overrides
-}
-
 function writeOverrides(storage: KeyValueStorage, overrides: Record<string, Tier>): void {
   const payload: StoredOverrides = { seed: SEED_FINGERPRINT, overrides }
   storage.setItem(STORAGE_KEY, JSON.stringify(payload))
@@ -54,12 +31,41 @@ function writeOverrides(storage: KeyValueStorage, overrides: Record<string, Tier
 
 /** Seam 4: tier list persistence. Seeds from tiers.json, overlays user edits in storage. */
 export function createTierStore(storage: KeyValueStorage = defaultStorage()) {
+  // Sticky for the life of this store instance (one page load): once the stale entry is
+  // removed from storage, a later read can no longer tell "discarded" from "never had any",
+  // so the fact has to be captured at the moment of discovery, not re-derived on every read.
+  let discardedOnLoad = false
+
+  /**
+   * Overrides are stamped with a fingerprint of the seed they were edited against.
+   * When the shipped tier list changes, previously-saved edits would silently shadow
+   * it — so they are discarded rather than masking the new seed. Payloads without a
+   * fingerprint are from the pre-versioning format and are treated as stale.
+   */
+  function readOverrides(): Record<string, Tier> {
+    const raw = storage.getItem(STORAGE_KEY)
+    if (!raw) return {}
+    let parsed: unknown
+    try {
+      parsed = JSON.parse(raw)
+    } catch {
+      return {}
+    }
+    const stored = parsed as Partial<StoredOverrides>
+    if (stored?.seed !== SEED_FINGERPRINT || !stored.overrides) {
+      storage.removeItem(STORAGE_KEY)
+      discardedOnLoad = true
+      return {}
+    }
+    return stored.overrides
+  }
+
   return {
     getTier(id: string): Tier | undefined {
-      return readOverrides(storage)[id] ?? SEED[id]
+      return readOverrides()[id] ?? SEED[id]
     },
     setTier(id: string, tier: Tier): void {
-      const overrides = readOverrides(storage)
+      const overrides = readOverrides()
       overrides[id] = tier
       writeOverrides(storage, overrides)
     },
@@ -67,11 +73,26 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage()) {
       storage.removeItem(STORAGE_KEY)
     },
     getAll(): Record<string, Tier> {
-      return { ...SEED, ...readOverrides(storage) }
+      return { ...SEED, ...readOverrides() }
+    },
+    /** Only the user's edits (keys whose value differs from the seed) - what a backup export
+     * should carry, as distinct from `getAll()`'s merged view the recommender depends on. */
+    getOverrides(): Record<string, Tier> {
+      return readOverrides()
     },
     /** True when the user has edited away from the shipped tier list. */
     isCustomised(): boolean {
-      return Object.keys(readOverrides(storage)).length > 0
+      return Object.keys(readOverrides()).length > 0
+    },
+    /** True once a fingerprint mismatch has discarded stored overrides this session. A fresh
+     * install (nothing ever stored) never sets this - see `readOverrides`'s `if (!raw)` guard. */
+    wasDiscarded(): boolean {
+      readOverrides()
+      return discardedOnLoad
+    },
+    /** Silences the discard notice for the rest of this session. */
+    dismissDiscardNotice(): void {
+      discardedOnLoad = false
     },
   }
 }

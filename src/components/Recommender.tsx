@@ -114,6 +114,10 @@ function useRanking() {
     () => (tuned ? tuneTowardGaps(prefs.weights, roleGaps) : prefs.weights),
     [prefs.weights, roleGaps, tuned],
   )
+  // Reads complexityStore, tierStore and gameLog - all mutable - but depends only on
+  // [prefs, weights]. Correct today only because App.tsx unmounts RecommenderMain (and this
+  // hook with it) on every tab switch, so a stale read here never survives to be seen; it is
+  // not safe to call this hook from a component that stays mounted while those stores change.
   const ranked = useMemo(() => {
     const configsForRanking = expand(spirits, complexityStore.getAll())
     const timesPlayed = Object.fromEntries(
@@ -272,7 +276,7 @@ function ResultRow({
         <div className="deck-row-body">
           <div className="deck-row-detail">
             <p className="meta">
-              {spirit.expansion} · {spirit.complexity} · {spirit.elements.join(', ')}
+              {spirit.expansion} · {config.effectiveComplexity} · {spirit.elements.join(', ')}
             </p>
             <p>{spirit.summary}</p>
             {spirit.notes && (
@@ -298,7 +302,8 @@ function ResultRow({
                 <ul className="aspects">
                   {siblings.map((sibling) => (
                     <li key={sibling.configId}>
-                      {sibling.aspect ? sibling.aspect.name : 'Base'} — tier {tiers[sibling.configId] ?? '?'}
+                      {sibling.aspect ? sibling.aspect.name : 'Base'} — tier {tiers[sibling.configId] ?? '?'} ·{' '}
+                      {sibling.effectiveComplexity}
                     </li>
                   ))}
                 </ul>
@@ -343,6 +348,7 @@ function ResultsBoard() {
               {wildcard.spirit.name}
               {wildcard.aspect ? <> — play the <strong>{wildcard.aspect.name}</strong> aspect</> : null}
             </div>
+            <div className="meta">{wildcard.effectiveComplexity}</div>
             <div className="deck-why">{wildcard.spirit.summary}</div>
           </div>
           <button type="button" className="deck-ghost" onClick={rerollWildcard}>
@@ -477,8 +483,10 @@ function RandomChooser() {
   const { setPhase } = useRecommender()
   const [complexityCeiling, setComplexityCeiling] = useState<Complexity | ''>('')
   const [drawKey, setDrawKey] = useState(0)
+  // drawKey is a deliberate re-run trigger for the reroll button, not a real dependency.
   const drawn = useMemo(
     () => drawRandom(spirits, { complexityCeiling: complexityCeiling || undefined }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [complexityCeiling, drawKey],
   )
 

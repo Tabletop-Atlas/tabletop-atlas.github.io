@@ -59,6 +59,25 @@ describe('complexityStore', () => {
     expect(store.isCustomised()).toBe(false)
   })
 
+  it('reports a discard on fingerprint mismatch, and stays reported across reads until dismissed', () => {
+    const storage = memoryStorage()
+    storage.setItem(
+      'spirit-island:complexity-overrides',
+      JSON.stringify({ seed: 'a-stale-fingerprint', overrides: { [SHADOWS]: 'Very High' } }),
+    )
+    const store = createComplexityStore(storage)
+    expect(store.wasDiscarded()).toBe(true)
+    expect(store.getComplexity(SHADOWS)).toBe(printedOf(SHADOWS))
+    expect(store.wasDiscarded()).toBe(true)
+    store.dismissDiscardNotice()
+    expect(store.wasDiscarded()).toBe(false)
+  })
+
+  it('does not report a discard for a fresh install with nothing ever stored', () => {
+    const store = createComplexityStore(memoryStorage())
+    expect(store.wasDiscarded()).toBe(false)
+  })
+
   it('survives corrupt stored JSON', () => {
     const storage = memoryStorage()
     storage.setItem('spirit-island:complexity-overrides', '{not json')
@@ -72,6 +91,14 @@ describe('complexityStore', () => {
     expect(store.isCustomised()).toBe(true)
     store.reset(SHADOWS)
     expect(store.isCustomised()).toBe(false)
+  })
+
+  it('getOverrides returns only the user edits, empty when nothing changed', () => {
+    const store = createComplexityStore(memoryStorage())
+    expect(store.getOverrides()).toEqual({})
+    const override = notPrintedOf(SHADOWS)
+    store.setComplexity(SHADOWS, override)
+    expect(store.getOverrides()).toEqual({ [SHADOWS]: override })
   })
 
   it('getAll overlays edits on top of the full seeded set', () => {

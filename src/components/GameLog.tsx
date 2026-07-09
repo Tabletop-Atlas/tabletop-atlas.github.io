@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
+import { ADVERSARIES, findAdversary } from '../domain/adversaries'
 import { expand } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
 import { computeLogStats, type RateStat } from '../domain/logStats'
@@ -40,10 +41,26 @@ export function GameLog() {
   const [terrorLevel, setTerrorLevel] = useState('')
   const [blightRemaining, setBlightRemaining] = useState('')
 
+  // version is a deliberate re-run trigger for gameLog's mutable read, not a real dependency.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const entries = useMemo(() => [...gameLog.list()].reverse(), [version])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const stats = useMemo(() => computeLogStats(gameLog.list(), spirits), [version])
 
   const canSubmit = adversary.trim().length > 0 && players.every((p) => p.name.trim() && p.configId)
+  const selectedAdversary = findAdversary(adversary)
+
+  const handleSetAdversary = (name: string) => {
+    setAdversary(name)
+    const found = findAdversary(name)
+    if (found) setAdversaryLevel((level) => Math.min(Math.max(level, found.minLevel), found.maxLevel))
+  }
+
+  const handleSetAdversaryLevel = (raw: string) => {
+    const found = findAdversary(adversary)
+    const level = Number(raw)
+    setAdversaryLevel(found ? Math.min(Math.max(level, found.minLevel), found.maxLevel) : level)
+  }
 
   const handleSubmit = () => {
     if (!canSubmit) return
@@ -118,16 +135,23 @@ export function GameLog() {
       <p>
         <label>
           <span>Adversary</span>{' '}
-          <input type="text" value={adversary} onChange={(e) => setAdversary(e.target.value)} />
+          <select value={adversary} onChange={(e) => handleSetAdversary(e.target.value)}>
+            <option value="">Which adversary?</option>
+            {ADVERSARIES.map((a) => (
+              <option key={a.name} value={a.name}>
+                {a.name}
+              </option>
+            ))}
+          </select>
         </label>{' '}
         <label>
           <span>Level</span>{' '}
           <input
             type="number"
-            min={0}
-            max={6}
+            min={selectedAdversary?.minLevel ?? 0}
+            max={selectedAdversary?.maxLevel ?? 6}
             value={adversaryLevel}
-            onChange={(e) => setAdversaryLevel(Number(e.target.value))}
+            onChange={(e) => handleSetAdversaryLevel(e.target.value)}
           />
         </label>
       </p>

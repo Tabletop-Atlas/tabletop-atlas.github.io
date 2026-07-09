@@ -28,8 +28,10 @@ function downloadBackup(json: string) {
   const a = document.createElement('a')
   a.href = url
   a.download = `spirit-island-backup-${new Date().toISOString().slice(0, 10)}.json`
+  document.body.appendChild(a)
   a.click()
-  URL.revokeObjectURL(url)
+  a.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 0)
 }
 
 /** Editable tier list. The read-only visual board lives in the Tier list tab. */
@@ -38,10 +40,20 @@ export function TierEditor() {
   const [importMessage, setImportMessage] = useState<string | null>(null)
   const fileInput = useRef<HTMLInputElement>(null)
 
+  // version is a deliberate re-run trigger for tierStore's mutable read, not a real dependency.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const grouped = useMemo(() => groupByTier(configurations, tierStore.getAll()), [version])
   const customised = tierStore.isCustomised()
   const complexityOverrides = complexityStore.getAll()
   const complexityCustomised = complexityStore.isCustomised()
+  const tierDiscarded = tierStore.wasDiscarded()
+  const complexityDiscarded = complexityStore.wasDiscarded()
+
+  const handleDismissDiscardNotice = (store: 'tiers' | 'complexity overrides') => {
+    if (store === 'tiers') tierStore.dismissDiscardNotice()
+    else complexityStore.dismissDiscardNotice()
+    setVersion((v) => v + 1)
+  }
 
   const handleSetTier = (id: string, tier: Tier) => {
     tierStore.setTier(id, tier)
@@ -71,8 +83,8 @@ export function TierEditor() {
 
   const handleExport = () => {
     const json = serialise({
-      tiers: tierStore.getAll(),
-      complexityOverrides: complexityStore.getAll(),
+      tiers: tierStore.getOverrides(),
+      complexityOverrides: complexityStore.getOverrides(),
       answers: answersStore.load() ?? {},
       log: gameLog.list(),
     })
@@ -88,6 +100,22 @@ export function TierEditor() {
       setImportMessage(err instanceof Error ? err.message : 'Could not read that backup file.')
       return
     }
+
+    const hasExistingData =
+      tierStore.isCustomised() ||
+      complexityStore.isCustomised() ||
+      Object.keys(answersStore.load() ?? {}).length > 0 ||
+      gameLog.list().length > 0
+    if (hasExistingData) {
+      const ok = window.confirm(
+        'Importing will replace your tiers, complexity overrides and answers with the ones in ' +
+          'this file. Your game log is merged instead - entries are appended and de-duplicated ' +
+          'by id, so nothing already logged is lost.\n\nExport a backup first if you want to keep ' +
+          'what you have now?\n\nChoose Cancel to go export, or OK to import anyway.',
+      )
+      if (!ok) return
+    }
+
     tierStore.reset()
     for (const [id, tier] of Object.entries(result.state.tiers)) {
       tierStore.setTier(id, tier as Tier)
@@ -109,6 +137,24 @@ export function TierEditor() {
   return (
     <section>
       <h2>Customise tiers</h2>
+      {tierDiscarded && (
+        <p className="notice">
+          Your saved tier edits were discarded because the shipped tier list has changed since you
+          made them. Export a backup next time to avoid losing edits like this.{' '}
+          <button type="button" onClick={() => handleDismissDiscardNotice('tiers')}>
+            Dismiss
+          </button>
+        </p>
+      )}
+      {complexityDiscarded && (
+        <p className="notice">
+          Your saved complexity overrides were discarded because the shipped complexity values have
+          changed since you made them. Export a backup next time to avoid losing edits like this.{' '}
+          <button type="button" onClick={() => handleDismissDiscardNotice('complexity overrides')}>
+            Dismiss
+          </button>
+        </p>
+      )}
       <p>
         Reassign any spirit. Your edits are saved in this browser and override the shipped list —
         they change how the recommender's <em>raw power</em> slider ranks spirits.

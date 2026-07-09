@@ -62,6 +62,26 @@ describe('tierStore', () => {
     expect(store.isCustomised()).toBe(false)
   })
 
+  it('reports a discard on fingerprint mismatch, and stays reported across reads until dismissed', () => {
+    const storage = memoryStorage()
+    storage.setItem(
+      'spirit-island:tier-overrides',
+      JSON.stringify({ seed: 'a-stale-fingerprint', overrides: { [LIGHTNING]: 'F' } }),
+    )
+    const store = createTierStore(storage)
+    expect(store.wasDiscarded()).toBe(true)
+    // Storage no longer holds the stale entry, but the notice must survive further reads.
+    expect(store.getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
+    expect(store.wasDiscarded()).toBe(true)
+    store.dismissDiscardNotice()
+    expect(store.wasDiscarded()).toBe(false)
+  })
+
+  it('does not report a discard for a fresh install with nothing ever stored', () => {
+    const store = createTierStore(memoryStorage())
+    expect(store.wasDiscarded()).toBe(false)
+  })
+
   it('discards overrides stored in the pre-versioning format', () => {
     const storage = memoryStorage()
     storage.setItem('spirit-island:tier-overrides', JSON.stringify({ [LIGHTNING]: 'F' }))
@@ -73,6 +93,14 @@ describe('tierStore', () => {
     const storage = memoryStorage()
     storage.setItem('spirit-island:tier-overrides', '{not json')
     expect(createTierStore(storage).getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
+  })
+
+  it('getOverrides returns only the user edits, empty when nothing changed', () => {
+    const store = createTierStore(memoryStorage())
+    expect(store.getOverrides()).toEqual({})
+    const override = notSeedOf(LIGHTNING)
+    store.setTier(LIGHTNING, override)
+    expect(store.getOverrides()).toEqual({ [LIGHTNING]: override })
   })
 
   it('reports whether the user has customised the list', () => {

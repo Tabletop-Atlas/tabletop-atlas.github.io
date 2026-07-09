@@ -78,13 +78,13 @@ function tagBoost(config: Configuration, tempo: number, boardControl: number): n
  * the table.
  */
 function complexityPenalty(config: Configuration, ceiling: Complexity | undefined, importance: number): number {
-  if (importance <= 0) return 0
-
   const over = ceiling ? COMPLEXITY_LEVEL[config.effectiveComplexity] - COMPLEXITY_LEVEL[ceiling] : 0
-  const ceilingPenalty = over > 0 ? importance * over * COMPLEXITY_PENALTY_SCALE : 0
+  const ceilingPenalty = over > 0 ? over * COMPLEXITY_PENALTY_SCALE : 0
 
   const preferencePenalty =
-    importance * COMPLEXITY_LEVEL[config.personalEffectiveComplexity] * PREFERENCE_PENALTY_SCALE
+    importance > 0
+      ? importance * COMPLEXITY_LEVEL[config.personalEffectiveComplexity] * PREFERENCE_PENALTY_SCALE
+      : 0
 
   return ceilingPenalty + preferencePenalty
 }

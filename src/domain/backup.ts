@@ -67,10 +67,25 @@ function filterKnown<T>(
   return result
 }
 
-function mergeLog(existing: LogEntry[], incoming: LogEntry[]): LogEntry[] {
+/** Cross-device dedupe depends on a stable id; an entry without one can't be merged safely,
+ * so it's reported rather than collapsed into whatever id-less entry arrived first. */
+function mergeLog(
+  existing: LogEntry[],
+  incoming: unknown[],
+  knownConfigIds: Set<string>,
+  unresolved: string[],
+): LogEntry[] {
   const byId = new Map(existing.map((entry) => [entry.id, entry]))
-  for (const entry of incoming) {
-    if (!byId.has(entry.id)) byId.set(entry.id, entry)
+  for (const raw of incoming) {
+    const entry = raw as Partial<LogEntry>
+    if (typeof entry.id !== 'string') {
+      unresolved.push('log entry with missing or invalid id')
+      continue
+    }
+    for (const player of entry.players ?? []) {
+      if (!knownConfigIds.has(player.configId)) unresolved.push(player.configId)
+    }
+    if (!byId.has(entry.id)) byId.set(entry.id, entry as LogEntry)
   }
   return [...byId.values()]
 }
@@ -98,7 +113,7 @@ export function parse(json: string, known: KnownIds, existingLog: LogEntry[] = [
   const tiers = filterKnown(parsed.tiers, known.tierIds, unresolved)
   const complexityOverrides = filterKnown(parsed.complexityOverrides, known.complexityIds, unresolved)
   const answers = filterKnown(parsed.answers, known.questionIds, unresolved)
-  const log = mergeLog(existingLog, parsed.log ?? [])
+  const log = mergeLog(existingLog, parsed.log ?? [], known.tierIds, unresolved)
 
   return { state: { tiers, complexityOverrides, answers, log }, unresolved }
 }
