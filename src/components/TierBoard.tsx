@@ -43,7 +43,10 @@ export function TierBoard() {
                   >
                     <SpiritArt spirit={config.spirit} className="tier-tile-art" />
                     {config.aspect ? (
-                      <figcaption className="tier-tile-aspect">{config.aspect.name}</figcaption>
+                      <figcaption className="tier-tile-aspect">
+                        <span className="tier-tile-aspect-name">{config.aspect.name}</span>
+                        <span className="tier-tile-spirit-name">{config.spirit.name}</span>
+                      </figcaption>
                     ) : (
                       <figcaption>{config.spirit.name}</figcaption>
                     )}
