@@ -138,6 +138,69 @@ describe('backup', () => {
     expect(unresolved).toContain('no-longer-exists')
   })
 
+  it('rejects an entry whose players is missing, null, or not an array', () => {
+    const json = JSON.stringify({
+      schemaVersion: CURRENT_SCHEMA_VERSION,
+      exportedAt: new Date().toISOString(),
+      tiers: {},
+      complexityOverrides: {},
+      answers: {},
+      log: [
+        { ...entryA, id: 'no-players', players: undefined },
+        { ...entryA, id: 'null-players', players: null },
+        { ...entryA, id: 'object-players', players: { name: 'Adam', configId: 'lightnings-swift-strike' } },
+      ],
+    })
+    const { state, unresolved } = parse(json, KNOWN)
+    expect(state.log).toEqual([])
+    expect(unresolved.filter((u) => u === 'log entry with missing or invalid players')).toHaveLength(3)
+  })
+
+  it('rejects an entry whose players is a string instead of iterating its characters', () => {
+    const json = JSON.stringify({
+      schemaVersion: CURRENT_SCHEMA_VERSION,
+      exportedAt: new Date().toISOString(),
+      tiers: {},
+      complexityOverrides: {},
+      answers: {},
+      log: [{ ...entryA, id: 'string-players', players: 'nope' }],
+    })
+    const { state, unresolved } = parse(json, KNOWN)
+    expect(state.log).toEqual([])
+    // Not one push per character, and no `undefined` sneaking into unresolved via `.configId`.
+    expect(unresolved).toEqual(['log entry with missing or invalid players'])
+  })
+
+  it('rejects an entry whose player is missing name or configId', () => {
+    const json = JSON.stringify({
+      schemaVersion: CURRENT_SCHEMA_VERSION,
+      exportedAt: new Date().toISOString(),
+      tiers: {},
+      complexityOverrides: {},
+      answers: {},
+      log: [
+        { ...entryA, id: 'no-name', players: [{ configId: 'lightnings-swift-strike' }] },
+        { ...entryA, id: 'no-configid', players: [{ name: 'Adam' }] },
+      ],
+    })
+    const { state, unresolved } = parse(json, KNOWN)
+    expect(state.log).toEqual([])
+    expect(unresolved.filter((u) => u === 'log entry with missing or invalid players')).toHaveLength(2)
+  })
+
+  it('still imports every good entry when a malformed-players entry is in the same file', () => {
+    const json = JSON.stringify({
+      schemaVersion: CURRENT_SCHEMA_VERSION,
+      exportedAt: new Date().toISOString(),
+      tiers: {},
+      complexityOverrides: {},
+      answers: {},
+      log: [entryA, { ...entryB, players: 'nope' }],
+    })
+    const { state } = parse(json, KNOWN)
+    expect(state.log.map((e) => e.id)).toEqual(['game-1'])
+  })
+
   it('still imports every good entry when one entry in the file is bad', () => {
     const json = JSON.stringify({
       schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -154,6 +217,13 @@ describe('backup', () => {
   it('rejects a bundle with a future schemaVersion with a clear error', () => {
     const future = JSON.stringify({ ...JSON.parse(serialise(fullState)), schemaVersion: CURRENT_SCHEMA_VERSION + 1 })
     expect(() => parse(future, KNOWN)).toThrow(/newer app version/i)
+  })
+
+  it('rejects a bundle with schemaVersion 0 or negative as malformed', () => {
+    const zero = JSON.stringify({ ...JSON.parse(serialise(fullState)), schemaVersion: 0 })
+    const negative = JSON.stringify({ ...JSON.parse(serialise(fullState)), schemaVersion: -1 })
+    expect(() => parse(zero, KNOWN)).toThrow(/malformed/i)
+    expect(() => parse(negative, KNOWN)).toThrow(/malformed/i)
   })
 
   it('touches no localStorage and no DOM', () => {

@@ -8,7 +8,9 @@ function readEntries(storage: KeyValueStorage): LogEntry[] {
   if (!raw) return []
   try {
     const parsed = JSON.parse(raw)
-    return Array.isArray(parsed) ? parsed : []
+    // backup.parse rejects these on import, but a log corrupted by an older build is already
+    // in storage - and timesPlayed() reads it on every render of the Recommend tab.
+    return Array.isArray(parsed) ? parsed.filter((e) => Array.isArray(e?.players)) : []
   } catch {
     return []
   }

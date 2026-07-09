@@ -60,6 +60,11 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage()) {
     return stored.overrides
   }
 
+  /** Stored overrides minus the ones that merely restate the seed. */
+  function userEdits(): Record<string, Tier> {
+    return Object.fromEntries(Object.entries(readOverrides()).filter(([id, tier]) => tier !== SEED[id]))
+  }
+
   return {
     getTier(id: string): Tier | undefined {
       return readOverrides()[id] ?? SEED[id]
@@ -76,13 +81,16 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage()) {
       return { ...SEED, ...readOverrides() }
     },
     /** Only the user's edits (keys whose value differs from the seed) - what a backup export
-     * should carry, as distinct from `getAll()`'s merged view the recommender depends on. */
+     * should carry, as distinct from `getAll()`'s merged view the recommender depends on.
+     * Assigning a spirit the tier it already has stores a no-op override; this filters it back
+     * out, so that no-op never round-trips through a backup as a real edit. */
     getOverrides(): Record<string, Tier> {
-      return readOverrides()
+      return userEdits()
     },
-    /** True when the user has edited away from the shipped tier list. */
+    /** True when the user has edited away from the shipped tier list. Reads the same filtered
+     * map the export does, so "has edits" and "exports edits" can never disagree. */
     isCustomised(): boolean {
-      return Object.keys(readOverrides()).length > 0
+      return Object.keys(userEdits()).length > 0
     },
     /** True once a fingerprint mismatch has discarded stored overrides this session. A fresh
      * install (nothing ever stored) never sets this - see `readOverrides`'s `if (!raw)` guard. */

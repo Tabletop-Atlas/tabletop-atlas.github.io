@@ -45,3 +45,18 @@ Reject it with the same clarity the future-version branch already manages.
 ## Blocked by
 
 - None — can start immediately
+
+## Comments
+
+Resolved, all four:
+1. `getOverrides()` in both stores now filters out entries where the stored override equals the
+   seed, so the comment ("only the user's edits") is true. Tests added pinning it (a no-op
+   `setTier`/`setComplexity` no longer appears in `getOverrides()`).
+2. Deleted the duplicate test in `recommend.test.ts`; kept "pins the interaction..." and folded
+   the deleted test's rationale ("the ceiling is a safeguard, not a taste knob") into its name.
+3. `adversaries.json`'s `_note` now points at `.scratch/v2/issues/16-adversary-closed-set.md`'s
+   Comments section, which is where the fetch trail actually lives.
+4. `backup.parse` now rejects `schemaVersion < 1` with its own "malformed schemaVersion" error,
+   distinct from the future-version message. Test added for both 0 and negative.
+
+`npm test` (171 tests), `tsc -b`, and `npm run lint` all stay green.

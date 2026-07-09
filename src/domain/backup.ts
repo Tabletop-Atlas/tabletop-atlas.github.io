@@ -67,6 +67,16 @@ function filterKnown<T>(
   return result
 }
 
+/** `gameLog.timesPlayed()` does `entry.players.some(...)` unconditionally - an entry that
+ * reaches storage without a real players array crashes every later render, not just import.
+ * `Array.isArray` alone is enough to reject a string: strings are iterable but not arrays. */
+function hasValidPlayers(players: unknown): players is { name: string; configId: string }[] {
+  return (
+    Array.isArray(players) &&
+    players.every((p) => typeof p?.name === 'string' && typeof p?.configId === 'string')
+  )
+}
+
 /** Cross-device dedupe depends on a stable id; an entry without one can't be merged safely,
  * so it's reported rather than collapsed into whatever id-less entry arrived first. */
 function mergeLog(
@@ -82,7 +92,11 @@ function mergeLog(
       unresolved.push('log entry with missing or invalid id')
       continue
     }
-    for (const player of entry.players ?? []) {
+    if (!hasValidPlayers(entry.players)) {
+      unresolved.push('log entry with missing or invalid players')
+      continue
+    }
+    for (const player of entry.players) {
       if (!knownConfigIds.has(player.configId)) unresolved.push(player.configId)
     }
     if (!byId.has(entry.id)) byId.set(entry.id, entry as LogEntry)
@@ -106,6 +120,11 @@ export function parse(json: string, known: KnownIds, existingLog: LogEntry[] = [
     throw new Error(
       `This backup was made with a newer app version (schemaVersion ${parsed.schemaVersion ?? 'unknown'}); ` +
         `this app only understands up to ${CURRENT_SCHEMA_VERSION}. Update the app before importing.`,
+    )
+  }
+  if (parsed.schemaVersion < 1) {
+    throw new Error(
+      `This backup has a malformed schemaVersion (${parsed.schemaVersion}); this app never wrote a version below 1.`,
     )
   }
 

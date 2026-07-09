@@ -106,4 +106,15 @@ describe('gameLog', () => {
       expect(log.list()).toEqual(merged)
     })
   })
+
+  it('drops an entry with no players array, rather than throwing on every later read', () => {
+    const storage = memoryStorage()
+    storage.setItem(
+      'spirit-island:game-log',
+      JSON.stringify([{ id: 'corrupt', date: 'x', adversary: 'England', adversaryLevel: 1, outcome: 'win' }]),
+    )
+    const log = createGameLog(storage)
+    expect(log.list()).toEqual([])
+    expect(log.timesPlayed('anything')).toBe(0)
+  })
 })

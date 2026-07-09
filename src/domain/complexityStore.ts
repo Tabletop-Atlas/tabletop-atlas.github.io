@@ -58,6 +58,11 @@ export function createComplexityStore(storage: KeyValueStorage = defaultStorage(
     return stored.overrides
   }
 
+  /** Stored overrides minus the ones that merely restate the printed value. */
+  function userEdits(): Record<string, Complexity> {
+    return Object.fromEntries(Object.entries(readOverrides()).filter(([id, complexity]) => complexity !== SEED[id]))
+  }
+
   return {
     getComplexity(spiritId: string): Complexity | undefined {
       return readOverrides()[spiritId] ?? SEED[spiritId]
@@ -79,12 +84,16 @@ export function createComplexityStore(storage: KeyValueStorage = defaultStorage(
       return { ...SEED, ...readOverrides() }
     },
     /** Only the user's edits (keys whose value differs from the seed) - what a backup export
-     * should carry, as distinct from `getAll()`'s merged view the recommender depends on. */
+     * should carry, as distinct from `getAll()`'s merged view the recommender depends on.
+     * Assigning a spirit the complexity it already has stores a no-op override; this filters
+     * it back out, so that no-op never round-trips through a backup as a real edit. */
     getOverrides(): Record<string, Complexity> {
-      return readOverrides()
+      return userEdits()
     },
+    /** Reads the same filtered map the export does, so "has edits" and "exports edits" can
+     * never disagree. */
     isCustomised(): boolean {
-      return Object.keys(readOverrides()).length > 0
+      return Object.keys(userEdits()).length > 0
     },
     /** True once a fingerprint mismatch has discarded stored overrides this session. */
     wasDiscarded(): boolean {

@@ -103,12 +103,25 @@ describe('tierStore', () => {
     expect(store.getOverrides()).toEqual({ [LIGHTNING]: override })
   })
 
+  it('getOverrides excludes a no-op edit (assigning the tier a spirit already has)', () => {
+    const store = createTierStore(memoryStorage())
+    store.setTier(LIGHTNING, seedOf(LIGHTNING))
+    expect(store.getOverrides()).toEqual({})
+  })
+
   it('reports whether the user has customised the list', () => {
     const store = createTierStore(memoryStorage())
     expect(store.isCustomised()).toBe(false)
     store.setTier(LIGHTNING, notSeedOf(LIGHTNING))
     expect(store.isCustomised()).toBe(true)
     store.reset()
+    expect(store.isCustomised()).toBe(false)
+  })
+
+  it('a no-op edit is not a customisation - isCustomised agrees with getOverrides', () => {
+    const store = createTierStore(memoryStorage())
+    store.setTier(LIGHTNING, seedOf(LIGHTNING))
+    expect(store.getOverrides()).toEqual({})
     expect(store.isCustomised()).toBe(false)
   })
 })

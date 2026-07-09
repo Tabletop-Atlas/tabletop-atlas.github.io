@@ -53,3 +53,13 @@ every good one.
 ## Blocked by
 
 - None — can start immediately
+
+## Comments
+
+Resolved: `mergeLog` now calls a `hasValidPlayers` guard before merging - `Array.isArray` plus a
+check that every player has a string `name` and `configId`. A string value for `players` fails
+`Array.isArray` outright, so it's rejected rather than iterated character by character. A
+rejected entry is reported as `'log entry with missing or invalid players'` and skipped, same
+discipline as the `id` guard from #14. Tests added in `backup.test.ts` covering missing/null/
+non-array/string players, a player missing `name` or `configId`, and one-bad-entry-doesn't-
+block-the-rest.

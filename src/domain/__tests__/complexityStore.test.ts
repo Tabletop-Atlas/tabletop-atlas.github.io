@@ -93,12 +93,25 @@ describe('complexityStore', () => {
     expect(store.isCustomised()).toBe(false)
   })
 
+  it('a no-op edit is not a customisation - isCustomised agrees with getOverrides', () => {
+    const store = createComplexityStore(memoryStorage())
+    store.setComplexity(SHADOWS, printedOf(SHADOWS))
+    expect(store.getOverrides()).toEqual({})
+    expect(store.isCustomised()).toBe(false)
+  })
+
   it('getOverrides returns only the user edits, empty when nothing changed', () => {
     const store = createComplexityStore(memoryStorage())
     expect(store.getOverrides()).toEqual({})
     const override = notPrintedOf(SHADOWS)
     store.setComplexity(SHADOWS, override)
     expect(store.getOverrides()).toEqual({ [SHADOWS]: override })
+  })
+
+  it('getOverrides excludes a no-op edit (assigning the complexity a spirit already has)', () => {
+    const store = createComplexityStore(memoryStorage())
+    store.setComplexity(SHADOWS, printedOf(SHADOWS))
+    expect(store.getOverrides()).toEqual({})
   })
 
   it('getAll overlays edits on top of the full seeded set', () => {
