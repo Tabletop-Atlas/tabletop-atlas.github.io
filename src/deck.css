@@ -562,6 +562,11 @@ button:disabled {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.tier-tile-aspect {
+  color: var(--deck-accent);
+  background: rgba(20, 53, 31, 0.88);
+  font-weight: 700;
+}
 .tier-empty {
   margin: 0;
   padding: 0.5rem;

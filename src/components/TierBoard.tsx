@@ -36,12 +36,17 @@ export function TierBoard() {
                 <p className="tier-empty">No spirits in this tier</p>
               ) : (
                 grouped[tier].map((config) => (
-                  <figure className="tier-tile" key={config.configId} title={config.spirit.name}>
+                  <figure
+                    className="tier-tile"
+                    key={config.configId}
+                    title={config.aspect ? `${config.spirit.name} — ${config.aspect.name} aspect` : config.spirit.name}
+                  >
                     <SpiritArt spirit={config.spirit} className="tier-tile-art" />
-                    <figcaption>
-                      {config.spirit.name}
-                      {config.aspect ? <span className="meta"> — {config.aspect.name}</span> : null}
-                    </figcaption>
+                    {config.aspect ? (
+                      <figcaption className="tier-tile-aspect">{config.aspect.name}</figcaption>
+                    ) : (
+                      <figcaption>{config.spirit.name}</figcaption>
+                    )}
                   </figure>
                 ))
               )}
