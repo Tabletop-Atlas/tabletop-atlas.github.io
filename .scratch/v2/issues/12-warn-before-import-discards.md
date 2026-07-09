@@ -1,6 +1,6 @@
 # 12 — Warn before an import discards tiers, overrides and answers
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

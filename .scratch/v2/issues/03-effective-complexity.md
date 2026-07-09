@@ -1,6 +1,6 @@
 # 03 — Effective complexity from the aspect's printed arrow
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

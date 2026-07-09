@@ -1,6 +1,6 @@
 # 15 — Report overrides discarded by a seed-fingerprint change
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

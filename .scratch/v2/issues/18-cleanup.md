@@ -1,6 +1,6 @@
 # 18 — Cleanup: stale seed note, download anchor, memo deps, vacuous assertion
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

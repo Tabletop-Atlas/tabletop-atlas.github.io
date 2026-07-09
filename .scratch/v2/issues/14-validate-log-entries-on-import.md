@@ -1,6 +1,6 @@
 # 14 — Validate log entries on import instead of collapsing them
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

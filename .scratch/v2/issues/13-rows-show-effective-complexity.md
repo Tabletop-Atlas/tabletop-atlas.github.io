@@ -1,6 +1,6 @@
 # 13 — Result rows show the configuration's effective complexity
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

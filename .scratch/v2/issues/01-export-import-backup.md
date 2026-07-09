@@ -1,6 +1,6 @@
 # 01 — Export/import backup (schema v1)
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

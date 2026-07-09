@@ -1,6 +1,6 @@
 # 10 — The newcomer ceiling must not be gated by the enjoyment knob
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

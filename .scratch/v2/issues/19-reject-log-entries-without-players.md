@@ -1,6 +1,6 @@
 # 19 — A log entry without a usable `players` array must be rejected, not stored
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

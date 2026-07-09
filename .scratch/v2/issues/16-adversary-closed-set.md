@@ -1,6 +1,6 @@
 # 16 — Record the adversary from a closed set, not free text
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

@@ -1,6 +1,6 @@
 # 04 — Dedup by base spirit, with base-wins tie-break
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

@@ -1,6 +1,6 @@
 # 05 — Personal complexity override, with the split rule
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

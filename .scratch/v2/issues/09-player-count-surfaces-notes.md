@@ -1,6 +1,6 @@
 # 09 — Make `playerCount` stop lying
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

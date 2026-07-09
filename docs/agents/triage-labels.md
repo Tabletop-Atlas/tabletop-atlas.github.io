@@ -10,6 +10,15 @@ The skills speak in terms of five canonical triage roles. This file maps those r
 | `ready-for-human` | `ready-for-human`            | Requires human implementation            |
 | `wontfix`         | `wontfix`                    | Will not be actioned                     |
 
+One local addition, outside the five canonical roles:
+
+| Status string | Meaning                                                     |
+| ------------- | ----------------------------------------------------------- |
+| `done`        | Implemented and merged. Keep the file; the `## Comments` section records how it was resolved. |
+
+Whoever implements an issue flips its `Status:` line to `done`. An issue left on
+`ready-for-agent` after its work has merged will send the next AFK agent to reimplement it.
+
 When a skill mentions a role (e.g. "apply the AFK-ready triage label"), write the corresponding string on the issue file's `Status:` line.
 
 Edit the right-hand column to match whatever vocabulary you actually use.

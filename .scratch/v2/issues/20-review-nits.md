@@ -1,6 +1,6 @@
 # 20 — Nits from the second review: a lying comment, a twin test, a dangling pointer
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

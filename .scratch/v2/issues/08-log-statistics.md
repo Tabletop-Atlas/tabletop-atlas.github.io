@@ -1,6 +1,6 @@
 # 08 — Descriptive statistics over the game log
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

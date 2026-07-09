@@ -1,6 +1,6 @@
 # 06 — Game log: record and browse played games
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

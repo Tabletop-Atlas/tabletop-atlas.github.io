@@ -1,6 +1,6 @@
 # 07 — `timesPlayed` gives the novelty knob a concrete meaning
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

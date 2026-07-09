@@ -1,6 +1,6 @@
 # 02 — Configurations + 68-key tier seed
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 
