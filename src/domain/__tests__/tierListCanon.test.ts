@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import ownersBoard from '../../data/tier-lists/owners-board.json'
 import siaFavoritesFunSolo from '../../data/tier-lists/sia-favorites-fun-solo-2026.json'
+import threeMbgStrengthSolo from '../../data/tier-lists/3mbg-strength-solo-2025.json'
 import spiritsData from '../../data/spirits.json'
 import { expand } from '../configurations'
 import type { Spirit, TierList } from '../types'
@@ -10,7 +11,11 @@ const configIds = new Set(expand(spirits).map((c) => c.configId))
 
 /** Every shipped tier list. Extend this array as new lists land - this test is the tripwire
  * that keeps every one of them honest, modelled on `aspectCanon.test.ts`. */
-const SHIPPED_LISTS: TierList[] = [ownersBoard as TierList, siaFavoritesFunSolo as TierList]
+const SHIPPED_LISTS: TierList[] = [
+  ownersBoard as TierList,
+  siaFavoritesFunSolo as TierList,
+  threeMbgStrengthSolo as TierList,
+]
 
 /**
  * A deliberate duplication of the owner's 68 expected keys, so drift in `owners-board.json`
@@ -88,6 +93,50 @@ const OWNERS_BOARD_EXPECTED_KEYS = [
   'shroud-of-silent-mist::Stranded',
 ]
 
+/**
+ * A deliberate duplication of the 36 base spirits 3MBG's video covers, so drift in
+ * `3mbg-strength-solo-2025.json` fails loudly. The source never mentions Fathomless Mud of the
+ * Swamp and never covers aspects - those 32 keys must stay absent, not filled in.
+ */
+const THREE_MBG_EXPECTED_KEYS = [
+  'lightnings-swift-strike',
+  'vital-strength-of-the-earth',
+  'river-surges-in-sunlight',
+  'shadows-flicker-like-flame',
+  'thunderspeaker',
+  'a-spread-of-rampant-green',
+  'oceans-hungry-grasp',
+  'bringer-of-dreams-and-nightmares',
+  'sharp-fangs-behind-the-leaves',
+  'keeper-of-the-forbidden-wilds',
+  'serpent-slumbering-beneath-the-island',
+  'heart-of-the-wildfire',
+  'shifting-memory-of-ages',
+  'many-minds-move-as-one',
+  'lure-of-the-deep-wilderness',
+  'grinning-trickster-stirs-up-trouble',
+  'stones-unyielding-defiance',
+  'volcano-looming-high',
+  'vengeance-as-a-burning-plague',
+  'shroud-of-silent-mist',
+  'starlight-seeks-its-form',
+  'fractured-days-split-the-sky',
+  'downpour-drenches-the-world',
+  'finder-of-paths-unseen',
+  'eyes-watch-from-the-trees',
+  'rising-heat-of-stone-and-sand',
+  'devouring-teeth-lurk-underfoot',
+  'sun-bright-whirlwind',
+  'ember-eyed-behemoth',
+  'hearth-vigil',
+  'towering-roots-of-the-jungle',
+  'relentless-gaze-of-the-sun',
+  'wounded-waters-bleeding',
+  'wandering-voice-keens-delirium',
+  'breath-of-darkness-down-your-spine',
+  'dances-up-earthquakes',
+]
+
 describe('tier list canon', () => {
   for (const list of SHIPPED_LISTS) {
     describe(list.id, () => {
@@ -124,6 +173,20 @@ describe('tier list canon', () => {
 
   it('the owner\'s board covers all 68 configurations (deliberate duplication - drift fails loudly)', () => {
     expect(Object.keys(ownersBoard.tiers).sort()).toEqual([...OWNERS_BOARD_EXPECTED_KEYS].sort())
+  })
+
+  it('3mbg-strength-solo-2025 covers exactly the 36 base spirits the video rates (deliberate duplication - drift fails loudly)', () => {
+    expect(Object.keys(threeMbgStrengthSolo.tiers).sort()).toEqual([...THREE_MBG_EXPECTED_KEYS].sort())
+  })
+
+  it('3mbg-strength-solo-2025 never rates an aspect configId', () => {
+    for (const configId of Object.keys(threeMbgStrengthSolo.tiers)) {
+      expect(configId, `${configId} should not appear - 3MBG never covers aspects`).not.toContain('::')
+    }
+  })
+
+  it('3mbg-strength-solo-2025 never rates Fathomless Mud of the Swamp', () => {
+    expect('fathomless-mud-of-the-swamp' in threeMbgStrengthSolo.tiers).toBe(false)
   })
 
   describe('sia-favorites-fun-solo-2026 - the dash/"None" edge case', () => {

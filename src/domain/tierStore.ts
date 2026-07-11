@@ -1,10 +1,15 @@
 import ownersBoard from '../data/tier-lists/owners-board.json'
 import siaFavoritesFunSolo from '../data/tier-lists/sia-favorites-fun-solo-2026.json'
+import threeMbgStrengthSolo from '../data/tier-lists/3mbg-strength-solo-2025.json'
 import type { Configuration } from './configurations'
 import { defaultStorage, type KeyValueStorage } from './storage'
 import type { TierList, TierListType } from './types'
 
-const SHIPPED_LISTS: TierList[] = [ownersBoard as TierList, siaFavoritesFunSolo as TierList]
+const SHIPPED_LISTS: TierList[] = [
+  ownersBoard as TierList,
+  siaFavoritesFunSolo as TierList,
+  threeMbgStrengthSolo as TierList,
+]
 
 const OLD_V2_KEY = 'spirit-island:tier-overrides'
 const ACTIVE_LIST_KEY = 'spirit-island:active-list-id'

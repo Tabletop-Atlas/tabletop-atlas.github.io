@@ -1,6 +1,6 @@
 # 08 — Land the 3MBG solo list
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 
@@ -45,3 +45,12 @@ verification remains a human job.
 - #02 (a partial list must not be loadable before `FALLBACK_TIER` is gone)
 - #05 (a cited list must show its citation the moment it is visible)
 - #06 (a solo list is unreachable until player count selects lists)
+
+## Comments
+
+Owner pasted the scraped tiers (36 base spirits, no aspects) directly as JSON, same as
+`sia-favorites-fun-solo-2026.json`'s "owner-provided transcript" path. No `uncertain` or
+`unresolved` entries were supplied. Landed as `src/data/tier-lists/3mbg-strength-solo-2025.json`
+and registered in `tierStore.ts`'s `SHIPPED_LISTS`. `tierListCanon.test.ts` extended with a
+duplication tripwire (36 expected keys), an aspect-exclusion check, and a Fathomless-Mud-absence
+check. 232 tests pass, `tsc -b` and `oxlint` clean.
