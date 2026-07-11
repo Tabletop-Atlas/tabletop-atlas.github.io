@@ -1,0 +1,58 @@
+[
+  {
+    "file": "images/adversaries/scotland.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050875404517237857/10E4712FFC3E1E13A55264013248006C03FB879A/",
+    "asset_type": "adversary_panel",
+    "adversary": "Scotland",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/adversaries/russia.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050875404517243300/B5E0821A735B54D62E68D085BE021409C26FD033/",
+    "asset_type": "adversary_panel",
+    "adversary": "Russia",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/adversaries/habsburg-monarchy.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050875404517242466/554B1FE3247B26063921EDD2DBFE7C528593D95D/",
+    "asset_type": "adversary_panel",
+    "adversary": "Habsburg Monarchy",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/adversaries/france.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050878574170810476/B1B0FCA3C9225CC3E39059845945554BF271062A/",
+    "asset_type": "adversary_panel",
+    "adversary": "France",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/adversaries/sweden.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050878574170811147/26EEF382EA85C8D8626D3BCFCAEFD70B6B9F49CD/",
+    "asset_type": "adversary_panel",
+    "adversary": "Sweden",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/adversaries/england.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050878574170810219/A5B6D6FD6B7013E145B3DF53D99B43935E1F0CD6/",
+    "asset_type": "adversary_panel",
+    "adversary": "England",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/adversaries/brandenburg-prussia.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050878574170810737/30621F95AE4988BC16F68C07F8A6004478AF3B27/",
+    "asset_type": "adversary_panel",
+    "adversary": "Brandenburg-Prussia",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/adversaries/habsburg-mining-expedition.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355492622/21AF5E73847C5CE23AC5406B0F6130462C46E1BF/",
+    "asset_type": "adversary_panel",
+    "adversary": "Habsburg Mining Expedition",
+    "source_site": "TTS mod (Steam Workshop)"
+  }
+]

@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Asset archive (.scratch/asset-archive): originals stay local-only, only the manifest is
+# committed. See images/manifest.json / .scratch/asset-archive/issues/06-unify-manifest-verify-counts.md.
+images/*
+!images/manifest.json

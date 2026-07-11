@@ -1,0 +1,3770 @@
+[
+  {
+    "file": "images/spirits/lightnings-swift-strike/unique_shatter_homesteads.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/shatter_homesteads.webp",
+    "asset_type": "unique_power",
+    "spirit": "lightnings-swift-strike",
+    "card_name": "Shatter Homesteads",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/lightnings-swift-strike/unique_raging_storm.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/raging_storm.webp",
+    "asset_type": "unique_power",
+    "spirit": "lightnings-swift-strike",
+    "card_name": "Raging Storm",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/lightnings-swift-strike/unique_lightning_s_boon.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/lightnings_boon.webp",
+    "asset_type": "unique_power",
+    "spirit": "lightnings-swift-strike",
+    "card_name": "Lightning's Boon",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/lightnings-swift-strike/unique_harbingers_of_the_lightning.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/harbingers_of_the_lightning.webp",
+    "asset_type": "unique_power",
+    "spirit": "lightnings-swift-strike",
+    "card_name": "Harbingers of the Lightning",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/river-surges-in-sunlight/unique_flash_floods.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/flash_floods.webp",
+    "asset_type": "unique_power",
+    "spirit": "river-surges-in-sunlight",
+    "card_name": "Flash Floods",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/river-surges-in-sunlight/unique_wash_away.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/wash_away.webp",
+    "asset_type": "unique_power",
+    "spirit": "river-surges-in-sunlight",
+    "card_name": "Wash Away",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/river-surges-in-sunlight/unique_boon_of_vigor.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_vigor.webp",
+    "asset_type": "unique_power",
+    "spirit": "river-surges-in-sunlight",
+    "card_name": "Boon of Vigor",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/river-surges-in-sunlight/unique_river_s_bounty.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rivers_bounty.webp",
+    "asset_type": "unique_power",
+    "spirit": "river-surges-in-sunlight",
+    "card_name": "River's Bounty",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shadows-flicker-like-flame/unique_concealing_shadows.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/concealing_shadows.webp",
+    "asset_type": "unique_power",
+    "spirit": "shadows-flicker-like-flame",
+    "card_name": "Concealing Shadows",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shadows-flicker-like-flame/unique_favors_called_due.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/favors_called_due.webp",
+    "asset_type": "unique_power",
+    "spirit": "shadows-flicker-like-flame",
+    "card_name": "Favors Called Due",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shadows-flicker-like-flame/unique_mantle_of_dread.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/mantle_of_dread.webp",
+    "asset_type": "unique_power",
+    "spirit": "shadows-flicker-like-flame",
+    "card_name": "Mantle of Dread",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shadows-flicker-like-flame/unique_crops_wither_and_fade.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/crops_wither_and_fade.webp",
+    "asset_type": "unique_power",
+    "spirit": "shadows-flicker-like-flame",
+    "card_name": "Crops Wither and Fade",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vital-strength-of-the-earth/unique_guard_the_healing_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/guard_the_healing_land.webp",
+    "asset_type": "unique_power",
+    "spirit": "vital-strength-of-the-earth",
+    "card_name": "Guard the Healing Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vital-strength-of-the-earth/unique_a_year_of_perfect_stillness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/a_year_of_perfect_stillness.webp",
+    "asset_type": "unique_power",
+    "spirit": "vital-strength-of-the-earth",
+    "card_name": "A Year of Perfect Stillness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vital-strength-of-the-earth/unique_rituals_of_destruction.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rituals_of_destruction.webp",
+    "asset_type": "unique_power",
+    "spirit": "vital-strength-of-the-earth",
+    "card_name": "Rituals of Destruction",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vital-strength-of-the-earth/unique_draw_of_the_fruitful_earth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/draw_of_the_fruitful_earth.webp",
+    "asset_type": "unique_power",
+    "spirit": "vital-strength-of-the-earth",
+    "card_name": "Draw of the Fruitful Earth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/thunderspeaker/unique_manifestation_of_power_and_glory.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/manifestation_of_power_and_glory.webp",
+    "asset_type": "unique_power",
+    "spirit": "thunderspeaker",
+    "card_name": "Manifestation of Power and Glory",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/thunderspeaker/unique_words_of_warning.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/words_of_warning.webp",
+    "asset_type": "unique_power",
+    "spirit": "thunderspeaker",
+    "card_name": "Words of Warning",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/thunderspeaker/unique_sudden_ambush.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sudden_ambush.webp",
+    "asset_type": "unique_power",
+    "spirit": "thunderspeaker",
+    "card_name": "Sudden Ambush",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/thunderspeaker/unique_voice_of_thunder.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/voice_of_thunder.webp",
+    "asset_type": "unique_power",
+    "spirit": "thunderspeaker",
+    "card_name": "Voice of Thunder",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/oceans-hungry-grasp/unique_call_of_the_deeps.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_of_the_deeps.webp",
+    "asset_type": "unique_power",
+    "spirit": "oceans-hungry-grasp",
+    "card_name": "Call of the Deeps",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/oceans-hungry-grasp/unique_grasping_tide.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/grasping_tide.webp",
+    "asset_type": "unique_power",
+    "spirit": "oceans-hungry-grasp",
+    "card_name": "Grasping Tide",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/oceans-hungry-grasp/unique_swallow_the_land_dwellers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/swallow_the_landdwellers.webp",
+    "asset_type": "unique_power",
+    "spirit": "oceans-hungry-grasp",
+    "card_name": "Swallow the Land-Dwellers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/oceans-hungry-grasp/unique_tidal_boon.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/tidal_boon.webp",
+    "asset_type": "unique_power",
+    "spirit": "oceans-hungry-grasp",
+    "card_name": "Tidal Boon",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/bringer-of-dreams-and-nightmares/unique_predatory_nightmares.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/predatory_nightmares.webp",
+    "asset_type": "unique_power",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "card_name": "Predatory Nightmares",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/bringer-of-dreams-and-nightmares/unique_dread_apparitions.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dread_apparitions.webp",
+    "asset_type": "unique_power",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "card_name": "Dread Apparitions",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/bringer-of-dreams-and-nightmares/unique_call_on_midnight_s_dream.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_on_midnights_dream.webp",
+    "asset_type": "unique_power",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "card_name": "Call on Midnight's Dream",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/bringer-of-dreams-and-nightmares/unique_dreams_of_the_dahan.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dreams_of_the_dahan.webp",
+    "asset_type": "unique_power",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "card_name": "Dreams of the Dahan",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/a-spread-of-rampant-green/unique_overgrow_in_a_night.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/overgrow_in_a_night.webp",
+    "asset_type": "unique_power",
+    "spirit": "a-spread-of-rampant-green",
+    "card_name": "Overgrow in a Night",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/a-spread-of-rampant-green/unique_gift_of_proliferation.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_proliferation.webp",
+    "asset_type": "unique_power",
+    "spirit": "a-spread-of-rampant-green",
+    "card_name": "Gift of Proliferation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/a-spread-of-rampant-green/unique_fields_choked_with_growth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/fields_choked_with_growth.webp",
+    "asset_type": "unique_power",
+    "spirit": "a-spread-of-rampant-green",
+    "card_name": "Fields Choked with Growth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/a-spread-of-rampant-green/unique_stem_the_flow_of_fresh_water.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/stem_the_flow_of_fresh_water.webp",
+    "asset_type": "unique_power",
+    "spirit": "a-spread-of-rampant-green",
+    "card_name": "Stem the Flow of Fresh Water",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/savage_mawbeasts.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/savage_mawbeasts.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Savage Mawbeasts",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/voracious_growth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/voracious_growth.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Voracious Growth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/rouse_the_trees_and_stones.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rouse_the_trees_and_stones.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Rouse the Trees and Stones",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/encompassing_ward.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/encompassing_ward.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Encompassing Ward",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/song_of_sanctity.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/song_of_sanctity.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Song of Sanctity",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/uncanny_melting.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/uncanny_melting.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Uncanny Melting",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/shadows_of_the_burning_forest.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/shadows_of_the_burning_forest.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Shadows of the Burning Forest",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/steam_vents.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/steam_vents.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Steam Vents",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/veil_the_night_s_hunt.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/veil_the_nights_hunt.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Veil the Night's Hunt",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/elemental_boon.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/elemental_boon.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Elemental Boon",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/devouring_ants.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/devouring_ants.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Devouring Ants",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/dark_and_tangled_woods.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dark_and_tangled_woods.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Dark and Tangled Woods",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/sap_the_strength_of_multitudes.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sap_the_strength_of_multitudes.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Sap the Strength of Multitudes",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/drift_down_into_slumber.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/drift_down_into_slumber.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Drift down into Slumber",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/land_of_haunts_and_embers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/land_of_haunts_and_embers.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Land of Haunts and Embers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/nature_s_resilience.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/natures_resilience.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Nature's Resilience",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/visions_of_fiery_doom.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/visions_of_fiery_doom.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Visions of Fiery Doom",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/pull_beneath_the_hungry_earth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pull_beneath_the_hungry_earth.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Pull Beneath the Hungry Earth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_of_the_dahan_ways.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_of_the_dahan_ways.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call of the Dahan Ways",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_to_bloodshed.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_bloodshed.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call to Bloodshed",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_to_isolation.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_isolation.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call to Isolation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_to_migrate.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_migrate.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call to Migrate",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_to_tend.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_tend.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call to Tend",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/quicken_the_earth_s_struggles.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/quicken_the_earths_struggles.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Quicken the Earth's Struggles",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/delusions_of_danger.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/delusions_of_danger.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Delusions of Danger",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/drought.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/drought.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Drought",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/gift_of_constancy.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_constancy.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Gift of Constancy",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/enticing_splendor.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/enticing_splendor.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Enticing Splendor",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/entrancing_apparitions.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/entrancing_apparitions.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Entrancing Apparitions",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/gift_of_living_energy.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_living_energy.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Gift of Living Energy",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/gift_of_power.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_power.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Gift of Power",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/gnawing_rootbiters.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gnawing_rootbiters.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Gnawing Rootbiters",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/lure_of_the_unknown.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/lure_of_the_unknown.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Lure of the Unknown",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/purifying_flame.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/purifying_flame.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Purifying Flame",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/rain_of_blood.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rain_of_blood.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Rain of Blood",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/reaching_grasp.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/reaching_grasp.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Reaching Grasp",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/accelerated_rot.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/accelerated_rot.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Accelerated Rot",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/cleansing_floods.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/cleansing_floods.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Cleansing Floods",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/pillar_of_living_flame.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pillar_of_living_flame.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Pillar of Living Flame",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/poisoned_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/poisoned_land.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Poisoned Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/terrifying_nightmares.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/terrifying_nightmares.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Terrifying Nightmares",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/the_trees_and_stones_speak_of_war.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/the_trees_and_stones_speak_of_war.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "The Trees and Stones Speak of War",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/entwined_power.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/entwined_power.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Entwined Power",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/paralyzing_fright.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/paralyzing_fright.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Paralyzing Fright",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/powerstorm.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/powerstorm.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Powerstorm",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/talons_of_lightning.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/talons_of_lightning.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Talons of Lightning",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/the_jungle_hungers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/the_jungle_hungers.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "The Jungle Hungers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/the_land_thrashes_in_furious_pain.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/the_land_thrashes_in_furious_pain.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "The Land Thrashes in Furious Pain",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/tsunami.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/tsunami.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Tsunami",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/vigor_of_the_breaking_dawn.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/vigor_of_the_breaking_dawn.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Vigor of the Breaking Dawn",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/vengeance_of_the_dead.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/vengeance_of_the_dead.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Vengeance of the Dead",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/wrap_in_wings_of_sunlight.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/wrap_in_wings_of_sunlight.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Wrap in Wings of Sunlight",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/blazing_renewal.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/blazing_renewal.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Blazing Renewal",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/winds_of_rust_and_atrophy.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/winds_of_rust_and_atrophy.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Winds of Rust and Atrophy",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/indomitable_claim.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/indomitable_claim.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Indomitable Claim",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/mists_of_oblivion.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/mists_of_oblivion.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Mists of Oblivion",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/infinite_vitality.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/infinite_vitality.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Infinite Vitality",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/dissolve_the_bonds_of_kinship.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dissolve_the_bonds_of_kinship.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Dissolve the Bonds of Kinship",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/strangling_firevine.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/strangling_firevine.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Strangling Firevine",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/bloodwrack_plague.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/bloodwrack_plague.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Bloodwrack Plague",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/cast_down_into_the_briny_deep.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/cast_down_into_the_briny_deep.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Cast down into the Briny Deep",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/death_falls_gently_from_open_blossoms.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/death_falls_gently_from_open_blossoms.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Death Falls Gently from Open Blossoms",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/fire_and_flood.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/fire_and_flood.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Fire and Flood",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/grant_hatred_a_ravenous_form.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/grant_hatred_a_ravenous_form.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Grant Hatred a Ravenous Form",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/insatiable_hunger_of_the_swarm.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/insatiable_hunger_of_the_swarm.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Insatiable Hunger of the Swarm",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/instruments_of_their_own_ruin.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/instruments_of_their_own_ruin.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Instruments of their own Ruin",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/flow_like_water_reach_like_air.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/flow_like_water_reach_like_air.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Flow like Water, Reach like Air",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/pent_up_calamity.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pentup_calamity.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Pent-Up Calamity",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/pyroclastic_flow.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pyroclastic_flow.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Pyroclastic Flow",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/savage_transformation.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/savage_transformation.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Savage Transformation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/sea_monsters.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sea_monsters.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Sea Monsters",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/tigers_hunting.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/tigers_hunting.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Tigers Hunting",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/unrelenting_growth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unrelenting_growth.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Unrelenting Growth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/volcanic_eruption.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/volcanic_eruption.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Volcanic Eruption",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/sweep_into_the_sea.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sweep_into_the_sea.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Sweep into the Sea",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/manifest_incarnation.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/manifest_incarnation.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Manifest Incarnation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/smothering_infestation.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/smothering_infestation.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Smothering Infestation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/twisted_flowers_murmur_ultimatums.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/twisted_flowers_murmur_ultimatums.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Twisted Flowers Murmur Ultimatums",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/unlock_the_gates_of_deepest_power.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unlock_the_gates_of_deepest_power.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Unlock the Gates of Deepest Power",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/inflame_the_fires_of_life.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/inflame_the_fires_of_life.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Inflame the Fires of Life",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/fire_in_the_sky.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/fire_in_the_sky.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Fire in the Sky",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/fleshrot_fever.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/fleshrot_fever.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Fleshrot Fever",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/gold_s_allure.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/golds_allure.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Gold's Allure",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/guardian_serpents.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/guardian_serpents.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Guardian Serpents",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/here_there_be_monsters.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/here_there_be_monsters.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Here there be Monsters",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/infested_aquifers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/infested_aquifers.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Infested Aquifers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/poisoned_dew.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/poisoned_dew.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Poisoned Dew",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/portents_of_disaster.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/portents_of_disaster.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Portents of Disaster",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/prowling_panthers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/prowling_panthers.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Prowling Panthers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/renewing_rain.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/renewing_rain.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Renewing Rain",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/rites_of_the_land_s_rejection.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rites_of_the_lands_rejection.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Rites of the Land's Rejection",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/pact_of_the_joined_hunt.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pact_of_the_joined_hunt.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Pact of the Joined Hunt",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/razor_sharp_undergrowth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/razorsharp_undergrowth.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Razor-Sharp Undergrowth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/growth_through_sacrifice.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/growth_through_sacrifice.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Growth through Sacrifice",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/scour_the_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/scour_the_land.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Scour the Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/sky_stretches_to_shore.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sky_stretches_to_shore.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Sky Stretches to Shore",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/swarming_wasps.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/swarming_wasps.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Swarming Wasps",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/absorb_corruption.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/absorb_corruption.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Absorb Corruption",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/animated_wrackroot.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/animated_wrackroot.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Animated Wrackroot",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/promises_of_protection.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/promises_of_protection.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Promises of Protection",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_to_ferocity.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_ferocity.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call to Ferocity",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_to_trade.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_trade.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call to Trade",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/confounding_mists.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/confounding_mists.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Confounding Mists",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/cycles_of_time_and_tide.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/cycles_of_time_and_tide.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Cycles of Time and Tide",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/disorienting_landscape.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/disorienting_landscape.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Disorienting Landscape",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/elusive_ambushes.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/elusive_ambushes.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Elusive Ambushes",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/tormenting_rotflies.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/tormenting_rotflies.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Tormenting Rotflies",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/twilight_fog_brings_madness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/twilight_fog_brings_madness.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Twilight Fog brings Madness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/teeming_rivers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/teeming_rivers.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Teeming Rivers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/spur_on_with_words_of_fire.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/spur_on_with_words_of_fire.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Spur on with Words of Fire",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sharp-fangs-behind-the-leaves/unique_prey_on_the_builders.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/prey_on_the_builders.webp",
+    "asset_type": "unique_power",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "card_name": "Prey on the Builders",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sharp-fangs-behind-the-leaves/unique_teeth_gleam_from_darkness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/teeth_gleam_from_darkness.webp",
+    "asset_type": "unique_power",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "card_name": "Teeth Gleam from Darkness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sharp-fangs-behind-the-leaves/unique_too_near_the_jungle.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/too_near_the_jungle.webp",
+    "asset_type": "unique_power",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "card_name": "Too Near the Jungle",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sharp-fangs-behind-the-leaves/unique_terrifying_chase.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/terrifying_chase.webp",
+    "asset_type": "unique_power",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "card_name": "Terrifying Chase",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/keeper-of-the-forbidden-wilds/unique_towering_wrath.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/towering_wrath.webp",
+    "asset_type": "unique_power",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "card_name": "Towering Wrath",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/keeper-of-the-forbidden-wilds/unique_regrow_from_roots.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/regrow_from_roots.webp",
+    "asset_type": "unique_power",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "card_name": "Regrow from Roots",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/keeper-of-the-forbidden-wilds/unique_boon_of_growing_power.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_growing_power.webp",
+    "asset_type": "unique_power",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "card_name": "Boon of Growing Power",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/keeper-of-the-forbidden-wilds/unique_sacrosanct_wilderness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sacrosanct_wilderness.webp",
+    "asset_type": "unique_power",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "card_name": "Sacrosanct Wilderness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/heart-of-the-wildfire/unique_flash_fires.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/flashfires.webp",
+    "asset_type": "unique_power",
+    "spirit": "heart-of-the-wildfire",
+    "card_name": "Flash-Fires",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/heart-of-the-wildfire/unique_asphyxiating_smoke.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/asphyxiating_smoke.webp",
+    "asset_type": "unique_power",
+    "spirit": "heart-of-the-wildfire",
+    "card_name": "Asphyxiating Smoke",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/heart-of-the-wildfire/unique_flame_s_fury.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/flames_fury.webp",
+    "asset_type": "unique_power",
+    "spirit": "heart-of-the-wildfire",
+    "card_name": "Flame's Fury",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/heart-of-the-wildfire/unique_threatening_flames.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/threatening_flames.webp",
+    "asset_type": "unique_power",
+    "spirit": "heart-of-the-wildfire",
+    "card_name": "Threatening Flames",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/serpent-slumbering-beneath-the-island/unique_gift_of_the_primordial_deeps.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_the_primordial_deeps.webp",
+    "asset_type": "unique_power",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "card_name": "Gift of the Primordial Deeps",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/serpent-slumbering-beneath-the-island/unique_gift_of_flowing_power.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_flowing_power.webp",
+    "asset_type": "unique_power",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "card_name": "Gift of Flowing Power",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/serpent-slumbering-beneath-the-island/unique_absorb_essence.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/absorb_essence.webp",
+    "asset_type": "unique_power",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "card_name": "Absorb Essence",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/serpent-slumbering-beneath-the-island/unique_elemental_aegis.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/elemental_aegis.webp",
+    "asset_type": "unique_power",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "card_name": "Elemental Aegis",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/forests_of_living_obsidian.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/forests_of_living_obsidian.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Forests of Living Obsidian",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/infestation_of_venomous_spiders.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/infestation_of_venomous_spiders.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Infestation of Venomous Spiders",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/dream_of_the_untouched_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dream_of_the_untouched_land.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Dream of the Untouched Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/angry_bears.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/angry_bears.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Angry Bears",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/focus_the_land_s_anguish.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/focus_the_lands_anguish.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Focus the Land's Anguish",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/vanish_softly_away_forgotten_by_all.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/vanish_softly_away_forgotten_by_all.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Vanish Softly Away, Forgotten by All",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/unleash_a_torrent_of_the_self_s_own_essence.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unleash_a_torrent_of_the_selfs_own_essence.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Unleash a Torrent of the Self's Own Essence",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/bargains_of_power_and_protection.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/bargains_of_power_and_protection.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Bargains of Power and Protection",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/transform_to_a_murderous_darkness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/transform_to_a_murderous_darkness.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Transform to a Murderous Darkness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/settle_into_hunting_grounds.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/settle_into_huntinggrounds.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Settle Into Hunting-Grounds",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/walls_of_rock_and_thorn.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/walls_of_rock_and_thorn.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Walls of Rock and Thorn",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/voice_of_command.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/voice_of_command.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Voice of Command",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/irresistible_call.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/irresistible_call.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Irresistible Call",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/the_wounded_wild_turns_on_its_assailants.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/the_wounded_wild_turns_on_its_assailants.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "The Wounded Wild Turns on its Assailants",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/draw_towards_a_consuming_void.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/draw_towards_a_consuming_void.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Draw Towards a Consuming Void",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/storm_swath.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/stormswath.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Storm-Swath",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/spill_bitterness_into_the_earth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/spill_bitterness_into_the_earth.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Spill Bitterness into the Earth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/utter_a_curse_of_dread_and_bone.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/utter_a_curse_of_dread_and_bone.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Utter a Curse of Dread and Bone",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/sleep_and_never_waken.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sleep_and_never_waken.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Sleep and Never Waken",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/weave_together_the_fabric_of_place.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/weave_together_the_fabric_of_place.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Weave Together the Fabric of Place",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/trees_radiate_celestial_brilliance.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/trees_radiate_celestial_brilliance.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Trees Radiate Celestial Brilliance",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/thickets_erupt_with_every_touch_of_breeze.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/thickets_erupt_with_every_touch_of_breeze.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Thickets Erupt with Every Touch of Breeze",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/melt_earth_into_quicksand.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/melt_earth_into_quicksand.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Melt Earth into Quicksand",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/hazards_spread_across_the_island.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/hazards_spread_across_the_island.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Hazards Spread Across The Island",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/bats_scout_for_raids_by_darkness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/bats_scout_for_raids_by_darkness.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Bats Scout For Raids By Darkness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/birds_cry_warning.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/birds_cry_warning.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Birds Cry Warning",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/blood_draws_predators.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/blood_draws_predators.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Blood Draws Predators",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/carapaced_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/carapaced_land.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Carapaced Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/call_to_guard.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_guard.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Call To Guard",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/desiccating_winds.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/desiccating_winds.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Desiccating Winds",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/dry_wood_explodes_in_smoldering_splinters.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dry_wood_explodes_in_smoldering_splinters.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Dry Wood Explodes In Smoldering Splinters",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/gift_of_nature_s_connection.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_natures_connection.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Gift of Nature's Connection",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/entrap_the_forces_of_corruption.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/entrap_the_forces_of_corruption.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Entrap The Forces Of Corruption",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/domesticated_animals_go_berserk.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/domesticated_animals_go_berserk.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Domesticated Animals Go Berserk",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/dire_metamorphosis.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dire_metamorphosis.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Dire Metamorphosis",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/skies_herald_the_season_of_return.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/skies_herald_the_season_of_return.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Skies Herald The Season Of Return",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/gift_of_twinned_days.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_twinned_days.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Gift of Twinned Days",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/haunted_by_primal_memories.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/haunted_by_primal_memories.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Haunted By Primal Memories",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/like_calls_to_like.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/like_calls_to_like.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Like Calls to Like",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/unquenchable_flames.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unquenchable_flames.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Unquenchable Flames",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/mesmerized_tranquility.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/mesmerized_tranquility.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Mesmerized Tranquility",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/territorial_strife.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/territorial_strife.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Territorial Strife",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/renewing_boon.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/renewing_boon.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Renewing Boon",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/scream_disease_into_the_wind.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/scream_disease_into_the_wind.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Scream Disease Into The Wind",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/sear_anger_into_the_wild_lands.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sear_anger_into_the_wild_lands.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Sear Anger Into The Wild Lands",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/set_them_on_an_ever_twisting_trail.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/set_them_on_an_evertwisting_trail.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Set Them On An Ever-Twisting Trail",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/strong_and_constant_currents.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/strong_and_constant_currents.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Strong And Constant Currents",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/sucking_ooze.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sucking_ooze.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Sucking Ooze",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/sunset_s_fire_flows_across_the_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sunsets_fire_flows_across_the_land.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Sunset's Fire Flows Across The Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/terror_turns_to_madness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/terror_turns_to_madness.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Terror Turns To Madness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/the_shore_seethes_with_hatred.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/the_shore_seethes_with_hatred.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "The Shore Seethes With Hatred",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/thriving_chokefungus.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/thriving_chokefungus.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Thriving Chokefungus",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/treacherous_waterways.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/treacherous_waterways.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Treacherous Waterways",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/flow_downriver_blow_downwind.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/flow_downriver_blow_downwind.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Flow Downriver, Blow Downwind",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/weep_for_what_is_lost.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/weep_for_what_is_lost.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Weep For What Is Lost",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/favor_of_the_sun_and_star_lit_dark.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/favor_of_the_sun_and_starlit_dark.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Favor Of The Sun And Star-Lit Dark",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/grinning-trickster-stirs-up-trouble/unique_unexpected_tigers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unexpected_tigers.webp",
+    "asset_type": "unique_power",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "card_name": "Unexpected Tigers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/grinning-trickster-stirs-up-trouble/unique_impersonate_authority.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/impersonate_authority.webp",
+    "asset_type": "unique_power",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "card_name": "Impersonate Authority",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/grinning-trickster-stirs-up-trouble/unique_incite_the_mob.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/incite_the_mob.webp",
+    "asset_type": "unique_power",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "card_name": "Incite the Mob",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/grinning-trickster-stirs-up-trouble/unique_overenthusiastic_arson.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/overenthusiastic_arson.webp",
+    "asset_type": "unique_power",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "card_name": "Overenthusiastic Arson",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/volcano-looming-high/unique_rain_of_ash.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rain_of_ash.webp",
+    "asset_type": "unique_power",
+    "spirit": "volcano-looming-high",
+    "card_name": "Rain of Ash",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/volcano-looming-high/unique_lava_flows.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/lava_flows.webp",
+    "asset_type": "unique_power",
+    "spirit": "volcano-looming-high",
+    "card_name": "Lava Flows",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/volcano-looming-high/unique_exaltation_of_molten_stone.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/exaltation_of_molten_stone.webp",
+    "asset_type": "unique_power",
+    "spirit": "volcano-looming-high",
+    "card_name": "Exaltation of Molten Stone",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/volcano-looming-high/unique_pyroclastic_bombardment.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pyroclastic_bombardment.webp",
+    "asset_type": "unique_power",
+    "spirit": "volcano-looming-high",
+    "card_name": "Pyroclastic Bombardment",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shroud-of-silent-mist/unique_dissolving_vapors.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dissolving_vapors.webp",
+    "asset_type": "unique_power",
+    "spirit": "shroud-of-silent-mist",
+    "card_name": "Dissolving Vapors",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shroud-of-silent-mist/unique_the_fog_closes_in.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/the_fog_closes_in.webp",
+    "asset_type": "unique_power",
+    "spirit": "shroud-of-silent-mist",
+    "card_name": "The Fog Closes In",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shroud-of-silent-mist/unique_unnerving_pall.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unnerving_pall.webp",
+    "asset_type": "unique_power",
+    "spirit": "shroud-of-silent-mist",
+    "card_name": "Unnerving Pall",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shroud-of-silent-mist/unique_flowing_and_silent_forms_dart_by.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/flowing_and_silent_forms_dart_by.webp",
+    "asset_type": "unique_power",
+    "spirit": "shroud-of-silent-mist",
+    "card_name": "Flowing and Silent Forms Dart By",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vengeance-as-a-burning-plague/unique_fiery_vengeance.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/fiery_vengeance.webp",
+    "asset_type": "unique_power",
+    "spirit": "vengeance-as-a-burning-plague",
+    "card_name": "Fiery Vengeance",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vengeance-as-a-burning-plague/unique_plaguebearers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/plaguebearers.webp",
+    "asset_type": "unique_power",
+    "spirit": "vengeance-as-a-burning-plague",
+    "card_name": "Plaguebearers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vengeance-as-a-burning-plague/unique_fetid_breath_spreads_infection.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/fetid_breath_spreads_infection.webp",
+    "asset_type": "unique_power",
+    "spirit": "vengeance-as-a-burning-plague",
+    "card_name": "Fetid Breath Spreads Infection",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/vengeance-as-a-burning-plague/unique_strike_low_with_sudden_fevers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/strike_low_with_sudden_fevers.webp",
+    "asset_type": "unique_power",
+    "spirit": "vengeance-as-a-burning-plague",
+    "card_name": "Strike Low with Sudden Fevers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fractured-days-split-the-sky/unique_absolute_stasis.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/absolute_stasis.webp",
+    "asset_type": "unique_power",
+    "spirit": "fractured-days-split-the-sky",
+    "card_name": "Absolute Stasis",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fractured-days-split-the-sky/unique_pour_time_sideways.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pour_time_sideways.webp",
+    "asset_type": "unique_power",
+    "spirit": "fractured-days-split-the-sky",
+    "card_name": "Pour Time Sideways",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fractured-days-split-the-sky/unique_the_past_returns_again.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/the_past_returns_again.webp",
+    "asset_type": "unique_power",
+    "spirit": "fractured-days-split-the-sky",
+    "card_name": "The Past Returns Again",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fractured-days-split-the-sky/unique_blur_the_arc_of_years.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/blur_the_arc_of_years.webp",
+    "asset_type": "unique_power",
+    "spirit": "fractured-days-split-the-sky",
+    "card_name": "Blur the Arc of Years",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shifting-memory-of-ages/unique_boon_of_ancient_memories.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_ancient_memories.webp",
+    "asset_type": "unique_power",
+    "spirit": "shifting-memory-of-ages",
+    "card_name": "Boon of Ancient Memories",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shifting-memory-of-ages/unique_elemental_teachings.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/elemental_teachings.webp",
+    "asset_type": "unique_power",
+    "spirit": "shifting-memory-of-ages",
+    "card_name": "Elemental Teachings",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shifting-memory-of-ages/unique_share_secrets_of_survival.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/share_secrets_of_survival.webp",
+    "asset_type": "unique_power",
+    "spirit": "shifting-memory-of-ages",
+    "card_name": "Share Secrets of Survival",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/shifting-memory-of-ages/unique_study_the_invaders_fears.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/study_the_invaders_fears.webp",
+    "asset_type": "unique_power",
+    "spirit": "shifting-memory-of-ages",
+    "card_name": "Study the Invaders' Fears",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/starlight-seeks-its-form/unique_boon_of_reimagining.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_reimagining.webp",
+    "asset_type": "unique_power",
+    "spirit": "starlight-seeks-its-form",
+    "card_name": "Boon of Reimagining",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/starlight-seeks-its-form/unique_gather_the_scattered_light_of_stars.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gather_the_scattered_light_of_stars.webp",
+    "asset_type": "unique_power",
+    "spirit": "starlight-seeks-its-form",
+    "card_name": "Gather the Scattered Light of Stars",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/starlight-seeks-its-form/unique_shape_the_self_anew.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/shape_the_self_anew.webp",
+    "asset_type": "unique_power",
+    "spirit": "starlight-seeks-its-form",
+    "card_name": "Shape the Self Anew",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/starlight-seeks-its-form/unique_peace_of_the_nighttime_sky.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/peace_of_the_nighttime_sky.webp",
+    "asset_type": "unique_power",
+    "spirit": "starlight-seeks-its-form",
+    "card_name": "Peace of the Nighttime Sky",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/stones-unyielding-defiance/unique_scarred_and_stony_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/scarred_and_stony_land.webp",
+    "asset_type": "unique_power",
+    "spirit": "stones-unyielding-defiance",
+    "card_name": "Scarred and Stony Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/stones-unyielding-defiance/unique_plows_shatter_on_rocky_ground.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/plows_shatter_on_rocky_ground.webp",
+    "asset_type": "unique_power",
+    "spirit": "stones-unyielding-defiance",
+    "card_name": "Plows Shatter on Rocky Ground",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/stones-unyielding-defiance/unique_jagged_shards_push_from_the_earth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/jagged_shards_push_from_the_earth.webp",
+    "asset_type": "unique_power",
+    "spirit": "stones-unyielding-defiance",
+    "card_name": "Jagged Shards Push from the Earth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/stones-unyielding-defiance/unique_stubborn_solidity.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/stubborn_solidity.webp",
+    "asset_type": "unique_power",
+    "spirit": "stones-unyielding-defiance",
+    "card_name": "Stubborn Solidity",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/lure-of-the-deep-wilderness/unique_perils_of_the_deepest_island.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/perils_of_the_deepest_island.webp",
+    "asset_type": "unique_power",
+    "spirit": "lure-of-the-deep-wilderness",
+    "card_name": "Perils of the Deepest Island",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/lure-of-the-deep-wilderness/unique_softly_beckon_ever_inward.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/softly_beckon_ever_inward.webp",
+    "asset_type": "unique_power",
+    "spirit": "lure-of-the-deep-wilderness",
+    "card_name": "Softly Beckon Ever Inward",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/lure-of-the-deep-wilderness/unique_gift_of_the_untamed_wild.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_the_untamed_wild.webp",
+    "asset_type": "unique_power",
+    "spirit": "lure-of-the-deep-wilderness",
+    "card_name": "Gift of the Untamed Wild",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/lure-of-the-deep-wilderness/unique_swallowed_by_the_wilderness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/swallowed_by_the_wilderness.webp",
+    "asset_type": "unique_power",
+    "spirit": "lure-of-the-deep-wilderness",
+    "card_name": "Swallowed by the Wilderness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/many-minds-move-as-one/unique_pursue_with_scratches_pecks_and_stings.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/pursue_with_scratches_pecks_and_stings.webp",
+    "asset_type": "unique_power",
+    "spirit": "many-minds-move-as-one",
+    "card_name": "Pursue with Scratches, Pecks, and Stings",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/many-minds-move-as-one/unique_a_dreadful_tide_of_scurrying_flesh.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/a_dreadful_tide_of_scurrying_flesh.webp",
+    "asset_type": "unique_power",
+    "spirit": "many-minds-move-as-one",
+    "card_name": "A Dreadful Tide of Scurrying Flesh",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/many-minds-move-as-one/unique_boon_of_swarming_bedevilment.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_swarming_bedevilment.webp",
+    "asset_type": "unique_power",
+    "spirit": "many-minds-move-as-one",
+    "card_name": "Boon of Swarming Bedevilment",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/many-minds-move-as-one/unique_guide_the_way_on_feathered_wings.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/guide_the_way_on_feathered_wings.webp",
+    "asset_type": "unique_power",
+    "spirit": "many-minds-move-as-one",
+    "card_name": "Guide the Way on Feathered Wings",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/many-minds-move-as-one/unique_ever_multiplying_swarm.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/evermultiplying_swarm.webp",
+    "asset_type": "unique_power",
+    "spirit": "many-minds-move-as-one",
+    "card_name": "Ever-Multiplying Swarm",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/downpour-drenches-the-world/unique_foundations_sink_into_mud.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/foundations_sink_into_mud.webp",
+    "asset_type": "unique_power",
+    "spirit": "downpour-drenches-the-world",
+    "card_name": "Foundations Sink into Mud",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/downpour-drenches-the-world/unique_gift_of_abundance.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_abundance.webp",
+    "asset_type": "unique_power",
+    "spirit": "downpour-drenches-the-world",
+    "card_name": "Gift of Abundance",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/downpour-drenches-the-world/unique_unbearable_deluge.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unbearable_deluge.webp",
+    "asset_type": "unique_power",
+    "spirit": "downpour-drenches-the-world",
+    "card_name": "Unbearable Deluge",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/downpour-drenches-the-world/unique_dark_skies_loose_a_stinging_rain.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/dark_skies_loose_a_stinging_rain.webp",
+    "asset_type": "unique_power",
+    "spirit": "downpour-drenches-the-world",
+    "card_name": "Dark Skies Loose a Stinging Rain",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/unique_traveler_s_boon.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/travelers_boon.webp",
+    "asset_type": "unique_power",
+    "spirit": "finder-of-paths-unseen",
+    "card_name": "Traveler's Boon",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/unique_offer_passage_between_worlds.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/offer_passage_between_worlds.webp",
+    "asset_type": "unique_power",
+    "spirit": "finder-of-paths-unseen",
+    "card_name": "Offer Passage Between Worlds",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/unique_aid_from_the_spirit_speakers.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/aid_from_the_spiritspeakers.webp",
+    "asset_type": "unique_power",
+    "spirit": "finder-of-paths-unseen",
+    "card_name": "Aid from the Spirit-Speakers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/unique_paths_tied_by_nature.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/paths_tied_by_nature.webp",
+    "asset_type": "unique_power",
+    "spirit": "finder-of-paths-unseen",
+    "card_name": "Paths Tied by Nature",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/unique_ways_of_shore_and_heartland.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/ways_of_shore_and_heartland.webp",
+    "asset_type": "unique_power",
+    "spirit": "finder-of-paths-unseen",
+    "card_name": "Ways of Shore and Heartland",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/unique_a_circuitous_and_wending_journey.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/a_circuitous_and_wending_journey.webp",
+    "asset_type": "unique_power",
+    "spirit": "finder-of-paths-unseen",
+    "card_name": "A Circuitous and Wending Journey",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/devouring-teeth-lurk-underfoot/unique_ferocious_rampage.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/ferocious_rampage.webp",
+    "asset_type": "unique_power",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "card_name": "Ferocious Rampage",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/devouring-teeth-lurk-underfoot/unique_gift_of_furious_might.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_furious_might.webp",
+    "asset_type": "unique_power",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "card_name": "Gift of Furious Might",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/devouring-teeth-lurk-underfoot/unique_herd_towards_the_lurking_maw.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/herd_towards_the_lurking_maw.webp",
+    "asset_type": "unique_power",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "card_name": "Herd Towards the Lurking Maw",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/devouring-teeth-lurk-underfoot/unique_mark_territory_with_scars_and_teeth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/mark_territory_with_scars_and_teeth.webp",
+    "asset_type": "unique_power",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "card_name": "Mark Territory with Scars and Teeth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/eyes-watch-from-the-trees/unique_boon_of_watchful_guarding.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_watchful_guarding.webp",
+    "asset_type": "unique_power",
+    "spirit": "eyes-watch-from-the-trees",
+    "card_name": "Boon of Watchful Guarding",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/eyes-watch-from-the-trees/unique_eerie_noises_and_moving_trees.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/eerie_noises_and_moving_trees.webp",
+    "asset_type": "unique_power",
+    "spirit": "eyes-watch-from-the-trees",
+    "card_name": "Eerie Noises and Moving Trees",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/eyes-watch-from-the-trees/unique_mysterious_abductions.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/mysterious_abductions.webp",
+    "asset_type": "unique_power",
+    "spirit": "eyes-watch-from-the-trees",
+    "card_name": "Mysterious Abductions",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/eyes-watch-from-the-trees/unique_whispered_guidance_through_the_night.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/whispered_guidance_through_the_night.webp",
+    "asset_type": "unique_power",
+    "spirit": "eyes-watch-from-the-trees",
+    "card_name": "Whispered Guidance Through the Night",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fathomless-mud-of-the-swamp/unique_exaltation_of_tangled_growth.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/exaltation_of_tangled_growth.webp",
+    "asset_type": "unique_power",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "card_name": "Exaltation of Tangled Growth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fathomless-mud-of-the-swamp/unique_foul_vapors_and_fetid_muck.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/foul_vapors_and_fetid_muck.webp",
+    "asset_type": "unique_power",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "card_name": "Foul Vapors and Fetid Muck",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fathomless-mud-of-the-swamp/unique_intractable_thickets_and_thorns.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/intractable_thickets_and_thorns.webp",
+    "asset_type": "unique_power",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "card_name": "Intractable Thickets and Thorns",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/fathomless-mud-of-the-swamp/unique_open_shifting_waterways.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/open_shifting_waterways.webp",
+    "asset_type": "unique_power",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "card_name": "Open Shifting Waterways",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/rising-heat-of-stone-and-sand/unique_call_on_herders_for_aid.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_on_herders_for_aid.webp",
+    "asset_type": "unique_power",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "card_name": "Call on Herders for Aid",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/rising-heat-of-stone-and-sand/unique_gift_of_searing_heat.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_searing_heat.webp",
+    "asset_type": "unique_power",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "card_name": "Gift of Searing Heat",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/rising-heat-of-stone-and-sand/unique_stinging_sandstorm.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/stinging_sandstorm.webp",
+    "asset_type": "unique_power",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "card_name": "Stinging Sandstorm",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/rising-heat-of-stone-and-sand/unique_sweltering_exhaustion.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/sweltering_exhaustion.webp",
+    "asset_type": "unique_power",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "card_name": "Sweltering Exhaustion",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sun-bright-whirlwind/unique_gift_of_the_sunlit_air.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_the_sunlit_air.webp",
+    "asset_type": "unique_power",
+    "spirit": "sun-bright-whirlwind",
+    "card_name": "Gift of the Sunlit Air",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sun-bright-whirlwind/unique_gift_of_wind_sped_steps.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_windsped_steps.webp",
+    "asset_type": "unique_power",
+    "spirit": "sun-bright-whirlwind",
+    "card_name": "Gift of Wind-Sped Steps",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sun-bright-whirlwind/unique_scatter_to_the_winds.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/scatter_to_the_winds.webp",
+    "asset_type": "unique_power",
+    "spirit": "sun-bright-whirlwind",
+    "card_name": "Scatter to the Winds",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/sun-bright-whirlwind/unique_tempest_of_leaves_and_branches.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/tempest_of_leaves_and_branches.webp",
+    "asset_type": "unique_power",
+    "spirit": "sun-bright-whirlwind",
+    "card_name": "Tempest of Leaves and Branches",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/bargain_of_coursing_paths.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/bargain_of_coursing_paths.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Bargain of Coursing Paths",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/bombard_with_boulders_and_stinging_seeds.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/bombard_with_boulders_and_stinging_seeds.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Bombard with Boulders and Stinging Seeds",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/exaltation_of_the_incandescent_sky.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/exaltation_of_the_incandescent_sky.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Exaltation of the Incandescent Sky",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/flocking_red_talons.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/flocking_redtalons.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Flocking Red-Talons",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/fragments_of_yesteryear.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/fragments_of_yesteryear.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Fragments of Yesteryear",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/inspire_the_release_of_stolen_lands.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/inspire_the_release_of_stolen_lands.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Inspire the Release of Stolen Lands",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/plague_ships_sail_to_distant_ports.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/plague_ships_sail_to_distant_ports.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Plague Ships Sail to Distant Ports",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/ravaged_undergrowth_slithers_back_to_life.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/ravaged_undergrowth_slithers_back_to_life.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Ravaged Undergrowth Slithers Back to Life",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/rumbling_earthquakes.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rumbling_earthquakes.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Rumbling Earthquakes",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/solidify_echoes_of_majesty_past.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/solidify_echoes_of_majesty_past.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Solidify Echoes of Majesty Past",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/transformative_sacrifice.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/transformative_sacrifice.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Transformative Sacrifice",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/major/unearth_a_beast_of_wrathful_stone.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unearth_a_beast_of_wrathful_stone.webp",
+    "asset_type": "major_power",
+    "spirit": null,
+    "card_name": "Unearth a Beast of Wrathful Stone",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/minor/roiling_bog_and_snagging_thorn.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/roiling_bog_and_snagging_thorn.webp",
+    "asset_type": "minor_power",
+    "spirit": null,
+    "card_name": "Roiling Bog and Snagging Thorn",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/breath-of-darkness-down-your-spine/unique_emerge_from_the_dread_night_wind.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/emerge_from_the_dread_night_wind.webp",
+    "asset_type": "unique_power",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "card_name": "Emerge from the Dread Night Wind",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/breath-of-darkness-down-your-spine/unique_reach_from_the_infinite_darkness.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/reach_from_the_infinite_darkness.webp",
+    "asset_type": "unique_power",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "card_name": "Reach from the Infinite Darkness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/breath-of-darkness-down-your-spine/unique_swallowed_by_the_endless_dark.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/swallowed_by_the_endless_dark.webp",
+    "asset_type": "unique_power",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "card_name": "Swallowed by the Endless Dark",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/breath-of-darkness-down-your-spine/unique_terror_of_the_hunted.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/terror_of_the_hunted.webp",
+    "asset_type": "unique_power",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "card_name": "Terror of the Hunted",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/unique_inspire_a_winding_dance.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/inspire_a_winding_dance.webp",
+    "asset_type": "unique_power",
+    "spirit": "dances-up-earthquakes",
+    "card_name": "Inspire a Winding Dance",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/unique_exaltation_of_echoed_steps.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/exaltation_of_echoed_steps.webp",
+    "asset_type": "unique_power",
+    "spirit": "dances-up-earthquakes",
+    "card_name": "Exaltation of Echoed Steps",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/unique_gift_of_seismic_energy.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/gift_of_seismic_energy.webp",
+    "asset_type": "unique_power",
+    "spirit": "dances-up-earthquakes",
+    "card_name": "Gift of Seismic Energy",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/unique_radiating_tremors.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/radiating_tremors.webp",
+    "asset_type": "unique_power",
+    "spirit": "dances-up-earthquakes",
+    "card_name": "Radiating Tremors",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/unique_resounding_footfalls_sow_dismay.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/resounding_footfalls_sow_dismay.webp",
+    "asset_type": "unique_power",
+    "spirit": "dances-up-earthquakes",
+    "card_name": "Resounding Footfalls Sow Dismay",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/unique_rumblings_portend_a_greater_quake.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/rumblings_portend_a_greater_quake.webp",
+    "asset_type": "unique_power",
+    "spirit": "dances-up-earthquakes",
+    "card_name": "Rumblings Portend a Greater Quake",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/ember-eyed-behemoth/unique_blazing_intimidation.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/blazing_intimidation.webp",
+    "asset_type": "unique_power",
+    "spirit": "ember-eyed-behemoth",
+    "card_name": "Blazing Intimidation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/ember-eyed-behemoth/unique_exaltation_of_grasping_roots.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/exaltation_of_grasping_roots.webp",
+    "asset_type": "unique_power",
+    "spirit": "ember-eyed-behemoth",
+    "card_name": "Exaltation of Grasping Roots",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/ember-eyed-behemoth/unique_surging_lahar.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/surging_lahar.webp",
+    "asset_type": "unique_power",
+    "spirit": "ember-eyed-behemoth",
+    "card_name": "Surging Lahar",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/ember-eyed-behemoth/unique_terrifying_rampage.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/terrifying_rampage.webp",
+    "asset_type": "unique_power",
+    "spirit": "ember-eyed-behemoth",
+    "card_name": "Terrifying Rampage",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/hearth-vigil/unique_call_to_vigilance.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/call_to_vigilance.webp",
+    "asset_type": "unique_power",
+    "spirit": "hearth-vigil",
+    "card_name": "Call to Vigilance",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/hearth-vigil/unique_coordinated_raid.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/coordinated_raid.webp",
+    "asset_type": "unique_power",
+    "spirit": "hearth-vigil",
+    "card_name": "Coordinated Raid",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/hearth-vigil/unique_favors_of_story_and_season.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/favors_of_story_and_season.webp",
+    "asset_type": "unique_power",
+    "spirit": "hearth-vigil",
+    "card_name": "Favors of Story and Season",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/hearth-vigil/unique_surrounded_by_the_dahan.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/surrounded_by_the_dahan.webp",
+    "asset_type": "unique_power",
+    "spirit": "hearth-vigil",
+    "card_name": "Surrounded by the Dahan",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/relentless-gaze-of-the-sun/unique_blinding_glare.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/blinding_glare.webp",
+    "asset_type": "unique_power",
+    "spirit": "relentless-gaze-of-the-sun",
+    "card_name": "Blinding Glare",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/relentless-gaze-of-the-sun/unique_focus_the_sun_s_rays.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/focus_the_suns_rays.webp",
+    "asset_type": "unique_power",
+    "spirit": "relentless-gaze-of-the-sun",
+    "card_name": "Focus the Sun's Rays",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/relentless-gaze-of-the-sun/unique_unbearable_gaze.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/unbearable_gaze.webp",
+    "asset_type": "unique_power",
+    "spirit": "relentless-gaze-of-the-sun",
+    "card_name": "Unbearable Gaze",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/relentless-gaze-of-the-sun/unique_wither_bodies_scar_stones.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/wither_bodies_scar_stones.webp",
+    "asset_type": "unique_power",
+    "spirit": "relentless-gaze-of-the-sun",
+    "card_name": "Wither Bodies, Scar Stones",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/towering-roots-of-the-jungle/unique_blooming_of_the_rocks_and_trees.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/blooming_of_the_rocks_and_trees.webp",
+    "asset_type": "unique_power",
+    "spirit": "towering-roots-of-the-jungle",
+    "card_name": "Blooming of the Rocks and Trees",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/towering-roots-of-the-jungle/unique_boon_of_resilient_power.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_resilient_power.webp",
+    "asset_type": "unique_power",
+    "spirit": "towering-roots-of-the-jungle",
+    "card_name": "Boon of Resilient Power",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/towering-roots-of-the-jungle/unique_entwine_the_fates_of_all.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/entwine_the_fates_of_all.webp",
+    "asset_type": "unique_power",
+    "spirit": "towering-roots-of-the-jungle",
+    "card_name": "Entwine the Fates of All",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/towering-roots-of-the-jungle/unique_radiant_and_hallowed_grove.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/radiant_and_hallowed_grove.webp",
+    "asset_type": "unique_power",
+    "spirit": "towering-roots-of-the-jungle",
+    "card_name": "Radiant and Hallowed Grove",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wandering-voice-keens-delirium/unique_exhale_confusion_and_delirium.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/exhale_confusion_and_delirium.webp",
+    "asset_type": "unique_power",
+    "spirit": "wandering-voice-keens-delirium",
+    "card_name": "Exhale Confusion and Delirium",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wandering-voice-keens-delirium/unique_frightful_keening.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/frightful_keening.webp",
+    "asset_type": "unique_power",
+    "spirit": "wandering-voice-keens-delirium",
+    "card_name": "Frightful Keening",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wandering-voice-keens-delirium/unique_turmoil_s_touch.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/turmoils_touch.webp",
+    "asset_type": "unique_power",
+    "spirit": "wandering-voice-keens-delirium",
+    "card_name": "Turmoil's Touch",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wandering-voice-keens-delirium/unique_twist_perceptions.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/twist_perceptions.webp",
+    "asset_type": "unique_power",
+    "spirit": "wandering-voice-keens-delirium",
+    "card_name": "Twist Perceptions",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wounded-waters-bleeding/unique_blood_water_and_bloodlust.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/blood_water_and_bloodlust.webp",
+    "asset_type": "unique_power",
+    "spirit": "wounded-waters-bleeding",
+    "card_name": "Blood Water and Bloodlust",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wounded-waters-bleeding/unique_boon_of_corrupted_blood.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/boon_of_corrupted_blood.webp",
+    "asset_type": "unique_power",
+    "spirit": "wounded-waters-bleeding",
+    "card_name": "Boon of Corrupted Blood",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wounded-waters-bleeding/unique_draw_to_the_water_s_edge.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/draw_to_the_waters_edge.webp",
+    "asset_type": "unique_power",
+    "spirit": "wounded-waters-bleeding",
+    "card_name": "Draw to the Water's Edge",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/spirits/wounded-waters-bleeding/unique_wrack_with_pain_and_grief.webp",
+    "source_url": "https://sick.oberien.de/imgs/powers/wrack_with_pain_and_grief.webp",
+    "asset_type": "unique_power",
+    "spirit": "wounded-waters-bleeding",
+    "card_name": "Wrack with Pain and Grief",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/fear_of_the_unseen.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/fear_of_the_unseen.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Fear of the Unseen",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/scapegoats.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/scapegoats.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Scapegoats",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/emigration_accelerates.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/emigration_accelerates.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Emigration Accelerates",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/dahan_on_their_guard.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/dahan_on_their_guard.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Dahan on their Guard",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/tall_tales_of_savagery.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/tall_tales_of_savagery.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Tall Tales of Savagery",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/retreat.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/retreat.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Retreat!",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/dahan_raid.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/dahan_raid.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Dahan Raid",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/dahan_enheartened.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/dahan_enheartened.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Dahan Enheartened",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/avoid_the_dahan.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/avoid_the_dahan.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Avoid the Dahan",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/seek_safety.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/seek_safety.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Seek Safety",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/wary_of_the_interior.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/wary_of_the_interior.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Wary of the Interior",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/belief_takes_root.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/belief_takes_root.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Belief Takes Root",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/isolation.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/isolation.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Isolation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/overseas_trade_seem_safer.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/overseas_trade_seem_safer.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Overseas Trade Seem Safer",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/trade_suffers.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/trade_suffers.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Trade Suffers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/demoralized.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/demoralized.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Demoralized",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/plan_for_departure.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/plan_for_departure.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Plan for Departure",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/tread_carefully.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/tread_carefully.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Tread Carefully",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/dahan_attack.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/dahan_attack.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Dahan Attack",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/explorers_are_reluctant.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/explorers_are_reluctant.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Explorers are Reluctant",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/immigration_slows.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/immigration_slows.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Immigration Slows",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/flee_the_pestilent_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/flee_the_pestilent_land.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Flee the Pestilent Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/quarantine.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/quarantine.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Quarantine",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/too_many_monsters.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/too_many_monsters.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Too Many Monsters",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/panicked_by_wild_beasts.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/panicked_by_wild_beasts.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Panicked by Wild Beasts",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/depart_the_dangerous_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/depart_the_dangerous_land.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Depart the Dangerous Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/unrest.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/unrest.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Unrest",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/panic.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/panic.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Panic",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/discord.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/discord.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Discord",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/dahan_threaten.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/dahan_threaten.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Dahan Threaten",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/sense_of_dread.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/sense_of_dread.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Sense of Dread",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/flee_from_dangerous_lands.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/flee_from_dangerous_lands.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Flee from Dangerous Lands",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/dahan_reclaim_fishing_grounds.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/dahan_reclaim_fishing_grounds.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Dahan Reclaim Fishing Grounds",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/beset_by_many_troubles.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/beset_by_many_troubles.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Beset by Many Troubles",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/nerves_fray.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/nerves_fray.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Nerves Fray",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/theological_strife.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/theological_strife.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Theological Strife",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/angry_mobs.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/angry_mobs.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Angry Mobs",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/mimic_the_dahan.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/mimic_the_dahan.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Mimic the Dahan",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/depopulation.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/depopulation.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Depopulation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/communities_in_disarray.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/communities_in_disarray.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Communities in Disarray",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/spreading_timidity.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/spreading_timidity.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Spreading Timidity",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/civil_unrest.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/civil_unrest.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Civil Unrest",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/dahan_gain_the_edge.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/dahan_gain_the_edge.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Dahan Gain the Edge",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/daunted_by_the_dahan.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/daunted_by_the_dahan.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Daunted by the Dahan",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/distracted_by_local_troubles.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/distracted_by_local_troubles.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Distracted by Local Troubles",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/restlessness.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/restlessness.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Restlessness",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/seek_company.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/seek_company.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Seek Company",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/struggles_over_farmland.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/struggles_over_farmland.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Struggles over Farmland",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/supply_chains_abandoned.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/supply_chains_abandoned.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Supply Chains Abandoned",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/fear/unsettled.webp",
+    "source_url": "https://sick.oberien.de/imgs/fears/unsettled.webp",
+    "asset_type": "fear",
+    "spirit": null,
+    "card_name": "Unsettled",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/years_of_little_rain.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/years_of_little_rain.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Years of Little Rain",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/farmers_seek_the_dahan_for_aid.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/farmers_seek_the_dahan_for_aid.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Farmers Seek the Dahan for Aid",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/new_species_spread.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/new_species_spread.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "New Species Spread",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/war_touches_the_island_s_shores.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/war_touches_the_islands_shores.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "War Touches the Island's Shores",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/sacred_sites_under_threat.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/sacred_sites_under_threat.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Sacred Sites under Threat",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/outpaced.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/outpaced.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Outpaced",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/missionaries_arrive.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/missionaries_arrive.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Missionaries Arrive",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/a_strange_madness_among_the_beasts.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/a_strange_madness_among_the_beasts.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "A Strange Madness among the Beasts",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/seeking_the_interior.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/seeking_the_interior.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Seeking the Interior",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/wave_of_reconnaissance.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/wave_of_reconnaissance.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Wave of Reconnaissance",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/interesting_discoveries.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/interesting_discoveries.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Interesting Discoveries",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/strange_tales_attract_explorers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/strange_tales_attract_explorers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Strange Tales attract Explorers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/cultural_assimilation.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/cultural_assimilation.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Cultural Assimilation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/investigation_of_dangers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/investigation_of_dangers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Investigation of Dangers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/distant_exploration.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/distant_exploration.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Distant Exploration",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/rising_interest_in_the_island.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/rising_interest_in_the_island.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Rising Interest in the Island",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/putting_down_roots.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/putting_down_roots.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Putting down Roots",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/search_for_new_lands.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/search_for_new_lands.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Search for new Lands",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/invaders_surge_inland.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/invaders_surge_inland.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Invaders Surge Inland",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/tight_knit_communities.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/tightknit_communities.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Tight-Knit Communities",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/well_prepared_explorers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/wellprepared_explorers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Well-Prepared Explorers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/population_rises.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/population_rises.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Population Rises",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/urban_development.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/urban_development.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Urban Development",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/heavy_farming.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/heavy_farming.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Heavy Farming",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/promising_farmland.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/promising_farmland.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Promising Farmland",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/slave_rebellion.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/slave_rebellion.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Slave Rebellion",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/lesser_spirits_imperiled.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/lesser_spirits_imperiled.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Lesser Spirits Imperiled",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/remnants_of_a_spirit_s_heart.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/remnants_of_a_spirits_heart.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Remnants of a Spirit's Heart",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/numinous_crisis.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/numinous_crisis.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Numinous Crisis",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/hard_working_settlers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/hardworking_settlers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Hard-Working Settlers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/dahan_trade_with_the_invaders.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/dahan_trade_with_the_invaders.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Dahan Trade with the Invaders",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/life_s_balance_tilts.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/lifes_balance_tilts.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Life's Balance Tilts",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/harvest_bounty_harvest_dust.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/harvest_bounty_harvest_dust.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Harvest Bounty, Harvest Dust",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/invested_aristocracy.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/invested_aristocracy.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Invested Aristocracy",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/mapmakers_chart_the_wild.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/mapmakers_chart_the_wild.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Mapmakers Chart the Wild",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/no_bravery_without_numbers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/no_bravery_without_numbers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "No Bravery without Numbers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/smaller_ports_spring_up.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/smaller_ports_spring_up.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Smaller Ports Spring Up",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/the_frontier_calls.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/the_frontier_calls.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "The Frontier Calls",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/seek_new_farmland.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/seek_new_farmland.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Seek New Farmland",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/gradual_corruption.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/gradual_corruption.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Gradual Corruption",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/fortune_seekers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/fortuneseekers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Fortune-Seekers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/provincial_seat.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/provincial_seat.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Provincial Seat",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/cities_rise.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/cities_rise.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Cities Rise",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/thriving_trade.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/thriving_trade.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Thriving Trade",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/wounded_lands_attract_explorers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/wounded_lands_attract_explorers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Wounded Lands Attract Explorers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/coastal_towns_multiply.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/coastal_towns_multiply.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Coastal Towns Multiply",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/civic_engagement.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/civic_engagement.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Civic Engagement",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/sprawl_contained_by_the_wilds.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/sprawl_contained_by_the_wilds.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Sprawl Contained by the Wilds",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/the_struggles_of_growth.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/the_struggles_of_growth.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "The Struggles of Growth",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/eager_explorers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/eager_explorers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Eager Explorers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/bureaucrats_adjust_funding.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/bureaucrats_adjust_funding.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Bureaucrats Adjust Funding",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/resourceful_populace.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/resourceful_populace.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Resourceful Populace",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/relentless_optimism.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/relentless_optimism.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Relentless Optimism",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/pull_together_in_adversity.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/pull_together_in_adversity.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Pull Together in Adversity",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/temporary_truce.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/temporary_truce.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Temporary Truce",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/overconfidence.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/overconfidence.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Overconfidence",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/ethereal_conjunction.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/ethereal_conjunction.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Ethereal Conjunction",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/far_off_wars_touch_the_island.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/faroff_wars_touch_the_island.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Far-Off Wars Touch the Island",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/visions_out_of_time.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/visions_out_of_time.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Visions Out of Time",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/accumulated_devastation.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/accumulated_devastation.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Accumulated Devastation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/focused_farming.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/focused_farming.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Focused Farming",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/influx_of_settlers.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/influx_of_settlers.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Influx of Settlers",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/search_for_unclaimed_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/search_for_unclaimed_land.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Search for Unclaimed Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/an_ominous_dawn.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/an_ominous_dawn.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "An Ominous Dawn",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/event/terror_spikes_upwards.webp",
+    "source_url": "https://sick.oberien.de/imgs/events/terror_spikes_upwards.webp",
+    "asset_type": "event",
+    "spirit": null,
+    "card_name": "Terror Spikes Upwards",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/downward_spiral.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/downward_spiral.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Downward Spiral",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/memory_fades_to_dust.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/memory_fades_to_dust.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Memory Fades to Dust",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/back_against_the_wall.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/back_against_the_wall.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Back Against the Wall",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/promising_farmlands.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/promising_farmlands.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Promising Farmlands",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/disintegrating_ecosystem.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/disintegrating_ecosystem.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Disintegrating Ecosystem",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/aid_from_lesser_spirits.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/aid_from_lesser_spirits.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Aid from Lesser Spirits",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/tipping_point.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/tipping_point.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Tipping Point",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/erosion_of_will.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/erosion_of_will.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Erosion of Will",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/a_pall_upon_the_land.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/a_pall_upon_the_land.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "A Pall upon the Land",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/unnatural_proliferation.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/unnatural_proliferation.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Unnatural Proliferation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/all_things_weaken.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/all_things_weaken.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "All Things Weaken",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/thriving_communities.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/thriving_communities.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Thriving Communities",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/power_corrodes_the_spirit.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/power_corrodes_the_spirit.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Power Corrodes the Spirit",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/untended_land_crumbles.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/untended_land_crumbles.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Untended Land Crumbles",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/invaders_find_the_land_to_their_liking.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/invaders_find_the_land_to_their_liking.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Invaders find the Land to their Liking",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/strong_earth_shatters_slowly.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/strong_earth_shatters_slowly.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Strong Earth Shatters Slowly",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/attenuated_essence.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/attenuated_essence.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Attenuated Essence",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/blight_corrodes_the_spirit.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/blight_corrodes_the_spirit.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Blight Corrodes the Spirit",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/burn_brightest_before_the_end.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/burn_brightest_before_the_end.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Burn Brightest Before the End",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/intensifying_exploitation.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/intensifying_exploitation.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Intensifying Exploitation",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/shattered_fragments_of_power.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/shattered_fragments_of_power.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Shattered Fragments of Power",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/slow_dissolution_of_will.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/slow_dissolution_of_will.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Slow Dissolution of Will",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/the_border_of_life_and_death.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/the_border_of_life_and_death.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "The Border of Life and Death",
+    "source_site": "sick.oberien.de"
+  },
+  {
+    "file": "images/cards/blight/thriving_crops.webp",
+    "source_url": "https://sick.oberien.de/imgs/blights/thriving_crops.webp",
+    "asset_type": "blight",
+    "spirit": null,
+    "card_name": "Thriving Crops",
+    "source_site": "sick.oberien.de"
+  }
+]

@@ -1,6 +1,6 @@
 # 11 — Retrieve panel and card images, transcribe `startingCards` from them
 
-Status: done (cards only — panels remain unsourced, see Comments)
+Status: done (cards and panels both landed, see Comments)
 
 ## Parent
 
@@ -100,6 +100,13 @@ Relentless Gaze of the Sun's fourth card is genuinely titled "Wither Bodies, Sca
 included) — verified against the raw wiki markup and the image filename
 (`Wither_Bodies%2C_Scar_Stones`), not a parsing artifact.
 
+**Panels: new source incoming (2026-07-11).** The owner has a Tabletop Simulator mod containing
+the panel images, already downloaded locally. He will upload them to the repository and provide
+the mod's website and repository for the source citation. **Deferred until that upload lands** —
+do not attempt the `spirit-island-builder` browser-automation route in the meantime. When the
+files arrive: convert to webp at `public/panels/<spiritId>-{front,back}.webp` (the paths #12
+expects), record the mod as the source here, and wire them into the detail view.
+
 **Panels: still not sourced.** Checked two spirits from different expansions (Lightning's Swift
 Strike, Starlight Seeks Its Form) after the CAPTCHA cleared — same result as the first pass,
 confirmed rather than re-guessed: the wiki's Gallery section holds only a small "Home" icon per
@@ -148,3 +155,18 @@ on his own time, not something to delegate back silently.
 needs pacing). Treat panels as a separate hand-off: ask the owner to export via
 spiritislandbuilder.com, or equip a future session with real browser automation before attempting
 route (a).
+
+**Panels landed 2026-07-12**, via a third source neither of the two above: the owner supplied a
+Tabletop Simulator workshop mod JSON (`.scratch/asset-archive/`, PRD + tickets #01–#07) containing
+Steam-hosted panel scans for all 37 spirits. `.scratch/asset-archive/issues/01-inventory-tts-json.md`
+found and deduplicated the URLs from the JSON's raw text (`FaceURL`/`BackURL` fields); `04-name-spirit-panels.md`
+matched all 74 files to spirits via `Nickname` context and determined front-vs-back by directly
+opening and reading every one of the 74 images (not inferred from filenames); `06-unify-manifest-verify-counts.md`
+recorded them in the committed `images/manifest.json` with source URLs, citing the mod's own
+`SaveName` ("Spirit Island - [By MJ & iakona]") since no Workshop URL string exists anywhere in
+the JSON (one remaining owner ask: which Workshop listing this was subscribed from);
+`07-panels-into-app.md` converted the originals to `public/panels/<spiritId>-{front,back}.webp`
+(`cwebp -q 85`, same as the cards) and browser-verified them rendering in the detail modal at
+375px with no horizontal overflow. `dataIntegrity.test.ts` now asserts both panel files exist for
+every spirit, unconditionally (#04 found zero gaps). The github.com/spirit-island-builder route
+above was never revisited — the TTS mod turned out to be the faster path.

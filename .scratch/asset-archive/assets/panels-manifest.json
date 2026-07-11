@@ -1,0 +1,520 @@
+[
+  {
+    "file": "images/spirits/shifting-memory-of-ages/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322015034/9F6EDDB98B1183B423285F6FB2341E73D8A887A2/",
+    "asset_type": "panel_front",
+    "spirit": "shifting-memory-of-ages",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/shifting-memory-of-ages/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322015742/086942453A436989B4E9FF783C1F3BA79626CA08/",
+    "asset_type": "panel_back_lore",
+    "spirit": "shifting-memory-of-ages",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/starlight-seeks-its-form/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322017926/FCA2F44620872053BED1DAD18E837C01B88074E5/",
+    "asset_type": "panel_front",
+    "spirit": "starlight-seeks-its-form",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/starlight-seeks-its-form/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322018567/940A01765079514429A9D5F1536596C42AAEB583/",
+    "asset_type": "panel_back_lore",
+    "spirit": "starlight-seeks-its-form",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/shroud-of-silent-mist/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322016488/718D1A0D07373D079B33BCA133063D4B73825FDB/",
+    "asset_type": "panel_front",
+    "spirit": "shroud-of-silent-mist",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/shroud-of-silent-mist/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322017211/553FB77FC786C5CA2315D60BC137A1F4EF0FE203/",
+    "asset_type": "panel_back_lore",
+    "spirit": "shroud-of-silent-mist",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/lure-of-the-deep-wilderness/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322012189/516B0E0CE00C8CF33178565E60780CE571CFF662/",
+    "asset_type": "panel_front",
+    "spirit": "lure-of-the-deep-wilderness",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/lure-of-the-deep-wilderness/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322013066/3450CA95ED66A46D2AC164054EE8A66F734E20E8/",
+    "asset_type": "panel_back_lore",
+    "spirit": "lure-of-the-deep-wilderness",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/fractured-days-split-the-sky/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322040139/939A4B931D1DB7FB25A27BC0D116CA39ED3A7373/",
+    "asset_type": "panel_front",
+    "spirit": "fractured-days-split-the-sky",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/fractured-days-split-the-sky/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322040778/1998204FD21BD3A59C880E090CF0CCC2239FBA9D/",
+    "asset_type": "panel_back_lore",
+    "spirit": "fractured-days-split-the-sky",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322023293/AEAB8D624F6BF3E9B6509A3B69C23CE5D144CF53/",
+    "asset_type": "panel_front",
+    "spirit": "finder-of-paths-unseen",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/finder-of-paths-unseen/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322024016/8D1A07B74BF9D069ACAF1913C9FF1E1A8369EC90/",
+    "asset_type": "panel_back_lore",
+    "spirit": "finder-of-paths-unseen",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/vengeance-as-a-burning-plague/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322002466/26EFEE4929B896335DE4F68B2C75A93A641FE41E/",
+    "asset_type": "panel_front",
+    "spirit": "vengeance-as-a-burning-plague",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/vengeance-as-a-burning-plague/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322003261/11ACBAF86E149D47C5A8F22061E0A1316F967047/",
+    "asset_type": "panel_back_lore",
+    "spirit": "vengeance-as-a-burning-plague",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/downpour-drenches-the-world/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322021850/2F806DD681510207C78BD815D0EA6206A9C0B752/",
+    "asset_type": "panel_front",
+    "spirit": "downpour-drenches-the-world",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/downpour-drenches-the-world/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322022570/73A975C34B7E8463DA888F0B214605297CE87DC7/",
+    "asset_type": "panel_back_lore",
+    "spirit": "downpour-drenches-the-world",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/keeper-of-the-forbidden-wilds/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322020501/EF9B997734D8DA7E5178F93682A9C7B36F348F57/",
+    "asset_type": "panel_front",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/keeper-of-the-forbidden-wilds/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322021142/4A152A79E35093B5FDE077660BF1F3FE9364FA25/",
+    "asset_type": "panel_back_lore",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/sharp-fangs-behind-the-leaves/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322038989/095337706BF413DD6D5E3BA3FA0A6CFC40851960/",
+    "asset_type": "panel_front",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/sharp-fangs-behind-the-leaves/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322039495/FECF7BD4BD76D0BCF849B6616059AB8D23CA5963/",
+    "asset_type": "panel_back_lore",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/heart-of-the-wildfire/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322026190/34B8E2A40504B76A83A954903B775B3E33AF1CD7/",
+    "asset_type": "panel_front",
+    "spirit": "heart-of-the-wildfire",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/heart-of-the-wildfire/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322026811/77C5A2C9A60C7875354896A71D3E8029E8ECA677/",
+    "asset_type": "panel_back_lore",
+    "spirit": "heart-of-the-wildfire",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/serpent-slumbering-beneath-the-island/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322024907/9BB0149B801A06E4E6C968B9135F8D603CDF1647/",
+    "asset_type": "panel_front",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/serpent-slumbering-beneath-the-island/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322025557/78B1DCA33BD5F9A73626C103791ED0CCDB701BA5/",
+    "asset_type": "panel_back_lore",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/volcano-looming-high/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322003979/448F48CCBB591BF060028A4A1CEA904FF67B1315/",
+    "asset_type": "panel_front",
+    "spirit": "volcano-looming-high",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/volcano-looming-high/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322004654/95A58ED6513784D7A4D65A8817F8141183FE569A/",
+    "asset_type": "panel_back_lore",
+    "spirit": "volcano-looming-high",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/stones-unyielding-defiance/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322019243/FDB6B3095AA82EC195FE46243DF90CE662899486/",
+    "asset_type": "panel_front",
+    "spirit": "stones-unyielding-defiance",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/stones-unyielding-defiance/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322019832/F87E539F7B374AFA9A636D61C0602DB4210FB75D/",
+    "asset_type": "panel_back_lore",
+    "spirit": "stones-unyielding-defiance",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/grinning-trickster-stirs-up-trouble/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322000930/860850A2A9C99DC57343C943A63FB88DE64ED907/",
+    "asset_type": "panel_front",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/grinning-trickster-stirs-up-trouble/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322001769/23C844817CBF388F07EC09EEA9AD2F37FE186F2B/",
+    "asset_type": "panel_back_lore",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/many-minds-move-as-one/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322013793/A466CAD40856995F373A71E837DF2D6FD6EEB512/",
+    "asset_type": "panel_front",
+    "spirit": "many-minds-move-as-one",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/many-minds-move-as-one/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322014378/657DC550ECC514B9042C803245FE53E2B0D63F19/",
+    "asset_type": "panel_back_lore",
+    "spirit": "many-minds-move-as-one",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/river-surges-in-sunlight/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322034627/84CF77EEFC27BB9CD6414ABF7183277B4D6AA64A/",
+    "asset_type": "panel_front",
+    "spirit": "river-surges-in-sunlight",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/river-surges-in-sunlight/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322035488/7BDBAE39DC2599A0B10E8C4ABEA7F0841EF960D5/",
+    "asset_type": "panel_back_lore",
+    "spirit": "river-surges-in-sunlight",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/lightnings-swift-strike/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322031808/776038C27C4560123FD8B9413FD17F0D7B2A4ECA/",
+    "asset_type": "panel_front",
+    "spirit": "lightnings-swift-strike",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/lightnings-swift-strike/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322032446/E2EBD78BA2B060A3B8381FBEB9A7694852AC606C/",
+    "asset_type": "panel_back_lore",
+    "spirit": "lightnings-swift-strike",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/shadows-flicker-like-flame/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322036173/BFC4E54EA2428293BEE4A889EC12D42D93759509/",
+    "asset_type": "panel_front",
+    "spirit": "shadows-flicker-like-flame",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/shadows-flicker-like-flame/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322036758/DC93E457AD34440EA8D8291E4F781B6FA252B13D/",
+    "asset_type": "panel_back_lore",
+    "spirit": "shadows-flicker-like-flame",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/vital-strength-of-the-earth/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322028926/89DDEBF3B5B910CE5B922BC66AEE3A5C9E1DA4BF/",
+    "asset_type": "panel_front",
+    "spirit": "vital-strength-of-the-earth",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/vital-strength-of-the-earth/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322029637/8C13B31742100566AEEC9DE9B0DA90CF92F5D465/",
+    "asset_type": "panel_back_lore",
+    "spirit": "vital-strength-of-the-earth",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/thunderspeaker/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322037411/AA4BC038F052F60FF7C50F63A0EDB25D6826CDB2/",
+    "asset_type": "panel_front",
+    "spirit": "thunderspeaker",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/thunderspeaker/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322038182/13A6D93E1D316BDC14467B4F054330DCB55D5593/",
+    "asset_type": "panel_back_lore",
+    "spirit": "thunderspeaker",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/a-spread-of-rampant-green/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322030329/793A3B7F910406AE53E7B40220136EC6B03A7E71/",
+    "asset_type": "panel_front",
+    "spirit": "a-spread-of-rampant-green",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/a-spread-of-rampant-green/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322030975/A6CFC1DAC262A2B7021C026BC680EC0356383AC8/",
+    "asset_type": "panel_back_lore",
+    "spirit": "a-spread-of-rampant-green",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/bringer-of-dreams-and-nightmares/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322027639/731D20ACD3B87E1BF14557B1BAEA1EBCABFA281E/",
+    "asset_type": "panel_front",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/bringer-of-dreams-and-nightmares/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322028273/93BF9014778F791BDEB451635AF402490A74AD20/",
+    "asset_type": "panel_back_lore",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/oceans-hungry-grasp/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322033225/703C21A6F0D7F3FF574A44938C8DA02146474692/",
+    "asset_type": "panel_front",
+    "spirit": "oceans-hungry-grasp",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/oceans-hungry-grasp/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322033974/761FECAC889FBBDF4734BD5DA725847FF1ED2B68/",
+    "asset_type": "panel_back_lore",
+    "spirit": "oceans-hungry-grasp",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/devouring-teeth-lurk-underfoot/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322008617/F1FBDD7CE141E5ECCA15E146CF0963F4957A491E/",
+    "asset_type": "panel_front",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/devouring-teeth-lurk-underfoot/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050880567269245086/70FB56FBB591BA1E12B8C9B459C4619E55FFCBF6/",
+    "asset_type": "panel_back_lore",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/eyes-watch-from-the-trees/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322005436/5B673702F2D3885E564997A5FD2B4CA81B97E449/",
+    "asset_type": "panel_front",
+    "spirit": "eyes-watch-from-the-trees",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/eyes-watch-from-the-trees/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050880567269245816/96132D40B1A0E27B337AB7739EDCC8DF60FEA0EA/",
+    "asset_type": "panel_back_lore",
+    "spirit": "eyes-watch-from-the-trees",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/fathomless-mud-of-the-swamp/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298321924925/E8FF4C8CE2F698B05672B6C986B4535B57102DA3/",
+    "asset_type": "panel_front",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/fathomless-mud-of-the-swamp/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050880567269245452/ED9758AF77F642E14EED1847A52FAF69F3913D7E/",
+    "asset_type": "panel_back_lore",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/rising-heat-of-stone-and-sand/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322006773/ACE7382864A6447E0EE6E86DAFED3C4E0AC2822D/",
+    "asset_type": "panel_front",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/rising-heat-of-stone-and-sand/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050880567269244589/B01F7F171DA012716FC6CEF3D04AB19A16E2CDAE/",
+    "asset_type": "panel_back_lore",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/sun-bright-whirlwind/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050879298322010240/05AE4A383B92A71180D7D59F351F8B59A984394C/",
+    "asset_type": "panel_front",
+    "spirit": "sun-bright-whirlwind",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/sun-bright-whirlwind/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2050880567269244208/9A5D3B946B95735A931863405CC64D1BCB08CF61/",
+    "asset_type": "panel_back_lore",
+    "spirit": "sun-bright-whirlwind",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/ember-eyed-behemoth/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355504601/C63F533DB7EF3A97B9185C0C6A153E1A33C18950/",
+    "asset_type": "panel_front",
+    "spirit": "ember-eyed-behemoth",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/ember-eyed-behemoth/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355504026/8FEAA4FF87F1452F6E3EB4E142970BB3D148A264/",
+    "asset_type": "panel_back_lore",
+    "spirit": "ember-eyed-behemoth",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/hearth-vigil/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355500787/13BB19BBBE91C111DECB5DDB40718C96E24613F8/",
+    "asset_type": "panel_front",
+    "spirit": "hearth-vigil",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/hearth-vigil/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355500254/019A500EC9582709EEE30C767EFCC312AF7C4E01/",
+    "asset_type": "panel_back_lore",
+    "spirit": "hearth-vigil",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/towering-roots-of-the-jungle/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355499755/4C467242482A4005B252E5EA9DF2EFD30C8E3949/",
+    "asset_type": "panel_front",
+    "spirit": "towering-roots-of-the-jungle",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/towering-roots-of-the-jungle/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355499193/8F01F8D14C217CF7A8ADAFC652C4D95E0F1EE319/",
+    "asset_type": "panel_back_lore",
+    "spirit": "towering-roots-of-the-jungle",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/breath-of-darkness-down-your-spine/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355503593/5C471C8BCBB0C8B26F9EDFF1E7D778EE80F9CF37/",
+    "asset_type": "panel_front",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/breath-of-darkness-down-your-spine/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355503063/38BB7F80C9AA8003443B9E1AE03C2118B2EC1B1B/",
+    "asset_type": "panel_back_lore",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/relentless-gaze-of-the-sun/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355501702/7FC3CEC6B1727D9E1909BAF6F8227C1B5293B7A4/",
+    "asset_type": "panel_front",
+    "spirit": "relentless-gaze-of-the-sun",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/relentless-gaze-of-the-sun/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355501214/B4D4CE9E354ECFCF5139375F97DA06682554B8C6/",
+    "asset_type": "panel_back_lore",
+    "spirit": "relentless-gaze-of-the-sun",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/wandering-voice-keens-delirium/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355498666/90A11CA86CA473722CA91DEA4824AE2CF0104048/",
+    "asset_type": "panel_front",
+    "spirit": "wandering-voice-keens-delirium",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/wandering-voice-keens-delirium/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355498086/29161F97962468EB196F711B87F56EFEB9F0F171/",
+    "asset_type": "panel_back_lore",
+    "spirit": "wandering-voice-keens-delirium",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/wounded-waters-bleeding/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355582055/076BC0F6F180E55D747742B43EA108C73C272897/",
+    "asset_type": "panel_front",
+    "spirit": "wounded-waters-bleeding",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/wounded-waters-bleeding/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355505154/C3E5CA7FB72B1F8312982612083128DE8749831F/",
+    "asset_type": "panel_back_lore",
+    "spirit": "wounded-waters-bleeding",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/panel_front.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355502695/61C7EF39E176264D1FA9DD3EFF604179FF39928D/",
+    "asset_type": "panel_front",
+    "spirit": "dances-up-earthquakes",
+    "source_site": "TTS mod (Steam Workshop)"
+  },
+  {
+    "file": "images/spirits/dances-up-earthquakes/panel_back_lore.png",
+    "source_url": "https://steamusercontent-a.akamaihd.net/ugc/2308724646355502180/49AE49A2F03F93DA149E10FFE86D0475A4C2BABE/",
+    "asset_type": "panel_back_lore",
+    "spirit": "dances-up-earthquakes",
+    "source_site": "TTS mod (Steam Workshop)"
+  }
+]

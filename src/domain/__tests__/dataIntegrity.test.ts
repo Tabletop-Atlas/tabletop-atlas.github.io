@@ -117,6 +117,18 @@ describe('spirit artwork', () => {
       })
     }
   })
+
+  it('ships a panel front and back for every spirit, at the path asset-archive #07 expects', () => {
+    // asset-archive #04 found no gaps across all 37 spirits, so this is unconditional (unlike
+    // startingCards above, which is genuinely optional for a spirit whose cards were never
+    // sourced). A spirit missing here would silently fall back to PlaceholderArt.
+    for (const spirit of spirits) {
+      for (const side of ['front', 'back'] as const) {
+        const path = new URL(`../../../public/panels/${spirit.id}-${side}.webp`, import.meta.url)
+        expect(existsSync(path), `${spirit.name} has no panel ${side} at public/panels/${spirit.id}-${side}.webp`).toBe(true)
+      }
+    }
+  })
 })
 
 describe("owner's board integrity", () => {
