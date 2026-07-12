@@ -8,6 +8,7 @@ import { complexityStore } from '../domain/complexityStore'
 import { expand, type Configuration } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
 import { isRelevantToPlayerCount } from '../domain/noteRelevance'
+import { clampPlayerCount } from '../domain/playerCount'
 import { QUESTIONS } from '../domain/questionnaire'
 import { drawRandom } from '../domain/randomChoose'
 import { dedupeBySpirit, recommend, type Weights } from '../domain/recommend'
@@ -84,7 +85,7 @@ export function RecommenderProvider({ children }: { children: ReactNode }) {
     answers,
     answer: (questionId, val) => setAnswers((prev) => ({ ...prev, [questionId]: val })),
     playerCount,
-    setPlayerCount,
+    setPlayerCount: (n) => setPlayerCount(clampPlayerCount(n)),
     restart: () => {
       answersStore.clear()
       setAnswers({})
@@ -146,6 +147,26 @@ function useRanking() {
   return { prefs, weights, roleGaps, ranked, wildcard }
 }
 
+/** Holds the field as a free-typed string locally, clamping only on blur - clamping every
+ * keystroke would make an emptied field (backspacing a "2" to "") impossible to retype into. */
+function PlayerCountInput() {
+  const { playerCount, setPlayerCount } = useRecommender()
+  const [text, setText] = useState(String(playerCount))
+
+  useEffect(() => setText(String(playerCount)), [playerCount])
+
+  return (
+    <input
+      type="number"
+      min={1}
+      max={6}
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+      onBlur={() => setPlayerCount(Number(text))}
+    />
+  )
+}
+
 /* ------------------------------ sidebar ------------------------------ */
 
 /** "beatOpponents" -> "beat opponents". The full prompt stays as the control's tooltip. */
@@ -155,7 +176,7 @@ function shortLabel(id: string): string {
 
 /** Live controls. Every change re-ranks the main pane immediately — no submit. */
 export function RecommenderSide() {
-  const { phase, answers, answer, playerCount, setPlayerCount, restart } = useRecommender()
+  const { phase, answers, answer, restart } = useRecommender()
   if (phase !== 'board') return null
 
   return (
@@ -164,13 +185,7 @@ export function RecommenderSide() {
 
       <label className="deck-field">
         <span>players</span>
-        <input
-          type="number"
-          min={1}
-          max={6}
-          value={playerCount}
-          onChange={(e) => setPlayerCount(Number(e.target.value))}
-        />
+        <PlayerCountInput />
       </label>
 
       {QUESTIONS.map((question) => (
@@ -429,19 +444,13 @@ function TeamPanel() {
 }
 
 function Wizard() {
-  const { step, setStep, answers, answer, playerCount, setPlayerCount, setPhase } = useRecommender()
+  const { step, setStep, answers, answer, setPhase } = useRecommender()
 
   if (step === 0) {
     return (
       <section className="deck-wizard">
         <h2>How many players at the table?</h2>
-        <input
-          type="number"
-          min={1}
-          max={6}
-          value={playerCount}
-          onChange={(e) => setPlayerCount(Number(e.target.value))}
-        />
+        <PlayerCountInput />
         <div className="deck-wizard-actions">
           <button type="button" onClick={() => setStep((s) => s + 1)}>
             Next

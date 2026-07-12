@@ -5,18 +5,19 @@ import type { OtherCard } from './types'
  * these three types carry no elements, cost or speed, so `OtherCardFilterState` has no fields for
  * them: the type system is the enforcement that "no control is ever offered for a field the
  * selected card type lacks" (v4 #13's acceptance criterion), not a runtime check.
+ *
+ * No `kind` field: the Cards tab's segmented switch (Powers | Fear | Events | Blight) already
+ * picks exactly one kind before this filter ever sees the array (v5 #01) - a second control over
+ * the same axis let you contradict the segment.
  */
 export interface OtherCardFilterState {
-  /** OR within this list — a card is only ever one kind. Empty = every kind. */
-  kinds: OtherCard['kind'][]
   expansion?: string
 }
 
-export const EMPTY_OTHER_CARD_FILTER: OtherCardFilterState = { kinds: [] }
+export const EMPTY_OTHER_CARD_FILTER: OtherCardFilterState = {}
 
 export function filterOtherCards(cards: OtherCard[], filter: OtherCardFilterState): OtherCard[] {
   return cards.filter((card) => {
-    if (filter.kinds.length > 0 && !filter.kinds.includes(card.kind)) return false
     if (filter.expansion && card.expansion !== filter.expansion) return false
     return true
   })

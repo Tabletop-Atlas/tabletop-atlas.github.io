@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useRecommender } from './Recommender'
 import { tierStore } from '../domain/tierStore'
 import { LIST_TYPES } from '../domain/types'
 import type { TierList, TierListType } from '../domain/types'
@@ -37,9 +36,9 @@ function TierListCitation({ list, rated, total }: { list: TierList; rated: numbe
 }
 
 /**
- * The list picker (#04), its player-count/type filter (#06, #09) and its citation panel (#05),
- * shared by the read-only board and the editor so they can never disagree about which list is
- * active. `allowCreate` gates the "new personal list" form, shown only from the editor.
+ * The list picker (#04), its type filter (#09) and its citation panel (#05), shared by the
+ * read-only board and the editor so they can never disagree about which list is active.
+ * `allowCreate` gates the "new personal list" form, shown only from the editor.
  */
 export function TierListControls({
   totalConfigs,
@@ -50,43 +49,28 @@ export function TierListControls({
   allowCreate?: boolean
   onChange: () => void
 }) {
-  const { playerCount, setPlayerCount } = useRecommender()
   const [typeFilter, setTypeFilter] = useState<TierListType | ''>('')
   const [newName, setNewName] = useState('')
   const [newType, setNewType] = useState<TierListType>('strength')
 
   const lists = tierStore.getLists()
   const active = tierStore.getActiveList()
-  const eligible = lists.filter(
-    (l) => (l.players === undefined || l.players === playerCount) && (!typeFilter || l.type === typeFilter),
-  )
+  const eligible = lists.filter((l) => !typeFilter || l.type === typeFilter)
 
-  // Player count is metadata you select on, never a delta anyone authors: if the active list no
-  // longer matches the chosen count or type filter, fall forward to the first list that does
-  // rather than silently continuing to score against a list the picker no longer shows.
+  // If the active list no longer matches the chosen type filter, fall forward to the first list
+  // that does rather than silently continuing to score against a list the picker no longer shows.
   useEffect(() => {
     if (eligible.length > 0 && !eligible.some((l) => l.id === active.id)) {
       tierStore.setActiveListId(eligible[0].id)
       onChange()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playerCount, typeFilter, active.id])
+  }, [typeFilter, active.id])
 
   const rated = Object.keys(tierStore.getAll()).length
 
   return (
     <div className="tier-list-controls">
-      <label className="deck-field">
-        <span>Player count</span>
-        <input
-          type="number"
-          min={1}
-          max={6}
-          value={playerCount}
-          onChange={(e) => setPlayerCount(Number(e.target.value))}
-        />
-      </label>
-
       <label className="deck-field">
         <span>Filter by type</span>
         <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as TierListType | '')}>
@@ -100,11 +84,7 @@ export function TierListControls({
       </label>
 
       {eligible.length === 0 ? (
-        <p className="notice">
-          No tier list exists for {playerCount} player{playerCount === 1 ? '' : 's'}
-          {typeFilter ? ` (${typeFilter})` : ''}. Player count is metadata a list declares, never a
-          number this app invents — nothing here derives one tier list from another.
-        </p>
+        <p className="notice">No tier list exists for type "{typeFilter}".</p>
       ) : (
         <label className="deck-field">
           <span>Tier list</span>

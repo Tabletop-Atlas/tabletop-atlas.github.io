@@ -717,7 +717,10 @@ button:disabled {
   background: var(--deck-panel-2);
   color: var(--deck-dim);
   border: 1px dashed var(--deck-line);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.02em;
 }
 .tier-row-unrated .tier-tiles {
   background: var(--deck-panel-2);
