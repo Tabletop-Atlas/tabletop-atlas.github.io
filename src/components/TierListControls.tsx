@@ -50,7 +50,7 @@ export function TierListControls({
   allowCreate?: boolean
   onChange: () => void
 }) {
-  const { playerCount } = useRecommender()
+  const { playerCount, setPlayerCount } = useRecommender()
   const [typeFilter, setTypeFilter] = useState<TierListType | ''>('')
   const [newName, setNewName] = useState('')
   const [newType, setNewType] = useState<TierListType>('strength')
@@ -76,6 +76,17 @@ export function TierListControls({
 
   return (
     <div className="tier-list-controls">
+      <label className="deck-field">
+        <span>Player count</span>
+        <input
+          type="number"
+          min={1}
+          max={6}
+          value={playerCount}
+          onChange={(e) => setPlayerCount(Number(e.target.value))}
+        />
+      </label>
+
       <label className="deck-field">
         <span>Filter by type</span>
         <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as TierListType | '')}>

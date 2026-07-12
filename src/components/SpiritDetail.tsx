@@ -42,7 +42,7 @@ function DetailImage({
  * and cards (the repo has no data on which aspects change which cards) plus its own `delta`.
  */
 export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () => void }) {
-  const [enlargedCard, setEnlargedCard] = useState<{ src: string; alt: string } | null>(null)
+  const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
   const tier = tierStore.getTier(spirit.id)
   const activeList = tierStore.getActiveList()
   const base = import.meta.env.BASE_URL
@@ -80,12 +80,14 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
 
         <h3>Panel</h3>
         <div className="spirit-detail-panels">
-          <DetailImage
-            spirit={spirit}
-            src={`${base}panels/${spirit.id}-front.webp`}
-            alt={`${spirit.name} panel front`}
-          />
-          <DetailImage spirit={spirit} src={`${base}panels/${spirit.id}-back.webp`} alt={`${spirit.name} panel back`} />
+          {[
+            { src: `${base}panels/${spirit.id}-front.webp`, alt: `${spirit.name} panel front` },
+            { src: `${base}panels/${spirit.id}-back.webp`, alt: `${spirit.name} panel back` },
+          ].map(({ src, alt }) => (
+            <button key={src} type="button" className="spirit-detail-panel" onClick={() => setEnlarged({ src, alt })}>
+              <DetailImage spirit={spirit} src={src} alt={alt} />
+            </button>
+          ))}
         </div>
 
         {spirit.startingCards && (
@@ -99,7 +101,7 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
                     <button
                       type="button"
                       className="spirit-detail-card"
-                      onClick={() => setEnlargedCard({ src, alt: cardName })}
+                      onClick={() => setEnlarged({ src, alt: cardName })}
                     >
                       <DetailImage spirit={spirit} src={src} alt={cardName} />
                       <span className="spirit-detail-card-name">{cardName}</span>
@@ -128,15 +130,15 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
         )}
       </div>
 
-      {enlargedCard && (
+      {enlarged && (
         <div
           className="card-enlarge-backdrop"
           onClick={(e) => {
             e.stopPropagation()
-            setEnlargedCard(null)
+            setEnlarged(null)
           }}
         >
-          <img src={enlargedCard.src} alt={enlargedCard.alt} />
+          <img src={enlarged.src} alt={enlarged.alt} />
         </div>
       )}
     </div>
