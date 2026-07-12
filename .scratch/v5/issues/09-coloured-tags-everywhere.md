@@ -1,6 +1,6 @@
 # 09 — Coloured tags, everywhere they belong
 
-Status: needs-triage
+Status: done
 Type: wayfinder:task (AFK)
 Parent: [v5 map](../MAP.md)
 
@@ -40,3 +40,20 @@ only by hue for a colour-blind reader.
 - Verified in a real browser at 375px and desktop.
 
 ## Comments
+
+`SpiritTile.tsx` was already done as part of #08's fold-in (last commit before this ticket
+started). The remaining undecorated surface was the spirit detail modal
+(`SpiritDetail.tsx`): it rendered `{spirit.expansion} · {spirit.complexity}` as bare text and
+never showed `spirit.tags` at all. Fixed by reusing #08's scheme verbatim — same
+`tagColors.ts` lookups, same CSS classes (`spirit-tile-chip`, `spirit-tile-dot`,
+`spirit-tile-tag-chip`) — rather than a modal-specific variant, since the modal shares the
+tile's `--deck-panel` background (contrast already validated in #08 carries over unchanged).
+
+The dropdown ("also visible in the dropdown") stays out of scope, per #08's own resolution:
+a native `<select>` can't hold a styled chip, replacing it is a real separate cost that was
+surfaced but never asked for, and #08 explicitly said that's a new ticket if the owner wants
+it — not #09.
+
+Verified with Playwright against the dev build at desktop and 375px on Lightning's Swift
+Strike (2 tags): expansion chip, 4-dot complexity meter, and both tag chips render correctly
+in the modal, no console errors, no overflow at 375px. `tsc --noEmit` clean.

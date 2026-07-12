@@ -5,6 +5,7 @@ import { CardViewer } from './CardViewer'
 import { OcfduRadar } from './OcfduRadar'
 import { PlaceholderArt } from './PlaceholderArt'
 import { SpiritArt } from './SpiritArt'
+import { COMPLEXITY_LEVEL, EXPANSION_COLOR, tagColor, tagLabel } from './tagColors'
 
 const ARROW: Record<string, string> = { up: '↑ more complex', down: '↓ simpler', same: '→ same complexity' }
 
@@ -56,6 +57,8 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
   const tier = tierStore.getTier(spirit.id)
   const activeList = tierStore.getActiveList()
   const base = import.meta.env.BASE_URL
+  const level = COMPLEXITY_LEVEL[spirit.complexity]
+  const expansionColor = EXPANSION_COLOR[spirit.expansion]
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -68,9 +71,30 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
           <SpiritArt spirit={spirit} />
           <div>
             <h2>{spirit.name}</h2>
-            <p className="meta">
-              {spirit.expansion} · {spirit.complexity}
-            </p>
+            <div className="spirit-tile-complexity" title={spirit.complexity}>
+              {[1, 2, 3, 4].map((n) => (
+                <span key={n} className={n <= level ? 'spirit-tile-dot spirit-tile-dot-filled' : 'spirit-tile-dot'} />
+              ))}
+              <span className="spirit-tile-complexity-label">{spirit.complexity}</span>
+            </div>
+            <div className="spirit-tile-chip-row">
+              <span className="spirit-tile-chip" style={{ background: expansionColor }}>
+                {spirit.expansion}
+              </span>
+            </div>
+            {spirit.tags.length > 0 && (
+              <div className="spirit-tile-chip-row spirit-tile-tags">
+                {spirit.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="spirit-tile-tag-chip"
+                    style={{ borderColor: tagColor(tag), color: tagColor(tag) }}
+                  >
+                    {tagLabel(tag)}
+                  </span>
+                ))}
+              </div>
+            )}
             <p className="meta">
               Tier ({activeList.name}): {tier ?? 'not rated by this list'}
             </p>
