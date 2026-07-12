@@ -123,6 +123,25 @@
   margin: 0.25rem 0 0;
 }
 
+/* Variants E/F: stripe for expansion, chips for tags only */
+.tp-chip-row-tight {
+  margin-top: 0.4rem;
+}
+.tp-chip-small {
+  padding: 0.1rem 0.45rem;
+  font-size: 10px;
+}
+.tp-chip-outline {
+  display: inline-block;
+  padding: 0.08rem 0.45rem;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  background: transparent;
+  white-space: nowrap;
+}
+
 /* Switcher, per the prototype skill's spec */
 .tp-switcher {
   position: fixed;

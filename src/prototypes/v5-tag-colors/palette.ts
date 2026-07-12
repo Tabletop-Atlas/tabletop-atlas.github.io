@@ -51,11 +51,27 @@ export function complexityColor(c: Complexity): string {
 /** For Variant B's difficulty-pip idiom (●●○○) - ordinal position, not a colour. */
 export const COMPLEXITY_LEVEL: Record<Complexity, number> = { Low: 1, Moderate: 2, High: 3, 'Very High': 4 }
 
-const TAG_PALETTE = ['#8a6d3b', '#3b6d8a', '#6d3b8a', '#3b8a5c', '#8a3b5c', '#5c8a3b', '#3b5c8a', '#8a5c3b']
-// Same hues, lifted for use as text colour on this app's dark background (deck.css) - the chip
-// backgrounds above are dark enough to need white text on top; a tag rendered as bare text
-// needs the colour itself to carry contrast.
-const TAG_TEXT_PALETTE = ['#d9b876', '#76b8d9', '#b876d9', '#76d99e', '#d976a3', '#9ed976', '#76a3d9', '#d9a376']
+// v5 #08 owner feedback on the first pass: the original 8-colour hash palette for 11 known tags
+// guaranteed collisions (blight-sensitive and token-heavy both landed on the same green in
+// Variant C's screenshot) - two *different* tags reading as the *same* colour breaks the whole
+// point of colour-coding. Every known tag now gets an explicit, distinct, saturated hue - a
+// different family entirely from EXPANSION_COLOR's muted "jewel tones", so a tag chip can never
+// be mistaken for an expansion stripe by hue alone. The hash fallback only fires for a future tag
+// this file hasn't been updated for yet.
+const TAG_COLOR: Record<string, string> = {
+  aggressive: '#e0475a',
+  'blight-positive': '#e0862f',
+  'blight-sensitive': '#d4b32f',
+  'board-control': '#3f9de0',
+  coastal: '#2fb8c4',
+  'dahan-synergy': '#4fb84a',
+  'fast-tempo': '#e0479e',
+  'fear-focused': '#8a5ce0',
+  incarnate: '#5ce0a8',
+  'ramping-economy': '#b8862f',
+  'token-heavy': '#5c7ae0',
+}
+const TAG_FALLBACK_PALETTE = ['#e0475a', '#3f9de0', '#4fb84a', '#e0862f', '#8a5ce0', '#2fb8c4']
 
 function hashString(s: string): number {
   let h = 0
@@ -64,11 +80,14 @@ function hashString(s: string): number {
 }
 
 export function tagColor(tag: string): string {
-  return TAG_PALETTE[hashString(tag) % TAG_PALETTE.length]
+  return TAG_COLOR[tag] ?? TAG_FALLBACK_PALETTE[hashString(tag) % TAG_FALLBACK_PALETTE.length]
 }
 
+// Tag colours above are already bright/saturated enough to read as text on this app's dark
+// background - unlike the expansion palette, there's no separate darker "chip fill" version to
+// lift from, so this is the same value. Kept as its own function so callers don't care which.
 export function tagTextColor(tag: string): string {
-  return TAG_TEXT_PALETTE[hashString(tag) % TAG_TEXT_PALETTE.length]
+  return tagColor(tag)
 }
 
 export function tagLabel(tag: string): string {
