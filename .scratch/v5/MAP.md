@@ -119,6 +119,17 @@ scenarios browse alongside the cards.
   "not in your collection" note rather than hiding them - #06's "information, not silence" call.
   Cards/Archive received no changes at all, per #06's explicit exclusion. Browser-verified
   (Playwright, production build, 375px + desktop) across all three tabs; no bugs found.
+- **[#08](issues/08-the-tag-colour-scheme.md) done** (2026-07-12), via `/prototype` - four rounds
+  of owner review against real spirit data (screenshots in `.scratch/v5/screenshots-08/`, variants
+  A-H). Winner **variant H**: expansion gets a left-edge stripe + a solid chip (same colour,
+  verified byte-identical); complexity is a dot-meter (●●○○) plus its word as text, not a colour
+  (the "effort level" idiom); playstyle tags get their own outlined chips on a separate line.
+  Round 1's tag palette had a real bug the owner caught, not review - an 8-colour hash for 11
+  known tags guaranteed collisions (two different tags rendered identically); fixed with an
+  explicit colour per known tag. "Also visible in the dropdown" and tags-as-filters stayed
+  explicitly unbuilt, per the ticket. Folded into `SpiritTile.tsx` + new `tagColors.ts`; the
+  throwaway prototype deleted, screenshots kept. Browser-verified and code-reviewed clean.
+  #09 unblocked.
 
 Two calls were made while charting, ahead of any ticket:
 
@@ -178,9 +189,7 @@ fix                      decide                      build
                          08 the tag colour scheme ── 09 coloured tags everywhere
 ```
 
-Frontier (updated 2026-07-12): **#08** (prototype built, screenshots ready — awaiting the owner's
-visual pick before ## Comments can close it and unblock #09). #01/#02/#03/#04/#05a/#05b/#06/#07a/
-#07b/#07c are done.
+Frontier (updated 2026-07-12): **#09.** Every other ticket on this map is done.
 
 **On the re-cut (2026-07-12):** the original #05 and #07 were each too big for one context window and
 were split into tracer-bullet slices, each demoable alone. #05 split because adversaries and scenarios

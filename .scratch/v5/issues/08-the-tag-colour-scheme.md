@@ -1,6 +1,6 @@
 # 08 — The tag colour scheme
 
-Status: needs-triage
+Status: done
 Type: wayfinder:prototype (HITL)
 Parent: [v5 map](../MAP.md)
 
@@ -59,3 +59,54 @@ palette, sampled from the owner's TierMaker board. Whatever this scheme is, it m
 it — a spirit chip that looks like a tier badge is worse than a grey chip.
 
 ## Comments
+
+Resolved via `/prototype`, four rounds of owner review against real spirit data at 375px and
+desktop (screenshots in `.scratch/v5/screenshots-08/`, variants A through H). **The winner is
+variant H**, now folded into `src/components/SpiritTile.tsx` with its palette in the new
+`src/components/tagColors.ts`:
+
+- **Expansion** gets a left-edge stripe on the tile *and* a solid pill chip on its own line
+  (same colour in both places, verified byte-identical) — the two reinforce one signal rather
+  than reading as two.
+- **Complexity** is not a colour at all — it's ordinal, so it's a 4-dot meter (●●○○) with the
+  complexity word as text next to it, the same "dots + word" idiom Claude Code's own effort-level
+  picker uses. Round 1 tried colouring it (ramp/rainbow); dropped once the dots-plus-word version
+  landed.
+- **Playstyle tags** get their own outlined chips (coloured border + coloured text, transparent
+  fill) on a separate line below the expansion chip - never sharing a row or a visual style with
+  expansion, so "provenance" and "playstyle fact" read as two different kinds of information.
+
+**What round 1 got wrong, caught by the owner, not by review:** the first tag palette was an
+8-colour hash for 11 known tags, which guaranteed collisions - `token-heavy` and
+`blight-sensitive` rendered as the identical green. Fixed with an explicit, collision-free colour
+per known tag (hash only as a fallback for a future unmapped one). A colour scheme where two
+different things read as the same colour is worse than no colour scheme; this is the same
+"the field must be honest" discipline this repo already applies to data, applied here to a
+palette instead.
+
+**Answers to the prototype's other questions:**
+- *"Also visible in the dropdown"* — **not built.** A native `<select>` can't hold a styled chip;
+  replacing the dropdown with a custom listbox is a real, separate cost that was surfaced but
+  never asked for outright. Still open if the owner wants to pursue it - a new ticket, not part of
+  #08/#09.
+- *Tags as filter controls* — **not built**, as instructed. The tag chip is inert (no `onClick`).
+- *Collision with `tierColors.ts`* — checked: the two palettes are separated by lightness/
+  saturation (tier = light pastel, tags/expansion = darker and more saturated), not by hue alone;
+  a couple of tag hues land near a tier hue in raw hue-angle terms but read distinctly on this
+  app's dark background. Documented in `tagColors.ts`'s own comment, including a note to re-check
+  if either palette is ever brightened independently.
+
+The throwaway prototype (`src/prototypes/v5-tag-colors/`, `prototype-v5-tag-colors.html`) is
+deleted now that the winner is folded in; the screenshots stay as the historical record, same as
+v4 #04/#07's prototypes. Browser-verified (Playwright, production build, 375px + desktop): stripe/
+chip colour match confirmed via computed styles, dots/label/tags all render correctly, #07c's
+collection annotation (dimming + "not in your collection") still works unchanged, no console
+errors, no horizontal overflow.
+
+A code-review pass (standards + spec) found no structural drift from the approved screenshots and
+no scope creep; one real, minor finding (the `tierColors.ts` comment overstated "no shared hues"
+when the actual separation is lightness/saturation) - fixed by correcting the comment's wording.
+
+[#09](09-coloured-tags-everywhere.md) is unblocked - this ticket **was** #09's spec-setting
+half for the Browse tile; #09's remaining scope is wherever else in the app tags/expansion/
+complexity render undecorated (the ticket itself should say where).

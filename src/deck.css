@@ -590,6 +590,8 @@ button:disabled {
 .spirit-tile {
   background: var(--deck-panel);
   border: 1px solid var(--deck-line);
+  border-left-width: 4px;
+  border-left-style: solid;
   border-radius: 8px;
   padding: 0.55rem;
   overflow: hidden;
@@ -614,6 +616,64 @@ button:disabled {
   border-radius: 4px;
   color: var(--deck-text);
   padding: 0.3rem;
+}
+
+/* v5 #08/#09: tile colour scheme - see tagColors.ts */
+.spirit-tile-name-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.spirit-tile-complexity {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.spirit-tile-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  display: inline-block;
+}
+.spirit-tile-dot-filled {
+  background: #fff;
+}
+.spirit-tile-complexity-label {
+  margin-left: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--deck-dim);
+  letter-spacing: 0.02em;
+}
+.spirit-tile-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+}
+.spirit-tile-chip {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+.spirit-tile-tag-chip {
+  display: inline-block;
+  padding: 0.08rem 0.45rem;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  background: transparent;
+  white-space: nowrap;
 }
 
 /* --- tier board --- */

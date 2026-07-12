@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { ExpansionName } from '../domain/types'
-import type { Spirit } from '../domain/types'
+import type { ExpansionName, Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
+import { COMPLEXITY_LEVEL, EXPANSION_COLOR, tagColor, tagLabel } from './tagColors'
 
 /** v5 #07c: Browse annotates (never hides, unless the caller already dropped it via
  * hard-filter) a spirit outside the collection - dimmed with a note, same treatment as the
@@ -10,7 +10,12 @@ import { SpiritArt } from './SpiritArt'
  * the same thing* - a spirit already dimmed and noted unowned doesn't need every aspect
  * repeating it, that's new information only when the aspect's exclusion is independent of the
  * spirit's. `excluded` is passed down rather than read per-aspect from `collectionStore` - the
- * caller already reads it once per render (Browser.tsx). */
+ * caller already reads it once per render (Browser.tsx).
+ *
+ * v5 #08/#09: colour scheme decided via `/prototype` (variant H, screenshots in
+ * `.scratch/v5/screenshots-08/`) - a left-edge stripe and a solid chip (same colour, verified
+ * identical) carry the expansion; the complexity dots carry a text word next to them; playstyle
+ * tags get their own outlined chips on a separate line below the expansion chip. */
 export function SpiritTile({
   spirit,
   onSelect,
@@ -23,9 +28,14 @@ export function SpiritTile({
   excluded: ReadonlySet<ExpansionName>
 }) {
   const [expanded, setExpanded] = useState(false)
+  const level = COMPLEXITY_LEVEL[spirit.complexity]
+  const expansionColor = EXPANSION_COLOR[spirit.expansion]
 
   return (
-    <li className={owned ? 'spirit-tile' : 'spirit-tile spirit-tile-unowned'}>
+    <li
+      className={owned ? 'spirit-tile' : 'spirit-tile spirit-tile-unowned'}
+      style={{ borderLeftColor: expansionColor }}
+    >
       <button
         type="button"
         className="spirit-tile-open"
@@ -33,12 +43,31 @@ export function SpiritTile({
         aria-label={`View ${spirit.name} details`}
       >
         <SpiritArt spirit={spirit} />
-        <h3>{spirit.name}</h3>
+        <div className="spirit-tile-name-row">
+          <h3>{spirit.name}</h3>
+          <span className="spirit-tile-complexity" title={spirit.complexity}>
+            {[1, 2, 3, 4].map((n) => (
+              <span key={n} className={n <= level ? 'spirit-tile-dot spirit-tile-dot-filled' : 'spirit-tile-dot'} />
+            ))}
+            <span className="spirit-tile-complexity-label">{spirit.complexity}</span>
+          </span>
+        </div>
       </button>
-      <p className="meta">
-        {spirit.expansion} · {spirit.complexity}
+      <div className="spirit-tile-chip-row">
+        <span className="spirit-tile-chip" style={{ background: expansionColor }}>
+          {spirit.expansion}
+        </span>
         {!owned && <span className="unowned-note"> · not in your collection</span>}
-      </p>
+      </div>
+      {spirit.tags.length > 0 && (
+        <div className="spirit-tile-chip-row spirit-tile-tags">
+          {spirit.tags.map((tag) => (
+            <span key={tag} className="spirit-tile-tag-chip" style={{ borderColor: tagColor(tag), color: tagColor(tag) }}>
+              {tagLabel(tag)}
+            </span>
+          ))}
+        </div>
+      )}
       <p>{spirit.summary}</p>
 
       {spirit.aspects.length > 0 && (
