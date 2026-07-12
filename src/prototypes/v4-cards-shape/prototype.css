@@ -87,7 +87,11 @@
   flex: 0 0 auto;
   display: flex;
   gap: 2px;
-  font-size: 13px;
+}
+.proto-b-element-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 .proto-b-cost {
   flex: 0 0 auto;

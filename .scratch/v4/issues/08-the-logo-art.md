@@ -59,3 +59,18 @@ confirming it's not a fan recreation.
 with the sidebar exactly as intended, no overflow, no cropping. See
 `.scratch/v4/screenshots-07/wizard_step0_375x667.png`. The `max-width: 232px` bound holds. Flipping
 to `done`.
+
+**Correction, found by the owner:** the "transparent background, 600×208" claim above was wrong —
+checked with a screenshot viewer, not pixel data. The wiki's PNG has a fully opaque white background
+(alpha uniformly 255 across all 124,800 pixels, verified with PIL). It rendered as a visible white
+box in the sidebar rather than blending in. Fixed by flood-filling the white background from all
+four corners (PIL `ImageDraw.floodfill`, threshold 30, so it only removes the *connected* white
+region and leaves any white detail inside the art alone), then a light 0.6px Gaussian blur on just
+the alpha channel to soften the hard cutoff into a smoother edge. Re-encoded to webp with
+`-alpha_q 100` (the original `cwebp -q 90` command silently dropped the alpha channel entirely —
+worth remembering for any future webp conversion in this repo: verify the output is RGBA, don't
+assume `cwebp` preserves alpha by default). Both `images/spirit_island_logo.png` (archive original)
+and `public/spirit-island-logo.webp` (app-facing derivative) replaced in place; `manifest.json`'s
+entry is unchanged since the source URL and asset identity didn't change, only the processing.
+Verified in the running app: the logo now sits directly on the sidebar background with no visible
+box. `tsc -b`, full suite (246/246) and `vite build` all clean.

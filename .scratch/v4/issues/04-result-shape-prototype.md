@@ -1,6 +1,6 @@
 # 04 — What a filtered result looks like, at 375px
 
-Status: ready-for-human
+Status: done
 Type: wayfinder:prototype (HITL)
 Parent: [v4 map](../MAP.md)
 
@@ -79,6 +79,27 @@ thumbnail derivatives at this scale. That question may look different at 471 car
 scrolling/pagination, which this prototype doesn't test (36 cards, no filters, no virtualization) —
 flagging for #05 rather than answering it definitively.
 
-**Owner's call — not made here, by design (this is a HITL ticket):** A vs. B. Once decided, delete
-`src/prototypes/v4-cards-shape/`, `prototype-v4-cards-shape.html`, and `public/_prototype-04/`, and
-record the choice + reasoning above this line before deleting.
+**Owner's decision (2026-07-12): both.** Not a tie-break — a real product requirement. The owner's
+reasoning: the image grid (A) is how he actually recognizes cards ("I remember the cards by the
+visuals"); the compact rows (B) work as a fast data sheet. Neither subsumes the other. **#11/#12
+should build both, switchable**, not pick one — this is now the shape decision #03 (filter set) and
+#11 (power cards end-to-end) build against, not a prototype question anymore.
+
+**One concrete change requested from judging the prototype:** replace variant B's element glyphs —
+they were emoji (☀☾🔥💨💧⛰🌿🐾) — with the game's real element iconography, "because those elements
+are quite memorable." Fetched the 8 real icons from `spiritislandwiki.com` (`Esun.png`, `Emoon.png`,
+etc. — the same API-verified, non-thumb full-resolution source #08 used for the logo), visually
+cross-checked one (`fire.png`) against a card's own printed element icon in the variant A grid
+screenshots — same art. Archived to `images/elements/*.png` (registered in `images/manifest.json`,
+`asset_type: "element_icon"`), converted to webp with alpha preserved, and swapped into
+`VariantB.tsx` in place of the emoji map. Re-verified with Playwright at 375px: no overflow, icons
+render crisp at 18×18. This is genuinely real input for #11/#12, not just a prototype detail — the
+element icon set will be needed wherever the real Cards tab shows compact rows.
+
+**Follow-up, not yet done:** #05/#11 will need to decide whether the *real* 471-card build uses
+these element icons in variant A too (currently A shows only the card's own printed art, no
+separate icon overlay) or keeps them B-only. Not answered here — flagging for whoever picks up #11.
+
+Prototype tree, throwaway assets and the standalone HTML entry are **kept** (not deleted) since the
+"build both" decision means #11/#12 will want to reference this working code rather than starting
+from zero. Revisit deletion once the real Cards tab has absorbed what it needs.

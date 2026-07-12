@@ -5161,5 +5161,61 @@
     "asset_type": "logo",
     "name": "Spirit Island logo",
     "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/sun.png",
+    "source_url": "https://spiritislandwiki.com/images/2/23/Esun.png",
+    "asset_type": "element_icon",
+    "name": "Sun",
+    "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/moon.png",
+    "source_url": "https://spiritislandwiki.com/images/a/a6/Emoon.png",
+    "asset_type": "element_icon",
+    "name": "Moon",
+    "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/fire.png",
+    "source_url": "https://spiritislandwiki.com/images/e/ef/Efire.png",
+    "asset_type": "element_icon",
+    "name": "Fire",
+    "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/air.png",
+    "source_url": "https://spiritislandwiki.com/images/9/96/Eair.png",
+    "asset_type": "element_icon",
+    "name": "Air",
+    "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/water.png",
+    "source_url": "https://spiritislandwiki.com/images/b/b4/Ewater.png",
+    "asset_type": "element_icon",
+    "name": "Water",
+    "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/earth.png",
+    "source_url": "https://spiritislandwiki.com/images/6/6e/Eearth.png",
+    "asset_type": "element_icon",
+    "name": "Earth",
+    "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/plant.png",
+    "source_url": "https://spiritislandwiki.com/images/f/f2/Eplant.png",
+    "asset_type": "element_icon",
+    "name": "Plant",
+    "source_site": "spiritislandwiki.com"
+  },
+  {
+    "file": "images/elements/animal.png",
+    "source_url": "https://spiritislandwiki.com/images/c/c9/Eanimal.png",
+    "asset_type": "element_icon",
+    "name": "Animal",
+    "source_site": "spiritislandwiki.com"
   }
 ]

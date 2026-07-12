@@ -51,7 +51,10 @@ anyone can open on their phone:
 - **#08** — real logo art found at `spiritislandwiki.com`'s own site logo (`Spirit-Island-Logo.png`,
   a clean crop of the box-cover wordmark), not in the TTS mod JSON. Swapped into `AppShell`'s
   `.deck-brand`, capped at `max-width: 232px` so it scales with the sidebar. Verified at 375/390px
-  by #07's audit — holds.
+  by #07's audit — holds. **Correction (owner, 2026-07-12):** the source PNG's background was
+  opaque white, not transparent as first recorded — showed as a visible white box in the sidebar.
+  Fixed by flood-filling the background transparent; `cwebp` silently drops alpha unless told
+  `-alpha_q 100`, worth remembering for future conversions in this repo.
 - **#07** — audited all nine surfaces at 375×667/390×844 with Playwright. Worst finding: the
   recommender results' wildcard/reroll box (`.deck-wild`'s fixed-plus-auto grid columns) genuinely
   overflows the page at 375px. Also found: the spirit detail modal's close button overlaps a long
@@ -65,9 +68,17 @@ anyone can open on their phone:
   findings (small filter labels, a cosmetic spacing gap) explicitly closed, not fixed — see
   [issues/14](issues/14-the-phone-fixes.md#comments) for why. Desktop measured pixel-identical
   before/after. `playwright` is now a dev dependency for this kind of verification going forward.
+- **#04 — owner's decision: both.** Not A vs. B — the image grid and compact rows answer different
+  needs (visual recognition vs. fast scanning) and neither replaces the other. #11/#12 build a
+  switchable view, not a single layout. Also: variant B's element glyphs are the real in-game icons
+  (`spiritislandwiki.com`'s `Esun.png` etc., archived to `images/elements/`), not emoji — requested
+  after judging the prototype. Prototype code kept (not deleted) as a starting point for #11/#12.
+  See [issues/04](issues/04-result-shape-prototype.md#comments).
 
 ## Not yet specified
 
+- **Whether variant A (the image grid) also gets element icon overlays**, or keeps to card art only
+  — #04 raised this, deferred to whoever picks up #11.
 - **The Cards tab's shape beyond filtering.** Sort order, empty state, deep-linking to a single
   card, whether a filtered set can be shared as a URL. Follows [#03](issues/03-the-filter-set.md).
 - **Cross-links between spirits and cards.** A spirit's uniques already render in `SpiritDetail`;
