@@ -44,7 +44,10 @@ anyone can open on their phone:
 
 <!-- one line per closed ticket -->
 
-*(none yet — map charted 2026-07-12)*
+- **#01** — card data source is `oberien/spirit-island-card-katalog` (`src/types.ts` + `src/db.ts`,
+  upstream of the compiled `cards.js`). All 471 cards join to the manifest by primary name, 0 misses.
+  Elements/cost/speed/major-minor exist only on `PowerCard`; expansion exists on all 471. See
+  [card-data-source.md](card-data-source.md).
 
 ## Not yet specified
 
