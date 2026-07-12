@@ -6,6 +6,7 @@ import { pickFixture } from './palette'
 import { VariantA } from './VariantA'
 import { VariantB } from './VariantB'
 import { VariantC } from './VariantC'
+import { VariantD } from './VariantD'
 
 const spirits = spiritsData as Spirit[]
 const fixture = pickFixture(spirits)
@@ -14,6 +15,7 @@ const VARIANTS = {
   A: { label: 'A — Chip row (all three axes as equal chips)', Component: VariantA },
   B: { label: 'B — Badge + dots, tags as text', Component: VariantB },
   C: { label: 'C — Accent stripe, colour as wayfinding', Component: VariantC },
+  D: { label: 'D — C, but the name is coloured too', Component: VariantD },
 } as const
 
 type VariantKey = keyof typeof VARIANTS

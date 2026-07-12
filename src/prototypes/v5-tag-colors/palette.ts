@@ -23,6 +23,20 @@ export const EXPANSION_COLOR: Record<string, string> = {
   Promo: '#5a5a7a',
 }
 
+// Same hues as EXPANSION_COLOR, lifted for use as text colour (e.g. colouring a spirit's name
+// itself) - the swatch values above are dark background fills; a name rendered in that same dark
+// hue on this app's dark background would barely read. v5 #08 follow-up: "should the whole name
+// be coloured too, or is that too much" - variant D.
+export const EXPANSION_TEXT_COLOR: Record<string, string> = {
+  Base: '#8fb8e0',
+  'Branch & Claw': '#a3cc85',
+  'Feather & Flame': '#e0a875',
+  Horizons: '#7cd4c0',
+  'Jagged Earth': '#d491c0',
+  'Nature Incarnate': '#d4b95a',
+  Promo: '#a3a3d4',
+}
+
 const COMPLEXITY_RAMP: Record<Complexity, string> = {
   Low: '#3a4048',
   Moderate: '#525c68',
