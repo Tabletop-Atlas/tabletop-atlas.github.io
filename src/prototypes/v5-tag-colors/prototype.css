@@ -114,8 +114,17 @@
 }
 .tp-complexity-dots {
   display: inline-flex;
+  align-items: center;
   gap: 2px;
   flex: 0 0 auto;
+}
+/* Variant H: the effort-level idiom - dots alone are a legend, dots + word are self-explanatory */
+.tp-complexity-label {
+  margin-left: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--deck-dim);
+  letter-spacing: 0.02em;
 }
 .tp-tag-line {
   font-size: 11px;
@@ -126,6 +135,10 @@
 /* Variants E/F: stripe for expansion, chips for tags only */
 .tp-chip-row-tight {
   margin-top: 0.4rem;
+}
+/* Variant H: tags start on their own line below the expansion chip, not wrapped into it */
+.tp-chip-row-tags {
+  margin-top: 0.35rem;
 }
 .tp-chip-small {
   padding: 0.1rem 0.45rem;
