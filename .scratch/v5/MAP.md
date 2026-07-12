@@ -106,6 +106,19 @@ scenarios browse alongside the cards.
   instead of a live manifest read - all fixed before commit. Browser verification (production
   build, 375px + desktop) caught and fixed a real regression: the segmented switch overflowed
   375px once it grew from 4 to 6 buttons.
+- **[#07b](issues/07b-the-recommender-respects-the-collection.md) and
+  [#07c](issues/07c-browse-and-cards-respect-the-collection.md) done** (2026-07-12), built
+  together: the Recommender and Browse both gained the tier board's session-only hard-filter
+  checkbox pattern. #06 didn't fully settle #07b's pre-vs-post-ranking-filter question, so the
+  owner was asked directly per the ticket's own "stop and ask, do not pick" instruction: hard-filter
+  pre-filters the candidate pool *before* `recommend()` runs (matching #07a's tier board exactly),
+  so an untouched collection reproduces today's ranking byte-for-byte and a hard-filtered shortlist
+  always fills rather than coming back short. `recommendCollection.test.ts` (new) pins this
+  specifically - it fails if the filter is ever moved to run after `recommend()` instead of before.
+  Annotate mode (default, both surfaces) shows unowned results/tiles dimmed with a
+  "not in your collection" note rather than hiding them - #06's "information, not silence" call.
+  Cards/Archive received no changes at all, per #06's explicit exclusion. Browser-verified
+  (Playwright, production build, 375px + desktop) across all three tabs; no bugs found.
 
 Two calls were made while charting, ahead of any ticket:
 
@@ -165,7 +178,9 @@ fix                      decide                      build
                          08 the tag colour scheme ── 09 coloured tags everywhere
 ```
 
-Frontier (updated 2026-07-12): **#07b, #07c, #08.** #01/#02/#03/#04/#05a/#05b/#06/#07a are done.
+Frontier (updated 2026-07-12): **#08** (prototype built, screenshots ready — awaiting the owner's
+visual pick before ## Comments can close it and unblock #09). #01/#02/#03/#04/#05a/#05b/#06/#07a/
+#07b/#07c are done.
 
 **On the re-cut (2026-07-12):** the original #05 and #07 were each too big for one context window and
 were split into tracer-bullet slices, each demoable alone. #05 split because adversaries and scenarios

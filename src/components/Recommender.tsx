@@ -4,6 +4,7 @@ import { answersStore } from '../domain/answersStore'
 import { answersToWeights, type Answers } from '../domain/answersToWeights'
 import { aspectShiftsToward, topWeightedLowAxis } from '../domain/aspectNudge'
 import { AXIS_LABEL } from '../domain/axisLabels'
+import { candidatesForRecommender, collectionStore, isConfigurationOwned } from '../domain/collectionStore'
 import { complexityStore } from '../domain/complexityStore'
 import { expand, type Configuration } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
@@ -49,6 +50,9 @@ interface RecommenderState {
   setTuned: (b: boolean) => void
   wildcardOffset: number
   rerollWildcard: () => void
+  /** v5 #07b: session-only, like the tier board's - a view preference, not collection data. */
+  hardFilter: boolean
+  setHardFilter: (b: boolean) => void
 }
 
 const Ctx = createContext<RecommenderState | null>(null)
@@ -72,6 +76,7 @@ export function RecommenderProvider({ children }: { children: ReactNode }) {
   const [teamIds, setTeamIds] = useState<string[]>([])
   const [tuned, setTuned] = useState(false)
   const [wildcardOffset, setWildcardOffset] = useState(0)
+  const [hardFilter, setHardFilter] = useState(false)
 
   useEffect(() => {
     answersStore.save(answers)
@@ -100,6 +105,8 @@ export function RecommenderProvider({ children }: { children: ReactNode }) {
     setTuned,
     wildcardOffset,
     rerollWildcard: () => setWildcardOffset((n) => n + 1),
+    hardFilter,
+    setHardFilter,
   }
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
@@ -107,7 +114,7 @@ export function RecommenderProvider({ children }: { children: ReactNode }) {
 
 /** Everything the ranking depends on, derived once and shared by both panes. */
 function useRanking() {
-  const { answers, teamIds, tuned, wildcardOffset } = useRecommender()
+  const { answers, teamIds, tuned, wildcardOffset, hardFilter } = useRecommender()
 
   const prefs = useMemo(() => answersToWeights(answers), [answers])
   const roleGaps = useMemo(
@@ -118,12 +125,20 @@ function useRanking() {
     () => (tuned ? tuneTowardGaps(prefs.weights, roleGaps) : prefs.weights),
     [prefs.weights, roleGaps, tuned],
   )
-  // Reads complexityStore, tierStore and gameLog - all mutable - but depends only on
-  // [prefs, weights]. Correct today only because App.tsx unmounts RecommenderMain (and this
-  // hook with it) on every tab switch, so a stale read here never survives to be seen; it is
-  // not safe to call this hook from a component that stays mounted while those stores change.
+  // Reads complexityStore, collectionStore, tierStore and gameLog - all mutable - but depends
+  // only on [prefs, weights, hardFilter]. Correct today only because App.tsx unmounts
+  // RecommenderMain (and this hook with it) on every tab switch, so a stale read here never
+  // survives to be seen; it is not safe to call this hook from a component that stays mounted
+  // while those stores change.
+  const excluded = collectionStore.getExcluded()
   const ranked = useMemo(() => {
-    const configsForRanking = expand(spirits, complexityStore.getAll())
+    const allConfigs = expand(spirits, complexityStore.getAll())
+    // v5 #07b: hard-filter (#06's opt-in) removes unowned configurations from the candidate
+    // pool *before* recommend() ever sees them - the same pre-ranking filter #07a's tier board
+    // already applies, so an untouched collection (excluded.length === 0) is a no-op and
+    // reproduces today's ranking exactly, and a full collection excludes always fills the
+    // shortlist rather than handing back a short one.
+    const configsForRanking = candidatesForRecommender(allConfigs, hardFilter, new Set(excluded))
     const timesPlayed = Object.fromEntries(
       configsForRanking.map((c) => [c.configId, gameLog.timesPlayed(c.configId)]),
     )
@@ -138,13 +153,14 @@ function useRanking() {
         timesPlayed,
       }),
     )
-  }, [prefs, weights])
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- excluded is a snapshot array, compared by identity is wrong; hardFilter/prefs/weights already cover every case that changes it in-session.
+  }, [prefs, weights, hardFilter])
   const wildcard = useMemo(
     () => selectWildcard(ranked, weights, prefs.complexityCeiling, wildcardOffset),
     [ranked, weights, prefs.complexityCeiling, wildcardOffset],
   )
 
-  return { prefs, weights, roleGaps, ranked, wildcard }
+  return { prefs, weights, roleGaps, ranked, wildcard, excluded: new Set(excluded) }
 }
 
 /** Holds the field as a free-typed string locally, clamping only on blur - clamping every
@@ -260,12 +276,14 @@ function ResultRow({
   rank,
   weights,
   tiers,
+  owned,
 }: {
   config: Configuration
   score: number
   rank: number
   weights: Weights
   tiers: Record<string, string>
+  owned: boolean
 }) {
   const [open, setOpen] = useState(false)
   const { playerCount } = useRecommender()
@@ -275,7 +293,7 @@ function ResultRow({
   const noteIsRelevant = spirit.notes ? isRelevantToPlayerCount(spirit.notes, playerCount) : false
 
   return (
-    <li className="deck-row">
+    <li className={owned ? 'deck-row' : 'deck-row deck-row-unowned'}>
       <button type="button" className="deck-row-head" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
         <span className="deck-rank">{rank}</span>
         <SpiritArt spirit={spirit} className="deck-thumb" />
@@ -283,6 +301,10 @@ function ResultRow({
           <span className="deck-name">
             {spirit.name}
             {aspect ? <> — play the <strong>{aspect.name}</strong> aspect</> : null}
+            {/* v5 #07b: annotate mode (hard-filter off) still shows unowned results - the
+             * "best spirit for you is in an expansion you don't have" case #06 called out as
+             * information, not something to hide silently. */}
+            {!owned && <span className="unowned-note"> · not in your collection</span>}
           </span>
           <span className="deck-why">{whyYou(spirit, weights)}</span>
         </span>
@@ -342,8 +364,8 @@ function ResultRow({
 }
 
 function ResultsBoard() {
-  const { setPhase, rerollWildcard } = useRecommender()
-  const { weights, ranked, wildcard } = useRanking()
+  const { setPhase, rerollWildcard, hardFilter, setHardFilter } = useRecommender()
+  const { weights, ranked, wildcard, excluded } = useRanking()
   const shortlist = ranked.slice(0, SHORTLIST_SIZE)
   const tiers = tierStore.getAll()
 
@@ -356,10 +378,22 @@ function ResultsBoard() {
         </button>
       </div>
       <p className="meta">Scored against: {tierStore.getActiveList().name}</p>
+      <label className="deck-field-inline">
+        <input type="checkbox" checked={hardFilter} onChange={(e) => setHardFilter(e.target.checked)} />
+        Only recommend spirits I own
+      </label>
 
       <ol className="deck-rows">
         {shortlist.map(({ config, score }, i) => (
-          <ResultRow key={config.configId} config={config} score={score} rank={i + 1} weights={weights} tiers={tiers} />
+          <ResultRow
+            key={config.configId}
+            config={config}
+            score={score}
+            rank={i + 1}
+            weights={weights}
+            tiers={tiers}
+            owned={isConfigurationOwned(config, excluded)}
+          />
         ))}
       </ol>
       <p className="deck-hint">Change an answer in the sidebar — the ranking recomputes immediately.</p>

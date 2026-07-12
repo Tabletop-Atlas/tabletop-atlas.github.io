@@ -577,12 +577,25 @@ button:disabled {
   font-size: 11px;
 }
 
+/* v5 #07b: a Recommender result outside the collection - a wide row has room for the full
+ * wording inline, unlike a 116px tier tile, so this is text rather than a corner marker. */
+.deck-row-unowned {
+  opacity: 0.6;
+}
+.unowned-note {
+  color: var(--deck-dim);
+  font-weight: 400;
+}
+
 .spirit-tile {
   background: var(--deck-panel);
   border: 1px solid var(--deck-line);
   border-radius: 8px;
   padding: 0.55rem;
   overflow: hidden;
+}
+.spirit-tile-unowned {
+  opacity: 0.6;
 }
 .spirit-tile h3,
 .spirit-tile h4 {

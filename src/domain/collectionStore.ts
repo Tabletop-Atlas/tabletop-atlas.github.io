@@ -83,3 +83,17 @@ export function isConfigurationOwned(config: Configuration, excluded: ReadonlySe
 export function filterOwnedConfigurations(configs: Configuration[], excluded: ReadonlySet<ExpansionName>): Configuration[] {
   return configs.filter((c) => isConfigurationOwned(c, excluded))
 }
+
+/** v5 #07b: the exact candidate-pool decision the Recommender makes before calling `recommend()`
+ * - hard-filter off (default) leaves the pool untouched (an unowned configuration can still
+ * surface, annotated); on, it's pre-filtered so an unowned configuration never enters scoring.
+ * Exported so `recommendCollection.test.ts` pins this function itself, not a reimplementation of
+ * it - a test that imports this and a test that imports `Recommender.tsx`'s wiring are the same
+ * test once the component calls this instead of inlining the ternary. */
+export function candidatesForRecommender(
+  configs: Configuration[],
+  hardFilter: boolean,
+  excluded: ReadonlySet<ExpansionName>,
+): Configuration[] {
+  return hardFilter ? filterOwnedConfigurations(configs, excluded) : configs
+}

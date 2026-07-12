@@ -1,0 +1,153 @@
+.tp-host {
+  padding: 1.5rem 2rem 6rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.tp-warning {
+  background: #2a1f08;
+  border: 1px solid #5c4a1a;
+  color: #d8c48b;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 1.2rem;
+}
+
+.tp-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.8rem;
+}
+.tp-tile {
+  background: var(--deck-panel);
+  border: 1px solid var(--deck-line);
+  border-radius: 8px;
+  padding: 0.7rem;
+}
+.tp-tile h3 {
+  margin: 0 0 0.35rem;
+  font-size: 15px;
+  color: var(--deck-text);
+}
+.tp-tile p {
+  margin: 0.5rem 0 0;
+  font-size: 12px;
+  color: var(--deck-body);
+}
+
+/* Variant A */
+.tp-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.tp-chip {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Variant B */
+.tp-badge-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: flex-start;
+}
+.tp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+.tp-badge-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+.tp-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  display: inline-block;
+}
+.tp-dot-filled {
+  background: #fff;
+}
+.tp-tags-inline {
+  font-size: 11px;
+  color: var(--deck-dim);
+}
+.tp-tag-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.tp-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Variant C */
+.tp-tile-stripe {
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+.tp-name-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.tp-complexity-dots {
+  display: inline-flex;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+.tp-tag-line {
+  font-size: 11px;
+  color: var(--deck-dim);
+  margin: 0.25rem 0 0;
+}
+
+/* Switcher, per the prototype skill's spec */
+.tp-switcher {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #16202a;
+  border: 1px solid var(--deck-accent);
+  border-radius: 999px;
+  padding: 0.4rem 0.6rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  font: 600 12px/1 var(--deck-mono);
+  color: var(--deck-text);
+  z-index: 1000;
+}
+.tp-switcher button {
+  all: unset;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  color: var(--deck-accent);
+}
+.tp-switcher button:hover {
+  background: var(--deck-accent-bg);
+}

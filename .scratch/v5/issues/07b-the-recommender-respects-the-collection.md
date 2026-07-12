@@ -1,6 +1,6 @@
 # 07b — The Recommender respects the collection
 
-Status: needs-triage
+Status: done
 Type: wayfinder:task (AFK)
 Parent: [v5 map](../MAP.md) · Spec: [PRD.md](../PRD.md)
 
@@ -34,12 +34,46 @@ already established that the Recommender's player count earns its place.
 
 ## Acceptance criteria
 
-- [ ] With a collection set, every configuration in the ranking is one the user owns.
-- [ ] The ranking is computed pre- or post-filter exactly as #06 specified, and a test pins which — the
+- [x] With a collection set, every configuration in the ranking is one the user owns.
+- [x] The ranking is computed pre- or post-filter exactly as #06 specified, and a test pins which — the
       test should fail if someone later flips it.
-- [ ] The user is (or isn't) told that the collection narrowed the answer, per #06.
-- [ ] An untouched collection produces a ranking **identical** to today's. Tested — this is the regression
+- [x] The user is (or isn't) told that the collection narrowed the answer, per #06.
+- [x] An untouched collection produces a ranking **identical** to today's. Tested — this is the regression
       that would otherwise go unnoticed.
-- [ ] Verified in a real browser at 375px and desktop.
+- [x] Verified in a real browser at 375px and desktop.
 
 ## Comments
+
+**#06 didn't fully settle pre- vs. post-filter explicitly for this ticket** (it named which
+surfaces respect the collection, not the ranking mechanics), so per this ticket's own instruction
+("if #06's answer doesn't settle it, stop and ask") the owner was asked directly: pre-filter the
+candidate pool before `recommend()` runs, matching #07a's tier board (`filterOwnedConfigurations`
+applied to the raw configuration list before anything downstream sees it). Confirmed.
+
+`useRanking()` in `Recommender.tsx` now takes a session-only `hardFilter` toggle
+("Only recommend spirits I own" checkbox, same UX as the tier board's). Off (default): candidates
+untouched, ranking identical to before this ticket - unowned results can still surface, each
+annotated with a "· not in your collection" note and dimmed (`.deck-row-unowned` /
+`.unowned-note`), the "information, not silently hidden" case #06/this ticket both called out. On:
+`filterOwnedConfigurations` runs over the full candidate pool *before* `recommend()`, so an unowned
+configuration never enters scoring, never occupies a shortlist slot, and score normalization only
+ever runs over the owned pool.
+
+`src/domain/__tests__/recommendCollection.test.ts` (new) pins the wiring itself, not just the pure
+`collectionStore` functions (already covered by #07a's tests): an untouched collection reproduces
+`recommend()`'s unfiltered output byte-for-byte; a hard-filtered unowned expansion never appears in
+the ranking; and a third test proves pre-filtering is what's implemented (not post-filtering) by
+showing that excluding a strong unowned competitor measurably renormalizes the surviving
+candidates' scores - the exact "these produce different results" case the ticket described. That
+test fails if the filter is ever moved to run after `recommend()` instead of before.
+
+Browser-verified (Playwright, production build, 375px + desktop) alongside [#07c](07c-browse-and-cards-respect-the-collection.md):
+checkbox present, unowned results annotated when off, fully excluded when on, no console errors, no
+horizontal overflow.
+
+A code-review pass caught a real gap in the first version of this test: it called
+`filterOwnedConfigurations` directly rather than the code path `Recommender.tsx` actually runs, so
+it would keep passing even if the wiring itself were later changed to filter after `recommend()`
+instead of before. Fixed by extracting `candidatesForRecommender(configs, hardFilter, excluded)`
+into `collectionStore.ts` - the literal function `useRanking()` calls - and re-pointing the test at
+it, so the test and the component now share one implementation rather than two that could drift.

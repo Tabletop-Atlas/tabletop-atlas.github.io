@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import spiritsData from '../data/spirits.json'
+import { collectionStore } from '../domain/collectionStore'
 import type { Complexity, OCFDU, Spirit } from '../domain/types'
 import { SpiritDetail } from './SpiritDetail'
 import { SpiritTile } from './SpiritTile'
@@ -20,18 +21,25 @@ export function Browser() {
   const [tag, setTag] = useState('')
   const [sortKey, setSortKey] = useState<SortKey>('name')
   const [selected, setSelected] = useState<Spirit | null>(null)
+  // v5 #07c: session-only, like the tier board's and the Recommender's - a view preference, not
+  // collection data. #06 named Browse as a surface that respects the collection; Cards does not.
+  const [hardFilter, setHardFilter] = useState(false)
+  // Read once per render, not once per spirit/aspect - collectionStore.getExcluded() does a
+  // storage read + JSON.parse + Set rebuild, and the earlier version called it per tile.
+  const excluded = useMemo(() => new Set(collectionStore.getExcluded()), [])
 
   const shown = useMemo(() => {
     const filtered = spirits.filter(
       (s) =>
         (!expansion || s.expansion === expansion) &&
         (!complexity || s.complexity === complexity) &&
-        (!tag || s.tags.includes(tag)),
+        (!tag || s.tags.includes(tag)) &&
+        (!hardFilter || !excluded.has(s.expansion)),
     )
     return [...filtered].sort((a, b) =>
       sortKey === 'name' ? a.name.localeCompare(b.name) : b.ratings[sortKey] - a.ratings[sortKey],
     )
-  }, [expansion, complexity, tag, sortKey])
+  }, [expansion, complexity, tag, sortKey, hardFilter, excluded])
 
   return (
     <section>
@@ -82,6 +90,10 @@ export function Browser() {
           </select>
         </label>
       </div>
+      <label className="deck-field-inline">
+        <input type="checkbox" checked={hardFilter} onChange={(e) => setHardFilter(e.target.checked)} />
+        Only show spirits I own
+      </label>
 
       <p>
         {shown.length} of {spirits.length} spirits
@@ -89,7 +101,7 @@ export function Browser() {
 
       <ul className="spirit-grid">
         {shown.map((spirit) => (
-          <SpiritTile key={spirit.id} spirit={spirit} onSelect={setSelected} />
+          <SpiritTile key={spirit.id} spirit={spirit} onSelect={setSelected} owned={!excluded.has(spirit.expansion)} excluded={excluded} />
         ))}
       </ul>
 
