@@ -1,6 +1,6 @@
 # 03 — The card sub-type classifier
 
-Status: ready-for-agent
+Status: done
 Type: wayfinder:task (AFK)
 Parent: [v5 map](../MAP.md)
 
@@ -74,3 +74,17 @@ with the existing controls — v4 #03's rule, which holds across the whole app.
 - Verified in a real browser at 375px and desktop.
 
 ## Comments
+
+Shipped 2026-07-12. `src/domain/otherCardClassifier.ts` holds the keyword rules
+(`classifyFear`/`classifyBlight`/`eventClassFromConstructorName`) plus `explainFear`/`explainBlight`
+for tracing a tag to its matched phrase. `scripts/extract-other-cards.mjs` runs them and writes both
+`src/data/other-cards.json` (the shipped dataset) and `src/domain/__tests__/fixtures/otherCardSourceText.json`
+(the literal text each fear/blight card was classified from, committed so the tripwire test can
+re-run the classifier over the *entire* corpus offline, not a hand-picked sample). `OtherCard` is a
+discriminated union per kind; blight's variant carries `tagsSource: 'judgment'` in the data itself
+(not just a doc comment), same discipline as `ratingsSource`. `OtherCardFilterState` gained
+`fearTags`/`blightTags` (multi-select, OR-within, plus an explicit `'unclassified'` value) and
+`eventClass` (single-select) — each only matches its own kind. `--explain "<card name>"` on the
+extraction script prints the matched phrase per tag; spot-checked 10 cards by hand. Verified in a
+real browser at desktop and 375px (found and fixed a `flex-wrap` gap on `.card-filters-kinds` that
+cut off buttons on Fear/Blight's now-longer sub-type row).

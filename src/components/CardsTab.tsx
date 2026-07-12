@@ -73,7 +73,7 @@ export function CardsTab() {
       {segment === 'Powers' ? (
         <CardFilters filter={powerFilter} onChange={setPowerFilter} expansions={POWER_EXPANSIONS} />
       ) : (
-        <OtherCardFilters filter={otherFilter} onChange={setOtherFilter} expansions={otherExpansions} />
+        <OtherCardFilters segment={segment} filter={otherFilter} onChange={setOtherFilter} expansions={otherExpansions} />
       )}
 
       <div className="card-view-switch" role="group" aria-label="Card view">

@@ -65,6 +65,12 @@ scenarios browse alongside the cards.
   swing), marked as judgment data, with the "aggressive" axis dropped as unratable. Both fear and
   blight's unmatched cards get an explicit filterable "Unclassified" state, never a forced bucket.
   #03 unblocked.
+- **[#03](issues/03-the-card-sub-type-classifier.md) done** (2026-07-12): `otherCardClassifier.ts`
+  implements #02's rules verbatim; `other-cards.json` and its new source-text fixture regenerated;
+  `OtherCard` is a discriminated union with `tagsSource: 'judgment'` on blight; Cards tab's sub-type
+  filter ships per segment. Full-corpus tripwire test added (re-classifies every fear/blight card
+  from committed source text, not a sample) after a code-review pass caught the original tripwire
+  only covering an 11-card sample.
 
 Two calls were made while charting, ahead of any ticket:
 

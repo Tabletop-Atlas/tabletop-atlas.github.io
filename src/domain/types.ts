@@ -93,17 +93,43 @@ export type PowerCard =
   | (PowerCardBase & { kind: 'major' })
   | (PowerCardBase & { kind: 'unique'; spirit: string; spiritName: string })
 
+/** v5 #02: the 5 upstream event classes, carried through as-is — source data, not judgment. */
+export const EVENT_CLASSES = ['choice', 'stage', 'terrorLevel', 'healthyBlightedLand', 'adversary'] as const
+export type EventClass = (typeof EVENT_CLASSES)[number]
+
+/**
+ * v5 #02: fear's sub-type buckets — keyword-derived from the card's own `level1/2/3` text.
+ * A card may carry more than one (its effect can cross buckets as terror level scales up).
+ */
+export const FEAR_TAGS = ['removal', 'defensive', 'weaken', 'disruption', 'displacement'] as const
+export type FearTag = (typeof FEAR_TAGS)[number]
+
+/**
+ * v5 #02: blight's sub-type buckets — keyword-derived, multi-tag, and judgment data (like
+ * `shiftsToward`): the bucket boundaries are a coarser read of the text than fear's. The
+ * "aggressive/less aggressive" axis the owner first asked for was dropped — no honest descriptive
+ * equivalent exists; it would be rating cards, out of scope for this repo.
+ */
+export const BLIGHT_TAGS = ['presenceLoss', 'boardChange', 'damageBonus', 'resourceSwing'] as const
+export type BlightTag = (typeof BLIGHT_TAGS)[number]
+
 /**
  * Fear, event and blight cards (v4 #01/#13) — the 139 cards outside `PowerCard`. #01 found none
  * of them carry elements, cost or speed, so `OtherCard` does not carry those fields either; a
  * missing field here is a fact about the card, not a gap in extraction.
+ *
+ * A discriminated union rather than one shape with optional fields (v5 #03): a fear bucket is not
+ * a blight bucket, and the type system should say so — `card.tags` on an event card is a compile
+ * error, not a field that happens to be empty. An empty `tags` array means no keyword rule
+ * matched (v5 #02's "Unclassified"), never a forced nearest-bucket guess.
  */
-export interface OtherCard {
-  name: string
-  expansion: string
-  kind: 'fear' | 'event' | 'blight'
-  image: string
-}
+export type OtherCard =
+  | { name: string; expansion: string; kind: 'fear'; image: string; tags: FearTag[] }
+  | { name: string; expansion: string; kind: 'event'; image: string; eventClass: EventClass }
+  // `tagsSource: 'judgment'` is in the data itself, not just a doc comment - same discipline as
+  // `ratingsSource` on Spirit, so anyone reading other-cards.json in a year sees the provenance
+  // without reading this file.
+  | { name: string; expansion: string; kind: 'blight'; image: string; tags: BlightTag[]; tagsSource: 'judgment' }
 
 export interface Spirit {
   id: string

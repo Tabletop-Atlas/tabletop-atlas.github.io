@@ -884,6 +884,7 @@ button:disabled {
 .card-filters-elements,
 .card-filters-kinds {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.3rem;
 }
 .card-filters-element {
