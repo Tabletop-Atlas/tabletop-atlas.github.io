@@ -21,7 +21,7 @@ describe('app smoke', () => {
 
   it('renders the shell and the first wizard question', () => {
     const html = renderToStaticMarkup(<App />)
-    expect(html).toContain('SPIRIT ISLAND')
+    expect(html).toContain('alt="Spirit Island"')
     expect(html).toContain('Recommend')
     expect(html).toContain('Tier list')
     // Fresh state (memory storage) starts at the wizard, step 0.

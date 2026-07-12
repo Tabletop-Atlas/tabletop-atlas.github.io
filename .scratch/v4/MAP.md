@@ -48,6 +48,10 @@ anyone can open on their phone:
   upstream of the compiled `cards.js`). All 471 cards join to the manifest by primary name, 0 misses.
   Elements/cost/speed/major-minor exist only on `PowerCard`; expansion exists on all 471. See
   [card-data-source.md](card-data-source.md).
+- **#08** — real logo art found at `spiritislandwiki.com`'s own site logo (`Spirit-Island-Logo.png`,
+  a clean crop of the box-cover wordmark), not in the TTS mod JSON. Swapped into `AppShell`'s
+  `.deck-brand`, capped at `max-width: 232px` so it scales with the sidebar. Needs a human 375px
+  check once #07 lands.
 
 ## Not yet specified
 

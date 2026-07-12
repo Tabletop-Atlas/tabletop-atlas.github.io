@@ -5154,5 +5154,12 @@
     "source_site": "TTS mod (Steam Workshop)",
     "mod_name": "Spirit Island - [By MJ & iakona]",
     "mod_workshop_url": null
+  },
+  {
+    "file": "images/spirit_island_logo.png",
+    "source_url": "https://spiritislandwiki.com/images/9/96/Spirit-Island-Logo.png",
+    "asset_type": "logo",
+    "name": "Spirit Island logo",
+    "source_site": "spiritislandwiki.com"
   }
 ]

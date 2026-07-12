@@ -27,7 +27,7 @@ export function AppShell<T extends string>({
   return (
     <div className="deck">
       <aside className="deck-side">
-        <div className="deck-brand">SPIRIT ISLAND</div>
+        <img className="deck-brand" src={`${import.meta.env.BASE_URL}spirit-island-logo.webp`} alt="Spirit Island" />
         <nav className="deck-nav">
           {nav.map((item) => (
             <button

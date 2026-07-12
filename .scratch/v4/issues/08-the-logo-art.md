@@ -1,6 +1,6 @@
 # 08 — The logo art
 
-Status: ready-for-agent
+Status: ready-for-human
 Type: wayfinder:task (AFK, with one HITL check)
 Parent: [v4 map](../MAP.md)
 
@@ -28,3 +28,35 @@ low-res screenshot scaled up. If no usable source turns up, say so in `## Commen
 - Swapped into the header, sized so it survives #07's 375px pass — a wide wordmark in a phone header
   is exactly the kind of thing that overflows.
 - Rights: hosting risk is already accepted (2026-07-09). Do not reopen it.
+
+## Comments
+
+Checked the TTS mod JSON first (per the ticket's suggested order): no `Nickname`/`Description`
+containing "logo", "box", "banner", "title" or "cover" anywhere in the 4.2 MB file — the mod has no
+box art. Went to the wiki next and found it there: `spiritislandwiki.com`'s own site logo,
+`File:Spirit-Island-Logo.png`, fetched via the MediaWiki `imageinfo` API (never the `/images/thumb/`
+path, per `REFERENCE.md`). It's a clean isolated crop of the real box-cover wordmark — hand-lettered
+"SPIRIT · ISLAND" on a wood-grain banner with vine/flower details, transparent background, 600×208.
+Cross-checked against `File:Spirit_Island_box.png` (the actual box cover, 600×600): same artwork,
+confirming it's not a fan recreation.
+
+- Archive original saved to `images/spirit_island_logo.png` (git-ignored, per owner policy — matches
+  every other archive asset).
+- App-facing derivative: `public/spirit-island-logo.webp` (cwebp -q 90, 27.8 KB), following this
+  repo's existing convention of webp-only in `public/`.
+- Registered in `images/manifest.json` with `source_url` pointing at the wiki's full-resolution API
+  URL and a new `asset_type: "logo"`.
+- Swapped into `AppShell.tsx`: the `.deck-brand` div (`SPIRIT ISLAND` text) is now an `<img>` with
+  `alt="Spirit Island"`. CSS caps it at `max-width: 232px` (the 264px sidebar minus its 1rem
+  padding) with `height: auto`, so it scales down as the sidebar narrows rather than overflowing —
+  the same technique #07 will need for the rest of the sidebar, done here first since this control
+  had to solve it anyway.
+- `appSmoke.test.tsx` updated to assert on `alt="Spirit Island"` instead of the removed literal
+  `SPIRIT ISLAND` text node. Full suite (246/246), `tsc -b` and `vite build` all clean; `vite
+  preview` confirms the derivative resolves at the deployed base path.
+
+**Not verified in a real browser at 375px** — no headless-browser tool available in this session,
+same gap as #10. The `max-width: 232px` bound only holds if the sidebar itself doesn't grow wider
+than intended on mobile; #07 (responsive audit, not yet run) is the ticket that will actually drive
+this at phone width and catch it if the assumption is wrong. Marked `ready-for-human` for a real
+eyeball, not `done`.
