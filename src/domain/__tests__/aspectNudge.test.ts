@@ -11,7 +11,7 @@ const lightningLike: Spirit = {
   elements: [],
   summary: '',
   tags: [],
-  aspects: [{ name: 'Wind', delta: 'Leans supportive instead of pure offense.', shiftsToward: '+utility' }],
+  aspects: [{ name: 'Wind', delta: 'Leans supportive instead of pure offense.', shiftsToward: '+utility', expansion: 'Jagged Earth' }],
 }
 
 describe('topWeightedLowAxis', () => {
@@ -54,6 +54,6 @@ describe('aspectShiftsToward', () => {
   })
 
   it('is false for an aspect with no shiftsToward hint at all', () => {
-    expect(aspectShiftsToward({ name: 'Sparking' }, 'utility')).toBe(false)
+    expect(aspectShiftsToward({ name: 'Sparking', expansion: 'Nature Incarnate' }, 'utility')).toBe(false)
   })
 })

@@ -80,6 +80,12 @@ scenarios browse alongside the cards.
   live against the wiki (not the asset archive's filename suffixes, which would have mis-tagged 2).
   Collection store mirrors `complexityStore`: absence = owns everything, backup stores only the
   turned-off deltas. #07a unblocked.
+- **[#07a](issues/07a-the-collection-store.md) done** (2026-07-12): `collectionStore.ts` built,
+  `Aspect.expansion` populated on all 31 aspects, `backup.ts` bumped to schema v3. Tier board dims
+  an unowned configuration in its rated row (small corner marker, not a second text line - a
+  116px tile has no room) and gained a session-only hard-filter toggle. A code-review pass caught
+  the hard-filter path shipped with no UI consumer; fixed by wiring the toggle in rather than
+  leaving it dead. Recommender/Browse/Cards untouched, as scoped - #07b/#07c next.
 
 Two calls were made while charting, ahead of any ticket:
 

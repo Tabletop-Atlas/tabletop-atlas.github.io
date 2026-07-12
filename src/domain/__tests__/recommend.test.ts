@@ -36,7 +36,7 @@ function aspectConfig(s: Spirit, aspectName: string, effectiveComplexity: Comple
   return {
     configId: `${s.id}::${aspectName}`,
     spirit: s,
-    aspect: { name: aspectName },
+    aspect: { name: aspectName, expansion: 'Jagged Earth' },
     isBase: false,
     effectiveComplexity,
     personalEffectiveComplexity: effectiveComplexity,

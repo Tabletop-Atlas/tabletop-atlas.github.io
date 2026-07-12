@@ -1,6 +1,6 @@
-import type { Complexity } from './types'
+import type { Complexity, ExpansionName } from './types'
 
-export const CURRENT_SCHEMA_VERSION = 2
+export const CURRENT_SCHEMA_VERSION = 3
 
 /** Entry shape from the PRD's game log (Seam 6, issue #06). Declared here now so schema v1
  * ships every section it will ever need — later slices populate rather than force a version bump. */
@@ -23,6 +23,11 @@ export interface BackupState {
   complexityOverrides: Record<string, Complexity>
   answers: Record<string, string>
   log: LogEntry[]
+  /** v5 #06/#07a: expansions the player has turned off (a delta from "owns everything"), same
+   * discipline as `complexityOverrides` storing only deltas from the printed complexity. Absent
+   * on any backup older than schema v3 - migrated to an empty array (owns everything), never
+   * guessed. */
+  collection: ExpansionName[]
 }
 
 interface Backup extends BackupState {
@@ -39,6 +44,7 @@ export interface KnownIds {
   listIds: Set<string>
   complexityIds: Set<string>
   questionIds: Set<string>
+  expansions: Set<ExpansionName>
 }
 
 export interface ParseResult {
@@ -67,6 +73,20 @@ function filterKnown<T>(
       result[id] = value
     } else {
       unresolved.push(id)
+    }
+  }
+  return result
+}
+
+/** Same discipline as `filterKnown`, for a plain list rather than a keyed record - used for the
+ * collection's `excluded` array. */
+function filterKnownList<T extends string>(list: unknown, known: Set<T>, unresolved: string[]): T[] {
+  const result: T[] = []
+  for (const item of Array.isArray(list) ? list : []) {
+    if (typeof item === 'string' && known.has(item as T)) {
+      result.push(item as T)
+    } else {
+      unresolved.push(String(item))
     }
   }
   return result
@@ -150,7 +170,7 @@ function filterTiersV2(
  * ignore it and key by the list id each edit already names.
  */
 export function parse(json: string, known: KnownIds, existingLog: LogEntry[] = [], ownersListId = ''): ParseResult {
-  const parsed = JSON.parse(json) as Partial<Backup> & { tiers?: unknown }
+  const parsed = JSON.parse(json) as Partial<Backup> & { tiers?: unknown; collection?: unknown }
 
   if (typeof parsed.schemaVersion !== 'number' || parsed.schemaVersion > CURRENT_SCHEMA_VERSION) {
     throw new Error(
@@ -172,6 +192,9 @@ export function parse(json: string, known: KnownIds, existingLog: LogEntry[] = [
   const complexityOverrides = filterKnown(parsed.complexityOverrides, known.complexityIds, unresolved)
   const answers = filterKnown(parsed.answers, known.questionIds, unresolved)
   const log = mergeLog(existingLog, parsed.log ?? [], known.tierIds, unresolved)
+  // Absent on any backup older than v3 (parsed.collection undefined) - filterKnownList reads an
+  // empty list from that, which is exactly "owns everything," no separate migration needed.
+  const collection = filterKnownList(parsed.collection, known.expansions, unresolved)
 
-  return { state: { tiers, complexityOverrides, answers, log }, unresolved }
+  return { state: { tiers, complexityOverrides, answers, log, collection }, unresolved }
 }

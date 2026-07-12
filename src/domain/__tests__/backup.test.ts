@@ -10,6 +10,7 @@ const KNOWN: KnownIds = {
   listIds: new Set([OWNERS_LIST, FUN_LIST]),
   complexityIds: new Set(['lightnings-swift-strike']),
   questionIds: new Set(['beatOpponents', 'tempo']),
+  expansions: new Set(['Jagged Earth', 'Base']),
 }
 
 const entryA: LogEntry = {
@@ -35,6 +36,7 @@ const fullState: BackupState = {
   complexityOverrides: { 'lightnings-swift-strike': 'Moderate' },
   answers: { beatOpponents: 'force', tempo: 'fast' },
   log: [entryA],
+  collection: ['Jagged Earth'],
 }
 
 describe('backup', () => {
@@ -45,10 +47,10 @@ describe('backup', () => {
     expect(unresolved).toEqual([])
   })
 
-  it('stamps the current schema version (2) and an exportedAt timestamp', () => {
+  it('stamps the current schema version (3) and an exportedAt timestamp', () => {
     const bundle = JSON.parse(serialise(fullState))
     expect(bundle.schemaVersion).toBe(CURRENT_SCHEMA_VERSION)
-    expect(CURRENT_SCHEMA_VERSION).toBe(2)
+    expect(CURRENT_SCHEMA_VERSION).toBe(3)
     expect(typeof bundle.exportedAt).toBe('string')
   })
 
@@ -102,18 +104,36 @@ describe('backup', () => {
     })
   })
 
+  describe('v2 -> v3 migration', () => {
+    it('a v2 backup with no collection field migrates to an empty collection (owns everything)', () => {
+      const v2Json = JSON.stringify({
+        schemaVersion: 2,
+        exportedAt: new Date().toISOString(),
+        tiers: { [OWNERS_LIST]: { 'lightnings-swift-strike': 'S' } },
+        complexityOverrides: {},
+        answers: {},
+        log: [],
+      })
+      const { state, unresolved } = parse(v2Json, KNOWN)
+      expect(state.collection).toEqual([])
+      expect(unresolved).toEqual([])
+    })
+  })
+
   it('reports unknown keys as unresolved instead of dropping or throwing', () => {
     const stale: BackupState = {
       tiers: { [OWNERS_LIST]: { 'no-longer-exists': 'S' } },
       complexityOverrides: { 'no-longer-exists': 'Moderate' },
       answers: { unknownQuestion: 'x' },
       log: [],
+      collection: ['Not A Real Expansion'] as unknown as BackupState['collection'],
     }
     const { state, unresolved } = parse(serialise(stale), KNOWN)
     expect(state.tiers[OWNERS_LIST]).toEqual({})
     expect(state.complexityOverrides).toEqual({})
     expect(state.answers).toEqual({})
-    expect(unresolved.sort()).toEqual(['no-longer-exists', 'no-longer-exists', 'unknownQuestion'])
+    expect(state.collection).toEqual([])
+    expect(unresolved.sort()).toEqual(['Not A Real Expansion', 'no-longer-exists', 'no-longer-exists', 'unknownQuestion'])
   })
 
   it('an import naming an unknown list id lands in unresolved, applies nothing from it, and does not throw', () => {
@@ -134,6 +154,7 @@ describe('backup', () => {
       listIds: KNOWN.listIds,
       complexityIds: KNOWN.complexityIds,
       questionIds: KNOWN.questionIds,
+      expansions: KNOWN.expansions,
     }
     const { state, unresolved } = parse(json, biggerSeed)
     expect(state.tiers).toEqual(fullState.tiers)

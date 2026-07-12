@@ -1,6 +1,6 @@
 # 07a — The collection store, and the tier list respects it
 
-Status: ready-for-agent
+Status: done
 Type: wayfinder:task (AFK)
 Parent: [v5 map](../MAP.md) · Spec: [PRD.md](../PRD.md)
 
@@ -50,3 +50,20 @@ table).
 - [ ] Verified in a real browser at 375px and desktop.
 
 ## Comments
+
+Shipped 2026-07-12. `src/domain/collectionStore.ts` mirrors `complexityStore`: injected storage,
+`excluded: ExpansionName[]` as a delta from "owns everything" (absence, not an explicit snapshot),
+`isConfigurationOwned`/`filterOwnedConfigurations` as pure domain functions. `Aspect` gained a
+required `expansion` field, sourced from #06's wiki-verified table and applied to all 31 aspects
+in `spirits.json` via a surgical text substitution (not a full `JSON.stringify` re-serialise,
+which would have reformatted the whole file). `backup.ts` bumped to schema v3 with a `collection`
+field and a v2→v3 migration (absent → empty array). "My collection" lives on Customise tiers as a
+checkbox per canonical expansion. The tier board dims an unowned configuration in its rated row
+with a small corner marker (a full-width badge label didn't fit a 116px tile - found and fixed via
+browser verification) and offers a session-only "Only show spirits I own" hard-filter toggle.
+
+Two code-review passes (standards + spec) both caught the same real gap before this was
+considered done: the hard-filter path (`filterOwnedConfigurations`) existed but had no UI
+consumer, making #06's opt-in toggle unreachable. Fixed by wiring the toggle into the tier board
+rather than leaving the function as dead code - the spec reviewer correctly read #06's "when
+hard-filter is on..." wording as a requirement for this ticket, not deferred scope.

@@ -9,10 +9,10 @@
     "summary": "A full-attack, hit-fast spirit that punishes Invaders the turn they land.",
     "tags": ["fast-tempo", "aggressive"],
     "aspects": [
-      { "name": "Pandemonium", "delta": "Replaces the Thundering Destruction innate with one that adds Fear alongside its damage.", "complexityDelta": "up", "shiftsToward": "+fear" },
-      { "name": "Wind", "delta": "Replaces Swiftness of Lightning; its innate hastens and empowers another Spirit's Powers instead.", "complexityDelta": "up", "shiftsToward": "+utility" },
-      { "name": "Immense", "delta": "Your top Presence track pays double Energy, but Power Cards cost 2 Card Plays; unused plays convert to Elements.", "complexityDelta": "up" },
-      { "name": "Sparking", "delta": "Replaces Thundering Destruction; its innate lets any target Spirit damage Invaders, gain a Minor Power, or play a card. (Card 2 of 2 is not on the wiki.)", "complexityDelta": "up", "shiftsToward": "+utility" }
+      { "name": "Pandemonium", "delta": "Replaces the Thundering Destruction innate with one that adds Fear alongside its damage.", "complexityDelta": "up", "shiftsToward": "+fear", "expansion": "Jagged Earth" },
+      { "name": "Wind", "delta": "Replaces Swiftness of Lightning; its innate hastens and empowers another Spirit's Powers instead.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Jagged Earth" },
+      { "name": "Immense", "delta": "Your top Presence track pays double Energy, but Power Cards cost 2 Card Plays; unused plays convert to Elements.", "complexityDelta": "up", "expansion": "Feather & Flame" },
+      { "name": "Sparking", "delta": "Replaces Thundering Destruction; its innate lets any target Spirit damage Invaders, gain a Minor Power, or play a card. (Card 2 of 2 is not on the wiki.)", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Nature Incarnate" }
     ],
     "notes": "Strong from turn one; less impactful late-game.",
     "startingCards": ["Harbingers of the Lightning", "Lightning's Boon", "Raging Storm", "Shatter Homesteads"]
@@ -27,9 +27,9 @@
     "summary": "Synergizes with Dahan to repel and push back Invaders before they can build up.",
     "tags": ["dahan-synergy", "board-control"],
     "aspects": [
-      { "name": "Sunshine", "delta": "Its innate feeds another Spirit Energy (and you gain some too), and can remove Blight.", "complexityDelta": "up", "shiftsToward": "+utility" },
-      { "name": "Travel", "delta": "Replaces River's Domain; moves Dahan along your Presence and turns 4-Dahan lands into Sacred Sites with Defend 1.", "complexityDelta": "up", "shiftsToward": "+utility" },
-      { "name": "Haven", "delta": "Replaces Massive Flooding with an innate that Defends, gathers Dahan and removes Invader Health.", "complexityDelta": "up", "shiftsToward": "+defense" }
+      { "name": "Sunshine", "delta": "Its innate feeds another Spirit Energy (and you gain some too), and can remove Blight.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Jagged Earth" },
+      { "name": "Travel", "delta": "Replaces River's Domain; moves Dahan along your Presence and turns 4-Dahan lands into Sacred Sites with Defend 1.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Feather & Flame" },
+      { "name": "Haven", "delta": "Replaces Massive Flooding with an innate that Defends, gathers Dahan and removes Invader Health.", "complexityDelta": "up", "shiftsToward": "+defense", "expansion": "Nature Incarnate" }
     ],
     "notes": "Shines with high Dahan counts.",
     "startingCards": ["Boon of Vigor", "Flash Floods", "River's Bounty", "Wash Away"]
@@ -44,9 +44,9 @@
     "summary": "Ramps up slowly with few early Powers, but grows into a durable defensive powerhouse.",
     "tags": ["ramping-economy", "board-control"],
     "aspects": [
-      { "name": "Resilience", "delta": "Lands with your Sacred Site take 8 additional Damage before any Blight is added.", "complexityDelta": "same", "shiftsToward": "+defense" },
-      { "name": "Might", "delta": "Its innate grants an extra Power Card play, +1 Damage on damage-dealing Powers, and a Power Card.", "complexityDelta": "up", "shiftsToward": "+offense" },
-      { "name": "Nourishing", "delta": "Gain a Minor Power after each Major; its innate gathers Dahan and gives them +2 Health.", "complexityDelta": "up", "shiftsToward": "+defense" }
+      { "name": "Resilience", "delta": "Lands with your Sacred Site take 8 additional Damage before any Blight is added.", "complexityDelta": "same", "shiftsToward": "+defense", "expansion": "Jagged Earth" },
+      { "name": "Might", "delta": "Its innate grants an extra Power Card play, +1 Damage on damage-dealing Powers, and a Power Card.", "complexityDelta": "up", "shiftsToward": "+offense", "expansion": "Feather & Flame" },
+      { "name": "Nourishing", "delta": "Gain a Minor Power after each Major; its innate gathers Dahan and gives them +2 Health.", "complexityDelta": "up", "shiftsToward": "+defense", "expansion": "Nature Incarnate" }
     ],
     "notes": "Weak opening hand; needs patience.",
     "startingCards": ["A Year of Perfect Stillness", "Draw of the Fruitful Earth", "Guard the Healing Land", "Rituals of Destruction"]
@@ -61,11 +61,11 @@
     "summary": "Generates heavy Fear at relatively low damage, especially effective against Explorers.",
     "tags": ["fear-focused"],
     "aspects": [
-      { "name": "Madness", "delta": "Adding Presence during Growth can also add Fear; Presence destroyed near Invaders generates Fear.", "complexityDelta": "up", "shiftsToward": "+fear" },
-      { "name": "Reach", "delta": "Once per turn you may ignore Range.", "complexityDelta": "down", "shiftsToward": "+utility" },
-      { "name": "Amorphous", "delta": "Move 1 Presence during each Fast phase and each Slow phase.", "complexityDelta": "up", "shiftsToward": "+utility" },
-      { "name": "Foreboding", "delta": "Its innate lets your other Powers ignore Range there, and turns Fear generated in the land into Pushes.", "complexityDelta": "up", "shiftsToward": "+control" },
-      { "name": "Dark Fire", "delta": "Treat Moon as Fire and vice versa; the first Action each turn that would destroy your Presence Pushes it instead.", "complexityDelta": "up", "shiftsToward": "+utility" }
+      { "name": "Madness", "delta": "Adding Presence during Growth can also add Fear; Presence destroyed near Invaders generates Fear.", "complexityDelta": "up", "shiftsToward": "+fear", "expansion": "Jagged Earth" },
+      { "name": "Reach", "delta": "Once per turn you may ignore Range.", "complexityDelta": "down", "shiftsToward": "+utility", "expansion": "Jagged Earth" },
+      { "name": "Amorphous", "delta": "Move 1 Presence during each Fast phase and each Slow phase.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Feather & Flame" },
+      { "name": "Foreboding", "delta": "Its innate lets your other Powers ignore Range there, and turns Fear generated in the land into Pushes.", "complexityDelta": "up", "shiftsToward": "+control", "expansion": "Feather & Flame" },
+      { "name": "Dark Fire", "delta": "Treat Moon as Fire and vice versa; the first Action each turn that would destroy your Presence Pushes it instead.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Nature Incarnate" }
     ],
     "notes": "Best against low-terror-track adversaries early on.",
     "startingCards": ["Concealing Shadows", "Crops Wither and Fade", "Favors Called Due", "Mantle of Dread"]
@@ -80,8 +80,8 @@
     "summary": "Leans on a large Dahan army for damage and control, alternating War and Growth turns.",
     "tags": ["dahan-synergy", "aggressive"],
     "aspects": [
-      { "name": "Tactician", "delta": "Replaces the third Growth option with a flexible choice: a Power Card, Presence, Energy, or Sun/Fire.", "complexityDelta": "same", "shiftsToward": "+utility" },
-      { "name": "Warrior", "delta": "Dahan moved by your Actions deal Damage, and its innate damages per Dahan present.", "complexityDelta": "up", "shiftsToward": "+offense" }
+      { "name": "Tactician", "delta": "Replaces the third Growth option with a flexible choice: a Power Card, Presence, Energy, or Sun/Fire.", "complexityDelta": "same", "shiftsToward": "+utility", "expansion": "Nature Incarnate" },
+      { "name": "Warrior", "delta": "Dahan moved by your Actions deal Damage, and its innate damages per Dahan present.", "complexityDelta": "up", "shiftsToward": "+offense", "expansion": "Nature Incarnate" }
     ],
     "notes": "Needs Dahan-dense boards to shine.",
     "startingCards": ["Manifestation of Power and Glory", "Sudden Ambush", "Voice of Thunder", "Words of Warning"]
@@ -96,8 +96,8 @@
     "summary": "Grows fast and hits Towns hard while also holding the line as a solid all-around defender.",
     "tags": ["ramping-economy", "board-control"],
     "aspects": [
-      { "name": "Regrowth", "delta": "Replaces Steady Regenerations and All-Enveloping Green with an innate that adds Presence, even to adjacent lands.", "complexityDelta": "up" },
-      { "name": "Tangles", "delta": "Replaces Creepers Tear Into Mortar; its innate Pushes Dahan, Isolates the land and Downgrades a City. (Card 2 of 2 is not on the wiki.)", "complexityDelta": "up", "shiftsToward": "+control" }
+      { "name": "Regrowth", "delta": "Replaces Steady Regenerations and All-Enveloping Green with an innate that adds Presence, even to adjacent lands.", "complexityDelta": "up", "expansion": "Nature Incarnate" },
+      { "name": "Tangles", "delta": "Replaces Creepers Tear Into Mortar; its innate Pushes Dahan, Isolates the land and Downgrades a City. (Card 2 of 2 is not on the wiki.)", "complexityDelta": "up", "shiftsToward": "+control", "expansion": "Nature Incarnate" }
     ],
     "startingCards": ["Fields Choked with Growth", "Gift of Proliferation", "Overgrow in a Night", "Stem the Flow of Fresh Water"]
   },
@@ -111,7 +111,7 @@
     "summary": "A powerful coastal attacker that devastates Towns and Cities but struggles far inland.",
     "tags": ["coastal", "aggressive"],
     "aspects": [
-      { "name": "Deeps", "delta": "Adds Ocean tokens to Coastal lands on any board; they damage Towns and Cities and can drown a land into the Ocean permanently.", "complexityDelta": "up", "shiftsToward": "+control" }
+      { "name": "Deeps", "delta": "Adds Ocean tokens to Coastal lands on any board; they damage Towns and Cities and can drown a land into the Ocean permanently.", "complexityDelta": "up", "shiftsToward": "+control", "expansion": "Nature Incarnate" }
     ],
     "notes": "Weak on inland-heavy boards.",
     "startingCards": ["Call of the Deeps", "Grasping Tide", "Swallow the Land-Dwellers", "Tidal Boon"]
@@ -126,8 +126,8 @@
     "summary": "Transforms damage into Fear and plays entirely on the terror level track.",
     "tags": ["fear-focused", "token-heavy"],
     "aspects": [
-      { "name": "Enticing", "delta": "Its innate makes Invaders and Dahan deal 1 less Damage in the target land, and gathers them in.", "complexityDelta": "same", "shiftsToward": "+defense" },
-      { "name": "Violence", "delta": "Bottom-track Card Plays double for Damage/Destroy Powers, and Fear scales with what they hit. Makes the game simpler for everyone else.", "complexityDelta": "up", "shiftsToward": "+offense" }
+      { "name": "Enticing", "delta": "Its innate makes Invaders and Dahan deal 1 less Damage in the target land, and gathers them in.", "complexityDelta": "same", "shiftsToward": "+defense", "expansion": "Nature Incarnate" },
+      { "name": "Violence", "delta": "Bottom-track Card Plays double for Damage/Destroy Powers, and Fear scales with what they hit. Makes the game simpler for everyone else.", "complexityDelta": "up", "shiftsToward": "+offense", "expansion": "Nature Incarnate" }
     ],
     "notes": "Rewards table-wide Fear coordination.",
     "startingCards": ["Call on Midnight's Dream", "Dread Apparitions", "Dreams of the Dahan", "Predatory Nightmares"]
@@ -142,8 +142,8 @@
     "summary": "Relies on Beast tokens to strike and generate Fear, but weakens as Blight piles up.",
     "tags": ["token-heavy", "fear-focused", "blight-sensitive"],
     "aspects": [
-      { "name": "Encircle", "delta": "Your Powers get +1 when targeting lands with Beasts; its innate gathers Beasts and deals Damage.", "complexityDelta": "same", "shiftsToward": "+offense" },
-      { "name": "Unconstrained", "delta": "Ranging Hunt may target Blighted lands, and Beasts can be prepared each Spirit phase.", "complexityDelta": "down" }
+      { "name": "Encircle", "delta": "Your Powers get +1 when targeting lands with Beasts; its innate gathers Beasts and deals Damage.", "complexityDelta": "same", "shiftsToward": "+offense", "expansion": "Nature Incarnate" },
+      { "name": "Unconstrained", "delta": "Ranging Hunt may target Blighted lands, and Beasts can be prepared each Spirit phase.", "complexityDelta": "down", "expansion": "Nature Incarnate" }
     ],
     "startingCards": ["Prey on the Builders", "Teeth Gleam from Darkness", "Terrifying Chase", "Too Near the Jungle"]
   },
@@ -157,7 +157,7 @@
     "summary": "Uses Wilds tokens to choke Explorer progress while still hitting decently hard.",
     "tags": ["token-heavy", "board-control"],
     "aspects": [
-      { "name": "Spreading Hostility", "delta": "Sacred Sites also count as Wilds, top-track Energy is halved, and the last Growth option becomes Fire, move Presence and Damage.", "complexityDelta": "up" }
+      { "name": "Spreading Hostility", "delta": "Sacred Sites also count as Wilds, top-track Energy is halved, and the last Growth option becomes Fire, move Presence and Damage.", "complexityDelta": "up", "expansion": "Nature Incarnate" }
     ],
     "startingCards": ["Boon of Growing Power", "Regrow from Roots", "Sacrosanct Wilderness", "Towering Wrath"]
   },
@@ -171,7 +171,7 @@
     "summary": "An aggressive spirit that feeds on Blight to grow stronger over time.",
     "tags": ["blight-positive", "aggressive"],
     "aspects": [
-      { "name": "Transforming", "delta": "Destroying a Town or City instead Downgrades and Pushes it; its innate helps another Spirit swap Blight and cards.", "complexityDelta": "up", "shiftsToward": "+control" }
+      { "name": "Transforming", "delta": "Destroying a Town or City instead Downgrades and Pushes it; its innate helps another Spirit swap Blight and cards.", "complexityDelta": "up", "shiftsToward": "+control", "expansion": "Nature Incarnate" }
     ],
     "startingCards": ["Asphyxiating Smoke", "Flame's Fury", "Flash-Fires", "Threatening Flames"]
   },
@@ -185,7 +185,7 @@
     "summary": "Starts glacially slow but becomes an unstoppable, versatile force late-game.",
     "tags": ["ramping-economy"],
     "aspects": [
-      { "name": "Locus", "delta": "An Incarna that other Spirits can target through, and that repeats their land-targeting Power Cards.", "complexityDelta": "up", "shiftsToward": "+utility" }
+      { "name": "Locus", "delta": "An Incarna that other Spirits can target through, and that repeats their land-targeting Power Cards.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Nature Incarnate" }
     ],
     "notes": "Very weak opening; needs a patient player and a forgiving early game.",
     "startingCards": ["Absorb Essence", "Elemental Aegis", "Gift of Flowing Power", "Gift of the Primordial Deeps"]
@@ -212,8 +212,8 @@
     "summary": "A defensive, Power-hoarding spirit that accumulates elemental tokens and Major Powers over time.",
     "tags": ["ramping-economy", "token-heavy"],
     "aspects": [
-      { "name": "Intensify", "delta": "Spend Element Markers to modify your Actions: extra Damage, Defend, movement, or a Minor Power.", "complexityDelta": "up", "shiftsToward": "+utility" },
-      { "name": "Mentor", "delta": "Draw fewer Power Cards but keep more; its innate hands cards to another Spirit and lets them play or repeat them.", "complexityDelta": "up", "shiftsToward": "+utility" }
+      { "name": "Intensify", "delta": "Spend Element Markers to modify your Actions: extra Damage, Defend, movement, or a Minor Power.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Nature Incarnate" },
+      { "name": "Mentor", "delta": "Draw fewer Power Cards but keep more; its innate hands cards to another Spirit and lets them play or repeat them.", "complexityDelta": "up", "shiftsToward": "+utility", "expansion": "Nature Incarnate" }
     ],
     "startingCards": ["Boon of Ancient Memories", "Elemental Teachings", "Share Secrets of Survival", "Study the Invaders' Fears"]
   },
@@ -239,7 +239,7 @@
     "summary": "Piles Beast, Disease, Wilds, and Badlands tokens to strangle Explorer progress inland.",
     "tags": ["token-heavy"],
     "aspects": [
-      { "name": "Lair", "delta": "An Incarna Lair where Invaders and Dahan cannot move, and large Invader stacks do not Ravage.", "complexityDelta": "up", "shiftsToward": "+control" }
+      { "name": "Lair", "delta": "An Incarna Lair where Invaders and Dahan cannot move, and large Invader stacks do not Ravage.", "complexityDelta": "up", "shiftsToward": "+control", "expansion": "Nature Incarnate" }
     ],
     "startingCards": ["Gift of the Untamed Wild", "Perils of the Deepest Island", "Softly Beckon Ever Inward", "Swallowed by the Wilderness"]
   },
@@ -278,7 +278,7 @@
     "summary": "Places Presence broadly to strain Invaders and prevent their healing.",
     "tags": ["fear-focused", "token-heavy"],
     "aspects": [
-      { "name": "Stranded", "delta": "Push your Presence twice each Fast and Slow phase, and Isolate one of your lands each Fast phase.", "complexityDelta": "down", "shiftsToward": "+control" }
+      { "name": "Stranded", "delta": "Push your Presence twice each Fast and Slow phase, and Isolate one of your lands each Fast phase.", "complexityDelta": "down", "shiftsToward": "+control", "expansion": "Nature Incarnate" }
     ],
     "startingCards": ["Dissolving Vapors", "Flowing and Silent Forms Dart By", "The Fog Closes In", "Unnerving Pall"]
   },

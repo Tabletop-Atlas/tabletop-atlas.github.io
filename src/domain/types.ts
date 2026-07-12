@@ -53,6 +53,15 @@ export interface OCFDU {
   utility: number
 }
 
+/**
+ * v5 #06: the canonical expansion names, one checkbox per entry in the collection. Sourced from
+ * `spirits.json`'s own expansion strings, which already use these names verbatim - cards' raw
+ * expansion strings differ (`Basegame`, `Horizons of Spirit Island`, `Promo2`) and are mapped onto
+ * this canonical set where the collection needs to reach cards (#07c), not here.
+ */
+export const EXPANSIONS = ['Base', 'Branch & Claw', 'Feather & Flame', 'Horizons', 'Jagged Earth', 'Nature Incarnate', 'Promo'] as const
+export type ExpansionName = (typeof EXPANSIONS)[number]
+
 /** Printed on the aspect card as an up/level/down arrow. */
 export type ComplexityDelta = 'up' | 'same' | 'down'
 
@@ -70,6 +79,11 @@ export interface Aspect {
   shiftsToward?: string
   /** The aspect exists (wiki-verified) but its effect has not been transcribed yet. */
   reviewNeeded?: boolean
+  /** v5 #06: which expansion's box the aspect deck ships in - independent of the base spirit's
+   * own expansion (an aspect can ship in a later box than its spirit). Sourced live against
+   * spiritislandwiki.com's aspect list, not the asset archive's incidental filename suffixes -
+   * see #06's Comments for why that would have mis-tagged 2 of the 31 aspects. */
+  expansion: ExpansionName
 }
 
 /** The eight canonical Spirit Island elements. */
@@ -134,7 +148,7 @@ export type OtherCard =
 export interface Spirit {
   id: string
   name: string
-  expansion: string
+  expansion: ExpansionName
   complexity: Complexity
   ratings: OCFDU
   elements: Element[]

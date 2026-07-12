@@ -54,7 +54,7 @@ describe('configurations', () => {
     const veryHighSpirit: Spirit = {
       ...spirits[0],
       complexity: 'Very High',
-      aspects: [{ name: 'Fixture Up', complexityDelta: 'up' }],
+      aspects: [{ name: 'Fixture Up', complexityDelta: 'up', expansion: 'Jagged Earth' }],
     }
     const config = expand([veryHighSpirit]).find((c) => c.aspect?.name === 'Fixture Up')
     expect(config?.effectiveComplexity).toBe('Very High')
@@ -180,6 +180,7 @@ describe('seed growth regression (issue #01 -> #02 ordering)', () => {
       listIds: new Set([ownersBoard.id]),
       complexityIds: new Set(spirits.map((s) => s.id)),
       questionIds: new Set(),
+      expansions: new Set(),
     }
     const { state, unresolved } = parse(json, currentSeed, [], ownersBoard.id)
 

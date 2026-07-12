@@ -3,12 +3,13 @@ import spiritsData from '../data/spirits.json'
 import { answersStore } from '../domain/answersStore'
 import { parse, serialise } from '../domain/backup'
 import type { KnownIds } from '../domain/backup'
+import { collectionStore } from '../domain/collectionStore'
 import { complexityStore } from '../domain/complexityStore'
 import { expand } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
 import { QUESTIONS } from '../domain/questionnaire'
 import { groupByTier, tierStore } from '../domain/tierStore'
-import { COMPLEXITIES } from '../domain/types'
+import { COMPLEXITIES, EXPANSIONS } from '../domain/types'
 import type { Complexity, Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
 import { tierColor } from './tierColors'
@@ -25,6 +26,7 @@ function knownIds(): KnownIds {
     listIds: new Set(tierStore.getLists().map((l) => l.id)),
     complexityIds: new Set(spirits.map((s) => s.id)),
     questionIds: new Set(QUESTIONS.map((q) => q.id)),
+    expansions: new Set(EXPANSIONS),
   }
 }
 
@@ -59,6 +61,7 @@ export function TierEditor() {
   const complexityCustomised = complexityStore.isCustomised()
   const tierDiscarded = tierStore.wasDiscarded()
   const complexityDiscarded = complexityStore.wasDiscarded()
+  const collectionCustomised = collectionStore.isCustomised()
 
   const handleDismissDiscardNotice = (store: 'tiers' | 'complexity overrides') => {
     if (store === 'tiers') tierStore.dismissDiscardNotice()
@@ -78,6 +81,11 @@ export function TierEditor() {
 
   const handleResetComplexity = (spiritId: string) => {
     complexityStore.reset(spiritId)
+    bump()
+  }
+
+  const handleSetOwned = (expansion: (typeof EXPANSIONS)[number], owned: boolean) => {
+    collectionStore.setOwned(expansion, owned)
     bump()
   }
 
@@ -103,6 +111,7 @@ export function TierEditor() {
       complexityOverrides: complexityStore.getOverrides(),
       answers: answersStore.load() ?? {},
       log: gameLog.list(),
+      collection: collectionStore.getExcluded(),
     })
     downloadBackup(json)
   }
@@ -120,14 +129,15 @@ export function TierEditor() {
     const hasExistingData =
       tierStore.hasAnyPersonalEdits() ||
       complexityStore.isCustomised() ||
+      collectionStore.isCustomised() ||
       Object.keys(answersStore.load() ?? {}).length > 0 ||
       gameLog.list().length > 0
     if (hasExistingData) {
       const ok = window.confirm(
-        'Importing will replace your tiers, complexity overrides and answers with the ones in ' +
-          'this file. Your game log is merged instead - entries are appended and de-duplicated ' +
-          'by id, so nothing already logged is lost.\n\nExport a backup first if you want to keep ' +
-          'what you have now?\n\nChoose Cancel to go export, or OK to import anyway.',
+        'Importing will replace your tiers, complexity overrides, collection and answers with ' +
+          'the ones in this file. Your game log is merged instead - entries are appended and ' +
+          'de-duplicated by id, so nothing already logged is lost.\n\nExport a backup first if ' +
+          'you want to keep what you have now?\n\nChoose Cancel to go export, or OK to import anyway.',
       )
       if (!ok) return
     }
@@ -142,6 +152,10 @@ export function TierEditor() {
     }
     answersStore.save(result.state.answers)
     gameLog.replaceAll(result.state.log)
+    collectionStore.resetAll()
+    for (const expansion of result.state.collection) {
+      collectionStore.setOwned(expansion, false)
+    }
     bump()
     setImportMessage(
       result.unresolved.length > 0
@@ -217,6 +231,29 @@ export function TierEditor() {
         />
       </p>
       {importMessage ? <p className="meta">{importMessage}</p> : null}
+
+      <h3>My collection</h3>
+      <p className="meta">
+        Untick an expansion you don't own. Nothing disappears by default — spirits and aspects
+        outside your collection are dimmed wherever a surface respects it (starting with the tier
+        board below), never hidden. The Cards tab never respects this: browsing the full card pool
+        is how you decide whether to buy an expansion.{' '}
+        {collectionCustomised ? <span>You've excluded some expansions.</span> : null}
+      </p>
+      <ul className="collection-checklist">
+        {EXPANSIONS.map((expansion) => (
+          <li key={expansion}>
+            <label>
+              <input
+                type="checkbox"
+                checked={collectionStore.owns(expansion)}
+                onChange={(e) => handleSetOwned(expansion, e.target.checked)}
+              />
+              {expansion}
+            </label>
+          </li>
+        ))}
+      </ul>
 
       <h3>Complexity overrides</h3>
       <p className="meta">

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import spiritsData from '../../data/spirits.json'
 import ownersBoardData from '../../data/tier-lists/owners-board.json'
 import { expand } from '../configurations'
-import { ELEMENTS } from '../types'
+import { ELEMENTS, EXPANSIONS } from '../types'
 import type { Complexity, Spirit, TierList } from '../types'
 
 const spirits = spiritsData as Spirit[]
@@ -21,6 +21,12 @@ describe('spirits.json integrity', () => {
   it('has a unique id for every spirit', () => {
     const ids = spirits.map((s) => s.id)
     expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('only uses a canonical expansion name for every spirit (v5 #06)', () => {
+    for (const spirit of spirits) {
+      expect(EXPANSIONS, `${spirit.name} has unknown expansion "${spirit.expansion}"`).toContain(spirit.expansion)
+    }
   })
 
   it('only uses the eight canonical elements', () => {

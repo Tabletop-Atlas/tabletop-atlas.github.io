@@ -537,6 +537,46 @@ button:disabled {
   gap: 0.85rem;
 }
 
+/* --- v5 #07a: the collection checklist --- */
+.collection-checklist {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+}
+.collection-checklist label,
+.deck-field-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Configurations outside the collection - dimmed in place, never removed from their tier row. */
+.tier-tile-unowned {
+  opacity: 0.4;
+}
+/* A tier tile is only 116px wide with an absolutely-positioned figcaption already covering its
+ * bottom edge - a second text line has nowhere to go, so this is a small corner marker instead;
+ * the full "not in your collection" wording lives in the tile's title tooltip and a visually-
+ * hidden span for screen readers. */
+.unowned-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.74);
+  border: 1px solid var(--deck-line);
+  color: var(--deck-dim);
+  font-size: 11px;
+}
+
 .spirit-tile {
   background: var(--deck-panel);
   border: 1px solid var(--deck-line);
