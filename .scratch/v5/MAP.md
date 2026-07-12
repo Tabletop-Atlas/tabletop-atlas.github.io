@@ -86,6 +86,13 @@ scenarios browse alongside the cards.
   116px tile has no room) and gained a session-only hard-filter toggle. A code-review pass caught
   the hard-filter path shipped with no UI consumer; fixed by wiring the toggle in rather than
   leaving it dead. Recommender/Browse/Cards untouched, as scoped - #07b/#07c next.
+- **[#04](issues/04-the-tabs-new-name.md) done** (2026-07-12), via `/grilling`: the Cards tab is
+  renamed **"Archive."** Scenario tile is front-image-only, one tile per scenario (sidesteps Varied
+  Terrains' missing back). Adversary tile is image + `adversaries.json`'s existing data (expansion,
+  level range) - deliberately the one inconsistent segment, since that data already exists at
+  dataset scale; card segments and Scenarios stay pure image galleries, no rules-text detail view
+  (explicitly not on this map). No filters beyond the expansion filter every segment gets from #06.
+  #05a and #05b unblocked.
 
 Two calls were made while charting, ahead of any ticket:
 
@@ -145,8 +152,7 @@ fix                      decide                      build
                          08 the tag colour scheme ── 09 coloured tags everywhere
 ```
 
-Frontier: **#01, #02, #04, #06, #08.** Five takeable now — one AFK task (#01), three grillings and
-one prototype (all HITL).
+Frontier (updated 2026-07-12): **#05a, #07b, #07c, #08.** #01/#02/#03/#04/#06/#07a are done.
 
 **On the re-cut (2026-07-12):** the original #05 and #07 were each too big for one context window and
 were split into tracer-bullet slices, each demoable alone. #05 split because adversaries and scenarios

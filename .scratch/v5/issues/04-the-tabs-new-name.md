@@ -1,6 +1,6 @@
 # 04 — The tab's new name, and what an adversary or scenario tile shows
 
-Status: needs-triage
+Status: done
 Type: wayfinder:grilling (HITL)
 Parent: [v5 map](../MAP.md)
 
@@ -70,3 +70,26 @@ fronts vs. 15 backs — one scenario has no back, and whoever builds [#05b](05b-
 will hit that. Worth knowing which one before designing the flip.
 
 ## Comments
+
+Resolved via `/grilling` (2026-07-12), against real facts pulled from the repo first: nav today is
+`Recommender | Browse | Cards | Tier list` (`src/App.tsx`); `adversaries.json` has 8 adversaries with
+`expansion`/`minLevel`/`maxLevel`, already driving the Recommender; the manifest carries 16
+`scenario_front`, 15 `scenario_back` (missing back is **Varied Terrains**), 1
+`scenario_shared_component`, 8 `adversary_panel`.
+
+1. **The tab is renamed "Archive."** Distinct from "Browse" (spirits) and short enough for the 375px
+   sidebar.
+2. **Scenario tile: front image only, one tile per scenario.** Matches every other segment's plain
+   gallery shape and sidesteps Varied Terrains' missing back entirely — no fallback state needed, no
+   flip interaction to build.
+3. **Adversary tile: image + data** (expansion, level range) from the existing `adversaries.json`. The
+   data's already in the app and already canon-tested; surfacing it is cheap and more useful than a
+   bare image.
+4. **Scope guard: no detail view for the card segments.** Adversaries is deliberately the one
+   inconsistent segment — image+data because that data already exists at dataset scale (8 items). Powers
+   /Fear/Events/Blight and Scenarios stay pure image galleries; a rules-text detail view for cards is
+   explicitly **not on this map**.
+5. **No filters beyond the expansion filter every segment gets from #06.** 8 adversaries and 16
+   scenarios are small enough to browse unfiltered; no difficulty-level control for Adversaries.
+
+[#05a](05a-adversaries-browse.md) and [#05b](05b-scenarios-and-the-rename.md) are unblocked.
