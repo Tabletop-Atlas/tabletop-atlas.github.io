@@ -594,6 +594,9 @@ button:disabled {
   padding: 0.5rem;
   color: var(--deck-dim);
   font-size: 0.8rem;
+  /* .tier-tiles is a wrapping flex row; without a full-width basis this note sits beside the
+     tiles as just another flex item instead of on its own line. */
+  flex-basis: 100%;
 }
 .tier-chip {
   display: inline-grid;
