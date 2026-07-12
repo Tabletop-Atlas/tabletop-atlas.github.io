@@ -52,12 +52,17 @@ anyone can open on their phone:
   a clean crop of the box-cover wordmark), not in the TTS mod JSON. Swapped into `AppShell`'s
   `.deck-brand`, capped at `max-width: 232px` so it scales with the sidebar. Needs a human 375px
   check once #07 lands.
+- **#07** — audited all nine surfaces at 375×667/390×844 with Playwright. Worst finding: the
+  recommender results' wildcard/reroll box (`.deck-wild`'s fixed-plus-auto grid columns) genuinely
+  overflows the page at 375px. Also found: the spirit detail modal's close button overlaps a long
+  spirit name; tier board captions render at 8–8.8px and truncate. The nav shell itself is **not**
+  the hard part — it already collapses cleanly below 900px; every finding is inside the main content.
+  No fixes made (by design). Full list in [issues/07](issues/07-responsive-audit.md#comments).
 
 ## Not yet specified
 
-- **What actually breaks on a phone, and how to fix it.** [#07](issues/07-responsive-audit.md) goes
-  and looks; the fixes can't be ticketed until it reports. The nav shell is the suspected hard part
-  — `AppShell`'s tabs were designed for one big surface and v4 adds a second.
+- **The fixes for #07's findings.** Not yet ticketed — that's the next step now that the list exists.
+  The wildcard/reroll overflow is the one worth fixing first (page-level breakage, not just cramped).
 - **The Cards tab's shape beyond filtering.** Sort order, empty state, deep-linking to a single
   card, whether a filtered set can be shared as a URL. Follows [#03](issues/03-the-filter-set.md).
 - **Cross-links between spirits and cards.** A spirit's uniques already render in `SpiritDetail`;
