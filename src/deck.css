@@ -452,6 +452,32 @@ button:disabled {
     grid-template-columns: 1fr;
     padding-left: 1rem;
   }
+  /* v4 #14: the fixed-plus-auto column grid doesn't shrink below its content's width and
+   * clips the Reroll button off-screen at 375px (v4 #07 finding 1) - stack instead. */
+  .deck-wild {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  /* v4 #14: tier tile captions at 8-8.8px were unreadable and several truncated mid-word
+   * (v4 #07 finding 3) - there's slack at this width for wider tiles and bigger text. */
+  .tier-tile,
+  .tier-tile-art {
+    width: 150px;
+  }
+  .tier-tile-art {
+    height: 68px;
+  }
+  .tier-tile figcaption {
+    font-size: 0.7rem;
+  }
+  .tier-tile-spirit-name {
+    font-size: 0.62rem;
+  }
+  /* v4 #14: nav buttons measured 36px tall, under the 44px tap-target guideline
+   * (v4 #07 finding 4) - desktop's compact rows are untouched, this is mobile-only. */
+  .deck-nav button {
+    padding: 0.85rem 0.7rem;
+  }
 }
 
 /* --- spirit art (landscape 480x218; containers crop, the asset never does) --- */
@@ -758,6 +784,9 @@ button:disabled {
 .spirit-detail-head h2 {
   color: var(--deck-text);
   margin: 0 0 0.3rem;
+  /* v4 #14: reserve clearance for the absolutely-positioned .modal-close button so a long
+   * name wraps instead of running under it and getting clipped (v4 #07 finding 2). */
+  padding-right: 2rem;
 }
 .spirit-detail-body {
   display: flex;

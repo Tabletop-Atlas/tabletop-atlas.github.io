@@ -1,6 +1,6 @@
 # 10 — Prefactor: a reusable card viewer
 
-Status: ready-for-human
+Status: done
 Type: wayfinder:task (AFK)
 Parent: [v4 map](../MAP.md) · Spec: [PRD.md](../PRD.md)
 
@@ -38,7 +38,7 @@ into `CardViewer`'s own `onClick`, so the public API stays a plain `onClose: () 
 `tsc -b`, the full test suite (246/246) and `vite build` are all clean — no test needed touching, the
 JSX emitted for the enlarge overlay is byte-for-byte the same as before extraction.
 
-**Not independently verified in a real browser** — no headless-browser tool was available in this
-session (no Playwright/puppeteer installed, no browser MCP). Recommend a human (or a session with
-`/run` and a real browser) confirm the spirit detail modal's card enlarge/dismiss still behaves at
-375px before closing this out fully. Marked `ready-for-human` for that reason, not `done`.
+**Update (v4 #07's audit):** a later session installed Playwright and drove the built app in real
+Chromium at 375×667, opening a spirit's panel image via `CardViewer`. It renders cleanly with no
+overflow — see `.scratch/v4/screenshots-07/card_enlarge_viewer_375.png`. v3's prior verification of
+this surface holds; no regression. Flipping to `done`.

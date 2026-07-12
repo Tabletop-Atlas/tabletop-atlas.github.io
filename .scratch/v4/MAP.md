@@ -50,19 +50,24 @@ anyone can open on their phone:
   [card-data-source.md](card-data-source.md).
 - **#08** — real logo art found at `spiritislandwiki.com`'s own site logo (`Spirit-Island-Logo.png`,
   a clean crop of the box-cover wordmark), not in the TTS mod JSON. Swapped into `AppShell`'s
-  `.deck-brand`, capped at `max-width: 232px` so it scales with the sidebar. Needs a human 375px
-  check once #07 lands.
+  `.deck-brand`, capped at `max-width: 232px` so it scales with the sidebar. Verified at 375/390px
+  by #07's audit — holds.
 - **#07** — audited all nine surfaces at 375×667/390×844 with Playwright. Worst finding: the
   recommender results' wildcard/reroll box (`.deck-wild`'s fixed-plus-auto grid columns) genuinely
   overflows the page at 375px. Also found: the spirit detail modal's close button overlaps a long
   spirit name; tier board captions render at 8–8.8px and truncate. The nav shell itself is **not**
   the hard part — it already collapses cleanly below 900px; every finding is inside the main content.
   No fixes made (by design). Full list in [issues/07](issues/07-responsive-audit.md#comments).
+- **#10** — card viewer lifted into standalone `CardViewer.tsx`. Verified with no regression by #07's
+  audit (real Chromium, 375px).
+- **#14** — fixed all four fixable findings from #07 (wildcard overflow, modal close-button overlap,
+  tiny tier captions, sub-44px nav buttons), all confined to the existing mobile media query. Two
+  findings (small filter labels, a cosmetic spacing gap) explicitly closed, not fixed — see
+  [issues/14](issues/14-the-phone-fixes.md#comments) for why. Desktop measured pixel-identical
+  before/after. `playwright` is now a dev dependency for this kind of verification going forward.
 
 ## Not yet specified
 
-- **The fixes for #07's findings.** Not yet ticketed — that's the next step now that the list exists.
-  The wildcard/reroll overflow is the one worth fixing first (page-level breakage, not just cramped).
 - **The Cards tab's shape beyond filtering.** Sort order, empty state, deep-linking to a single
   card, whether a filtered set can be shared as a URL. Follows [#03](issues/03-the-filter-set.md).
 - **Cross-links between spirits and cards.** A spirit's uniques already render in `SpiritDetail`;

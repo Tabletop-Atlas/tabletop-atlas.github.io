@@ -1,6 +1,6 @@
 # 08 — The logo art
 
-Status: ready-for-human
+Status: done
 Type: wayfinder:task (AFK, with one HITL check)
 Parent: [v4 map](../MAP.md)
 
@@ -55,8 +55,7 @@ confirming it's not a fan recreation.
   `SPIRIT ISLAND` text node. Full suite (246/246), `tsc -b` and `vite build` all clean; `vite
   preview` confirms the derivative resolves at the deployed base path.
 
-**Not verified in a real browser at 375px** — no headless-browser tool available in this session,
-same gap as #10. The `max-width: 232px` bound only holds if the sidebar itself doesn't grow wider
-than intended on mobile; #07 (responsive audit, not yet run) is the ticket that will actually drive
-this at phone width and catch it if the assumption is wrong. Marked `ready-for-human` for a real
-eyeball, not `done`.
+**Update (v4 #07's audit):** driven in real Chromium at 375×667 and 390×844 — the logo scales down
+with the sidebar exactly as intended, no overflow, no cropping. See
+`.scratch/v4/screenshots-07/wizard_step0_375x667.png`. The `max-width: 232px` bound holds. Flipping
+to `done`.
