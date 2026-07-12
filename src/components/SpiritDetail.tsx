@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { tierStore } from '../domain/tierStore'
 import type { Spirit } from '../domain/types'
+import { CardViewer } from './CardViewer'
 import { OcfduRadar } from './OcfduRadar'
 import { PlaceholderArt } from './PlaceholderArt'
 import { SpiritArt } from './SpiritArt'
@@ -151,17 +152,7 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
         )}
       </div>
 
-      {enlarged && (
-        <div
-          className="card-enlarge-backdrop"
-          onClick={(e) => {
-            e.stopPropagation()
-            setEnlarged(null)
-          }}
-        >
-          <img src={enlarged.src} alt={enlarged.alt} />
-        </div>
-      )}
+      {enlarged && <CardViewer src={enlarged.src} alt={enlarged.alt} onClose={() => setEnlarged(null)} />}
     </div>
   )
 }

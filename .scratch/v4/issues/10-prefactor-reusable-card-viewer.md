@@ -1,6 +1,6 @@
 # 10 — Prefactor: a reusable card viewer
 
-Status: ready-for-agent
+Status: ready-for-human
 Type: wayfinder:task (AFK)
 Parent: [v4 map](../MAP.md) · Spec: [PRD.md](../PRD.md)
 
@@ -26,3 +26,19 @@ Make the change easy, then make the easy change.
 ## Blocked by
 
 - None — can start immediately.
+
+## Comments
+
+Lifted the enlarge-on-click viewer out of `SpiritDetail.tsx` into `src/components/CardViewer.tsx`:
+a presentational component taking `src`, `alt`, `onClose`. `SpiritDetail` keeps its own
+`enlarged` state (unchanged) and now renders `<CardViewer .../>` instead of the inline backdrop +
+`<img>`. The `stopPropagation` that stops the enlarge click from also closing the parent modal moved
+into `CardViewer`'s own `onClick`, so the public API stays a plain `onClose: () => void`.
+
+`tsc -b`, the full test suite (246/246) and `vite build` are all clean — no test needed touching, the
+JSX emitted for the enlarge overlay is byte-for-byte the same as before extraction.
+
+**Not independently verified in a real browser** — no headless-browser tool was available in this
+session (no Playwright/puppeteer installed, no browser MCP). Recommend a human (or a session with
+`/run` and a real browser) confirm the spirit detail modal's card enlarge/dismiss still behaves at
+375px before closing this out fully. Marked `ready-for-human` for that reason, not `done`.
