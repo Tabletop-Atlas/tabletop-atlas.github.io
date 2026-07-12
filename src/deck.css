@@ -859,6 +859,116 @@ button:disabled {
   border-radius: 8px;
 }
 
+/* --- Cards tab (v4 #11), lifted from the v4 #04 prototype's variants A and B --- */
+.card-view-switch {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.5rem 0 0.75rem;
+}
+.card-view-switch button {
+  background: var(--deck-panel);
+  border: 1px solid var(--deck-line);
+  color: var(--deck-text);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font: 600 11px/1 var(--deck-mono);
+  cursor: pointer;
+}
+.card-view-switch button[aria-pressed='true'] {
+  background: var(--deck-text);
+  color: var(--deck-panel-2);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+.card-grid-tile {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--deck-line);
+}
+.card-grid-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card-rows {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.card-row {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.8rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 4px;
+  background: var(--deck-panel);
+  width: 100%;
+  box-sizing: border-box;
+}
+.card-row:hover {
+  background: var(--deck-line-soft);
+}
+.card-row-type {
+  flex: 0 0 auto;
+  width: 42px;
+  font: 700 9px/1 var(--deck-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7d8f9f;
+}
+.card-row-name {
+  flex: 1 1 160px;
+  min-width: 0;
+  color: var(--deck-text);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+.card-row-spirit {
+  color: #7d8f9f;
+  font-weight: 400;
+}
+.card-row-elements {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 2px;
+}
+.card-row-element-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.card-row-cost {
+  flex: 0 0 auto;
+  min-width: 1.4rem;
+  text-align: right;
+  color: #d7b56a;
+  font: 700 12px/1 var(--deck-mono);
+}
+.card-row-speed {
+  flex: 0 0 auto;
+  min-width: 2.4rem;
+  text-align: right;
+  font-size: 10px;
+  color: #7d8f9f;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

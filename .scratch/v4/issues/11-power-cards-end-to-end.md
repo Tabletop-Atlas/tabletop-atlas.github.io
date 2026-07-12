@@ -1,6 +1,6 @@
 # 11 — Power cards, end to end, unfiltered
 
-Status: blocked
+Status: done
 Type: wayfinder:task (AFK)
 Parent: [v4 map](../MAP.md) · Spec: [PRD.md](../PRD.md)
 
@@ -42,3 +42,44 @@ exists to enforce and this repo has already broken three times.
 - [01 — Where card data comes from](01-where-card-data-comes-from.md)
 - [04 — What a filtered result looks like, at 375px](04-result-shape-prototype.md)
 - [10 — Prefactor: a reusable card viewer](10-prefactor-reusable-card-viewer.md)
+
+## Comments
+
+`scripts/extract-power-cards.mjs` fetches `sick.oberien.de/cards.js` fresh each run, executes it in
+a sandboxed Node `vm` (same technique #01 used for research — required explicit owner sign-off this
+session since Claude Code's auto-mode classifier gates executing fetched third-party JS), filters
+`PowerCard` instances, and joins each to `images/manifest.json` by name (the same perfect 471/471
+join #01 already proved) to get its filename and, for uniques, its spirit slug. Output:
+`src/data/power-cards.json`, 332 cards, re-run reproduces it byte-for-byte since the upstream source
+is static card data. Re-running printed `101 minor / 78 major / 153 unique` — exact match to #01's
+counts.
+
+`PowerCard` in `src/domain/types.ts` is a discriminated union on `kind: 'minor' | 'major' | 'unique'`;
+only `unique` carries `spirit`/`spiritName`. No optional-everything interface.
+
+Image filenames resolve by rule, not a lookup table: minor/major go to `cards/{minor,major}/<file
+basename from the manifest join>`; uniques check whether their name is in that spirit's
+`startingCards` (already-committed data) — if so the image is `cards/<spiritId>-<index>.webp`,
+reusing the already-committed starting-card art already in `public/` rather than copying a second
+file under a second name; the 5 uniques with no starting-card slot (extra unique innates found on
+Finder of Paths Unseen, Dances Up Earthquakes, Many Minds Move as One) copy fresh from
+`images/spirits/<id>/unique_*.webp` to `public/cards/unique/`. All 332 resolved paths verified to
+exist on disk (`cardCanon.test.ts`'s asset-existence check, same pattern as `dataIntegrity.test.ts`).
+
+`cardCanon.test.ts`: pins the 101/78/153/332 counts, and spot-checks 8 cards' cost/speed/elements/
+spirit against the fixture #04 built and visually cross-checked against real card art via Playwright
+screenshots during prototype judging — an independent source, not this ticket's own extraction
+output, so the check isn't circular.
+
+UI: `CardsTab` (nav entry "Cards") renders all 332 (sorted by name, unfiltered — #12's job), switchable
+between `CardGrid` (#04 variant A) and `CardRows` (#04 variant B, real element icons copied from
+`public/_prototype-04/elements/` to `public/elements/`), both reusing `CardViewer` (#10) for
+tap-to-enlarge. Images use native `loading="lazy"`.
+
+Verified with Playwright against the production build (`vite build` + `vite preview`) at 375×667 and
+1440×900: 332 tiles/rows render in both views at both widths, zero horizontal overflow, enlarge
+opens and closes, a unique row shows its spirit name. `tsc -b`, the full suite (251/251, up from 246),
+and `vite build` all clean.
+
+**Not done here (explicitly out of scope for #11):** filtering (#12), fear/event/blight (#13), and
+whether variant A also gets element-icon overlays (#04 flagged, still open for whoever picks up #12).

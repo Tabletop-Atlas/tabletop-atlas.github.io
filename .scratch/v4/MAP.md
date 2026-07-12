@@ -81,6 +81,14 @@ anyone can open on their phone:
   ticket's own assumption: the old repo URL redirects, but the old **Pages** URL does not — it 404s,
   since Pages sites don't inherit a repo-transfer redirect the way repo URLs do.
 
+- **#11** — power-card dataset (332: 101 minor / 78 major / 153 unique) extracted by a committed,
+  re-runnable script (`scripts/extract-power-cards.mjs`) from #01's source, joined to the manifest by
+  name. Discriminated-union `PowerCard` type, `cardCanon.test.ts` tripwire pinned against an
+  independent source (#04's fixture). New **Cards** nav tab ships both of #04's result shapes
+  (grid/rows, switchable), reusing #10's `CardViewer`. Verified in real Chromium at 375px and
+  desktop against a production build — 332 tiles/rows, no overflow. See
+  [issues/11](issues/11-power-cards-end-to-end.md#comments).
+
 ## Not yet specified
 
 - **Whether variant A (the image grid) also gets element icon overlays**, or keeps to card art only
@@ -126,4 +134,5 @@ decide                             build
 09 the name and the URL  (independent, HITL)
 ```
 
-Frontier right now: **01**, **07**, **08**, **10** (AFK) and **09** (needs the owner).
+Frontier right now: **03** (needs the owner — the filter set's semantics) and **12** (power filters,
+AFK, blocked on 03). #01/#04/#07/#08/#09/#10/#11/#14 are all done.

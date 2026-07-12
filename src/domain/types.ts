@@ -77,6 +77,22 @@ export const ELEMENTS = ['Sun', 'Moon', 'Fire', 'Air', 'Water', 'Earth', 'Plant'
 
 export type Element = (typeof ELEMENTS)[number]
 
+interface PowerCardBase {
+  name: string
+  /** `set` on the source card object — a `ProductSet` enum value, e.g. "Basegame", "Jagged Earth". */
+  expansion: string
+  cost: number
+  speed: 'Fast' | 'Slow'
+  elements: Element[]
+  /** Path under `public/`, e.g. "cards/minor/steam_vents.webp". */
+  image: string
+}
+
+export type PowerCard =
+  | (PowerCardBase & { kind: 'minor' })
+  | (PowerCardBase & { kind: 'major' })
+  | (PowerCardBase & { kind: 'unique'; spirit: string; spiritName: string })
+
 export interface Spirit {
   id: string
   name: string

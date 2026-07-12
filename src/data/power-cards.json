@@ -1,0 +1,4612 @@
+[
+  {
+    "name": "A Circuitous and Wending Journey",
+    "expansion": "Promo2",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "finder-of-paths-unseen",
+    "spiritName": "Finder of Paths Unseen",
+    "image": "cards/finder-of-paths-unseen-0.webp"
+  },
+  {
+    "name": "A Dreadful Tide of Scurrying Flesh",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "many-minds-move-as-one",
+    "spiritName": "Many Minds Move as One",
+    "image": "cards/many-minds-move-as-one-0.webp"
+  },
+  {
+    "name": "A Year of Perfect Stillness",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "vital-strength-of-the-earth",
+    "spiritName": "Vital Strength of the Earth",
+    "image": "cards/vital-strength-of-the-earth-0.webp"
+  },
+  {
+    "name": "Absolute Stasis",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "fractured-days-split-the-sky",
+    "spiritName": "Fractured Days Split the Sky",
+    "image": "cards/fractured-days-split-the-sky-0.webp"
+  },
+  {
+    "name": "Absorb Corruption",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/absorb_corruption.webp"
+  },
+  {
+    "name": "Absorb Essence",
+    "expansion": "Promo",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "spiritName": "Serpent Slumbering Beneath the Island",
+    "image": "cards/serpent-slumbering-beneath-the-island-0.webp"
+  },
+  {
+    "name": "Accelerated Rot",
+    "expansion": "Basegame",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/accelerated_rot.webp"
+  },
+  {
+    "name": "Aid from the Spirit-Speakers",
+    "expansion": "Promo2",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "finder-of-paths-unseen",
+    "spiritName": "Finder of Paths Unseen",
+    "image": "cards/finder-of-paths-unseen-1.webp"
+  },
+  {
+    "name": "Angry Bears",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/angry_bears.webp"
+  },
+  {
+    "name": "Animated Wrackroot",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/animated_wrackroot.webp"
+  },
+  {
+    "name": "Asphyxiating Smoke",
+    "expansion": "Promo",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "heart-of-the-wildfire",
+    "spiritName": "Heart of the Wildfire",
+    "image": "cards/heart-of-the-wildfire-0.webp"
+  },
+  {
+    "name": "Bargain of Coursing Paths",
+    "expansion": "Nature Incarnate",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/bargain_of_coursing_paths.webp"
+  },
+  {
+    "name": "Bargains of Power and Protection",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Water",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/bargains_of_power_and_protection.webp"
+  },
+  {
+    "name": "Bats Scout For Raids By Darkness",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/bats_scout_for_raids_by_darkness.webp"
+  },
+  {
+    "name": "Birds Cry Warning",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/birds_cry_warning.webp"
+  },
+  {
+    "name": "Blazing Intimidation",
+    "expansion": "Nature Incarnate",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "ember-eyed-behemoth",
+    "spiritName": "Ember-Eyed Behemoth",
+    "image": "cards/ember-eyed-behemoth-0.webp"
+  },
+  {
+    "name": "Blazing Renewal",
+    "expansion": "Basegame",
+    "cost": 5,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/blazing_renewal.webp"
+  },
+  {
+    "name": "Blinding Glare",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "relentless-gaze-of-the-sun",
+    "spiritName": "Relentless Gaze of the Sun",
+    "image": "cards/relentless-gaze-of-the-sun-0.webp"
+  },
+  {
+    "name": "Blood Draws Predators",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Water",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/blood_draws_predators.webp"
+  },
+  {
+    "name": "Blood Water and Bloodlust",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Water",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "wounded-waters-bleeding",
+    "spiritName": "Wounded Waters Bleeding",
+    "image": "cards/wounded-waters-bleeding-0.webp"
+  },
+  {
+    "name": "Bloodwrack Plague",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Water",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/bloodwrack_plague.webp"
+  },
+  {
+    "name": "Blooming of the Rocks and Trees",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Air",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "towering-roots-of-the-jungle",
+    "spiritName": "Towering Roots of the Jungle",
+    "image": "cards/towering-roots-of-the-jungle-0.webp"
+  },
+  {
+    "name": "Blur the Arc of Years",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "fractured-days-split-the-sky",
+    "spiritName": "Fractured Days Split the Sky",
+    "image": "cards/fractured-days-split-the-sky-1.webp"
+  },
+  {
+    "name": "Bombard with Boulders and Stinging Seeds",
+    "expansion": "Nature Incarnate",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/bombard_with_boulders_and_stinging_seeds.webp"
+  },
+  {
+    "name": "Boon of Ancient Memories",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "shifting-memory-of-ages",
+    "spiritName": "Shifting Memory of Ages",
+    "image": "cards/shifting-memory-of-ages-0.webp"
+  },
+  {
+    "name": "Boon of Corrupted Blood",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "wounded-waters-bleeding",
+    "spiritName": "Wounded Waters Bleeding",
+    "image": "cards/wounded-waters-bleeding-1.webp"
+  },
+  {
+    "name": "Boon of Growing Power",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "spiritName": "Keeper of the Forbidden Wilds",
+    "image": "cards/keeper-of-the-forbidden-wilds-0.webp"
+  },
+  {
+    "name": "Boon of Reimagining",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon"
+    ],
+    "kind": "unique",
+    "spirit": "starlight-seeks-its-form",
+    "spiritName": "Starlight Seeks Its Form",
+    "image": "cards/starlight-seeks-its-form-0.webp"
+  },
+  {
+    "name": "Boon of Resilient Power",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Water",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "towering-roots-of-the-jungle",
+    "spiritName": "Towering Roots of the Jungle",
+    "image": "cards/towering-roots-of-the-jungle-1.webp"
+  },
+  {
+    "name": "Boon of Swarming Bedevilment",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "many-minds-move-as-one",
+    "spiritName": "Many Minds Move as One",
+    "image": "cards/many-minds-move-as-one-1.webp"
+  },
+  {
+    "name": "Boon of Vigor",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "river-surges-in-sunlight",
+    "spiritName": "River Surges in Sunlight",
+    "image": "cards/river-surges-in-sunlight-0.webp"
+  },
+  {
+    "name": "Boon of Watchful Guarding",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "eyes-watch-from-the-trees",
+    "spiritName": "Eyes Watch From the Trees",
+    "image": "cards/eyes-watch-from-the-trees-0.webp"
+  },
+  {
+    "name": "Call of the Dahan Ways",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_of_the_dahan_ways.webp"
+  },
+  {
+    "name": "Call of the Deeps",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "oceans-hungry-grasp",
+    "spiritName": "Ocean's Hungry Grasp",
+    "image": "cards/oceans-hungry-grasp-0.webp"
+  },
+  {
+    "name": "Call on Herders for Aid",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "spiritName": "Rising Heat of Stone and Sand",
+    "image": "cards/rising-heat-of-stone-and-sand-0.webp"
+  },
+  {
+    "name": "Call on Midnight's Dream",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "spiritName": "Bringer of Dreams and Nightmares",
+    "image": "cards/bringer-of-dreams-and-nightmares-0.webp"
+  },
+  {
+    "name": "Call to Bloodshed",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_to_bloodshed.webp"
+  },
+  {
+    "name": "Call to Ferocity",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_to_ferocity.webp"
+  },
+  {
+    "name": "Call To Guard",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_to_guard.webp"
+  },
+  {
+    "name": "Call to Isolation",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_to_isolation.webp"
+  },
+  {
+    "name": "Call to Migrate",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_to_migrate.webp"
+  },
+  {
+    "name": "Call to Tend",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_to_tend.webp"
+  },
+  {
+    "name": "Call to Trade",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/call_to_trade.webp"
+  },
+  {
+    "name": "Call to Vigilance",
+    "expansion": "Nature Incarnate",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "hearth-vigil",
+    "spiritName": "Hearth-Vigil",
+    "image": "cards/hearth-vigil-0.webp"
+  },
+  {
+    "name": "Carapaced Land",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/carapaced_land.webp"
+  },
+  {
+    "name": "Cast down into the Briny Deep",
+    "expansion": "Branch & Claw",
+    "cost": 9,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Water",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/cast_down_into_the_briny_deep.webp"
+  },
+  {
+    "name": "Cleansing Floods",
+    "expansion": "Basegame",
+    "cost": 5,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/cleansing_floods.webp"
+  },
+  {
+    "name": "Concealing Shadows",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "shadows-flicker-like-flame",
+    "spiritName": "Shadows Flicker Like Flame",
+    "image": "cards/shadows-flicker-like-flame-0.webp"
+  },
+  {
+    "name": "Confounding Mists",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/confounding_mists.webp"
+  },
+  {
+    "name": "Coordinated Raid",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "hearth-vigil",
+    "spiritName": "Hearth-Vigil",
+    "image": "cards/hearth-vigil-1.webp"
+  },
+  {
+    "name": "Crops Wither and Fade",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "shadows-flicker-like-flame",
+    "spiritName": "Shadows Flicker Like Flame",
+    "image": "cards/shadows-flicker-like-flame-1.webp"
+  },
+  {
+    "name": "Cycles of Time and Tide",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/cycles_of_time_and_tide.webp"
+  },
+  {
+    "name": "Dark and Tangled Woods",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/dark_and_tangled_woods.webp"
+  },
+  {
+    "name": "Dark Skies Loose a Stinging Rain",
+    "expansion": "Promo2",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "downpour-drenches-the-world",
+    "spiritName": "Downpour Drenches the World",
+    "image": "cards/downpour-drenches-the-world-0.webp"
+  },
+  {
+    "name": "Death Falls Gently from Open Blossoms",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/death_falls_gently_from_open_blossoms.webp"
+  },
+  {
+    "name": "Delusions of Danger",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/delusions_of_danger.webp"
+  },
+  {
+    "name": "Desiccating Winds",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/desiccating_winds.webp"
+  },
+  {
+    "name": "Devouring Ants",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/devouring_ants.webp"
+  },
+  {
+    "name": "Dire Metamorphosis",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/dire_metamorphosis.webp"
+  },
+  {
+    "name": "Disorienting Landscape",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/disorienting_landscape.webp"
+  },
+  {
+    "name": "Dissolve the Bonds of Kinship",
+    "expansion": "Basegame",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Water",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/dissolve_the_bonds_of_kinship.webp"
+  },
+  {
+    "name": "Dissolving Vapors",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "shroud-of-silent-mist",
+    "spiritName": "Shroud of Silent Mist",
+    "image": "cards/shroud-of-silent-mist-0.webp"
+  },
+  {
+    "name": "Domesticated Animals Go Berserk",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/domesticated_animals_go_berserk.webp"
+  },
+  {
+    "name": "Draw of the Fruitful Earth",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "vital-strength-of-the-earth",
+    "spiritName": "Vital Strength of the Earth",
+    "image": "cards/vital-strength-of-the-earth-1.webp"
+  },
+  {
+    "name": "Draw to the Water's Edge",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "wounded-waters-bleeding",
+    "spiritName": "Wounded Waters Bleeding",
+    "image": "cards/wounded-waters-bleeding-2.webp"
+  },
+  {
+    "name": "Draw Towards a Consuming Void",
+    "expansion": "Jagged Earth",
+    "cost": 8,
+    "speed": "Slow",
+    "elements": [],
+    "kind": "major",
+    "image": "cards/major/draw_towards_a_consuming_void.webp"
+  },
+  {
+    "name": "Dread Apparitions",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "spiritName": "Bringer of Dreams and Nightmares",
+    "image": "cards/bringer-of-dreams-and-nightmares-1.webp"
+  },
+  {
+    "name": "Dream of the Untouched Land",
+    "expansion": "Jagged Earth",
+    "cost": 6,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/dream_of_the_untouched_land.webp"
+  },
+  {
+    "name": "Dreams of the Dahan",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "spiritName": "Bringer of Dreams and Nightmares",
+    "image": "cards/bringer-of-dreams-and-nightmares-2.webp"
+  },
+  {
+    "name": "Drift down into Slumber",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/drift_down_into_slumber.webp"
+  },
+  {
+    "name": "Drought",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/drought.webp"
+  },
+  {
+    "name": "Dry Wood Explodes In Smoldering Splinters",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/dry_wood_explodes_in_smoldering_splinters.webp"
+  },
+  {
+    "name": "Eerie Noises and Moving Trees",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "eyes-watch-from-the-trees",
+    "spiritName": "Eyes Watch From the Trees",
+    "image": "cards/eyes-watch-from-the-trees-1.webp"
+  },
+  {
+    "name": "Elemental Aegis",
+    "expansion": "Promo",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "spiritName": "Serpent Slumbering Beneath the Island",
+    "image": "cards/serpent-slumbering-beneath-the-island-1.webp"
+  },
+  {
+    "name": "Elemental Boon",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [],
+    "kind": "minor",
+    "image": "cards/minor/elemental_boon.webp"
+  },
+  {
+    "name": "Elemental Teachings",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "shifting-memory-of-ages",
+    "spiritName": "Shifting Memory of Ages",
+    "image": "cards/shifting-memory-of-ages-1.webp"
+  },
+  {
+    "name": "Elusive Ambushes",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/elusive_ambushes.webp"
+  },
+  {
+    "name": "Emerge from the Dread Night Wind",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "spiritName": "Breath of Darkness Down Your Spine",
+    "image": "cards/breath-of-darkness-down-your-spine-0.webp"
+  },
+  {
+    "name": "Encompassing Ward",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Water",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/encompassing_ward.webp"
+  },
+  {
+    "name": "Enticing Splendor",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/enticing_splendor.webp"
+  },
+  {
+    "name": "Entrancing Apparitions",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/entrancing_apparitions.webp"
+  },
+  {
+    "name": "Entrap The Forces Of Corruption",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/entrap_the_forces_of_corruption.webp"
+  },
+  {
+    "name": "Entwine the Fates of All",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "towering-roots-of-the-jungle",
+    "spiritName": "Towering Roots of the Jungle",
+    "image": "cards/towering-roots-of-the-jungle-2.webp"
+  },
+  {
+    "name": "Entwined Power",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Water",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/entwined_power.webp"
+  },
+  {
+    "name": "Ever-Multiplying Swarm",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "many-minds-move-as-one",
+    "spiritName": "Many Minds Move as One",
+    "image": "cards/many-minds-move-as-one-2.webp"
+  },
+  {
+    "name": "Exaltation of Echoed Steps",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "dances-up-earthquakes",
+    "spiritName": "Dances Up Earthquakes",
+    "image": "cards/dances-up-earthquakes-0.webp"
+  },
+  {
+    "name": "Exaltation of Grasping Roots",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "ember-eyed-behemoth",
+    "spiritName": "Ember-Eyed Behemoth",
+    "image": "cards/ember-eyed-behemoth-1.webp"
+  },
+  {
+    "name": "Exaltation of Molten Stone",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "volcano-looming-high",
+    "spiritName": "Volcano Looming High",
+    "image": "cards/volcano-looming-high-0.webp"
+  },
+  {
+    "name": "Exaltation of Tangled Growth",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "spiritName": "Fathomless Mud of the Swamp",
+    "image": "cards/fathomless-mud-of-the-swamp-0.webp"
+  },
+  {
+    "name": "Exaltation of the Incandescent Sky",
+    "expansion": "Nature Incarnate",
+    "cost": 7,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/exaltation_of_the_incandescent_sky.webp"
+  },
+  {
+    "name": "Exhale Confusion and Delirium",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Animal",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "wandering-voice-keens-delirium",
+    "spiritName": "Wandering Voice Keens Delirium",
+    "image": "cards/wandering-voice-keens-delirium-0.webp"
+  },
+  {
+    "name": "Favor Of The Sun And Star-Lit Dark",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/favor_of_the_sun_and_star_lit_dark.webp"
+  },
+  {
+    "name": "Favors Called Due",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "shadows-flicker-like-flame",
+    "spiritName": "Shadows Flicker Like Flame",
+    "image": "cards/shadows-flicker-like-flame-2.webp"
+  },
+  {
+    "name": "Favors of Story and Season",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "hearth-vigil",
+    "spiritName": "Hearth-Vigil",
+    "image": "cards/hearth-vigil-2.webp"
+  },
+  {
+    "name": "Ferocious Rampage",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "spiritName": "Devouring Teeth Lurk Underfoot",
+    "image": "cards/devouring-teeth-lurk-underfoot-0.webp"
+  },
+  {
+    "name": "Fetid Breath Spreads Infection",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "vengeance-as-a-burning-plague",
+    "spiritName": "Vengeance as a Burning Plague",
+    "image": "cards/vengeance-as-a-burning-plague-0.webp"
+  },
+  {
+    "name": "Fields Choked with Growth",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "a-spread-of-rampant-green",
+    "spiritName": "A Spread of Rampant Green",
+    "image": "cards/a-spread-of-rampant-green-0.webp"
+  },
+  {
+    "name": "Fiery Vengeance",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire"
+    ],
+    "kind": "unique",
+    "spirit": "vengeance-as-a-burning-plague",
+    "spiritName": "Vengeance as a Burning Plague",
+    "image": "cards/vengeance-as-a-burning-plague-1.webp"
+  },
+  {
+    "name": "Fire and Flood",
+    "expansion": "Branch & Claw",
+    "cost": 7,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/fire_and_flood.webp"
+  },
+  {
+    "name": "Fire in the Sky",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/fire_in_the_sky.webp"
+  },
+  {
+    "name": "Flame's Fury",
+    "expansion": "Promo",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "heart-of-the-wildfire",
+    "spiritName": "Heart of the Wildfire",
+    "image": "cards/heart-of-the-wildfire-1.webp"
+  },
+  {
+    "name": "Flash Floods",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "river-surges-in-sunlight",
+    "spiritName": "River Surges in Sunlight",
+    "image": "cards/river-surges-in-sunlight-1.webp"
+  },
+  {
+    "name": "Flash-Fires",
+    "expansion": "Promo",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "heart-of-the-wildfire",
+    "spiritName": "Heart of the Wildfire",
+    "image": "cards/heart-of-the-wildfire-2.webp"
+  },
+  {
+    "name": "Fleshrot Fever",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/fleshrot_fever.webp"
+  },
+  {
+    "name": "Flocking Red-Talons",
+    "expansion": "Nature Incarnate",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/flocking_red_talons.webp"
+  },
+  {
+    "name": "Flow Downriver, Blow Downwind",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/flow_downriver_blow_downwind.webp"
+  },
+  {
+    "name": "Flow like Water, Reach like Air",
+    "expansion": "Branch & Claw",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/flow_like_water_reach_like_air.webp"
+  },
+  {
+    "name": "Flowing and Silent Forms Dart By",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "shroud-of-silent-mist",
+    "spiritName": "Shroud of Silent Mist",
+    "image": "cards/shroud-of-silent-mist-1.webp"
+  },
+  {
+    "name": "Focus the Land's Anguish",
+    "expansion": "Jagged Earth",
+    "cost": 5,
+    "speed": "Slow",
+    "elements": [
+      "Sun"
+    ],
+    "kind": "major",
+    "image": "cards/major/focus_the_land_s_anguish.webp"
+  },
+  {
+    "name": "Focus the Sun's Rays",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "relentless-gaze-of-the-sun",
+    "spiritName": "Relentless Gaze of the Sun",
+    "image": "cards/relentless-gaze-of-the-sun-1.webp"
+  },
+  {
+    "name": "Forests of Living Obsidian",
+    "expansion": "Jagged Earth",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/forests_of_living_obsidian.webp"
+  },
+  {
+    "name": "Foul Vapors and Fetid Muck",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "spiritName": "Fathomless Mud of the Swamp",
+    "image": "cards/fathomless-mud-of-the-swamp-1.webp"
+  },
+  {
+    "name": "Foundations Sink into Mud",
+    "expansion": "Promo2",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "downpour-drenches-the-world",
+    "spiritName": "Downpour Drenches the World",
+    "image": "cards/downpour-drenches-the-world-1.webp"
+  },
+  {
+    "name": "Fragments of Yesteryear",
+    "expansion": "Nature Incarnate",
+    "cost": 7,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon"
+    ],
+    "kind": "major",
+    "image": "cards/major/fragments_of_yesteryear.webp"
+  },
+  {
+    "name": "Frightful Keening",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "wandering-voice-keens-delirium",
+    "spiritName": "Wandering Voice Keens Delirium",
+    "image": "cards/wandering-voice-keens-delirium-1.webp"
+  },
+  {
+    "name": "Gather the Scattered Light of Stars",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon"
+    ],
+    "kind": "unique",
+    "spirit": "starlight-seeks-its-form",
+    "spiritName": "Starlight Seeks Its Form",
+    "image": "cards/starlight-seeks-its-form-1.webp"
+  },
+  {
+    "name": "Gift of Abundance",
+    "expansion": "Promo2",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Water",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "downpour-drenches-the-world",
+    "spiritName": "Downpour Drenches the World",
+    "image": "cards/downpour-drenches-the-world-2.webp"
+  },
+  {
+    "name": "Gift of Constancy",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/gift_of_constancy.webp"
+  },
+  {
+    "name": "Gift of Flowing Power",
+    "expansion": "Promo",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "spiritName": "Serpent Slumbering Beneath the Island",
+    "image": "cards/serpent-slumbering-beneath-the-island-2.webp"
+  },
+  {
+    "name": "Gift of Furious Might",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "spiritName": "Devouring Teeth Lurk Underfoot",
+    "image": "cards/devouring-teeth-lurk-underfoot-1.webp"
+  },
+  {
+    "name": "Gift of Living Energy",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/gift_of_living_energy.webp"
+  },
+  {
+    "name": "Gift of Nature's Connection",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [],
+    "kind": "minor",
+    "image": "cards/minor/gift_of_nature_s_connection.webp"
+  },
+  {
+    "name": "Gift of Power",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/gift_of_power.webp"
+  },
+  {
+    "name": "Gift of Proliferation",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "a-spread-of-rampant-green",
+    "spiritName": "A Spread of Rampant Green",
+    "image": "cards/a-spread-of-rampant-green-1.webp"
+  },
+  {
+    "name": "Gift of Searing Heat",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "spiritName": "Rising Heat of Stone and Sand",
+    "image": "cards/rising-heat-of-stone-and-sand-1.webp"
+  },
+  {
+    "name": "Gift of Seismic Energy",
+    "expansion": "Nature Incarnate",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "dances-up-earthquakes",
+    "spiritName": "Dances Up Earthquakes",
+    "image": "cards/dances-up-earthquakes-1.webp"
+  },
+  {
+    "name": "Gift of the Primordial Deeps",
+    "expansion": "Promo",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "spiritName": "Serpent Slumbering Beneath the Island",
+    "image": "cards/serpent-slumbering-beneath-the-island-3.webp"
+  },
+  {
+    "name": "Gift of the Sunlit Air",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "sun-bright-whirlwind",
+    "spiritName": "Sun-Bright Whirlwind",
+    "image": "cards/sun-bright-whirlwind-0.webp"
+  },
+  {
+    "name": "Gift of the Untamed Wild",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Air",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "lure-of-the-deep-wilderness",
+    "spiritName": "Lure of the Deep Wilderness",
+    "image": "cards/lure-of-the-deep-wilderness-0.webp"
+  },
+  {
+    "name": "Gift of Twinned Days",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/gift_of_twinned_days.webp"
+  },
+  {
+    "name": "Gift of Wind-Sped Steps",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "sun-bright-whirlwind",
+    "spiritName": "Sun-Bright Whirlwind",
+    "image": "cards/sun-bright-whirlwind-1.webp"
+  },
+  {
+    "name": "Gnawing Rootbiters",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/gnawing_rootbiters.webp"
+  },
+  {
+    "name": "Gold's Allure",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/gold_s_allure.webp"
+  },
+  {
+    "name": "Grant Hatred a Ravenous Form",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire"
+    ],
+    "kind": "major",
+    "image": "cards/major/grant_hatred_a_ravenous_form.webp"
+  },
+  {
+    "name": "Grasping Tide",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "oceans-hungry-grasp",
+    "spiritName": "Ocean's Hungry Grasp",
+    "image": "cards/oceans-hungry-grasp-1.webp"
+  },
+  {
+    "name": "Growth through Sacrifice",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/growth_through_sacrifice.webp"
+  },
+  {
+    "name": "Guard the Healing Land",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "vital-strength-of-the-earth",
+    "spiritName": "Vital Strength of the Earth",
+    "image": "cards/vital-strength-of-the-earth-2.webp"
+  },
+  {
+    "name": "Guardian Serpents",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/guardian_serpents.webp"
+  },
+  {
+    "name": "Guide the Way on Feathered Wings",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "many-minds-move-as-one",
+    "spiritName": "Many Minds Move as One",
+    "image": "cards/many-minds-move-as-one-3.webp"
+  },
+  {
+    "name": "Harbingers of the Lightning",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "lightnings-swift-strike",
+    "spiritName": "Lightning's Swift Strike",
+    "image": "cards/lightnings-swift-strike-0.webp"
+  },
+  {
+    "name": "Haunted By Primal Memories",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/haunted_by_primal_memories.webp"
+  },
+  {
+    "name": "Hazards Spread Across The Island",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/hazards_spread_across_the_island.webp"
+  },
+  {
+    "name": "Herd Towards the Lurking Maw",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "spiritName": "Devouring Teeth Lurk Underfoot",
+    "image": "cards/devouring-teeth-lurk-underfoot-2.webp"
+  },
+  {
+    "name": "Here there be Monsters",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/here_there_be_monsters.webp"
+  },
+  {
+    "name": "Impersonate Authority",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "spiritName": "Grinning Trickster Stirs Up Trouble",
+    "image": "cards/grinning-trickster-stirs-up-trouble-0.webp"
+  },
+  {
+    "name": "Incite the Mob",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "spiritName": "Grinning Trickster Stirs Up Trouble",
+    "image": "cards/grinning-trickster-stirs-up-trouble-1.webp"
+  },
+  {
+    "name": "Indomitable Claim",
+    "expansion": "Basegame",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/indomitable_claim.webp"
+  },
+  {
+    "name": "Infestation of Venomous Spiders",
+    "expansion": "Jagged Earth",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/infestation_of_venomous_spiders.webp"
+  },
+  {
+    "name": "Infested Aquifers",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/infested_aquifers.webp"
+  },
+  {
+    "name": "Infinite Vitality",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/infinite_vitality.webp"
+  },
+  {
+    "name": "Inflame the Fires of Life",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/inflame_the_fires_of_life.webp"
+  },
+  {
+    "name": "Insatiable Hunger of the Swarm",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/insatiable_hunger_of_the_swarm.webp"
+  },
+  {
+    "name": "Inspire a Winding Dance",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "dances-up-earthquakes",
+    "spiritName": "Dances Up Earthquakes",
+    "image": "cards/dances-up-earthquakes-2.webp"
+  },
+  {
+    "name": "Inspire the Release of Stolen Lands",
+    "expansion": "Nature Incarnate",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/inspire_the_release_of_stolen_lands.webp"
+  },
+  {
+    "name": "Instruments of their own Ruin",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/instruments_of_their_own_ruin.webp"
+  },
+  {
+    "name": "Intractable Thickets and Thorns",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "spiritName": "Fathomless Mud of the Swamp",
+    "image": "cards/fathomless-mud-of-the-swamp-2.webp"
+  },
+  {
+    "name": "Irresistible Call",
+    "expansion": "Jagged Earth",
+    "cost": 6,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/irresistible_call.webp"
+  },
+  {
+    "name": "Jagged Shards Push from the Earth",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "stones-unyielding-defiance",
+    "spiritName": "Stone's Unyielding Defiance",
+    "image": "cards/stones-unyielding-defiance-0.webp"
+  },
+  {
+    "name": "Land of Haunts and Embers",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Air"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/land_of_haunts_and_embers.webp"
+  },
+  {
+    "name": "Lava Flows",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "volcano-looming-high",
+    "spiritName": "Volcano Looming High",
+    "image": "cards/volcano-looming-high-1.webp"
+  },
+  {
+    "name": "Lightning's Boon",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "lightnings-swift-strike",
+    "spiritName": "Lightning's Swift Strike",
+    "image": "cards/lightnings-swift-strike-1.webp"
+  },
+  {
+    "name": "Like Calls to Like",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/like_calls_to_like.webp"
+  },
+  {
+    "name": "Lure of the Unknown",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Air",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/lure_of_the_unknown.webp"
+  },
+  {
+    "name": "Manifest Incarnation",
+    "expansion": "Branch & Claw",
+    "cost": 6,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/manifest_incarnation.webp"
+  },
+  {
+    "name": "Manifestation of Power and Glory",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "thunderspeaker",
+    "spiritName": "Thunderspeaker",
+    "image": "cards/thunderspeaker-0.webp"
+  },
+  {
+    "name": "Mantle of Dread",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "shadows-flicker-like-flame",
+    "spiritName": "Shadows Flicker Like Flame",
+    "image": "cards/shadows-flicker-like-flame-3.webp"
+  },
+  {
+    "name": "Mark Territory with Scars and Teeth",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "spiritName": "Devouring Teeth Lurk Underfoot",
+    "image": "cards/devouring-teeth-lurk-underfoot-3.webp"
+  },
+  {
+    "name": "Melt Earth into Quicksand",
+    "expansion": "Jagged Earth",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/melt_earth_into_quicksand.webp"
+  },
+  {
+    "name": "Mesmerized Tranquility",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Water",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/mesmerized_tranquility.webp"
+  },
+  {
+    "name": "Mists of Oblivion",
+    "expansion": "Basegame",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/mists_of_oblivion.webp"
+  },
+  {
+    "name": "Mysterious Abductions",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "eyes-watch-from-the-trees",
+    "spiritName": "Eyes Watch From the Trees",
+    "image": "cards/eyes-watch-from-the-trees-2.webp"
+  },
+  {
+    "name": "Nature's Resilience",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/nature_s_resilience.webp"
+  },
+  {
+    "name": "Offer Passage Between Worlds",
+    "expansion": "Promo2",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "finder-of-paths-unseen",
+    "spiritName": "Finder of Paths Unseen",
+    "image": "cards/finder-of-paths-unseen-2.webp"
+  },
+  {
+    "name": "Open Shifting Waterways",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "fathomless-mud-of-the-swamp",
+    "spiritName": "Fathomless Mud of the Swamp",
+    "image": "cards/fathomless-mud-of-the-swamp-3.webp"
+  },
+  {
+    "name": "Overenthusiastic Arson",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "spiritName": "Grinning Trickster Stirs Up Trouble",
+    "image": "cards/grinning-trickster-stirs-up-trouble-2.webp"
+  },
+  {
+    "name": "Overgrow in a Night",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "a-spread-of-rampant-green",
+    "spiritName": "A Spread of Rampant Green",
+    "image": "cards/a-spread-of-rampant-green-2.webp"
+  },
+  {
+    "name": "Pact of the Joined Hunt",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/pact_of_the_joined_hunt.webp"
+  },
+  {
+    "name": "Paralyzing Fright",
+    "expansion": "Basegame",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/paralyzing_fright.webp"
+  },
+  {
+    "name": "Paths Tied by Nature",
+    "expansion": "Promo2",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Air",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "finder-of-paths-unseen",
+    "spiritName": "Finder of Paths Unseen",
+    "image": "cards/finder-of-paths-unseen-3.webp"
+  },
+  {
+    "name": "Peace of the Nighttime Sky",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon"
+    ],
+    "kind": "unique",
+    "spirit": "starlight-seeks-its-form",
+    "spiritName": "Starlight Seeks Its Form",
+    "image": "cards/starlight-seeks-its-form-2.webp"
+  },
+  {
+    "name": "Pent-Up Calamity",
+    "expansion": "Branch & Claw",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/pent_up_calamity.webp"
+  },
+  {
+    "name": "Perils of the Deepest Island",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "lure-of-the-deep-wilderness",
+    "spiritName": "Lure of the Deep Wilderness",
+    "image": "cards/lure-of-the-deep-wilderness-1.webp"
+  },
+  {
+    "name": "Pillar of Living Flame",
+    "expansion": "Basegame",
+    "cost": 5,
+    "speed": "Slow",
+    "elements": [
+      "Fire"
+    ],
+    "kind": "major",
+    "image": "cards/major/pillar_of_living_flame.webp"
+  },
+  {
+    "name": "Plague Ships Sail to Distant Ports",
+    "expansion": "Nature Incarnate",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/plague_ships_sail_to_distant_ports.webp"
+  },
+  {
+    "name": "Plaguebearers",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Water",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "vengeance-as-a-burning-plague",
+    "spiritName": "Vengeance as a Burning Plague",
+    "image": "cards/vengeance-as-a-burning-plague-2.webp"
+  },
+  {
+    "name": "Plows Shatter on Rocky Ground",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "stones-unyielding-defiance",
+    "spiritName": "Stone's Unyielding Defiance",
+    "image": "cards/stones-unyielding-defiance-1.webp"
+  },
+  {
+    "name": "Poisoned Dew",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/poisoned_dew.webp"
+  },
+  {
+    "name": "Poisoned Land",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/poisoned_land.webp"
+  },
+  {
+    "name": "Portents of Disaster",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/portents_of_disaster.webp"
+  },
+  {
+    "name": "Pour Time Sideways",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "fractured-days-split-the-sky",
+    "spiritName": "Fractured Days Split the Sky",
+    "image": "cards/fractured-days-split-the-sky-2.webp"
+  },
+  {
+    "name": "Powerstorm",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "major",
+    "image": "cards/major/powerstorm.webp"
+  },
+  {
+    "name": "Predatory Nightmares",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "spiritName": "Bringer of Dreams and Nightmares",
+    "image": "cards/bringer-of-dreams-and-nightmares-3.webp"
+  },
+  {
+    "name": "Prey on the Builders",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "spiritName": "Sharp Fangs Behind the Leaves",
+    "image": "cards/sharp-fangs-behind-the-leaves-0.webp"
+  },
+  {
+    "name": "Promises of Protection",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/promises_of_protection.webp"
+  },
+  {
+    "name": "Prowling Panthers",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/prowling_panthers.webp"
+  },
+  {
+    "name": "Pull Beneath the Hungry Earth",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/pull_beneath_the_hungry_earth.webp"
+  },
+  {
+    "name": "Purifying Flame",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/purifying_flame.webp"
+  },
+  {
+    "name": "Pursue with Scratches, Pecks, and Stings",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "many-minds-move-as-one",
+    "spiritName": "Many Minds Move as One",
+    "image": "cards/unique/unique_pursue_with_scratches_pecks_and_stings.webp"
+  },
+  {
+    "name": "Pyroclastic Bombardment",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "volcano-looming-high",
+    "spiritName": "Volcano Looming High",
+    "image": "cards/volcano-looming-high-2.webp"
+  },
+  {
+    "name": "Pyroclastic Flow",
+    "expansion": "Branch & Claw",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/pyroclastic_flow.webp"
+  },
+  {
+    "name": "Quicken the Earth's Struggles",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/quicken_the_earth_s_struggles.webp"
+  },
+  {
+    "name": "Radiant and Hallowed Grove",
+    "expansion": "Nature Incarnate",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "towering-roots-of-the-jungle",
+    "spiritName": "Towering Roots of the Jungle",
+    "image": "cards/towering-roots-of-the-jungle-3.webp"
+  },
+  {
+    "name": "Radiating Tremors",
+    "expansion": "Nature Incarnate",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "dances-up-earthquakes",
+    "spiritName": "Dances Up Earthquakes",
+    "image": "cards/dances-up-earthquakes-3.webp"
+  },
+  {
+    "name": "Raging Storm",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "lightnings-swift-strike",
+    "spiritName": "Lightning's Swift Strike",
+    "image": "cards/lightnings-swift-strike-2.webp"
+  },
+  {
+    "name": "Rain of Ash",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "volcano-looming-high",
+    "spiritName": "Volcano Looming High",
+    "image": "cards/volcano-looming-high-3.webp"
+  },
+  {
+    "name": "Rain of Blood",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/rain_of_blood.webp"
+  },
+  {
+    "name": "Ravaged Undergrowth Slithers Back to Life",
+    "expansion": "Nature Incarnate",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/ravaged_undergrowth_slithers_back_to_life.webp"
+  },
+  {
+    "name": "Razor-Sharp Undergrowth",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/razor_sharp_undergrowth.webp"
+  },
+  {
+    "name": "Reach from the Infinite Darkness",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "spiritName": "Breath of Darkness Down Your Spine",
+    "image": "cards/breath-of-darkness-down-your-spine-1.webp"
+  },
+  {
+    "name": "Reaching Grasp",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/reaching_grasp.webp"
+  },
+  {
+    "name": "Regrow from Roots",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "spiritName": "Keeper of the Forbidden Wilds",
+    "image": "cards/keeper-of-the-forbidden-wilds-1.webp"
+  },
+  {
+    "name": "Renewing Boon",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/renewing_boon.webp"
+  },
+  {
+    "name": "Renewing Rain",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/renewing_rain.webp"
+  },
+  {
+    "name": "Resounding Footfalls Sow Dismay",
+    "expansion": "Nature Incarnate",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "dances-up-earthquakes",
+    "spiritName": "Dances Up Earthquakes",
+    "image": "cards/unique/unique_resounding_footfalls_sow_dismay.webp"
+  },
+  {
+    "name": "Rites of the Land's Rejection",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/rites_of_the_land_s_rejection.webp"
+  },
+  {
+    "name": "Rituals of Destruction",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Fire",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "vital-strength-of-the-earth",
+    "spiritName": "Vital Strength of the Earth",
+    "image": "cards/vital-strength-of-the-earth-3.webp"
+  },
+  {
+    "name": "River's Bounty",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "river-surges-in-sunlight",
+    "spiritName": "River Surges in Sunlight",
+    "image": "cards/river-surges-in-sunlight-2.webp"
+  },
+  {
+    "name": "Roiling Bog and Snagging Thorn",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/roiling_bog_and_snagging_thorn.webp"
+  },
+  {
+    "name": "Rouse the Trees and Stones",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/rouse_the_trees_and_stones.webp"
+  },
+  {
+    "name": "Rumbling Earthquakes",
+    "expansion": "Nature Incarnate",
+    "cost": 6,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/rumbling_earthquakes.webp"
+  },
+  {
+    "name": "Rumblings Portend a Greater Quake",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "dances-up-earthquakes",
+    "spiritName": "Dances Up Earthquakes",
+    "image": "cards/unique/unique_rumblings_portend_a_greater_quake.webp"
+  },
+  {
+    "name": "Sacrosanct Wilderness",
+    "expansion": "Branch & Claw",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "spiritName": "Keeper of the Forbidden Wilds",
+    "image": "cards/keeper-of-the-forbidden-wilds-2.webp"
+  },
+  {
+    "name": "Sap the Strength of Multitudes",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Water",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/sap_the_strength_of_multitudes.webp"
+  },
+  {
+    "name": "Savage Mawbeasts",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/savage_mawbeasts.webp"
+  },
+  {
+    "name": "Savage Transformation",
+    "expansion": "Branch & Claw",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/savage_transformation.webp"
+  },
+  {
+    "name": "Scarred and Stony Land",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "stones-unyielding-defiance",
+    "spiritName": "Stone's Unyielding Defiance",
+    "image": "cards/stones-unyielding-defiance-2.webp"
+  },
+  {
+    "name": "Scatter to the Winds",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "sun-bright-whirlwind",
+    "spiritName": "Sun-Bright Whirlwind",
+    "image": "cards/sun-bright-whirlwind-2.webp"
+  },
+  {
+    "name": "Scour the Land",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/scour_the_land.webp"
+  },
+  {
+    "name": "Scream Disease Into The Wind",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/scream_disease_into_the_wind.webp"
+  },
+  {
+    "name": "Sea Monsters",
+    "expansion": "Branch & Claw",
+    "cost": 5,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/sea_monsters.webp"
+  },
+  {
+    "name": "Sear Anger Into The Wild Lands",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/sear_anger_into_the_wild_lands.webp"
+  },
+  {
+    "name": "Set Them On An Ever-Twisting Trail",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/set_them_on_an_ever_twisting_trail.webp"
+  },
+  {
+    "name": "Settle Into Hunting-Grounds",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/settle_into_hunting_grounds.webp"
+  },
+  {
+    "name": "Shadows of the Burning Forest",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/shadows_of_the_burning_forest.webp"
+  },
+  {
+    "name": "Shape the Self Anew",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon"
+    ],
+    "kind": "unique",
+    "spirit": "starlight-seeks-its-form",
+    "spiritName": "Starlight Seeks Its Form",
+    "image": "cards/starlight-seeks-its-form-3.webp"
+  },
+  {
+    "name": "Share Secrets of Survival",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "shifting-memory-of-ages",
+    "spiritName": "Shifting Memory of Ages",
+    "image": "cards/shifting-memory-of-ages-2.webp"
+  },
+  {
+    "name": "Shatter Homesteads",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "lightnings-swift-strike",
+    "spiritName": "Lightning's Swift Strike",
+    "image": "cards/lightnings-swift-strike-3.webp"
+  },
+  {
+    "name": "Skies Herald The Season Of Return",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/skies_herald_the_season_of_return.webp"
+  },
+  {
+    "name": "Sky Stretches to Shore",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Water",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/sky_stretches_to_shore.webp"
+  },
+  {
+    "name": "Sleep and Never Waken",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/sleep_and_never_waken.webp"
+  },
+  {
+    "name": "Smothering Infestation",
+    "expansion": "Branch & Claw",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/smothering_infestation.webp"
+  },
+  {
+    "name": "Softly Beckon Ever Inward",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "lure-of-the-deep-wilderness",
+    "spiritName": "Lure of the Deep Wilderness",
+    "image": "cards/lure-of-the-deep-wilderness-2.webp"
+  },
+  {
+    "name": "Solidify Echoes of Majesty Past",
+    "expansion": "Nature Incarnate",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/solidify_echoes_of_majesty_past.webp"
+  },
+  {
+    "name": "Song of Sanctity",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/song_of_sanctity.webp"
+  },
+  {
+    "name": "Spill Bitterness into the Earth",
+    "expansion": "Jagged Earth",
+    "cost": 5,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Water",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/spill_bitterness_into_the_earth.webp"
+  },
+  {
+    "name": "Spur on with Words of Fire",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Air"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/spur_on_with_words_of_fire.webp"
+  },
+  {
+    "name": "Steam Vents",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Water",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/steam_vents.webp"
+  },
+  {
+    "name": "Stem the Flow of Fresh Water",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "a-spread-of-rampant-green",
+    "spiritName": "A Spread of Rampant Green",
+    "image": "cards/a-spread-of-rampant-green-3.webp"
+  },
+  {
+    "name": "Stinging Sandstorm",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "spiritName": "Rising Heat of Stone and Sand",
+    "image": "cards/rising-heat-of-stone-and-sand-2.webp"
+  },
+  {
+    "name": "Storm-Swath",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Air",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/storm_swath.webp"
+  },
+  {
+    "name": "Strangling Firevine",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/strangling_firevine.webp"
+  },
+  {
+    "name": "Strike Low with Sudden Fevers",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "vengeance-as-a-burning-plague",
+    "spiritName": "Vengeance as a Burning Plague",
+    "image": "cards/vengeance-as-a-burning-plague-3.webp"
+  },
+  {
+    "name": "Strong And Constant Currents",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Water",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/strong_and_constant_currents.webp"
+  },
+  {
+    "name": "Stubborn Solidity",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "stones-unyielding-defiance",
+    "spiritName": "Stone's Unyielding Defiance",
+    "image": "cards/stones-unyielding-defiance-3.webp"
+  },
+  {
+    "name": "Study the Invaders' Fears",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "shifting-memory-of-ages",
+    "spiritName": "Shifting Memory of Ages",
+    "image": "cards/shifting-memory-of-ages-3.webp"
+  },
+  {
+    "name": "Sucking Ooze",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/sucking_ooze.webp"
+  },
+  {
+    "name": "Sudden Ambush",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "thunderspeaker",
+    "spiritName": "Thunderspeaker",
+    "image": "cards/thunderspeaker-1.webp"
+  },
+  {
+    "name": "Sunset's Fire Flows Across The Land",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Fire",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/sunset_s_fire_flows_across_the_land.webp"
+  },
+  {
+    "name": "Surging Lahar",
+    "expansion": "Nature Incarnate",
+    "cost": 2,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "ember-eyed-behemoth",
+    "spiritName": "Ember-Eyed Behemoth",
+    "image": "cards/ember-eyed-behemoth-2.webp"
+  },
+  {
+    "name": "Surrounded by the Dahan",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "hearth-vigil",
+    "spiritName": "Hearth-Vigil",
+    "image": "cards/hearth-vigil-3.webp"
+  },
+  {
+    "name": "Swallow the Land-Dwellers",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "oceans-hungry-grasp",
+    "spiritName": "Ocean's Hungry Grasp",
+    "image": "cards/oceans-hungry-grasp-2.webp"
+  },
+  {
+    "name": "Swallowed by the Endless Dark",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "spiritName": "Breath of Darkness Down Your Spine",
+    "image": "cards/breath-of-darkness-down-your-spine-2.webp"
+  },
+  {
+    "name": "Swallowed by the Wilderness",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "lure-of-the-deep-wilderness",
+    "spiritName": "Lure of the Deep Wilderness",
+    "image": "cards/lure-of-the-deep-wilderness-3.webp"
+  },
+  {
+    "name": "Swarming Wasps",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/swarming_wasps.webp"
+  },
+  {
+    "name": "Sweep into the Sea",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Air",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/sweep_into_the_sea.webp"
+  },
+  {
+    "name": "Sweltering Exhaustion",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "rising-heat-of-stone-and-sand",
+    "spiritName": "Rising Heat of Stone and Sand",
+    "image": "cards/rising-heat-of-stone-and-sand-3.webp"
+  },
+  {
+    "name": "Talons of Lightning",
+    "expansion": "Basegame",
+    "cost": 6,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Air"
+    ],
+    "kind": "major",
+    "image": "cards/major/talons_of_lightning.webp"
+  },
+  {
+    "name": "Teeming Rivers",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Water",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/teeming_rivers.webp"
+  },
+  {
+    "name": "Teeth Gleam from Darkness",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "spiritName": "Sharp Fangs Behind the Leaves",
+    "image": "cards/sharp-fangs-behind-the-leaves-1.webp"
+  },
+  {
+    "name": "Tempest of Leaves and Branches",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "sun-bright-whirlwind",
+    "spiritName": "Sun-Bright Whirlwind",
+    "image": "cards/sun-bright-whirlwind-3.webp"
+  },
+  {
+    "name": "Terrifying Chase",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "spiritName": "Sharp Fangs Behind the Leaves",
+    "image": "cards/sharp-fangs-behind-the-leaves-2.webp"
+  },
+  {
+    "name": "Terrifying Nightmares",
+    "expansion": "Basegame",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "major",
+    "image": "cards/major/terrifying_nightmares.webp"
+  },
+  {
+    "name": "Terrifying Rampage",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "ember-eyed-behemoth",
+    "spiritName": "Ember-Eyed Behemoth",
+    "image": "cards/ember-eyed-behemoth-3.webp"
+  },
+  {
+    "name": "Territorial Strife",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/territorial_strife.webp"
+  },
+  {
+    "name": "Terror of the Hunted",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "breath-of-darkness-down-your-spine",
+    "spiritName": "Breath of Darkness Down Your Spine",
+    "image": "cards/breath-of-darkness-down-your-spine-3.webp"
+  },
+  {
+    "name": "Terror Turns To Madness",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/terror_turns_to_madness.webp"
+  },
+  {
+    "name": "The Fog Closes In",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "shroud-of-silent-mist",
+    "spiritName": "Shroud of Silent Mist",
+    "image": "cards/shroud-of-silent-mist-2.webp"
+  },
+  {
+    "name": "The Jungle Hungers",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/the_jungle_hungers.webp"
+  },
+  {
+    "name": "The Land Thrashes in Furious Pain",
+    "expansion": "Basegame",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/the_land_thrashes_in_furious_pain.webp"
+  },
+  {
+    "name": "The Past Returns Again",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon"
+    ],
+    "kind": "unique",
+    "spirit": "fractured-days-split-the-sky",
+    "spiritName": "Fractured Days Split the Sky",
+    "image": "cards/fractured-days-split-the-sky-3.webp"
+  },
+  {
+    "name": "The Shore Seethes With Hatred",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Water",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/the_shore_seethes_with_hatred.webp"
+  },
+  {
+    "name": "The Trees and Stones Speak of War",
+    "expansion": "Basegame",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/the_trees_and_stones_speak_of_war.webp"
+  },
+  {
+    "name": "The Wounded Wild Turns on its Assailants",
+    "expansion": "Jagged Earth",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/the_wounded_wild_turns_on_its_assailants.webp"
+  },
+  {
+    "name": "Thickets Erupt with Every Touch of Breeze",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/thickets_erupt_with_every_touch_of_breeze.webp"
+  },
+  {
+    "name": "Threatening Flames",
+    "expansion": "Promo",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "heart-of-the-wildfire",
+    "spiritName": "Heart of the Wildfire",
+    "image": "cards/heart-of-the-wildfire-3.webp"
+  },
+  {
+    "name": "Thriving Chokefungus",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/thriving_chokefungus.webp"
+  },
+  {
+    "name": "Tidal Boon",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "oceans-hungry-grasp",
+    "spiritName": "Ocean's Hungry Grasp",
+    "image": "cards/oceans-hungry-grasp-3.webp"
+  },
+  {
+    "name": "Tigers Hunting",
+    "expansion": "Branch & Claw",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/tigers_hunting.webp"
+  },
+  {
+    "name": "Too Near the Jungle",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "spiritName": "Sharp Fangs Behind the Leaves",
+    "image": "cards/sharp-fangs-behind-the-leaves-3.webp"
+  },
+  {
+    "name": "Tormenting Rotflies",
+    "expansion": "Branch & Claw",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/tormenting_rotflies.webp"
+  },
+  {
+    "name": "Towering Wrath",
+    "expansion": "Branch & Claw",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "spiritName": "Keeper of the Forbidden Wilds",
+    "image": "cards/keeper-of-the-forbidden-wilds-3.webp"
+  },
+  {
+    "name": "Transform to a Murderous Darkness",
+    "expansion": "Jagged Earth",
+    "cost": 6,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Air",
+      "Water",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/transform_to_a_murderous_darkness.webp"
+  },
+  {
+    "name": "Transformative Sacrifice",
+    "expansion": "Nature Incarnate",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Water",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/transformative_sacrifice.webp"
+  },
+  {
+    "name": "Traveler's Boon",
+    "expansion": "Promo2",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "unique",
+    "spirit": "finder-of-paths-unseen",
+    "spiritName": "Finder of Paths Unseen",
+    "image": "cards/unique/unique_traveler_s_boon.webp"
+  },
+  {
+    "name": "Treacherous Waterways",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Fire",
+      "Water",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/treacherous_waterways.webp"
+  },
+  {
+    "name": "Trees Radiate Celestial Brilliance",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/trees_radiate_celestial_brilliance.webp"
+  },
+  {
+    "name": "Tsunami",
+    "expansion": "Basegame",
+    "cost": 6,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/tsunami.webp"
+  },
+  {
+    "name": "Turmoil's Touch",
+    "expansion": "Nature Incarnate",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "wandering-voice-keens-delirium",
+    "spiritName": "Wandering Voice Keens Delirium",
+    "image": "cards/wandering-voice-keens-delirium-2.webp"
+  },
+  {
+    "name": "Twilight Fog brings Madness",
+    "expansion": "Branch & Claw",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/twilight_fog_brings_madness.webp"
+  },
+  {
+    "name": "Twist Perceptions",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Animal",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "wandering-voice-keens-delirium",
+    "spiritName": "Wandering Voice Keens Delirium",
+    "image": "cards/wandering-voice-keens-delirium-3.webp"
+  },
+  {
+    "name": "Twisted Flowers Murmur Ultimatums",
+    "expansion": "Branch & Claw",
+    "cost": 5,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/twisted_flowers_murmur_ultimatums.webp"
+  },
+  {
+    "name": "Unbearable Deluge",
+    "expansion": "Promo2",
+    "cost": 0,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "downpour-drenches-the-world",
+    "spiritName": "Downpour Drenches the World",
+    "image": "cards/downpour-drenches-the-world-3.webp"
+  },
+  {
+    "name": "Unbearable Gaze",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire"
+    ],
+    "kind": "unique",
+    "spirit": "relentless-gaze-of-the-sun",
+    "spiritName": "Relentless Gaze of the Sun",
+    "image": "cards/relentless-gaze-of-the-sun-2.webp"
+  },
+  {
+    "name": "Uncanny Melting",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Water"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/uncanny_melting.webp"
+  },
+  {
+    "name": "Unearth a Beast of Wrathful Stone",
+    "expansion": "Nature Incarnate",
+    "cost": 5,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/unearth_a_beast_of_wrathful_stone.webp"
+  },
+  {
+    "name": "Unexpected Tigers",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "spiritName": "Grinning Trickster Stirs Up Trouble",
+    "image": "cards/grinning-trickster-stirs-up-trouble-3.webp"
+  },
+  {
+    "name": "Unleash a Torrent of the Self's Own Essence",
+    "expansion": "Jagged Earth",
+    "cost": 2,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Fire",
+      "Water"
+    ],
+    "kind": "major",
+    "image": "cards/major/unleash_a_torrent_of_the_self_s_own_essence.webp"
+  },
+  {
+    "name": "Unlock the Gates of Deepest Power",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Fire",
+      "Air",
+      "Water",
+      "Earth",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/unlock_the_gates_of_deepest_power.webp"
+  },
+  {
+    "name": "Unnerving Pall",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "shroud-of-silent-mist",
+    "spiritName": "Shroud of Silent Mist",
+    "image": "cards/shroud-of-silent-mist-3.webp"
+  },
+  {
+    "name": "Unquenchable Flames",
+    "expansion": "Jagged Earth",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/unquenchable_flames.webp"
+  },
+  {
+    "name": "Unrelenting Growth",
+    "expansion": "Branch & Claw",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Water",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/unrelenting_growth.webp"
+  },
+  {
+    "name": "Utter a Curse of Dread and Bone",
+    "expansion": "Jagged Earth",
+    "cost": 4,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/utter_a_curse_of_dread_and_bone.webp"
+  },
+  {
+    "name": "Vanish Softly Away, Forgotten by All",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air"
+    ],
+    "kind": "major",
+    "image": "cards/major/vanish_softly_away_forgotten_by_all.webp"
+  },
+  {
+    "name": "Veil the Night's Hunt",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Air",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/veil_the_night_s_hunt.webp"
+  },
+  {
+    "name": "Vengeance of the Dead",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/vengeance_of_the_dead.webp"
+  },
+  {
+    "name": "Vigor of the Breaking Dawn",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/vigor_of_the_breaking_dawn.webp"
+  },
+  {
+    "name": "Visions of Fiery Doom",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Moon",
+      "Fire"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/visions_of_fiery_doom.webp"
+  },
+  {
+    "name": "Voice of Command",
+    "expansion": "Jagged Earth",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air"
+    ],
+    "kind": "major",
+    "image": "cards/major/voice_of_command.webp"
+  },
+  {
+    "name": "Voice of Thunder",
+    "expansion": "Basegame",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Air"
+    ],
+    "kind": "unique",
+    "spirit": "thunderspeaker",
+    "spiritName": "Thunderspeaker",
+    "image": "cards/thunderspeaker-2.webp"
+  },
+  {
+    "name": "Volcanic Eruption",
+    "expansion": "Branch & Claw",
+    "cost": 8,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/volcanic_eruption.webp"
+  },
+  {
+    "name": "Voracious Growth",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Plant"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/voracious_growth.webp"
+  },
+  {
+    "name": "Walls of Rock and Thorn",
+    "expansion": "Jagged Earth",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Earth",
+      "Plant"
+    ],
+    "kind": "major",
+    "image": "cards/major/walls_of_rock_and_thorn.webp"
+  },
+  {
+    "name": "Wash Away",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "river-surges-in-sunlight",
+    "spiritName": "River Surges in Sunlight",
+    "image": "cards/river-surges-in-sunlight-3.webp"
+  },
+  {
+    "name": "Ways of Shore and Heartland",
+    "expansion": "Promo2",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Air",
+      "Water",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "finder-of-paths-unseen",
+    "spiritName": "Finder of Paths Unseen",
+    "image": "cards/unique/unique_ways_of_shore_and_heartland.webp"
+  },
+  {
+    "name": "Weave Together the Fabric of Place",
+    "expansion": "Jagged Earth",
+    "cost": 4,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Moon",
+      "Air",
+      "Water",
+      "Earth"
+    ],
+    "kind": "major",
+    "image": "cards/major/weave_together_the_fabric_of_place.webp"
+  },
+  {
+    "name": "Weep For What Is Lost",
+    "expansion": "Jagged Earth",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Fire",
+      "Water",
+      "Animal"
+    ],
+    "kind": "minor",
+    "image": "cards/minor/weep_for_what_is_lost.webp"
+  },
+  {
+    "name": "Whispered Guidance Through the Night",
+    "expansion": "Horizons of Spirit Island",
+    "cost": 0,
+    "speed": "Slow",
+    "elements": [
+      "Moon",
+      "Air",
+      "Plant"
+    ],
+    "kind": "unique",
+    "spirit": "eyes-watch-from-the-trees",
+    "spiritName": "Eyes Watch From the Trees",
+    "image": "cards/eyes-watch-from-the-trees-3.webp"
+  },
+  {
+    "name": "Winds of Rust and Atrophy",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Air",
+      "Water",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/winds_of_rust_and_atrophy.webp"
+  },
+  {
+    "name": "Wither Bodies, Scar Stones",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Sun",
+      "Fire",
+      "Earth"
+    ],
+    "kind": "unique",
+    "spirit": "relentless-gaze-of-the-sun",
+    "spiritName": "Relentless Gaze of the Sun",
+    "image": "cards/relentless-gaze-of-the-sun-3.webp"
+  },
+  {
+    "name": "Words of Warning",
+    "expansion": "Basegame",
+    "cost": 1,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "thunderspeaker",
+    "spiritName": "Thunderspeaker",
+    "image": "cards/thunderspeaker-3.webp"
+  },
+  {
+    "name": "Wrack with Pain and Grief",
+    "expansion": "Nature Incarnate",
+    "cost": 1,
+    "speed": "Slow",
+    "elements": [
+      "Water",
+      "Plant",
+      "Animal"
+    ],
+    "kind": "unique",
+    "spirit": "wounded-waters-bleeding",
+    "spiritName": "Wounded Waters Bleeding",
+    "image": "cards/wounded-waters-bleeding-3.webp"
+  },
+  {
+    "name": "Wrap in Wings of Sunlight",
+    "expansion": "Basegame",
+    "cost": 3,
+    "speed": "Fast",
+    "elements": [
+      "Sun",
+      "Air",
+      "Animal"
+    ],
+    "kind": "major",
+    "image": "cards/major/wrap_in_wings_of_sunlight.webp"
+  }
+]
