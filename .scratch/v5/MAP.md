@@ -58,6 +58,13 @@ scenarios browse alongside the cards.
   centralized in `src/domain/playerCount.ts`; tier list's player-count control/filter removed;
   Fear/Events/Blight's redundant "Type" row and `OtherCardFilterState.kinds` deleted; "Unrated"
   label rotated vertical instead of squashed.
+- **[#02](issues/02-what-the-buckets-are.md) done** (2026-07-12), via `/grilling` against the real
+  card corpus: events carry their 5 upstream classes verbatim (free, structural, single-tag); fear
+  gets 5 keyword-derived multi-tag buckets (Removal/Defensive/Weaken/Disruption/Displacement);
+  blight gets 4 keyword-derived multi-tag buckets (Presence loss/Board change/Damage bonus/Resource
+  swing), marked as judgment data, with the "aggressive" axis dropped as unratable. Both fear and
+  blight's unmatched cards get an explicit filterable "Unclassified" state, never a forced bucket.
+  #03 unblocked.
 
 Two calls were made while charting, ahead of any ticket:
 

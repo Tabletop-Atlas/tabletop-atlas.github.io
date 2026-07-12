@@ -1,6 +1,6 @@
 # 02 — What the fear / event / blight buckets are
 
-Status: needs-triage
+Status: done
 Type: wayfinder:grilling (HITL)
 Parent: [v5 map](../MAP.md)
 
@@ -60,3 +60,53 @@ Use `/grilling` and `/domain-modeling`. The output is a spec [#03](03-the-card-s
 implements verbatim.
 
 ## Comments
+
+**Resolved 2026-07-12, via `/grilling` against the real corpus** (all 50 fear cards'
+`level1`/`level2`/`level3` text and all 24 blight cards' full text, fetched live from
+`sick.oberien.de/cards.js`). #03 implements this verbatim.
+
+### Events — free, structural, single-tag
+
+Sub-type = the 5 upstream classes, carried through as-is, no keyword rules:
+`ChoiceEventCard` → **Choice**, `StageEventCard` → **Stage**, `TerrorLevelEventCard` → **Terror
+Level**, `HealthyBlightedLandEventCard` → **Healthy/Blighted Land**, `AdversaryEvent` →
+**Adversary**. This is exactly what the owner meant by "healthy vs. blighted island" and "terror
+level" — the source already draws these lines.
+
+### Fear — keyword-derived, multi-tag
+
+Five buckets, a card may carry more than one (the level-scaled text often crosses buckets — e.g.
+*Belief Takes Root* is Defensive at L1/L2, Removal at L3):
+
+- **Removal** — destroys/removes an Explorer/Town/City (~20+ cards, the largest bucket)
+- **Defensive** — "Defend N" (~9-10 cards)
+- **Weaken** — adds Strife, or "-1 Health per Strife" (~9 cards)
+- **Disruption** — Isolate a land, or skip a normal Explore/Build action (~6-7 cards)
+- **Displacement** — Push/Gather Invaders without removing them (~5-6 cards)
+
+Derived deterministically from `level1`/`level2`/`level3` text — every tag traces to a matched
+phrase, not a single-level read (the classifier scans all three levels' text for each card).
+
+**Unmatched card:** no forced bucket — ships with an empty tag list, filterable as an explicit
+**"Unclassified"** option (same shape as the tier board's "Unrated" row: absent, not fabricated).
+
+### Blight — keyword-derived, multi-tag, judgment-marked
+
+Four buckets, multi-tag, same unclassified handling as fear (empty tags, explicit "Unclassified"
+filter option):
+
+- **Presence loss** — destroys a Spirit's Presence (the majority of cards)
+- **Board change** — adds Town/City/Dahan/Blight to the board
+- **Damage bonus** — Invaders deal +damage during Ravage
+- **Resource swing** — Energy/card-play/card-draw effects (can help or hurt Spirits)
+
+**Marked as judgment data** (like `shiftsToward`/`ratingsSource`): the bucket boundaries are a
+coarser read of the text than fear's more clear-cut categories, so provenance says so honestly.
+
+**The "aggressive vs. less aggressive" axis is dropped entirely** — no honest descriptive
+equivalent exists; severity depends on game state (Blight-per-player, player count, turn), and
+tagging it would be rating cards, out of scope per the map.
+
+**The free `Blighted Island` / `Still-Healthy Island (for now)` structural field on blight cards
+is *not* shipped as a sub-type** (owner's call) — noted here since it was found "for free" the same
+way the event classes were, in case it's revisited later.

@@ -1,6 +1,6 @@
 # 03 — The card sub-type classifier
 
-Status: needs-triage
+Status: ready-for-agent
 Type: wayfinder:task (AFK)
 Parent: [v5 map](../MAP.md)
 
