@@ -54,6 +54,14 @@ recommender. This map decides; it does not build.
   collection, Complexity overrides. Open-door policy: future durable prefs default to Settings.
   The v5 split survives — durable collection in Settings, session-only hide-unowned checkboxes
   stay on each surface.
+- **[#06 multi-tier-list architecture](issues/06-multi-tier-list-architecture.md) done**
+  (2026-07-13), via `/grilling` + `/domain-modeling`: every tier list gains a **subject**
+  (`configurations` / `minor-powers` / `major-powers`) defining its key namespace; one **active
+  list per subject** keeps board and browser agreeing, with a durable **default list** pick in
+  Settings seeded to the credited list. One Tier list tab serves all subjects. ADR 0001's
+  cited-document rules extend unchanged; no `game` field — subject is the multi-game seam.
+  Terms recorded in the repo's new `CONTEXT.md`; ADR 0002 drafted at build time. **#07
+  unblocked.**
 
 Eight calls were made by the owner ahead of charting, locked in
 [docs/phase-4-notes.md](../../docs/phase-4-notes.md) — they are not tickets; #09 folds them into
@@ -107,5 +115,5 @@ decide                                            assemble
 08 the recommender's short-term shape ───────┘
 ```
 
-Frontier (updated 2026-07-13): **#03, #04, #05, #06, #08** — all independent, any order.
-#07 waits on #06; #09 waits on everything. #01 and #02 are done.
+Frontier (updated 2026-07-13): **#03, #04, #05, #07, #08** — all independent, any order.
+#09 waits on everything else. #01, #02 and #06 are done; #06's close unblocked #07.
