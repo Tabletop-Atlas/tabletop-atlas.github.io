@@ -278,11 +278,6 @@ button:disabled {
   color: #8aa0b2;
   font-size: 12px;
 }
-.notes-relevant {
-  color: var(--deck-text);
-  border-left: 2px solid var(--deck-accent);
-  padding-left: 0.7rem;
-}
 .why-you {
   color: var(--deck-accent);
 }

@@ -8,8 +8,6 @@ import { candidatesForRecommender, collectionStore, isConfigurationOwned } from 
 import { complexityStore } from '../domain/complexityStore'
 import { expand, type Configuration } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
-import { isRelevantToPlayerCount } from '../domain/noteRelevance'
-import { clampPlayerCount } from '../domain/playerCount'
 import { QUESTIONS } from '../domain/questionnaire'
 import { drawRandom } from '../domain/randomChoose'
 import { dedupeBySpirit, recommend, type Weights } from '../domain/recommend'
@@ -41,8 +39,6 @@ interface RecommenderState {
   setStep: (fn: (s: number) => number) => void
   answers: Answers
   answer: (questionId: string, value: string) => void
-  playerCount: number
-  setPlayerCount: (n: number) => void
   restart: () => void
   teamIds: string[]
   setTeamIds: (fn: (ids: string[]) => string[]) => void
@@ -57,9 +53,7 @@ interface RecommenderState {
 
 const Ctx = createContext<RecommenderState | null>(null)
 
-/** Exported so other tabs (the tier board, the editor) can read the shared player count -
- * see #06: player count filters which tier lists are selectable, everywhere, not just here. */
-export function useRecommender(): RecommenderState {
+function useRecommender(): RecommenderState {
   const ctx = useContext(Ctx)
   if (!ctx) throw new Error('Recommender components must be inside <RecommenderProvider>')
   return ctx
@@ -72,7 +66,6 @@ export function RecommenderProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<Phase>(hasRestored ? 'resume' : 'wizard')
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>(restored ?? {})
-  const [playerCount, setPlayerCount] = useState(2)
   const [teamIds, setTeamIds] = useState<string[]>([])
   const [tuned, setTuned] = useState(false)
   const [wildcardOffset, setWildcardOffset] = useState(0)
@@ -89,8 +82,6 @@ export function RecommenderProvider({ children }: { children: ReactNode }) {
     setStep,
     answers,
     answer: (questionId, val) => setAnswers((prev) => ({ ...prev, [questionId]: val })),
-    playerCount,
-    setPlayerCount: (n) => setPlayerCount(clampPlayerCount(n)),
     restart: () => {
       answersStore.clear()
       setAnswers({})
@@ -163,26 +154,6 @@ function useRanking() {
   return { prefs, weights, roleGaps, ranked, wildcard, excluded: new Set(excluded) }
 }
 
-/** Holds the field as a free-typed string locally, clamping only on blur - clamping every
- * keystroke would make an emptied field (backspacing a "2" to "") impossible to retype into. */
-function PlayerCountInput() {
-  const { playerCount, setPlayerCount } = useRecommender()
-  const [text, setText] = useState(String(playerCount))
-
-  useEffect(() => setText(String(playerCount)), [playerCount])
-
-  return (
-    <input
-      type="number"
-      min={1}
-      max={6}
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-      onBlur={() => setPlayerCount(Number(text))}
-    />
-  )
-}
-
 /* ------------------------------ sidebar ------------------------------ */
 
 /** "beatOpponents" -> "beat opponents". The full prompt stays as the control's tooltip. */
@@ -198,11 +169,6 @@ export function RecommenderSide() {
   return (
     <div className="deck-knobs">
       <div className="deck-knobs-title">Your answers</div>
-
-      <label className="deck-field">
-        <span>players</span>
-        <PlayerCountInput />
-      </label>
 
       {QUESTIONS.map((question) => (
         <label className="deck-field" key={question.id} title={question.prompt}>
@@ -286,11 +252,9 @@ function ResultRow({
   owned: boolean
 }) {
   const [open, setOpen] = useState(false)
-  const { playerCount } = useRecommender()
   const { spirit, aspect } = config
   const hintAxis = topWeightedLowAxis(spirit, weights)
   const siblings = CONFIGS_BY_SPIRIT[spirit.id].filter((c) => c.configId !== config.configId)
-  const noteIsRelevant = spirit.notes ? isRelevantToPlayerCount(spirit.notes, playerCount) : false
 
   return (
     <li className={owned ? 'deck-row' : 'deck-row deck-row-unowned'}>
@@ -325,12 +289,7 @@ function ResultRow({
                 {aspect.delta ?? <em className="meta">effect not transcribed yet</em>}
               </p>
             )}
-            {spirit.notes && (
-              <p className={noteIsRelevant ? 'notes notes-relevant' : 'notes'}>
-                {noteIsRelevant ? <strong>At this table size: </strong> : null}
-                {spirit.notes}
-              </p>
-            )}
+            {spirit.notes && <p className="notes">{spirit.notes}</p>}
             {siblings.length > 0 && (
               <>
                 <p className="meta">Other configurations of {spirit.name}:</p>
@@ -480,31 +439,14 @@ function TeamPanel() {
 function Wizard() {
   const { step, setStep, answers, answer, setPhase } = useRecommender()
 
-  if (step === 0) {
-    return (
-      <section className="deck-wizard">
-        <h2>How many players at the table?</h2>
-        <PlayerCountInput />
-        <div className="deck-wizard-actions">
-          <button type="button" onClick={() => setStep((s) => s + 1)}>
-            Next
-          </button>
-          <button type="button" className="deck-ghost" onClick={() => setPhase('random')}>
-            Just pick one at random
-          </button>
-        </div>
-      </section>
-    )
-  }
-
-  const question = QUESTIONS[step - 1]
+  const question = QUESTIONS[step]
   const selected = answers[question.id]
-  const last = step === QUESTIONS.length
+  const last = step === QUESTIONS.length - 1
 
   return (
     <section className="deck-wizard">
       <p className="meta">
-        Question {step} of {QUESTIONS.length}
+        Question {step + 1} of {QUESTIONS.length}
       </p>
       <h2>{question.prompt}</h2>
       <ul className="deck-choices">
@@ -521,9 +463,15 @@ function Wizard() {
         ))}
       </ul>
       <div className="deck-wizard-actions">
-        <button type="button" className="deck-ghost" onClick={() => setStep((s) => Math.max(0, s - 1))}>
-          Back
-        </button>
+        {step > 0 ? (
+          <button type="button" className="deck-ghost" onClick={() => setStep((s) => s - 1)}>
+            Back
+          </button>
+        ) : (
+          <button type="button" className="deck-ghost" onClick={() => setPhase('random')}>
+            Just pick one at random
+          </button>
+        )}
         <button type="button" disabled={!selected} onClick={() => (last ? setPhase('board') : setStep((s) => s + 1))}>
           {last ? 'See results' : 'Next'}
         </button>

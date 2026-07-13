@@ -24,8 +24,10 @@ describe('app smoke', () => {
     expect(html).toContain('alt="Spirit Island"')
     expect(html).toContain('Recommend')
     expect(html).toContain('Tier list')
-    // Fresh state (memory storage) starts at the wizard, step 0.
-    expect(html).toContain('How many players')
+    // Fresh state (memory storage) starts at the wizard, on its first real question (#10:
+    // the player-count screen is gone).
+    expect(html).toContain('How do you like to beat your opponents?')
+    expect(html).not.toContain('How many players')
   })
 
   it('throws a useful error if recommender components are used outside the provider', () => {
