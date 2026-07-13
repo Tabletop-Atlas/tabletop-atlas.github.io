@@ -14,6 +14,7 @@ import { CardGrid } from './CardGrid'
 import { CardRows } from './CardRows'
 import { OtherCardFilters } from './OtherCardFilters'
 import { OtherCardRows } from './OtherCardRows'
+import { ScenarioDifficultyGrid } from '../prototypes/scenario-difficulty/ScenarioDifficultyGrid'
 import { ScenarioRows } from './ScenarioRows'
 
 const powerCards = powerCardsData as PowerCard[]
@@ -172,7 +173,9 @@ export function CardsTab() {
         )
       ) : segment === 'Scenarios' ? (
         view === 'grid' ? (
-          <CardGrid cards={SCENARIOS} />
+          // phase-4 #20 variant round (awaiting the owner's pick): plain CardGrid unless
+          // ?variant= is set. Reverts to <CardGrid cards={SCENARIOS} /> when the round closes.
+          <ScenarioDifficultyGrid />
         ) : (
           <ScenarioRows scenarios={SCENARIOS} />
         )
