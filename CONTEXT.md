@@ -34,9 +34,10 @@ _Avoid_: selected list, current list
 
 **Default list**:
 The durable, user-changeable pick (in Settings) of which list boots as active for a subject.
-Seeded to the app's credited default list, not the user's own board. (Seed pending: the owner's
-named source URL matches no shipped citation — the owner's board holds until #18 verifies; see
-ADR 0002's "Left open".)
+Intended seed: the app's credited default list, not the user's own board. (Seed escalated, not
+flipped: #18 verified the owner's named source URL against the shipped citations and none
+matches — the owner's board holds until the owner says which list they meant; see ADR 0002's
+"Left open".)
 _Avoid_: primary list
 
 **Collection**:

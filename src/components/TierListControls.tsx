@@ -4,7 +4,7 @@ import { LIST_TYPES, TIER_LIST_SUBJECTS } from '../domain/types'
 import type { TierList, TierListSubject, TierListType } from '../domain/types'
 
 /** Human labels for subject headings (#06: "UI may label subjects in human words"). */
-const SUBJECT_LABEL: Record<TierListSubject, string> = {
+export const SUBJECT_LABEL: Record<TierListSubject, string> = {
   configurations: 'Spirits',
   'minor-powers': 'Minor powers',
   'major-powers': 'Major powers',
@@ -20,13 +20,15 @@ function TierListCitation({ list, rated, total }: { list: TierList; rated: numbe
         </span>
         {!list.verified && <span className="badge-unverified"> Unverified</span>}
       </p>
+      {/* phase-4 #18: the credit for a cited list is author + title + link, straight from the
+       * citation fields — a personal list shows its personal origin instead, never a fake one. */}
       <p className="meta">
         By {list.source?.author ?? 'you'}
         {list.source && (
           <>
             {' · '}
             <a href={list.source.url} target="_blank" rel="noreferrer">
-              source
+              {list.source.title}
             </a>
           </>
         )}

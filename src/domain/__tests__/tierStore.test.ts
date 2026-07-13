@@ -369,7 +369,7 @@ describe('tierStore', () => {
       expect(store.getActiveListFor('major-powers')).toBeUndefined()
     })
 
-    it('a fresh install boots the owner\'s board as the configurations default (today\'s behaviour, pending #18\'s verified seed)', () => {
+    it('a fresh install boots the owner\'s board as the configurations default (#18 verified the seed and escalated — stays until the owner answers, see ADR 0002)', () => {
       const store = createTierStore(memoryStorage(), shipped)
       expect(store.getDefaultList('configurations')?.id).toBe(OWNERS_BOARD.id)
       expect(store.getActiveList().id).toBe(OWNERS_BOARD.id)

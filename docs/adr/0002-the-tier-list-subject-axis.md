@@ -58,5 +58,9 @@ list.** The owner named a specific 3MBG video as the app's default
 (`.scratch/phase-4/MAP.md`), but its URL matches **no shipped list's citation** —
 `3mbg-strength-solo-2025.json` cites a different video id. Per #18's own tripwire ("if no
 shipped list's citation matches it, stop and surface to the owner rather than guessing"),
-seeding it here would be a guess. #18 verifies the source, flips the seed via
-`setDefaultListId`, and ships the visible attribution that must accompany it.
+seeding it here would be a guess. **#18 ran that verification and escalated instead of
+flipping**: the visible attribution and the Settings default-list pick shipped; the seed stays
+the owner's board. Open question for the owner: is `3mbg-strength-solo-2025` (scraped from
+`watch?v=d130MTU08fg`) the list you meant by naming `watch?v=LoP2T4GO4xo`, or is that a
+different list still to transcribe? Once answered, the flip is a one-line seed change in
+`defaultListFor` plus the smoke test's pinned URL.

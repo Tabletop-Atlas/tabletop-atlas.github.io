@@ -56,13 +56,31 @@ describe('app smoke', () => {
     expect(labels).toEqual(['Browse', 'Recommend', 'Archive', 'Tier list', 'Log', 'Settings'])
   })
 
-  it('Settings holds exactly the three migrated sections (#14)', () => {
+  it('Settings holds exactly the three migrated sections (#14) plus the default-list pick (#18)', () => {
     const settings = renderToStaticMarkup(<Settings />)
     expect(settings).toContain('Backup')
+    expect(settings).toContain('Default tier list')
     expect(settings).toContain('My collection')
     expect(settings).toContain('Complexity overrides')
-    // "Exactly" the three migrated sections — a fourth section heading would be scope creep.
-    expect(settings.match(/<h3>/g)).toHaveLength(3)
+    // "Exactly" these sections — a fifth heading would be scope creep.
+    expect(settings.match(/<h3>/g)).toHaveLength(4)
+  })
+
+  it('the credit line renders for the default boot state, and a cited list credits author, title and link (#18)', () => {
+    // Default boot: the owner's board — a personal list shows its personal origin, no citation.
+    const board = renderToStaticMarkup(<TierBoard />)
+    expect(board).toContain('your list')
+    expect(board).toContain('By you')
+
+    tierStore.setActiveListId('3mbg-strength-solo-2025')
+    try {
+      const cited = renderToStaticMarkup(<TierBoard />)
+      expect(cited).toContain('By 3 Minute Board Games')
+      expect(cited).toContain('Tier ranking all the official spirits in Spirit Island (2025)')
+      expect(cited).toContain('href="https://www.youtube.com/watch?v=d130MTU08fg"')
+    } finally {
+      tierStore.setActiveListId('owners-board')
+    }
   })
 
   it('a personal minor-powers list renders card tiles on the board, and a rated card lands in its row (#16)', () => {

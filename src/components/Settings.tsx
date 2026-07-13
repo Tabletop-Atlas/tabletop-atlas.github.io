@@ -9,9 +9,10 @@ import { expand } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
 import { QUESTIONS } from '../domain/questionnaire'
 import { tierStore } from '../domain/tierStore'
-import { COMPLEXITIES, EXPANSIONS } from '../domain/types'
+import { COMPLEXITIES, EXPANSIONS, TIER_LIST_SUBJECTS } from '../domain/types'
 import type { Complexity, Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
+import { SUBJECT_LABEL } from './TierListControls'
 
 const spirits = spiritsData as Spirit[]
 const configurations = expand(spirits)
@@ -61,6 +62,7 @@ export function Settings() {
   const complexityCustomised = complexityStore.isCustomised()
   const complexityDiscarded = complexityStore.wasDiscarded()
   const collectionCustomised = collectionStore.isCustomised()
+  const allLists = tierStore.getLists()
 
   const handleSetComplexity = (spiritId: string, complexity: Complexity) => {
     complexityStore.setComplexity(spiritId, complexity)
@@ -187,6 +189,36 @@ export function Settings() {
         />
       </p>
       {importMessage ? <p className="meta">{importMessage}</p> : null}
+
+      {/* phase-4 #18: the durable boot pick, on the #12 seams. The active list stays session
+       * state — changing the default here changes which list boots next load, not this one.
+       * Seed note: the owner's named default video matches no shipped citation, so the seed
+       * stays the owner's board pending the owner's answer (escalated in #12/#18, ADR 0002). */}
+      <h3>Default tier list</h3>
+      <p className="meta">
+        Which list each subject boots into. Switching a list on the Tier list tab lasts for the
+        session; the pick here is what a fresh load starts from.
+      </p>
+      {TIER_LIST_SUBJECTS.filter((subject) => allLists.some((l) => l.subject === subject)).map((subject) => (
+        <label key={subject} className="deck-field">
+          <span>{SUBJECT_LABEL[subject]}</span>
+          <select
+            value={tierStore.getDefaultList(subject)?.id ?? ''}
+            onChange={(e) => {
+              tierStore.setDefaultListId(e.target.value)
+              bump()
+            }}
+          >
+            {allLists
+              .filter((l) => l.subject === subject)
+              .map((l) => (
+                <option key={l.id} value={l.id}>
+                  {l.name}
+                </option>
+              ))}
+          </select>
+        </label>
+      ))}
 
       <h3>My collection</h3>
       <p className="meta">

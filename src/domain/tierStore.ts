@@ -186,9 +186,11 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage(), shi
   }
 
   /** The durable boot pick. Unset or unresolvable falls back to the owner's board for
-   * configurations (today's behaviour — #18 verifies and flips the seed to the credited cited
-   * list; the owner's named URL matches no shipped citation yet, so seeding it here would be
-   * guessing) and to the first shipped list for any other subject. */
+   * configurations and to the first shipped list for any other subject. #18 verified the seed
+   * and ESCALATED instead of flipping it: the owner's named default video
+   * (`watch?v=LoP2T4GO4xo`, MAP.md) matches no shipped citation — 3mbg was scraped from a
+   * different video — so seeding the cited list would be guessing which list the owner meant.
+   * Stays the owner's board until the owner answers (#12/#18 resolutions, ADR 0002). */
   function defaultListFor(subject: TierListSubject): TierList | undefined {
     const stored = listOfSubject(storage.getItem(defaultListKey(subject)), subject)
     if (stored) return stored
