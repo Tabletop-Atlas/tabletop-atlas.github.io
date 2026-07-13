@@ -1063,30 +1063,38 @@ button:disabled {
   margin: 1rem 0;
 }
 
-/* --- OCFDU labelled bars (the #03 winner) --- */
+/* --- OCFDU labelled bars (the #03 winner; #23 flipped them vertical on the owner's call) --- */
 .ocfdu-bars {
   display: grid;
   gap: 0.55rem;
 }
-.ocfdu-bar-row {
+.ocfdu-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+}
+.ocfdu-column {
   display: grid;
-  grid-template-columns: 4.5rem 44px 1.5rem;
-  align-items: center;
-  gap: 0.9rem;
+  justify-items: center;
+  gap: 0.35rem;
 }
 .ocfdu-bar-label {
   font-size: 13px;
   color: var(--deck-text);
 }
-.ocfdu-bar-track {
-  height: 9px;
+.ocfdu-column-track {
+  position: relative;
+  width: 10px;
+  height: 72px;
   border-radius: 999px;
   background: #1a222b;
   overflow: hidden;
 }
-.ocfdu-bar-fill {
-  display: block;
-  height: 100%;
+.ocfdu-column-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   border-radius: 999px;
   background: var(--deck-accent);
 }

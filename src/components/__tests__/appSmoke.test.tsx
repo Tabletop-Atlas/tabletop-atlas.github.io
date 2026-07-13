@@ -135,22 +135,22 @@ describe('app smoke', () => {
     expect(html).toContain(spirit.summary)
   })
 
-  it('shows the labelled-bars OCFDU profile with element chips (#11: a 5-rated axis fills the track)', () => {
+  it('shows the labelled-bars OCFDU profile with element chips (#11; #23 flipped the fill vertical: a 5-rated axis fills the track)', () => {
     const lightning = spirits.find((s) => s.id === 'lightnings-swift-strike')! // offense 5, Air + Fire
     const html = renderToStaticMarkup(<SpiritDetail spirit={lightning} onClose={() => {}} />)
     for (const label of ['Offense', 'Control', 'Fear', 'Defense', 'Utility']) {
       expect(html).toContain(label)
     }
-    expect(html).toContain('width:100%')
+    expect(html).toContain('height:100%')
     expect(html).toContain('Air')
     expect(html).toContain('Fire')
   })
 
-  it('clamps a transcribed 6 at the full track but shows the true figure (#11)', () => {
+  it('clamps a transcribed 6 at the full track but shows the true figure (#11/#23)', () => {
     const behemoth = spirits.find((s) => s.id === 'ember-eyed-behemoth')! // offense 6
     const html = renderToStaticMarkup(<SpiritDetail spirit={behemoth} onClose={() => {}} />)
-    expect(html).toContain('width:100%')
-    expect(html).not.toContain('width:120%')
+    expect(html).toContain('height:100%')
+    expect(html).not.toContain('height:120%')
     expect(html).toContain('>6<')
   })
 

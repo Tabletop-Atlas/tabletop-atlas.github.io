@@ -14,22 +14,26 @@ const AXES: { key: keyof OCFDU; label: string }[] = [
 const TRACK_MAX = 5
 
 /** The labelled-bars OCFDU profile that won the #03 prototype round: full-word axis labels,
- * thin accent bars, value figures, plus the Elements chip row the detail never showed. */
+ * accent bars, value figures, plus the Elements chip row the detail never showed. #23 flipped
+ * the bars vertical (columns, fill bottom-up) on the owner's request — a stopgap until the
+ * panel-aligned theming conversation; the owner accepts the readability trade. */
 export function OcfduBars({ ratings, elements }: { ratings: OCFDU; elements: Element[] }) {
   return (
     <div className="ocfdu-bars">
-      {AXES.map(({ key, label }) => (
-        <div className="ocfdu-bar-row" key={key}>
-          <span className="ocfdu-bar-label">{label}</span>
-          <span className="ocfdu-bar-track">
-            <span
-              className="ocfdu-bar-fill"
-              style={{ width: `${Math.min(100, (ratings[key] / TRACK_MAX) * 100)}%` }}
-            />
-          </span>
-          <span className="ocfdu-bar-value">{ratings[key]}</span>
-        </div>
-      ))}
+      <div className="ocfdu-columns">
+        {AXES.map(({ key, label }) => (
+          <div className="ocfdu-column" key={key}>
+            <span className="ocfdu-bar-value">{ratings[key]}</span>
+            <span className="ocfdu-column-track">
+              <span
+                className="ocfdu-column-fill"
+                style={{ height: `${Math.min(100, (ratings[key] / TRACK_MAX) * 100)}%` }}
+              />
+            </span>
+            <span className="ocfdu-bar-label">{label}</span>
+          </div>
+        ))}
+      </div>
       {elements.length > 0 && (
         <div className="ocfdu-elements">
           <span className="ocfdu-elements-label">Elements</span>
