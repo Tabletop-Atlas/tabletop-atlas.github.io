@@ -1,7 +1,6 @@
 # 09 — Assemble the Phase 4 spec
 
-Status: needs-triage
-Assignee: Adam (spec-assembly session, 2026-07-13 — waiting on #05's research to land)
+Status: done
 Type: wayfinder:task (AFK)
 Parent: [phase-4 map](../MAP.md)
 
@@ -34,3 +33,25 @@ Rules:
 - Close this ticket with a pointer to the PRD; that closes the map.
 
 ## Comments
+
+**Resolution (2026-07-13): [PRD.md](../PRD.md) assembled and published, `ready-for-agent`.**
+
+Assembled via `/to-spec` from the eight locked owner calls and eight ticket resolutions; every
+statement traces to its ticket. Structure the owner approved before assembly: **one spec, five
+staged clusters** (honest fixes → tier data layer → app restructure → tier UX → Archive &
+theming), each independently demoable; tests at the **three existing seams** (domain modules,
+dataset canon tripwires, app smoke) plus the Playwright production-build convention.
+
+Contingency reconciliation (the "stop if resolutions conflict" rule was never triggered —
+nothing conflicted, three contingencies resolved):
+
+- **Nav order** (#01 ↔ #02): Browse / Recommend / Archive / Tier list / Log / Settings.
+- **Font call** (locked call ↔ #05's findings): returned to the owner as required — owner chose
+  **OFL approximation** (Reem Kufi body + OFL display for names); commercial Fling-a-Ling
+  declined.
+- **Fast/Slow icons** (locked call's "or official icons" ↔ #05): owner locked **red/blue
+  colours**; ~80px contested-provenance PNGs declined.
+- **Disclaimer wording** (#01's footer slot ↔ #05): satisfies the community-FAQ terms —
+  unofficial, fan-made, non-commercial.
+
+This closes the map: destination reached, ready for /to-tickets → /implement.

@@ -94,6 +94,10 @@ recommender. This map decides; it does not build.
   recorded position. **Rights actively contested; entirely new art is coming** — pixel-matching
   today's look may be obsolete within a publishing cycle. Font fallout returns to the owner at
   spec assembly.
+- **[#09 assemble the Phase 4 spec](issues/09-assemble-the-phase-4-spec.md) done** (2026-07-13):
+  **[PRD.md](PRD.md) published, `ready-for-agent`** — one spec, five staged clusters, tests at
+  the three existing seams. All contingencies reconciled; the #05 fallout settled by the owner
+  (OFL fonts, red/blue speed colours, FAQ-compliant disclaimer). **Destination reached.**
 
 Eight calls were made by the owner ahead of charting, locked in
 [docs/phase-4-notes.md](../../docs/phase-4-notes.md) — they are not tickets; #09 folds them into
@@ -147,6 +151,6 @@ decide                                            assemble
 08 the recommender's short-term shape ───────┘
 ```
 
-Frontier (updated 2026-07-13): **#05** — the AFK official-assets research is the last ticket
-before #09 (assemble the spec) unblocks. Every HITL ticket is done: #01, #02, #03, #04, #06,
-#07, #08.
+**THE MAP IS WALKED** (2026-07-13): all nine tickets closed, destination reached. The spec is
+[PRD.md](PRD.md) (`ready-for-agent`) — hand it to /to-tickets → /implement. The fog recorded in
+**Not yet specified** (theming overhaul, multi-game) awaits future maps.
