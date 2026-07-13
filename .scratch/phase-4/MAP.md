@@ -62,6 +62,11 @@ recommender. This map decides; it does not build.
   cited-document rules extend unchanged; no `game` field — subject is the multi-game seam.
   Terms recorded in the repo's new `CONTEXT.md`; ADR 0002 drafted at build time. **#07
   unblocked.**
+- **[#04 the Archive's structure](issues/04-the-archives-structure.md) done** (2026-07-13), via
+  `/grilling`: **the segmented switch stays; subfolders rejected** — they're a navigation
+  question in disguise, and the app adopts **no URL routing this phase** (deep-linking stays a
+  future, feature-justified decision). Powers remains one segment; the locked sort/group
+  controls land within it, no seventh button.
 
 Eight calls were made by the owner ahead of charting, locked in
 [docs/phase-4-notes.md](../../docs/phase-4-notes.md) — they are not tickets; #09 folds them into
@@ -115,5 +120,5 @@ decide                                            assemble
 08 the recommender's short-term shape ───────┘
 ```
 
-Frontier (updated 2026-07-13): **#03, #04, #05, #07, #08** — all independent, any order.
-#09 waits on everything else. #01, #02 and #06 are done; #06's close unblocked #07.
+Frontier (updated 2026-07-13): **#03, #05, #07, #08** — all independent, any order.
+#09 waits on everything else. #01, #02, #04 and #06 are done.
