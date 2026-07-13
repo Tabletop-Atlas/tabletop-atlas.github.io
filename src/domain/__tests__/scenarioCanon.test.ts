@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { SCENARIOS } from '../scenarios'
+import { SCENARIOS, scenarioDifficultyFigure } from '../scenarios'
 
 /**
  * Pins every scenario's printed difficulty against the Spirit Island Wiki (phase-4 #20; see
@@ -38,5 +38,26 @@ describe('scenario canon', () => {
     expect(SCENARIOS).toHaveLength(16)
     const names = SCENARIOS.map((s) => s.name)
     expect(new Set(names).size).toBe(names.length)
+  })
+})
+
+describe('scenarioDifficultyFigure', () => {
+  it('reads the figure out of every printed form, qualified values by their number', () => {
+    expect(scenarioDifficultyFigure('0')).toBe(0)
+    expect(scenarioDifficultyFigure('4')).toBe(4)
+    expect(scenarioDifficultyFigure('1*')).toBe(1)
+    expect(scenarioDifficultyFigure('-1*')).toBe(-1)
+    expect(scenarioDifficultyFigure('+/- 1')).toBe(1)
+    expect(scenarioDifficultyFigure('+7')).toBe(7)
+  })
+
+  it('a value with no figure reads undefined, never a guess', () => {
+    expect(scenarioDifficultyFigure('varies')).toBeUndefined()
+  })
+
+  it('every shipped difficulty has a readable figure', () => {
+    for (const s of SCENARIOS) {
+      expect(scenarioDifficultyFigure(s.difficulty), s.name).not.toBeUndefined()
+    }
   })
 })

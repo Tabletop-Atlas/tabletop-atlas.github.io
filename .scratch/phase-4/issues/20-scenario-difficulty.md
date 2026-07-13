@@ -1,6 +1,6 @@
 # 20 — Scenario difficulty: source it, then show it 🎨
 
-Status: needs-info
+Status: done
 Parent: [Phase 4 PRD](../PRD.md) · cluster 5 (Archive & theming)
 
 ## Blocked by
@@ -31,12 +31,11 @@ winner ships; screenshots kept in `../screenshots-20/`.
       source covers; unverifiable ones are absent and named, never estimated *(all 16 sourced —
       none unverifiable, see the fetch trail below)*
 - [x] A tripwire test pins every sourced value (model: the adversary/aspect canon tests)
-- [ ] Scenario tiles display the indicator; scenarios with absent difficulty show nothing (no
-      placeholder value) *(ships with the winning variant — pick pending)*
-- [ ] Variant round run and recorded (screenshots kept, scaffolding deleted) *(round run,
-      screenshots in `../screenshots-20/`; scaffolding stays until the pick)*
-- [ ] Browser-verified at 375px + desktop *(baseline + all three variants verified; the shipped
-      winner re-verifies on close)*
+- [x] Scenario tiles display the indicator; scenarios with absent difficulty show nothing (no
+      placeholder value) *(all 16 are sourced, so none exercises the absent path; the neutral
+      band exists for a future figure-less value)*
+- [x] Variant round run and recorded (screenshots kept, scaffolding deleted)
+- [x] Browser-verified at 375px + desktop
 
 ## Comments
 
@@ -88,3 +87,16 @@ the first signed figure.
 URL, or use the floating switcher. On your pick: the winner is rewritten properly (shared tile
 code, no inline styles), the scaffolding file is deleted, the rows view stays untouched, and
 this ticket closes.
+
+---
+
+**Closed (2026-07-13). The owner picked C — banded frame.** Shipped as a proper component:
+`ScenarioGrid.tsx` (CardGrid's shape plus the frame + corner tab), band styling in `deck.css`
+classes (no inline styles), and the figure parse moved to the domain as
+`scenarioDifficultyFigure` with tests (`+/- 1` → 1, `-1*` → -1, figure-less → undefined —
+covering the review's misparse finding at the real seam). The tab text is always the verbatim
+printed value; bands are ≤0 green / 1–2 yellow / 3–4 orange / 5+ red, with a neutral band for
+any future figure-less value. Scaffolding deleted (`ScenarioDifficultyGrid.tsx`), `?variant=`
+now inert. Verified on the production build at 375px + 1280px: all 16 tiles banded by default,
+`+7` alone in the top band, the three 0s and `-1*` in the low band, rows view value-free, no
+switcher, no overflow. 380/380 tests. Shipped screenshot: `../screenshots-20/1280-SHIPPED-C.png`.

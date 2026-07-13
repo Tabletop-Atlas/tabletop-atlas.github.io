@@ -13,3 +13,11 @@ export interface Scenario {
 }
 
 export const SCENARIOS = scenariosData.scenarios as Scenario[]
+
+/** The numeric reading of a printed difficulty, for presentation (band colours) only — the
+ * verbatim string is what renders. Qualified values read their figure (`+/- 1` → 1, `-1*` → -1);
+ * a value with no figure reads undefined. */
+export function scenarioDifficultyFigure(difficulty: string): number | undefined {
+  const match = difficulty.match(/[+-]?\d+/)
+  return match ? Number(match[0]) : undefined
+}

@@ -1255,6 +1255,54 @@ button:disabled {
   height: auto;
 }
 
+/* phase-4 #20 (owner's pick: variant C, banded frame). The band colours the frame and the
+ * corner tab; the tab's text is always the verbatim printed difficulty. Bands sit deliberately
+ * darker than the tag/tier palettes — a frame is not a chip. */
+.scenario-tile {
+  position: relative;
+  border-width: 2px;
+  border-radius: 8px;
+}
+.scenario-difficulty {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #f2f2f2;
+  font: 700 12px/1.2 var(--deck-mono);
+  padding: 0.15rem 0.55rem;
+  border-top-right-radius: 8px;
+}
+.scenario-band-low {
+  border-color: #3a7d44;
+}
+.scenario-band-low .scenario-difficulty {
+  background: #3a7d44;
+}
+.scenario-band-mid {
+  border-color: #8a7a1e;
+}
+.scenario-band-mid .scenario-difficulty {
+  background: #8a7a1e;
+}
+.scenario-band-high {
+  border-color: #a85b1e;
+}
+.scenario-band-high .scenario-difficulty {
+  background: #a85b1e;
+}
+.scenario-band-top {
+  border-color: #a33232;
+}
+.scenario-band-top .scenario-difficulty {
+  background: #a33232;
+}
+.scenario-band-none {
+  border-color: var(--deck-dim);
+}
+.scenario-band-none .scenario-difficulty {
+  background: var(--deck-dim);
+}
+
 .adversary-tile {
   position: relative;
 }
