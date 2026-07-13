@@ -3,6 +3,7 @@ import { ADVERSARIES } from '../domain/adversaries'
 import otherCardsData from '../data/other-cards.json'
 import powerCardsData from '../data/power-cards.json'
 import { EMPTY_OTHER_CARD_FILTER, filterOtherCards, type OtherCardFilterState } from '../domain/otherCardFilter'
+import { groupPowerCards, sortPowerCards, type PowerGroup, type PowerSort } from '../domain/powerCardArrange'
 import { EMPTY_POWER_CARD_FILTER, filterPowerCards, type PowerCardFilterState } from '../domain/powerCardFilter'
 import { SCENARIOS } from '../domain/scenarios'
 import type { OtherCard, PowerCard } from '../domain/types'
@@ -53,10 +54,18 @@ export function CardsTab() {
   const [segment, setSegment] = useState<Segment>('Powers')
   const [view, setView] = useState<View>('grid')
   const [powerFilter, setPowerFilter] = useState<PowerCardFilterState>(EMPTY_POWER_CARD_FILTER)
+  const [powerSort, setPowerSort] = useState<PowerSort>('none')
+  const [powerGroup, setPowerGroup] = useState<PowerGroup>('none')
   const [otherFilter, setOtherFilter] = useState<OtherCardFilterState>(EMPTY_OTHER_CARD_FILTER)
   const [adversaryExpansion, setAdversaryExpansion] = useState<string>('')
 
-  const shownPowerCards = useMemo(() => filterPowerCards(powerCards, powerFilter), [powerFilter])
+  // phase-4 #19: the Powers pipeline is filter → sort → group; the locked call keeps every other
+  // segment's ordering untouched (their data can't support more).
+  const shownPowerCards = useMemo(() => sortPowerCards(filterPowerCards(powerCards, powerFilter), powerSort), [powerFilter, powerSort])
+  const powerGroups = useMemo(
+    () => (powerGroup === 'none' ? null : groupPowerCards(shownPowerCards, powerGroup)),
+    [shownPowerCards, powerGroup],
+  )
 
   const segmentOtherCards = useMemo(
     () => (isOtherSegment(segment) ? otherCards.filter((c) => c.kind === OTHER_KIND_BY_SEGMENT[segment]) : []),
@@ -96,7 +105,30 @@ export function CardsTab() {
         ))}
       </div>
 
-      {segment === 'Powers' && <CardFilters filter={powerFilter} onChange={setPowerFilter} expansions={POWER_EXPANSIONS} />}
+      {segment === 'Powers' && (
+        <>
+          <CardFilters filter={powerFilter} onChange={setPowerFilter} expansions={POWER_EXPANSIONS} />
+          <div className="card-filters-row filters">
+            <label>
+              Sort
+              <select value={powerSort} onChange={(e) => setPowerSort(e.target.value as PowerSort)}>
+                <option value="none">Deck order</option>
+                <option value="cost-asc">Cost (low → high)</option>
+                <option value="cost-desc">Cost (high → low)</option>
+              </select>
+            </label>
+            <label>
+              Group by
+              <select value={powerGroup} onChange={(e) => setPowerGroup(e.target.value as PowerGroup)}>
+                <option value="none">No grouping</option>
+                <option value="cost">Cost</option>
+                <option value="speed">Speed</option>
+                <option value="element">Element</option>
+              </select>
+            </label>
+          </div>
+        </>
+      )}
       {isOtherSegment(segment) && (
         <OtherCardFilters segment={segment} filter={otherFilter} onChange={setOtherFilter} expansions={otherExpansions} />
       )}
@@ -144,6 +176,13 @@ export function CardsTab() {
         ) : (
           <ScenarioRows scenarios={SCENARIOS} />
         )
+      ) : segment === 'Powers' && powerGroups ? (
+        powerGroups.map((group) => (
+          <section key={group.label} className="card-group">
+            <h3>{group.label}</h3>
+            {view === 'grid' ? <CardGrid cards={group.cards} /> : <CardRows cards={group.cards} />}
+          </section>
+        ))
       ) : view === 'grid' ? (
         <CardGrid cards={shownCards} />
       ) : segment === 'Powers' ? (
