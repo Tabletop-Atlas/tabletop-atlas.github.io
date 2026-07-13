@@ -234,40 +234,46 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage(), shi
       const list = findList(id)
       if (list) storage.setItem(defaultListKey(list.subject), id)
     },
-    getTier(configId: string): string | undefined {
-      const list = activeList()
-      const label = readOverridesFor(list)[configId] ?? list.tiers[configId]
+    /** Editing reads and writes take an optional subject (#16) and operate on that subject's
+     * active list — 'configurations' by default, so every pre-#16 caller is unchanged. A subject
+     * with no lists reads empty and swallows writes. */
+    getTier(key: string, subject: TierListSubject = 'configurations'): string | undefined {
+      const list = activeListFor(subject)
+      if (!list) return undefined
+      const label = readOverridesFor(list)[key] ?? list.tiers[key]
       return label === UNRATED_OVERRIDE ? undefined : label
     },
     /** No-ops on a `cited` list — editing 3MBG's list would make it no longer 3MBG's list. */
-    setTier(configId: string, label: string): void {
-      const list = activeList()
-      if (list.origin === 'cited') return
+    setTier(key: string, label: string, subject: TierListSubject = 'configurations'): void {
+      const list = activeListFor(subject)
+      if (!list || list.origin === 'cited') return
       const overrides = readOverridesFor(list)
-      overrides[configId] = label
+      overrides[key] = label
       writeOverridesFor(list, overrides)
     },
-    /** Moves a configuration to the unrated bucket (#15). Where the seed never rated it,
-     * deleting the override restores plain absence; where it did, the sentinel shadows it. */
-    clearTier(configId: string): void {
-      const list = activeList()
-      if (list.origin === 'cited') return
+    /** Moves an entry to the unrated bucket (#15). Where the seed never rated it, deleting the
+     * override restores plain absence; where it did, the sentinel shadows it. */
+    clearTier(key: string, subject: TierListSubject = 'configurations'): void {
+      const list = activeListFor(subject)
+      if (!list || list.origin === 'cited') return
       const overrides = readOverridesFor(list)
-      if (list.tiers[configId] === undefined) delete overrides[configId]
-      else overrides[configId] = UNRATED_OVERRIDE
+      if (list.tiers[key] === undefined) delete overrides[key]
+      else overrides[key] = UNRATED_OVERRIDE
       writeOverridesFor(list, overrides)
     },
-    /** Resets only the active list; other lists' overrides are untouched. */
-    reset(): void {
-      storage.removeItem(overridesKey(activeList().id))
+    /** Resets only the subject's active list; other lists' overrides are untouched. */
+    reset(subject: TierListSubject = 'configurations'): void {
+      const list = activeListFor(subject)
+      if (list) storage.removeItem(overridesKey(list.id))
     },
     /** Resets an arbitrary list by id, without switching which list is active. Used by backup
      * import, which replaces every personal list's overrides in one pass. */
     resetList(listId: string): void {
       storage.removeItem(overridesKey(listId))
     },
-    getAll(): Record<string, string> {
-      const list = activeList()
+    getAll(subject: TierListSubject = 'configurations'): Record<string, string> {
+      const list = activeListFor(subject)
+      if (!list) return {}
       const merged = { ...list.tiers, ...readOverridesFor(list) }
       for (const [id, label] of Object.entries(merged)) {
         if (label === UNRATED_OVERRIDE) delete merged[id]
@@ -282,16 +288,19 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage(), shi
       const list = findList(listId)
       return list ? userEditsFor(list) : {}
     },
-    isCustomised(): boolean {
-      return Object.keys(userEditsFor(activeList())).length > 0
+    isCustomised(subject: TierListSubject = 'configurations'): boolean {
+      const list = activeListFor(subject)
+      return !!list && Object.keys(userEditsFor(list)).length > 0
     },
-    wasDiscarded(): boolean {
-      const list = activeList()
+    wasDiscarded(subject: TierListSubject = 'configurations'): boolean {
+      const list = activeListFor(subject)
+      if (!list) return false
       readOverridesFor(list)
       return discardedListIds.has(list.id)
     },
-    dismissDiscardNotice(): void {
-      discardedListIds.delete(activeList().id)
+    dismissDiscardNotice(subject: TierListSubject = 'configurations'): void {
+      const list = activeListFor(subject)
+      if (list) discardedListIds.delete(list.id)
     },
     /** Normalised rank (0 strongest .. 1 weakest) for every configuration the active list has
      * rated, computed against that list's own `tierLabels`. Unrated configurations have no
@@ -351,27 +360,30 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage(), shi
 
 export const tierStore = createTierStore()
 
-export interface TierGroups {
+export interface TierGroups<T = Configuration> {
   /** Keyed by label; iterate a list's own `tierLabels` to read these in strongest-first order. */
-  labeled: Record<string, Configuration[]>
-  /** Configurations the active list has no entry for at all — not rated badly, not rated. */
-  unrated: Configuration[]
+  labeled: Record<string, T[]>
+  /** Entries the list has no key for at all — not rated badly, not rated. */
+  unrated: T[]
 }
 
-/** Buckets configurations into a list's own tier vocabulary, plus an explicit unrated bucket.
- * Shared so the board and the editor can never disagree. There is no fallback tier: a
- * configuration absent from `tiers` is unrated, full stop — that absence is the whole point of
- * the entity model (see `.scratch/v3/README.md`'s "hazard this release exists to contain"). */
-export function groupByTier(configs: Configuration[], tiers: Record<string, string>, tierLabels: string[]): TierGroups {
-  const labeled = Object.fromEntries(tierLabels.map((label) => [label, [] as Configuration[]])) as Record<
-    string,
-    Configuration[]
-  >
-  const unrated: Configuration[] = []
-  for (const config of configs) {
-    const label = tiers[config.configId]
-    if (label !== undefined && label in labeled) labeled[label].push(config)
-    else unrated.push(config)
+/** Buckets a subject's entries (configurations, power cards — anything with an id in the
+ * list's key namespace, #16) into a list's own tier vocabulary, plus an explicit unrated
+ * bucket. Shared so every board renders from one rule. There is no fallback tier: an entry
+ * absent from `tiers` is unrated, full stop — that absence is the whole point of the entity
+ * model (see `.scratch/v3/README.md`'s "hazard this release exists to contain"). */
+export function groupByTier<T>(
+  items: T[],
+  idOf: (item: T) => string,
+  tiers: Record<string, string>,
+  tierLabels: string[],
+): TierGroups<T> {
+  const labeled = Object.fromEntries(tierLabels.map((label) => [label, [] as T[]])) as Record<string, T[]>
+  const unrated: T[] = []
+  for (const item of items) {
+    const label = tiers[idOf(item)]
+    if (label !== undefined && label in labeled) labeled[label].push(item)
+    else unrated.push(item)
   }
   return { labeled, unrated }
 }

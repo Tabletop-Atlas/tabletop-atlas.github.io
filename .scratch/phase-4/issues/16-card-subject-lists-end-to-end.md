@@ -1,6 +1,6 @@
 # 16 — Card-subject lists end to end
 
-Status: ready-for-agent
+Status: done
 Parent: [Phase 4 PRD](../PRD.md) · cluster 4 (tier UX)
 
 ## Blocked by
@@ -27,10 +27,32 @@ minor-powers list, rate some cards on the board, reload, it's all still there.*
 
 ## Acceptance criteria
 
-- [ ] Creating a personal list requires choosing a subject; the picker shows subject-grouped
+- [x] Creating a personal list requires choosing a subject; the picker shows subject-grouped
       headings
-- [ ] A personal minor-powers list can be created, cards rated on the board, and everything
+- [x] A personal minor-powers list can be created, cards rated on the board, and everything
       survives reload
-- [ ] Card tiles render card art and names; spirit boards are pixel-unchanged
-- [ ] Cited-list immutability and canon tests unaffected; no card list ships with the app
-- [ ] Browser-verified at 375px + desktop (card tiles fit the board rows)
+- [x] Card tiles render card art and names; spirit boards are pixel-unchanged
+- [x] Cited-list immutability and canon tests unaffected; no card list ships with the app
+- [x] Browser-verified at 375px + desktop (card tiles fit the board rows)
+
+## Comments
+
+**Resolved (2026-07-13).** The tracer bullet works: create a personal minor-powers list, rate
+cards on the board through edit mode, reload, re-pick — all still there. Store: the editing
+seams (`getTier/setTier/clearTier/getAll/reset/isCustomised/wasDiscarded/dismissDiscardNotice`)
+take an optional `subject` defaulting `'configurations'` (every pre-#16 caller unchanged; empty
+subjects read empty and swallow writes); `groupByTier` generalised with an `idOf` extractor.
+UI: the create form gains a Subject pick (human labels), the picker groups by subject via
+`optgroup`, the board renders portrait card tiles (existing `card.image` convention, placeholder
+on missing file) for card lists and tracks a **viewed subject** whose list is always that
+subject's active list — board and store cannot disagree by construction. Card boards are
+collection-ungated (no dimming, no hard-filter checkbox), matching the Archive's exemption.
+No card list ships; recommender prior stays configurations-only.
+
+Code review fixed three real findings before commit: the spirit board's empty-tier copy had
+changed ("pixel-unchanged" violated — now branched per subject), aspect tiles' edit-mode
+accessible labels had lost their aspect names, and a viewed/active desync hazard behind a
+test-only list-id prop (redesigned to subject-keyed viewing). Known edge, recorded not fixed:
+`setTier` with a forgotten subject arg writes the key into the configurations list silently —
+overrides are user-local, canon covers shipped data. 357/357; production build verified at
+375px + 1280px (screenshots in `../screenshots-16/`).

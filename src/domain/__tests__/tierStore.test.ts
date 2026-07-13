@@ -427,6 +427,57 @@ describe('tierStore', () => {
     })
   })
 
+  describe('subject-scoped editing (#16): a card list edits like the owner\'s board, keyed by card name', () => {
+    it('rating cards on a personal minor-powers list persists and survives a simulated reload', () => {
+      const storage = memoryStorage()
+      const store = createTierStore(storage)
+      const created = store.createList({ name: 'My Minor List', type: 'strength', subject: 'minor-powers' })
+      store.setActiveListId(created.id)
+      store.setTier('Call of the Dahan Ways', 'S', 'minor-powers')
+      expect(store.getTier('Call of the Dahan Ways', 'minor-powers')).toBe('S')
+
+      const reloaded = createTierStore(storage)
+      reloaded.setActiveListId(created.id)
+      expect(reloaded.getTier('Call of the Dahan Ways', 'minor-powers')).toBe('S')
+      expect(reloaded.getAll('minor-powers')).toEqual({ 'Call of the Dahan Ways': 'S' })
+    })
+
+    it('card-list edits never bleed into the configurations board', () => {
+      const store = createTierStore(memoryStorage())
+      const created = store.createList({ name: 'My Minor List', type: 'strength', subject: 'minor-powers' })
+      store.setActiveListId(created.id)
+      store.setTier('Call of the Dahan Ways', 'S', 'minor-powers')
+      expect(store.getAll()['Call of the Dahan Ways']).toBeUndefined()
+      expect(store.getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
+    })
+
+    it('clearTier and reset work per subject', () => {
+      const store = createTierStore(memoryStorage())
+      const created = store.createList({ name: 'My Minor List', type: 'strength', subject: 'minor-powers' })
+      store.setActiveListId(created.id)
+      store.setTier('Absorb Corruption', 'A', 'minor-powers')
+      store.clearTier('Absorb Corruption', 'minor-powers')
+      expect(store.getTier('Absorb Corruption', 'minor-powers')).toBeUndefined()
+      store.setTier('Absorb Corruption', 'B', 'minor-powers')
+      store.reset('minor-powers')
+      expect(store.getAll('minor-powers')).toEqual({})
+      expect(store.isCustomised('minor-powers')).toBe(false)
+    })
+
+    it('every editing read is safely empty for a subject with no lists', () => {
+      const store = createTierStore(memoryStorage())
+      expect(store.getAll('major-powers')).toEqual({})
+      expect(store.getTier('Accelerated Rot', 'major-powers')).toBeUndefined()
+      expect(store.isCustomised('major-powers')).toBe(false)
+      expect(store.wasDiscarded('major-powers')).toBe(false)
+      // Writes to nowhere are no-ops, not crashes.
+      store.setTier('Accelerated Rot', 'S', 'major-powers')
+      store.clearTier('Accelerated Rot', 'major-powers')
+      store.reset('major-powers')
+      expect(store.getAll('major-powers')).toEqual({})
+    })
+  })
+
   describe('rank normalisation (issue #03)', () => {
     it('computes rank as position / (length - 1), strongest at 0', () => {
       const store = createTierStore(memoryStorage(), [SIX_BAND_LIST])
@@ -491,7 +542,7 @@ describe('tierStore', () => {
 describe('groupByTier (issue #02)', () => {
   it('places unrated configurations in the unrated bucket, and a full-coverage list leaves it empty', () => {
     const configs = [config('a'), config('b')]
-    const { labeled, unrated } = groupByTier(configs, { a: 'S', b: 'A' }, ['S', 'A', 'B'])
+    const { labeled, unrated } = groupByTier(configs, (c) => c.configId, { a: 'S', b: 'A' }, ['S', 'A', 'B'])
     expect(labeled.S).toEqual([configs[0]])
     expect(labeled.A).toEqual([configs[1]])
     expect(unrated).toEqual([])
@@ -499,19 +550,19 @@ describe('groupByTier (issue #02)', () => {
 
   it('a configuration absent from tiers lands in the unrated bucket', () => {
     const configs = [config('a'), config('b')]
-    const { labeled, unrated } = groupByTier(configs, { a: 'S' }, ['S', 'A', 'B'])
+    const { labeled, unrated } = groupByTier(configs, (c) => c.configId, { a: 'S' }, ['S', 'A', 'B'])
     expect(labeled.S).toEqual([configs[0]])
     expect(unrated).toEqual([configs[1]])
   })
 
   it('a fixture list with six labels renders six bands, not seven', () => {
-    const { labeled } = groupByTier([], {}, ['S', 'A', 'B', 'C', 'D', 'F'])
+    const { labeled } = groupByTier([], (c: Configuration) => c.configId, {}, ['S', 'A', 'B', 'C', 'D', 'F'])
     expect(Object.keys(labeled)).toHaveLength(6)
   })
 
   it('never invents a fallback tier for an unknown label', () => {
     const configs = [config('a')]
-    const { labeled, unrated } = groupByTier(configs, { a: 'not-a-real-label' }, ['S', 'A'])
+    const { labeled, unrated } = groupByTier(configs, (c) => c.configId, { a: 'not-a-real-label' }, ['S', 'A'])
     expect(labeled.S).toEqual([])
     expect(labeled.A).toEqual([])
     expect(unrated).toEqual(configs)

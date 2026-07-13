@@ -1,32 +1,44 @@
 import { useState, type ReactNode } from 'react'
+import powerCardsData from '../data/power-cards.json'
 import spiritsData from '../data/spirits.json'
 import { collectionStore, filterOwnedConfigurations, isConfigurationOwned } from '../domain/collectionStore'
 import { expand, type Configuration } from '../domain/configurations'
 import { groupByTier, tierStore } from '../domain/tierStore'
-import type { Spirit } from '../domain/types'
+import type { PowerCard, Spirit, TierList, TierListSubject } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
 import { tierColor } from './tierColors'
 import { TierListControls } from './TierListControls'
 
 const spirits = spiritsData as Spirit[]
 const configurations = expand(spirits)
+const powerCards = powerCardsData as PowerCard[]
+
+/** The rateable universe per card subject, keyed by card name (#12/ADR 0002: the power-card
+ * dataset carries no other id). */
+const CARD_POOLS: Record<'minor-powers' | 'major-powers', PowerCard[]> = {
+  'minor-powers': powerCards.filter((c) => c.kind === 'minor'),
+  'major-powers': powerCards.filter((c) => c.kind === 'major'),
+}
+
+function subjectTotal(subject: TierListSubject): number {
+  return subject === 'configurations' ? configurations.length : CARD_POOLS[subject].length
+}
 
 /** Edit-mode controls for one tile (#15): reassign its tier, or send it to Unrated. Rendered
- * only when the active list is personal — the store refuses cited edits, the UI never offers
+ * only when the viewed list is personal — the store refuses cited edits, the UI never offers
  * them. Note for #17: while edit mode is active it owns tile interaction; the view-mode
  * click-to-detail behaviour must never fire during editing. */
 function TierTileEdit({
-  config,
+  name,
   current,
   labels,
   onAssign,
 }: {
-  config: Configuration
+  name: string
   current: string
   labels: string[]
   onAssign: (label: string) => void
 }) {
-  const name = config.aspect ? `${config.spirit.name} — ${config.aspect.name}` : config.spirit.name
   return (
     <label className="tier-tile-edit">
       <span className="visually-hidden">Tier for {name}</span>
@@ -73,70 +85,142 @@ function TierTile({ config, owned, edit }: { config: Configuration; owned: boole
   )
 }
 
-/** The tier board. Editing is a mode on this board (#15, the dissolution) — available only on
- * personal-origin lists, persisting through the same override machinery the old editor used. */
-export function TierBoard() {
+/** Card art with the same missing-file posture as the rest of the app: a plain placeholder,
+ * never a broken image. Card lists are ungated by the collection (#16) — like the Archive,
+ * browsing the full pool is the point. */
+function CardTile({ card, edit }: { card: PowerCard; edit?: ReactNode }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <figure className="tier-tile" title={card.name}>
+      {failed ? (
+        <span className="tier-tile-card-art tier-tile-card-missing" aria-hidden="true" />
+      ) : (
+        <img
+          className="tier-tile-card-art"
+          src={`${import.meta.env.BASE_URL}${card.image}`}
+          alt={card.name}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      )}
+      <figcaption>{card.name}</figcaption>
+      {edit}
+    </figure>
+  )
+}
+
+/** The tier board. One tab serves every subject (#16): spirit tiles for configurations lists,
+ * card tiles for card lists, same tier rows. Editing is a mode on this board (#15) —
+ * personal-origin lists only, persisting through the same override machinery everywhere. */
+export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject } = {}) {
   const [, setVersion] = useState(0)
   const [hardFilter, setHardFilter] = useState(false)
   const [editing, setEditing] = useState(false)
+  // The board tracks which SUBJECT is on display; the list shown is always that subject's
+  // active list, so the board and the store can never disagree about whose ratings render.
+  const [viewedSubject, setViewedSubject] = useState<TierListSubject>(initialSubject ?? 'configurations')
   const bump = () => setVersion((v) => v + 1)
-  const active = tierStore.getActiveList()
-  const customised = tierStore.isCustomised()
+
+  const viewed: TierList = tierStore.getActiveListFor(viewedSubject) ?? tierStore.getActiveList()
+  const subject = viewed.subject
+  const customised = tierStore.isCustomised(subject)
   const excluded = new Set(collectionStore.getExcluded())
   // The store refuses cited edits; the UI must not offer them (#15). `editing` may survive a
   // list switch, so the affordance is gated on the *current* list's origin, not the toggle.
-  const canEdit = active.origin === 'personal'
+  const canEdit = viewed.origin === 'personal'
   const editingHere = editing && canEdit
-  // Hard-filter (#06's opt-in): excluded exactly as if annotation had removed them first, rather
-  // than dimmed in place. Session-only - a view preference, not collection data, so it isn't
-  // persisted or exported like the collection itself.
-  const visibleConfigurations = hardFilter ? filterOwnedConfigurations(configurations, excluded) : configurations
-  const grouped = groupByTier(visibleConfigurations, tierStore.getAll(), active.tierLabels)
+  const tiers = tierStore.getAll(subject)
 
-  const assign = (configId: string) => (label: string) => {
-    if (label === '') tierStore.clearTier(configId)
-    else tierStore.setTier(configId, label)
+  const assign = (key: string) => (label: string) => {
+    if (label === '') tierStore.clearTier(key, subject)
+    else tierStore.setTier(key, label, subject)
     bump()
   }
 
-  const editFor = (config: Configuration, current: string) =>
+  const editControl = (key: string, name: string, current: string) =>
     editingHere ? (
-      <TierTileEdit config={config} current={current} labels={active.tierLabels} onAssign={assign(config.configId)} />
+      <TierTileEdit name={name} current={current} labels={viewed.tierLabels} onAssign={assign(key)} />
     ) : undefined
+
+  const configTiles = (items: Configuration[], current: string) =>
+    items.map((config) => (
+      <TierTile
+        key={config.configId}
+        config={config}
+        owned={isConfigurationOwned(config, excluded)}
+        edit={editControl(
+          config.configId,
+          config.aspect ? `${config.spirit.name} — ${config.aspect.name}` : config.spirit.name,
+          current,
+        )}
+      />
+    ))
+  const cardTiles = (items: PowerCard[], current: string) =>
+    items.map((card) => <CardTile key={card.name} card={card} edit={editControl(card.name, card.name, current)} />)
+
+  // Hard-filter (#06's opt-in): excluded exactly as if annotation had removed them first, rather
+  // than dimmed in place. Session-only - a view preference, not collection data, so it isn't
+  // persisted or exported like the collection itself. Configurations boards only (#16): card
+  // lists are ungated, matching the Archive's exemption.
+  const visibleConfigurations = hardFilter ? filterOwnedConfigurations(configurations, excluded) : configurations
+  const groups =
+    subject === 'configurations'
+      ? groupByTier(visibleConfigurations, (c) => c.configId, tiers, viewed.tierLabels)
+      : groupByTier(CARD_POOLS[subject], (c) => c.name, tiers, viewed.tierLabels)
+  const tilesFor = (items: (Configuration | PowerCard)[], current: string) =>
+    subject === 'configurations'
+      ? configTiles(items as Configuration[], current)
+      : cardTiles(items as PowerCard[], current)
 
   return (
     <section>
       <h2>Tier list</h2>
-      <TierListControls totalConfigs={configurations.length} allowCreate onChange={bump} />
+      <TierListControls
+        viewed={viewed}
+        total={subjectTotal(subject)}
+        allowCreate
+        onSelect={(list) => {
+          tierStore.setActiveListId(list.id)
+          setViewedSubject(list.subject)
+          bump()
+        }}
+      />
       <p>
-        {customised ? 'Your customised tier list' : 'The shipped tier list'} — <strong>{active.tierLabels[0]}</strong>{' '}
-        is strongest, <strong>{active.tierLabels[active.tierLabels.length - 1]}</strong> weakest. This ordering feeds
-        the recommender: the <em>raw power ↔ something fresh</em> slider decides how heavily a spirit's tier counts
-        toward its score.{' '}
+        {customised ? 'Your customised tier list' : 'The shipped tier list'} — <strong>{viewed.tierLabels[0]}</strong>{' '}
+        is strongest, <strong>{viewed.tierLabels[viewed.tierLabels.length - 1]}</strong> weakest.{' '}
+        {subject === 'configurations' && (
+          <>
+            This ordering feeds the recommender: the <em>raw power ↔ something fresh</em> slider decides how heavily a
+            spirit's tier counts toward its score.{' '}
+          </>
+        )}
         {canEdit ? (
-          <>Toggle <strong>Edit tiers</strong> to reassign spirits right here.</>
+          <>Toggle <strong>Edit tiers</strong> to reassign {subject === 'configurations' ? 'spirits' : 'cards'} right here.</>
         ) : (
           <>A cited list can't be edited — switch to a personal list to make changes.</>
         )}
       </p>
-      <label className="deck-field-inline">
-        <input type="checkbox" checked={hardFilter} onChange={(e) => setHardFilter(e.target.checked)} />
-        Only show spirits I own
-      </label>
+      {subject === 'configurations' && (
+        <label className="deck-field-inline">
+          <input type="checkbox" checked={hardFilter} onChange={(e) => setHardFilter(e.target.checked)} />
+          Only show spirits I own
+        </label>
+      )}
       {canEdit && (
         <label className="deck-field-inline">
           <input type="checkbox" checked={editing} onChange={(e) => setEditing(e.target.checked)} />
           Edit tiers
         </label>
       )}
-      {tierStore.wasDiscarded() && (
+      {tierStore.wasDiscarded(subject) && (
         <p className="notice">
           Your saved tier edits were discarded because the shipped tier list has changed since you
           made them. Export a backup from Settings next time to avoid losing edits like this.{' '}
           <button
             type="button"
             onClick={() => {
-              tierStore.dismissDiscardNotice()
+              tierStore.dismissDiscardNotice(subject)
               bump()
             }}
           >
@@ -156,7 +240,7 @@ export function TierBoard() {
                   'Choose Cancel to go export, or OK to reset anyway.',
               )
               if (!ok) return
-              tierStore.reset()
+              tierStore.reset(subject)
               bump()
             }}
           >
@@ -167,23 +251,18 @@ export function TierBoard() {
       )}
 
       <div className="tier-board">
-        {active.tierLabels.map((label, i) => (
+        {viewed.tierLabels.map((label, i) => (
           <div className="tier-row" key={label}>
             <div className="tier-label" style={{ backgroundColor: tierColor(i) }}>
               {label}
             </div>
             <div className="tier-tiles">
-              {grouped.labeled[label].length === 0 ? (
-                <p className="tier-empty">No spirits in this tier</p>
+              {groups.labeled[label].length === 0 ? (
+                <p className="tier-empty">
+                  {subject === 'configurations' ? 'No spirits in this tier' : 'No cards in this tier'}
+                </p>
               ) : (
-                grouped.labeled[label].map((config) => (
-                  <TierTile
-                    key={config.configId}
-                    config={config}
-                    owned={isConfigurationOwned(config, excluded)}
-                    edit={editFor(config, label)}
-                  />
-                ))
+                tilesFor(groups.labeled[label], label)
               )}
             </div>
           </div>
@@ -193,17 +272,10 @@ export function TierBoard() {
           <div className="tier-label tier-label-unrated">Unrated</div>
           <div className="tier-tiles">
             <p className="tier-empty meta">
-              Not rated by this source — different from rated badly. {grouped.unrated.length} of {configurations.length}{' '}
-              configurations here.
+              Not rated by this source — different from rated badly. {groups.unrated.length} of{' '}
+              {subjectTotal(subject)} {subject === 'configurations' ? 'configurations' : 'cards'} here.
             </p>
-            {grouped.unrated.map((config) => (
-              <TierTile
-                key={config.configId}
-                config={config}
-                owned={isConfigurationOwned(config, excluded)}
-                edit={editFor(config, '')}
-              />
-            ))}
+            {tilesFor(groups.unrated, '')}
           </div>
         </div>
       </div>

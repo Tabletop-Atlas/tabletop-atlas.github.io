@@ -787,6 +787,17 @@ button:disabled {
   width: 116px;
   margin: 0;
 }
+.tier-tile-card-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #17202a;
+}
+.tier-tile-card-missing {
+  border: 1px dashed var(--deck-line);
+}
 .tier-tile-edit select {
   width: 100%;
   margin-top: 0.2rem;

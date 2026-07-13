@@ -65,6 +65,22 @@ describe('app smoke', () => {
     expect(settings.match(/<h3>/g)).toHaveLength(3)
   })
 
+  it('a personal minor-powers list renders card tiles on the board, and a rated card lands in its row (#16)', () => {
+    const created = tierStore.createList({ name: 'Smoke Card List', type: 'strength', subject: 'minor-powers' })
+    tierStore.setActiveListId(created.id)
+    try {
+      tierStore.setTier('Call of the Dahan Ways', 'S', 'minor-powers')
+      const html = renderToStaticMarkup(<TierBoard initialSubject="minor-powers" />)
+      expect(html).toContain('Call of the Dahan Ways')
+      expect(html).toContain('tier-tile-card-art')
+      // The board shows the card pool, not spirit configurations.
+      expect(html).not.toContain('tier-tile-art"')
+      expect(html).toContain('101 cards here')
+    } finally {
+      tierStore.setActiveListId('owners-board')
+    }
+  })
+
   it('the tier board offers Edit tiers only on a personal list; a cited list gets no affordance (#15)', () => {
     // Default active list is the owner's board (personal).
     expect(renderToStaticMarkup(<TierBoard />)).toContain('Edit tiers')
