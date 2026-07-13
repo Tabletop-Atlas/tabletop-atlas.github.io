@@ -4,7 +4,9 @@ import spiritsData from '../../data/spirits.json'
 import type { Spirit } from '../../domain/types'
 import App from '../../App'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
+import { Settings } from '../Settings'
 import { SpiritDetail } from '../SpiritDetail'
+import { TierEditor } from '../TierEditor'
 
 const spirits = spiritsData as Spirit[]
 
@@ -46,14 +48,31 @@ describe('app smoke', () => {
     expect(html.match(/>Home</g)).toBeNull()
   })
 
-  it('nav starts with Browse; Recommend is demoted to second (#13, the locked call)', () => {
+  it('nav starts with Browse and ends with Settings (#13/#14, the locked calls)', () => {
     const html = renderToStaticMarkup(<App />)
-    const nav = html.slice(html.indexOf('deck-nav'))
+    const nav = html.slice(html.indexOf('deck-nav'), html.indexOf('</nav>'))
     // Browse is the FIRST nav button, not merely before Recommend.
     expect(nav.match(/<button[^>]*>([^<]+)<\/button>/)?.[1]).toBe('Browse')
+    const labels = [...nav.matchAll(/<button[^>]*>([^<]+)<\/button>/g)].map((m) => m[1])
+    expect(labels[labels.length - 1]).toBe('Settings')
     const order = ['Browse', 'Recommend', 'Archive', 'Tier list'].map((label) => nav.indexOf(`>${label}<`))
     expect(order.every((i) => i > -1)).toBe(true)
     expect([...order].sort((a, b) => a - b)).toEqual(order)
+  })
+
+  it('Settings holds exactly the three migrated sections; Customise tiers holds none of them (#14)', () => {
+    const settings = renderToStaticMarkup(<Settings />)
+    expect(settings).toContain('Backup')
+    expect(settings).toContain('My collection')
+    expect(settings).toContain('Complexity overrides')
+    // "Exactly" the three migrated sections — a fourth section heading would be scope creep.
+    expect(settings.match(/<h3>/g)).toHaveLength(3)
+
+    const editor = renderToStaticMarkup(<TierEditor />)
+    expect(editor).toContain('Customise tiers')
+    expect(editor).not.toContain('Backup')
+    expect(editor).not.toContain('My collection')
+    expect(editor).not.toContain('Complexity overrides')
   })
 
   it('throws a useful error if recommender components are used outside the provider', () => {
