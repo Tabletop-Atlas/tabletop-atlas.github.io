@@ -18,6 +18,13 @@ recommender. This map decides; it does not build.
 - **This map is planning-only** — unlike v4/v5, which carried execution. Every ticket resolves a
   decision; the one `task` ticket ([#09](issues/09-assemble-the-phase-4-spec.md)) assembles the
   spec, which is the destination itself. Build work happens downstream of the handoff, not here.
+- **The agent is the planner, not the coder** (owner, 2026-07-13). No session on this map writes
+  production code. The two `prototype` tickets produce throwaway reaction-fodder only — mockups,
+  or scratch code that is deleted once the decision lands (as v5's tag-colour prototype was);
+  nothing from them ships. All real coding happens downstream of #09's handoff.
+- **Charting (2026-07-13) grilled nothing** — the owner's notes stood in for it. Every HITL
+  ticket's grilling is still to happen, live, one ticket per session; the notes are input, not
+  answers.
 - **The owner wants counsel on backend/architecture questions, not just execution of their ideas**
   (their words). Grilling sessions on [#04](issues/04-the-archives-structure.md) and
   [#06](issues/06-multi-tier-list-architecture.md) especially: bring codebase facts to the
