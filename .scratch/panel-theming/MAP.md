@@ -11,6 +11,8 @@ aesthetic spreads to further surfaces. Spreading itself is beyond this map.
 
 ## Notes
 
+- **The spec:** [PRD.md](PRD.md) — the assembled contract the tickets build against (published
+  via /to-spec after charting; the map remains the work plan).
 - **Execution override:** this map carries execution for the modal — the winning treatment
   ships inside the map (ticket [03](issues/03-ship-the-winner.md)), matching how the phase-4
   rounds (#20–#22) were worked. Everything else stays decisions.
