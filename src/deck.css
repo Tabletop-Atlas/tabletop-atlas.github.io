@@ -1047,7 +1047,8 @@ button:disabled {
 .spirit-detail-head h2 {
   color: var(--deck-text);
   /* family repeated here: .deck-main h2's `font:` shorthand is later in the file than the
-   * grouped #22 rule and would silently reset it. */
+   * grouped #22 rule and would silently reset it. Its uppercase + 0.2em tracking still apply —
+   * that combination is the rendering the owner picked in the round. */
   font-family: 'Mouse Memoirs', ui-sans-serif, system-ui, sans-serif;
   font-size: 1.9rem;
   margin: 0 0 0.3rem;
@@ -1286,9 +1287,9 @@ button:disabled {
   height: auto;
 }
 
-/* phase-4 #20 (owner's pick: variant C, banded frame). The band colours the frame and the
- * corner tab; the tab's text is always the verbatim printed difficulty. Bands sit deliberately
- * darker than the tag/tier palettes — a frame is not a chip. */
+/* phase-4 #20 (owner's pick: variant C, banded frame). Shape only — the band colour comes
+ * inline from tagColors' SCENARIO_BAND_COLOR, and the tab's text is always the verbatim
+ * printed difficulty. */
 .scenario-tile {
   position: relative;
   border-width: 2px;
@@ -1302,36 +1303,6 @@ button:disabled {
   font: 700 12px/1.2 var(--deck-mono);
   padding: 0.15rem 0.55rem;
   border-top-right-radius: 8px;
-}
-.scenario-band-low {
-  border-color: #3a7d44;
-}
-.scenario-band-low .scenario-difficulty {
-  background: #3a7d44;
-}
-.scenario-band-mid {
-  border-color: #8a7a1e;
-}
-.scenario-band-mid .scenario-difficulty {
-  background: #8a7a1e;
-}
-.scenario-band-high {
-  border-color: #a85b1e;
-}
-.scenario-band-high .scenario-difficulty {
-  background: #a85b1e;
-}
-.scenario-band-top {
-  border-color: #a33232;
-}
-.scenario-band-top .scenario-difficulty {
-  background: #a33232;
-}
-.scenario-band-none {
-  border-color: var(--deck-dim);
-}
-.scenario-band-none .scenario-difficulty {
-  background: var(--deck-dim);
 }
 
 .adversary-tile {
@@ -1380,15 +1351,6 @@ button:disabled {
   text-transform: uppercase;
   color: #7d8f9f;
 }
-/* phase-4 #21 (owner's pick: variant B, filled pills) — shape only; each pill's background
- * comes inline from tagColors' CARD_KIND_COLOR / CARD_SPEED_COLOR, the single source. */
-.card-row-pill {
-  width: auto;
-  color: #f2f2f2;
-  border-radius: 999px;
-  padding: 0.2rem 0.5rem;
-  text-align: center;
-}
 .card-row-name {
   flex: 1 1 160px;
   min-width: 0;
@@ -1431,6 +1393,17 @@ button:disabled {
   flex: 0 0 auto;
   font-size: 10px;
   color: #7d8f9f;
+}
+/* phase-4 #21 (owner's pick: variant B, filled pills) — shape only; each pill's background
+ * comes inline from tagColors' CARD_KIND_COLOR / CARD_SPEED_COLOR, the single source. Must sit
+ * AFTER .card-row-type/.card-row-speed: their grey `color` and right `text-align` would win
+ * the cascade at equal specificity otherwise (the same later-rule hazard #22 hit with fonts). */
+.card-row-pill {
+  width: auto;
+  color: #f2f2f2;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  text-align: center;
 }
 
 .visually-hidden {

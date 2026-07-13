@@ -100,3 +100,8 @@ any future figure-less value. Scaffolding deleted (`ScenarioDifficultyGrid.tsx`)
 now inert. Verified on the production build at 375px + 1280px: all 16 tiles banded by default,
 `+7` alone in the top band, the three 0s and `-1*` in the low band, rows view value-free, no
 switcher, no overflow. 380/380 tests. Shipped screenshot: `../screenshots-20/1280-SHIPPED-C.png`.
+
+**Post-close review fix (same day):** band colours moved from ten deck.css class pairs into
+`SCENARIO_BAND_COLOR` in `tagColors.ts`, applied inline per the SpiritTile idiom — so
+`cardChipColors.test.ts` can pin the band palette apart from every other chip system (a claim
+the code comments made but no test previously reached).

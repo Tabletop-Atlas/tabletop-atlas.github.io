@@ -38,8 +38,8 @@ export const COMPLEXITY_LEVEL: Record<Complexity, number> = { Low: 1, Moderate: 
  * phase-4 #21 (owner picked variant B, filled pills): kind and speed chips in the Archive's
  * Powers rows. Fast red / Slow blue is the locked owner call. Near-hue check per this file's
  * own rule: these sit a lightness/saturation step off EXPANSION_COLOR's jewel tones (same
- * filled treatment, different surface) and off the #20 scenario bands — no value is shared
- * byte-identically with any other chip system, pinned by cardChipColors.test.ts.
+ * filled treatment, different surface) and off SCENARIO_BAND_COLOR — cardChipColors.test.ts
+ * pins that no value is shared byte-identically with the expansion, tag, or band palettes.
  */
 export const CARD_KIND_COLOR: Record<'minor' | 'major' | 'unique', string> = {
   minor: '#6b9948',
@@ -51,7 +51,19 @@ export const CARD_SPEED_COLOR: Record<'Fast' | 'Slow', string> = {
   Slow: '#3a6fa5',
 }
 
-const TAG_COLOR: Record<string, string> = {
+/** phase-4 #20 (owner picked C, banded frame): scenario difficulty bands, keyed by the figure
+ * ranges ScenarioGrid maps (≤0, 1–2, 3–4, 5+; `none` = no readable figure). Presentation only —
+ * the verbatim printed value is what renders. Lives here so cardChipColors.test.ts can pin
+ * every chip system apart in one place. */
+export const SCENARIO_BAND_COLOR = {
+  low: '#3a7d44',
+  mid: '#8a7a1e',
+  high: '#a85b1e',
+  top: '#a33232',
+  none: 'var(--deck-dim)',
+} as const
+
+export const TAG_COLOR: Record<string, string> = {
   aggressive: '#e0475a',
   'blight-positive': '#e0862f',
   'blight-sensitive': '#d4b32f',

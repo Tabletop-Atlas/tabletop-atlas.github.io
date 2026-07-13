@@ -98,6 +98,13 @@ Fear/Events/Blight rows keep their grey type text (single-kind segments — noth
 distinguish). Scaffolding deleted (`ColourPassRows.tsx`), `?colors=` inert. Verified on the
 production build at 375px + 1280px: five distinct pill fills by default, pills survive grouped
 rendering, Fear rows pill-free, no overflow. 383/383 tests. Shipped screenshot:
-`../screenshots-21/1280-SHIPPED-B.png`. **The expansion sub-question (adding expansion colour
+`../screenshots-21/1280-SHIPPED-B.png`.
+
+**Post-close review fix (same day):** the batch review caught the speed pill rendering dim
+grey text — `.card-row-speed`'s own `color`/`text-align` sat later in deck.css than
+`.card-row-pill` and won the cascade at equal specificity. The pill rule now sits after both
+chip rules with a comment naming the hazard, and the collision test widened to pin
+kind/speed colours apart from the expansion, tag, AND scenario-band palettes (the disclosure's
+full promise). **The expansion sub-question (adding expansion colour
 to the tier board/Archive) went unanswered and stays open** — flagged for a future ticket, not
 built.
