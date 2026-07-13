@@ -178,7 +178,10 @@ Traced to resolutions; modules named by role, per the no-file-paths rule.
   player count must not influence ranking until sourced per-player-count data exists.
 - **The Archive**: 6-segment switch retained; no URL routing anywhere this phase. The Powers
   segment gains sort/group controls (cost, elements, speed); other segments' ordering unchanged.
-  Scenario tiles gain a difficulty indicator from existing scenario data.
+  Scenario tiles gain a difficulty indicator — **scenario difficulty is not currently sourced**
+  (the dataset carries only name and image), so this item includes sourcing it from a verifiable
+  reference with a tripwire test; if it cannot be sourced, the indicator returns to the owner
+  rather than shipping estimates.
 - **Colour & type**: one expansion→colour mapping shared app-wide; Major/Unique/Minor tag
   colours distinct; Fast = red, Slow = blue (no icon assets — the only available icons are
   ~80px contested-provenance PNGs, declined). Typography: Reem Kufi (OFL) for body, an OFL
