@@ -85,6 +85,15 @@ recommender. This map decides; it does not build.
   aspect**; the detail shows a **coloured tier chip in the head + one per aspect row** from the
   active configurations-list, unrated as an outlined chip. Edit mode gates the click;
   card-subject tiles stay inert this phase.
+- **[#05 official assets and licensing](issues/05-official-assets-and-licensing.md) done**
+  (2026-07-13), AFK research ([full findings](official-assets-research.md)): **technically
+  feasible, legally unpermissioned.** Title font is commercial (Fling-a-Ling, buying its webfont
+  license is the one clean path); body font Reem Kufi is OFL-free; the free lookalike forbids app
+  use. Icons exist only as ~80px wiki PNGs (same risk class as hosted images). No publisher fan
+  policy page exists; the GTG-era FAQ terms (free, unofficial, off their forums) are the only
+  recorded position. **Rights actively contested; entirely new art is coming** — pixel-matching
+  today's look may be obsolete within a publishing cycle. Font fallout returns to the owner at
+  spec assembly.
 
 Eight calls were made by the owner ahead of charting, locked in
 [docs/phase-4-notes.md](../../docs/phase-4-notes.md) — they are not tickets; #09 folds them into

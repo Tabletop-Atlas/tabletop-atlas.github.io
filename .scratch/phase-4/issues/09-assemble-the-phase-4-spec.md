@@ -1,6 +1,7 @@
 # 09 — Assemble the Phase 4 spec
 
 Status: needs-triage
+Assignee: Adam (spec-assembly session, 2026-07-13 — waiting on #05's research to land)
 Type: wayfinder:task (AFK)
 Parent: [phase-4 map](../MAP.md)
 
