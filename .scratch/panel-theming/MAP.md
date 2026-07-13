@@ -48,6 +48,16 @@ aesthetic spreads to further surfaces. Spreading itself is beyond this map.
   `PANEL_COLOR` in `tagColors.ts` injected as `--panel-*` vars, retinted #23 bars, cascade-safe
   `.modal.spirit-detail` rules. Round scaffolding deleted, `?panel=` inert. Collision + smoke
   tests added (384 pass). Pre-existing 375px name-clip fixed in passing.
+- **[04 spread verdict](issues/04-the-spread-verdict.md) (done):** owner's verdict — spread is
+  wanted but **deferred**; finish this map here. No surface chartered, nothing built. A future
+  session (`/handoff`) charts the spread as its own wayfinder effort, consuming this effort's vibe
+  sheet + `PANEL_COLOR` as prior art.
+
+## Status: COMPLETE (2026-07-13)
+
+All four tickets closed. The spirit detail modal wears the owner-picked panel treatment (C);
+scaffolding deleted; the spread verdict is recorded (yes-in-principle, deferred). Nothing on this
+effort is left to decide.
 
 ## Not yet specified
 
