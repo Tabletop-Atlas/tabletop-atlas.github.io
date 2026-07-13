@@ -73,6 +73,12 @@ recommender. This map decides; it does not build.
   player count can't touch ranking until sourced per-count data exists. The 10-question wizard
   holds, no branching; the spec carries a non-gamer **copy pass**. Settings' recommendation-prefs
   slot stays empty; the homepage door copy stands.
+- **[#03 the radar chart: fix or replace](issues/03-the-radar-chart-fix-or-replace.md) done**
+  (2026-07-13), via `/prototype` (one round, three variants on the live modal): **replace —
+  labelled bars win.** Full-word rows with value figures plus an elements chip row (sourced,
+  never displayed before); the Recommender's per-row radar thumbnail is **dropped, not
+  miniaturised**, and `OcfduRadar` deletes at build time. Winner screenshot kept in
+  `screenshots-03/`; prototype deleted, source tree restored byte-identical.
 
 Eight calls were made by the owner ahead of charting, locked in
 [docs/phase-4-notes.md](../../docs/phase-4-notes.md) — they are not tickets; #09 folds them into
@@ -126,6 +132,5 @@ decide                                            assemble
 08 the recommender's short-term shape ───────┘
 ```
 
-Frontier (updated 2026-07-13): **#03, #05, #07** — the two prototypes and the AFK research,
-all independent. #09 waits on them. #01, #02, #04, #06 and #08 are done — every grilling ticket
-on the map is resolved.
+Frontier (updated 2026-07-13): **#05, #07** — the interconnect prototype and the AFK research,
+independent. #09 waits on them. #01, #02, #03, #04, #06 and #08 are done.
