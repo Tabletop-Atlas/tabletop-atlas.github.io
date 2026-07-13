@@ -42,7 +42,12 @@ recommender. This map decides; it does not build.
 
 <!-- one line per closed ticket -->
 
-_(no tickets closed yet)_
+- **[#01 the homepage](issues/01-the-homepage.md) done** (2026-07-13), via `/grilling`:
+  orientation + router, never a dashboard. Every visit boots to it; the logo is the only route
+  home (no Home nav button). Three intent-phrased doors (Browse / Recommend / Tier list;
+  Archive/Log/Settings nav-only), **Browse takes the lead in both doors and nav**. One framing
+  line each for game and app + a footer disclaimer slot pending #05; art-backed door tiles in
+  current styling, theming overhaul stays fog.
 
 Eight calls were made by the owner ahead of charting, locked in
 [docs/phase-4-notes.md](../../docs/phase-4-notes.md) — they are not tickets; #09 folds them into
@@ -96,5 +101,5 @@ decide                                            assemble
 08 the recommender's short-term shape ───────┘
 ```
 
-Frontier (charted 2026-07-13): **#01, #02, #03, #04, #05, #06, #08** — all independent, any
-order. #07 waits on #06; #09 waits on everything.
+Frontier (updated 2026-07-13): **#02, #03, #04, #05, #06, #08** — all independent, any order.
+#07 waits on #06; #09 waits on everything. #01 is done.
