@@ -863,11 +863,35 @@ button:disabled {
 .tier-chip {
   display: inline-grid;
   place-items: center;
-  width: 1.9rem;
+  min-width: 1.9rem;
   height: 1.9rem;
+  padding: 0 0.35rem;
+  box-sizing: border-box;
   border-radius: 5px;
   color: #10141a;
   font: 800 0.85rem/1 var(--deck-mono);
+  vertical-align: middle;
+}
+/* #17: honest absence — an unrated configuration gets an outline, never a defaulted colour. */
+.tier-chip-unrated {
+  background: transparent;
+  border: 1px solid var(--deck-dim);
+  color: var(--deck-dim);
+  font-weight: 600;
+}
+/* #17: view-mode tiles open the detail modal. */
+.tier-tile[role='button'] {
+  cursor: pointer;
+}
+.tier-tile[role='button']:focus-visible {
+  outline: 2px solid var(--deck-accent);
+  outline-offset: 2px;
+}
+/* #17: the aspect row the user clicked on the board is never buried. */
+.aspect-row-highlight {
+  outline: 2px solid var(--deck-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 /* --- tier list controls (picker, citation panel, create-list form) --- */

@@ -136,10 +136,29 @@ describe('app smoke', () => {
     expect(html).toContain('>6<')
   })
 
-  it('says a spirit is not rated by the active list when it has no tier entry', () => {
+  it('shows an outlined "unrated" chip when the active list has no tier entry (#17: honest absence)', () => {
     const unrated: Spirit = { ...spirits[0], id: 'a-spirit-no-list-has-ever-heard-of' }
     const html = renderToStaticMarkup(<SpiritDetail spirit={unrated} onClose={() => {}} />)
-    expect(html).toContain('not rated by this list')
+    expect(html).toContain('tier-chip-unrated')
+    expect(html).toContain('>unrated<')
+  })
+
+  it('shows a coloured head tier chip and one chip per aspect row, from the active list (#17)', () => {
+    const lightning = spirits.find((s) => s.id === 'lightnings-swift-strike')!
+    const html = renderToStaticMarkup(<SpiritDetail spirit={lightning} onClose={() => {}} />)
+    // Head chip: the owner's board rates the base config, so the chip carries a colour.
+    expect(html).toContain('spirit-detail-tier-line')
+    expect(html).toMatch(/tier-chip" style="background-color/)
+    // One chip per aspect row (4 aspects) + the head chip.
+    expect(html.match(/tier-chip/g)!.length).toBeGreaterThanOrEqual(5)
+  })
+
+  it('highlights the clicked aspect row when opened from an aspect tile (#17)', () => {
+    const lightning = spirits.find((s) => s.id === 'lightnings-swift-strike')!
+    const html = renderToStaticMarkup(
+      <SpiritDetail spirit={lightning} onClose={() => {}} highlightAspect="Sparking" />,
+    )
+    expect(html.match(/aspect-row-highlight/g)).toHaveLength(1)
   })
 
   it('omits the card row entirely for a spirit with no startingCards, rather than rendering placeholders', () => {

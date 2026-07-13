@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { toConfigId } from '../domain/configurations'
 import { tierStore } from '../domain/tierStore'
 import type { Spirit } from '../domain/types'
 import { CardViewer } from './CardViewer'
@@ -6,6 +7,23 @@ import { OcfduBars } from './OcfduBars'
 import { PlaceholderArt } from './PlaceholderArt'
 import { SpiritArt } from './SpiritArt'
 import { COMPLEXITY_LEVEL, EXPANSION_COLOR, tagColor, tagLabel } from './tagColors'
+import { tierColor } from './tierColors'
+
+/** Coloured tier chip for one configuration, read from the active configurations-list (#17).
+ * Colour is the label's position in that list's own vocabulary; an absent key renders an
+ * outlined "unrated" chip — honest absence, never a defaulted tier (ADR 0001). A label outside
+ * the vocabulary (a stale override) also reads as unrated, the same rule `groupByTier` applies
+ * on the board, so chip and board can never disagree. */
+function TierChip({ configId }: { configId: string }) {
+  const label = tierStore.getTier(configId)
+  const position = label === undefined ? -1 : tierStore.getActiveList().tierLabels.indexOf(label)
+  if (position === -1) return <span className="tier-chip tier-chip-unrated">unrated</span>
+  return (
+    <span className="tier-chip" style={{ backgroundColor: tierColor(position) }}>
+      {label}
+    </span>
+  )
+}
 
 const ARROW: Record<string, string> = { up: '↑ more complex', down: '↓ simpler', same: '→ same complexity' }
 
@@ -52,9 +70,20 @@ function DetailImage({
  * fields. An aspect configuration has no images of its own; it shows the base spirit's panel
  * and cards (the repo has no data on which aspects change which cards) plus its own `delta`.
  */
-export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () => void }) {
+export function SpiritDetail({
+  spirit,
+  onClose,
+  highlightAspect,
+}: {
+  spirit: Spirit
+  onClose: () => void
+  /** #17: opened from an aspect tile — scroll to the Aspects section with this row highlighted. */
+  highlightAspect?: string
+}) {
   const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
-  const tier = tierStore.getTier(spirit.id)
+  // "Lands scrolled" is a one-time act: without this guard the inline callback ref re-fires on
+  // every re-render (e.g. enlarging a card image) and snaps scroll back to the aspect row.
+  const scrolledToAspect = useRef(false)
   const activeList = tierStore.getActiveList()
   const base = import.meta.env.BASE_URL
   const level = COMPLEXITY_LEVEL[spirit.complexity]
@@ -95,8 +124,8 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
                 ))}
               </div>
             )}
-            <p className="meta">
-              Tier ({activeList.name}): {tier ?? 'not rated by this list'}
+            <p className="meta spirit-detail-tier-line">
+              Tier ({activeList.name}): <TierChip configId={spirit.id} />
             </p>
           </div>
         </div>
@@ -153,8 +182,22 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
             <ul className="aspects spirit-detail-aspects">
               {spirit.aspects.map((aspect) => {
                 const src = `${base}aspects/${spirit.id}-${aspectSlug(aspect.name)}.webp`
+                const highlighted = aspect.name === highlightAspect
                 return (
-                  <li key={aspect.name}>
+                  <li
+                    key={aspect.name}
+                    className={highlighted ? 'aspect-row-highlight' : undefined}
+                    ref={
+                      highlighted
+                        ? (el) => {
+                            if (el && !scrolledToAspect.current) {
+                              scrolledToAspect.current = true
+                              el.scrollIntoView({ block: 'center' })
+                            }
+                          }
+                        : undefined
+                    }
+                  >
                     <button
                       type="button"
                       className="spirit-detail-aspect-card"
@@ -163,7 +206,7 @@ export function SpiritDetail({ spirit, onClose }: { spirit: Spirit; onClose: () 
                       <DetailImage spirit={spirit} src={src} alt={`${spirit.name} (${aspect.name}) aspect card`} />
                     </button>
                     <div className="spirit-detail-aspect-text">
-                      <strong>{aspect.name}</strong>
+                      <TierChip configId={toConfigId(spirit.id, aspect.name)} /> <strong>{aspect.name}</strong>
                       {aspect.complexityDelta && <span className="meta"> · {ARROW[aspect.complexityDelta]}</span>}
                       {' — '}
                       {aspect.delta ?? <em className="meta">effect not transcribed yet</em>}

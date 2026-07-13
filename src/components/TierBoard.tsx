@@ -6,6 +6,7 @@ import { expand, type Configuration } from '../domain/configurations'
 import { groupByTier, tierStore } from '../domain/tierStore'
 import type { PowerCard, Spirit, TierList, TierListSubject } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
+import { SpiritDetail } from './SpiritDetail'
 import { tierColor } from './tierColors'
 import { TierListControls } from './TierListControls'
 
@@ -55,14 +56,39 @@ function TierTileEdit({
 }
 
 /** v5 #06: a configuration outside the collection stays in its rated tier row - a tier is
- * "how good," not "do you own it," so it's dimmed and badged in place, never regrouped. */
-function TierTile({ config, owned, edit }: { config: Configuration; owned: boolean; edit?: ReactNode }) {
+ * "how good," not "do you own it," so it's dimmed and badged in place, never regrouped.
+ * #17: in view mode the tile opens the spirit detail (`onOpen`); in edit mode `onOpen` is
+ * absent and only the tier select responds — the modal never opens while editing. */
+function TierTile({
+  config,
+  owned,
+  edit,
+  onOpen,
+}: {
+  config: Configuration
+  owned: boolean
+  edit?: ReactNode
+  onOpen?: () => void
+}) {
   return (
     <figure
       className={owned ? 'tier-tile' : 'tier-tile tier-tile-unowned'}
       title={
         (config.aspect ? `${config.spirit.name} — ${config.aspect.name} aspect` : config.spirit.name) +
         (owned ? '' : ' (not in your collection)')
+      }
+      role={onOpen ? 'button' : undefined}
+      tabIndex={onOpen ? 0 : undefined}
+      onClick={onOpen}
+      onKeyDown={
+        onOpen
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onOpen()
+              }
+            }
+          : undefined
       }
     >
       <SpiritArt spirit={config.spirit} className="tier-tile-art" />
@@ -120,6 +146,8 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
   // The board tracks which SUBJECT is on display; the list shown is always that subject's
   // active list, so the board and the store can never disagree about whose ratings render.
   const [viewedSubject, setViewedSubject] = useState<TierListSubject>(initialSubject ?? 'configurations')
+  // #17: board → detail. An aspect tile opens the base spirit's modal scrolled to that aspect.
+  const [detail, setDetail] = useState<{ spirit: Spirit; aspect?: string } | null>(null)
   const bump = () => setVersion((v) => v + 1)
 
   const viewed: TierList = tierStore.getActiveListFor(viewedSubject) ?? tierStore.getActiveList()
@@ -154,6 +182,9 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
           config.aspect ? `${config.spirit.name} — ${config.aspect.name}` : config.spirit.name,
           current,
         )}
+        onOpen={
+          editingHere ? undefined : () => setDetail({ spirit: config.spirit, aspect: config.aspect?.name })
+        }
       />
     ))
   const cardTiles = (items: PowerCard[], current: string) =>
@@ -279,6 +310,10 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
           </div>
         </div>
       </div>
+
+      {detail && (
+        <SpiritDetail spirit={detail.spirit} highlightAspect={detail.aspect} onClose={() => setDetail(null)} />
+      )}
     </section>
   )
 }
