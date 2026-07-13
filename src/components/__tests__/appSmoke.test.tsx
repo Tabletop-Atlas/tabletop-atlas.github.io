@@ -146,6 +146,18 @@ describe('app smoke', () => {
     expect(html).toContain('Fire')
   })
 
+  it('wears the panel treatment: the modal carries the panel palette as CSS variables (panel-theming #03, owner picked C)', () => {
+    const lightning = spirits.find((s) => s.id === 'lightnings-swift-strike')!
+    const html = renderToStaticMarkup(<SpiritDetail spirit={lightning} onClose={() => {}} />)
+    // PANEL_COLOR is injected on the modal root, so the shipped umber surface + band-tan accent
+    // are present; a regression that dropped the treatment would drop these.
+    expect(html).toContain('--panel-surface:#241d12')
+    expect(html).toContain('--panel-accent:#d2b068')
+    // The theme is presentation only — the #23 bars and #11 truth rules survive it (asserted in
+    // the clamp test below); no `?panel=` scaffolding remains.
+    expect(html).not.toContain('panel-switcher')
+  })
+
   it('clamps a transcribed 6 at the full track but shows the true figure (#11/#23)', () => {
     const behemoth = spirits.find((s) => s.id === 'ember-eyed-behemoth')! // offense 6
     const html = renderToStaticMarkup(<SpiritDetail spirit={behemoth} onClose={() => {}} />)

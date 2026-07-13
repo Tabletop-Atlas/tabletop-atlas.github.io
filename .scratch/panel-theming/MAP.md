@@ -41,6 +41,13 @@ aesthetic spreads to further surfaces. Spreading itself is beyond this map.
   fronts → [panel-vibe-sheet.md](panel-vibe-sheet.md). Parchment `#e7d19c`, ink `#2e2520`,
   gold/band accents, presence green, innate rust; node idiom + type hierarchy on the shipped
   faces; dark-translations proposed. The round builds from these, not guesses.
+- **[02 variant round](issues/02-the-modal-variant-round.md) (owner picked C):** three
+  compositions behind `?panel=A|B|C` (A light parchment + nodes, B dark + nodes, C dark + retinted
+  bars). Owner's pick: **C**, no reaction notes. Screenshots in `screenshots-02/`.
+- **[03 ship the winner](issues/03-ship-the-winner.md) (done):** C is the modal's default —
+  `PANEL_COLOR` in `tagColors.ts` injected as `--panel-*` vars, retinted #23 bars, cascade-safe
+  `.modal.spirit-detail` rules. Round scaffolding deleted, `?panel=` inert. Collision + smoke
+  tests added (384 pass). Pre-existing 375px name-clip fixed in passing.
 
 ## Not yet specified
 

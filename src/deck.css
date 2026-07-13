@@ -1415,214 +1415,65 @@ button:disabled {
   white-space: nowrap;
 }
 
-/* ========================================================================
-   ROUND 02 (panel-theming) — THROWAWAY variant styling. Delete on ship (#03),
-   together with src/components/PanelRound.tsx and its SpiritDetail call sites.
+/* --- spirit detail: panel treatment (panel-theming #03; owner picked variant C) ------------
+   A dark translation of the printed spirit panels: umber parchment surface, parchment text,
+   #23's vertical OCFDU bars retinted to the panel band-tan. Colours come from PANEL_COLOR in
+   tagColors.ts, injected as `--panel-*` custom properties on the modal root (SpiritDetail).
 
-   Colours trace to .scratch/panel-theming/panel-vibe-sheet.md (the #01 sampled
-   palette): the light `--pnl-*` values are sampled hexes, the `--pnl-d-*` values
-   are the sheet's proposed dark-translations. Gated on `.panel-A/B/C`, only under
-   `?panel=`; the paramless app never sees a byte of this.
-   ======================================================================== */
-:root {
-  /* sampled (light) */
-  --pnl-parchment: #e7d19c;
-  --pnl-parchment-lit: #f2e7c8;
-  --pnl-parchment-aged: #cdb88c;
-  --pnl-parchment-shadow: #a89368;
-  --pnl-band: #d2b068;
-  --pnl-gold: #eecb73;
-  --pnl-green: #239850;
-  --pnl-green-deep: #1e572b;
-  --pnl-rust: #a4562f;
-  --pnl-ink: #2e2520;
-  --pnl-ink-soft: #5b4e2d;
-  /* proposed dark-translation */
-  --pnl-d-field: #241d12;
-  --pnl-d-raised: #33291a;
-  --pnl-d-edge: #463a24;
-  --pnl-d-deep: #5a4a2e;
-  --pnl-d-text: #e7d19c;
-  --pnl-d-body: #c8b78f;
-  --pnl-d-green: #3fae6a;
+   Selectors are prefixed `.modal.spirit-detail` (two classes) on purpose: it clears the base
+   `.modal`/`.spirit-detail-head h2`/`.deck-main h3` rules by specificity, not source order, so
+   the cascade hazard phase-4 flagged (later `font:`/`color` shorthands winning ties) can't bite. */
+.modal.spirit-detail {
+  background: var(--panel-surface);
+  background-image: linear-gradient(180deg, var(--panel-raised) 0%, var(--panel-surface) 45%);
+  border: 1px solid var(--panel-edge);
+  color: var(--panel-body);
 }
-
-/* Shared panel-section-header treatment (all three variants): the GROWTH/PRESENCE ranking —
-   display face, uppercase, tracked. Two classes + element (0,0,2,1) beats `.deck-main h3`. */
-.spirit-detail.panel-A h3,
-.spirit-detail.panel-B h3,
-.spirit-detail.panel-C h3 {
+.modal.spirit-detail h2,
+.modal.spirit-detail h3,
+.modal.spirit-detail .ocfdu-bar-label {
+  color: var(--panel-text);
+}
+/* the panel ranks section headers as display-face, uppercase, tracked (vibe sheet type hierarchy) */
+.modal.spirit-detail h3 {
   font-family: 'Mouse Memoirs', ui-sans-serif, system-ui, sans-serif;
   font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
 }
-
-/* --- Node idiom (variants A & B): five round stone-like presence-track nodes --- */
-.ocfdu-nodes .ocfdu-node {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  border: 2px solid var(--pnl-green-deep);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
+.modal.spirit-detail p,
+.modal.spirit-detail .meta,
+.modal.spirit-detail .spirit-detail-card-name {
+  color: var(--panel-body);
 }
-.ocfdu-nodes .ocfdu-node-fill {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--pnl-green);
+.modal.spirit-detail .modal-close {
+  background: var(--panel-raised);
+  border-color: var(--panel-edge);
+  color: var(--panel-text);
 }
-.ocfdu-nodes .ocfdu-node-value {
-  position: relative;
-  z-index: 1;
-  font-family: 'Mouse Memoirs', ui-sans-serif, system-ui, sans-serif;
-  font-size: 1.3rem;
-  line-height: 1;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+/* #23's vertical bars, retinted to the panel palette */
+.modal.spirit-detail .ocfdu-column-track {
+  background: var(--panel-raised);
 }
-@media (max-width: 440px) {
-  .ocfdu-nodes .ocfdu-node {
-    width: 36px;
-    height: 36px;
+.modal.spirit-detail .ocfdu-column-fill {
+  background: var(--panel-accent);
+}
+.modal.spirit-detail .ocfdu-bar-value {
+  color: var(--panel-body);
+}
+.modal.spirit-detail .ocfdu-elements-label {
+  color: var(--panel-accent);
+}
+.modal.spirit-detail .ocfdu-element-chip {
+  border-color: var(--panel-edge);
+  color: var(--panel-body);
+}
+/* pre-existing (baseline, not the retheme): beside the fixed 200px art there isn't room for a
+   long Mouse Memoirs name at 375px, so it clipped past the modal edge. Stack the head on narrow
+   screens — art on top, name full-width below — so it wraps instead of clipping. Fixed here
+   while the modal is in hand (#02 round note). */
+@media (max-width: 480px) {
+  .spirit-detail-head {
+    flex-direction: column;
   }
-  .ocfdu-nodes .ocfdu-node-value {
-    font-size: 1.1rem;
-  }
-}
-
-/* --- A: light true-parchment card over the dark app --- */
-.spirit-detail.panel-A {
-  background: var(--pnl-parchment);
-  background-image: linear-gradient(180deg, var(--pnl-parchment-lit) 0%, var(--pnl-parchment) 42%);
-  border: 1px solid var(--pnl-parchment-shadow);
-  color: var(--pnl-ink-soft);
-}
-.spirit-detail.panel-A h2,
-.spirit-detail.panel-A h3,
-.spirit-detail.panel-A .ocfdu-bar-label {
-  color: var(--pnl-ink);
-}
-.spirit-detail.panel-A p,
-.spirit-detail.panel-A .meta,
-.spirit-detail.panel-A .spirit-detail-card-name {
-  color: var(--pnl-ink-soft);
-}
-.spirit-detail.panel-A .modal-close {
-  background: var(--pnl-parchment-aged);
-  border-color: var(--pnl-parchment-shadow);
-  color: var(--pnl-ink);
-}
-/* the OCFDU widget's own chrome, retinted so it stays legible on parchment (the widget is the
-   theme's centrepiece; the tier/tag/expansion chips are held as-is — see the round note). */
-.spirit-detail.panel-A .ocfdu-node {
-  background: var(--pnl-parchment-aged);
-}
-.spirit-detail.panel-A .ocfdu-node-value {
-  color: var(--pnl-ink);
-}
-.spirit-detail.panel-A .ocfdu-elements-label {
-  color: var(--pnl-ink-soft);
-}
-.spirit-detail.panel-A .ocfdu-element-chip {
-  border-color: var(--pnl-parchment-shadow);
-  color: var(--pnl-ink);
-}
-
-/* --- B & C share the dark-translation shell (umber surface, parchment text); they diverge only
-   in the OCFDU widget — B renders nodes, C keeps #23's retinted bars. --- */
-.spirit-detail.panel-B,
-.spirit-detail.panel-C {
-  background: var(--pnl-d-field);
-  background-image: linear-gradient(180deg, var(--pnl-d-raised) 0%, var(--pnl-d-field) 45%);
-  border: 1px solid var(--pnl-d-edge);
-  color: var(--pnl-d-body);
-}
-.spirit-detail.panel-B h2,
-.spirit-detail.panel-B h3,
-.spirit-detail.panel-B .ocfdu-bar-label,
-.spirit-detail.panel-C h2,
-.spirit-detail.panel-C h3,
-.spirit-detail.panel-C .ocfdu-bar-label {
-  color: var(--pnl-d-text);
-}
-.spirit-detail.panel-B p,
-.spirit-detail.panel-B .meta,
-.spirit-detail.panel-B .spirit-detail-card-name,
-.spirit-detail.panel-C p,
-.spirit-detail.panel-C .meta,
-.spirit-detail.panel-C .spirit-detail-card-name {
-  color: var(--pnl-d-body);
-}
-.spirit-detail.panel-B .modal-close,
-.spirit-detail.panel-C .modal-close {
-  background: var(--pnl-d-raised);
-  border-color: var(--pnl-d-edge);
-  color: var(--pnl-d-text);
-}
-.spirit-detail.panel-B .ocfdu-elements-label,
-.spirit-detail.panel-C .ocfdu-elements-label {
-  color: var(--pnl-band);
-}
-.spirit-detail.panel-B .ocfdu-element-chip,
-.spirit-detail.panel-C .ocfdu-element-chip {
-  border-color: var(--pnl-d-edge);
-  color: var(--pnl-d-body);
-}
-
-/* B only — the node idiom on dark */
-.spirit-detail.panel-B .ocfdu-node {
-  background: var(--pnl-d-raised);
-  border-color: var(--pnl-d-deep);
-}
-.spirit-detail.panel-B .ocfdu-node-fill {
-  background: var(--pnl-d-green);
-}
-.spirit-detail.panel-B .ocfdu-node-value {
-  color: var(--pnl-d-text);
-}
-
-/* C only — #23's vertical bars, retinted (the conservative anchor) */
-.spirit-detail.panel-C .ocfdu-column-track {
-  background: var(--pnl-d-raised);
-}
-.spirit-detail.panel-C .ocfdu-column-fill {
-  background: var(--pnl-band);
-}
-.spirit-detail.panel-C .ocfdu-bar-value {
-  color: var(--pnl-d-body);
-}
-
-/* --- floating round switcher --- */
-.panel-switcher {
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 300;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.4rem 0.6rem;
-  background: rgba(10, 13, 16, 0.92);
-  border: 1px solid var(--deck-line);
-  border-radius: 999px;
-}
-.panel-switcher-tag {
-  font: 700 10px/1 var(--deck-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--deck-dim);
-}
-.panel-switcher-buttons {
-  display: flex;
-  gap: 0.3rem;
-}
-.panel-switcher-buttons button[data-active='true'] {
-  border-color: var(--deck-accent);
-  color: var(--deck-accent);
 }

@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { CARD_KIND_COLOR, CARD_SPEED_COLOR, EXPANSION_COLOR, SCENARIO_BAND_COLOR, TAG_COLOR } from '../tagColors'
+import { CARD_KIND_COLOR, CARD_SPEED_COLOR, EXPANSION_COLOR, PANEL_COLOR, SCENARIO_BAND_COLOR, TAG_COLOR } from '../tagColors'
+import { tierColor } from '../tierColors'
+
+/** The tier palette is module-private behind `tierColor(position)`; enumerate its seven positions
+ * so the panel palette can be pinned apart from it too (PRD story 17 names tier). */
+const TIER_COLORS = Array.from({ length: 7 }, (_, i) => tierColor(i))
 
 /**
  * phase-4 #21's acceptance: no two kinds (and neither speed) share a colour — the v5 lesson
@@ -29,6 +34,34 @@ describe('card chip colours', () => {
       ...Object.values(SCENARIO_BAND_COLOR),
     ])
     for (const colour of [...kinds, ...speeds]) {
+      expect(others.has(colour), colour).toBe(false)
+    }
+  })
+})
+
+/**
+ * panel-theming #03: the panel-treatment palette (the modal's C look) pinned apart from every
+ * other colour system, byte-for-byte — the same separation rule tagColors.ts states, so a panel
+ * surface/text colour can never be mistaken for a tier, tag, expansion, kind/speed, or
+ * difficulty-band colour, and none of those can silently leak into the modal's theme.
+ */
+describe('panel treatment palette', () => {
+  const panel = Object.values(PANEL_COLOR)
+
+  it('has six distinct values', () => {
+    expect(new Set(panel).size).toBe(panel.length)
+  })
+
+  it('shares no value byte-identically with the tier, expansion, tag, kind/speed, or scenario-band palettes', () => {
+    const others = new Set([
+      ...TIER_COLORS,
+      ...Object.values(EXPANSION_COLOR),
+      ...Object.values(TAG_COLOR),
+      ...Object.values(CARD_KIND_COLOR),
+      ...Object.values(CARD_SPEED_COLOR),
+      ...Object.values(SCENARIO_BAND_COLOR),
+    ])
+    for (const colour of panel) {
       expect(others.has(colour), colour).toBe(false)
     }
   })

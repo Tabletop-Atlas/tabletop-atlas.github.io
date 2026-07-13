@@ -63,6 +63,34 @@ export const SCENARIO_BAND_COLOR = {
   none: 'var(--deck-dim)',
 } as const
 
+/**
+ * panel-theming #02→#03: the owner picked variant C — a dark translation of the printed spirit
+ * panels' palette, keeping #23's vertical OCFDU bars retinted. This is the spirit detail modal's
+ * default surface palette. Sampled/proposed off the panel scans the repo hosts (provenance:
+ * `.scratch/panel-theming/panel-vibe-sheet.md`, ticket #01) — `text`/`accent` are sampled hexes,
+ * the umber `surface`/`raised`/`edge` are the vibe sheet's proposed dark-translations of the
+ * parchment. Presentation only, not game data, so no canon tripwire (the round recorded
+ * provenance instead).
+ *
+ * Lives here as the modal's one colour source — applied as inline CSS custom properties on the
+ * modal root (`SpiritDetail`) and consumed by the `.modal.spirit-detail` rules in `deck.css`,
+ * the same colour-from-map idiom the chip systems use. `cardChipColors.test.ts` pins it apart
+ * from every other chip/band palette, byte-for-byte, so a panel colour can never be mistaken for
+ * a tier, tag, expansion, kind/speed, or difficulty-band colour.
+ *
+ * Provenance per the vibe sheet: `text`/`accent` are sampled hexes; the umber `surface`/`raised`/
+ * `edge` and the `body` brown are the sheet's *proposed dark-translations* (design judgment for a
+ * dark theme, not sampled) — labelled honestly so a judgment value never reads as sampled data.
+ */
+export const PANEL_COLOR = {
+  surface: '#241d12', // umber field — proposed dark-translation of the parchment #e7d19c
+  raised: '#33291a', // gradient crown, modal-close, bar track — proposed dark-translation
+  edge: '#463a24', // borders, chip borders — proposed dark-translation
+  text: '#e7d19c', // headers, axis labels — sampled parchment
+  body: '#c8b78f', // body text — proposed dark-translation of the ink-soft brown
+  accent: '#d2b068', // bar fill, elements label — sampled band-tan
+} as const
+
 export const TAG_COLOR: Record<string, string> = {
   aggressive: '#e0475a',
   'blight-positive': '#e0862f',

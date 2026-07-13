@@ -1,15 +1,24 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type CSSProperties } from 'react'
 import { toConfigId } from '../domain/configurations'
 import { tierStore } from '../domain/tierStore'
 import type { Spirit } from '../domain/types'
 import { CardViewer } from './CardViewer'
 import { OcfduBars } from './OcfduBars'
-// ROUND 02 (panel-theming) — throwaway import, delete on ship (#03).
-import { OcfduNodes, PanelSwitcher, readPanelVariant } from './PanelRound'
 import { PlaceholderArt } from './PlaceholderArt'
 import { SpiritArt } from './SpiritArt'
-import { COMPLEXITY_LEVEL, EXPANSION_COLOR, tagColor, tagLabel } from './tagColors'
+import { COMPLEXITY_LEVEL, EXPANSION_COLOR, PANEL_COLOR, tagColor, tagLabel } from './tagColors'
 import { tierColor } from './tierColors'
+
+/** panel-theming #03: the modal's one colour source, injected as CSS custom properties on the
+ * modal root and consumed by the `.modal.spirit-detail` rules in deck.css. */
+const PANEL_VARS = {
+  '--panel-surface': PANEL_COLOR.surface,
+  '--panel-raised': PANEL_COLOR.raised,
+  '--panel-edge': PANEL_COLOR.edge,
+  '--panel-text': PANEL_COLOR.text,
+  '--panel-body': PANEL_COLOR.body,
+  '--panel-accent': PANEL_COLOR.accent,
+} as CSSProperties
 
 /** Coloured tier chip for one configuration, read from the active configurations-list (#17).
  * Colour is the label's position in that list's own vocabulary; an absent key renders an
@@ -83,9 +92,6 @@ export function SpiritDetail({
   highlightAspect?: string
 }) {
   const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
-  // ROUND 02 (panel-theming) — throwaway. null unless `?panel=A|B|C`, so the app is
-  // byte-identical without the param. Delete on ship (#03).
-  const [panelVariant, setPanelVariant] = useState(readPanelVariant)
   // "Lands scrolled" is a one-time act: without this guard the inline callback ref re-fires on
   // every re-render (e.g. enlarging a card image) and snaps scroll back to the aspect row.
   const scrolledToAspect = useRef(false)
@@ -95,10 +101,10 @@ export function SpiritDetail({
   const expansionColor = EXPANSION_COLOR[spirit.expansion]
 
   return (
-    <>
     <div className="modal-backdrop" onClick={onClose}>
       <div
-        className={panelVariant ? `modal spirit-detail panel-${panelVariant}` : 'modal spirit-detail'}
+        className="modal spirit-detail"
+        style={PANEL_VARS}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-label={spirit.name}
@@ -144,12 +150,7 @@ export function SpiritDetail({
         <p>{spirit.summary}</p>
 
         <div className="spirit-detail-body">
-          {/* ROUND 02: A & B render nodes; C (and no-param) keeps #23's bars. Delete on ship. */}
-          {panelVariant === 'A' || panelVariant === 'B' ? (
-            <OcfduNodes ratings={spirit.ratings} elements={spirit.elements} />
-          ) : (
-            <OcfduBars ratings={spirit.ratings} elements={spirit.elements} />
-          )}
+          <OcfduBars ratings={spirit.ratings} elements={spirit.elements} />
           {spirit.ratingsSource === 'estimate' && (
             <p className="meta">
               These OCFDU ratings are an estimate — nobody has verified them against a printed source.
@@ -237,9 +238,5 @@ export function SpiritDetail({
 
       {enlarged && <CardViewer src={enlarged.src} alt={enlarged.alt} onClose={() => setEnlarged(null)} />}
     </div>
-    {/* ROUND 02: floating switcher, outside the backdrop so its clicks don't close the modal.
-        Delete on ship (#03). */}
-    {panelVariant && <PanelSwitcher current={panelVariant} onPick={setPanelVariant} />}
-    </>
   )
 }
