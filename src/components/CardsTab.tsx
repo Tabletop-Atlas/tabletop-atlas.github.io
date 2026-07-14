@@ -16,6 +16,7 @@ import { OtherCardFilters } from './OtherCardFilters'
 import { OtherCardRows } from './OtherCardRows'
 import { ScenarioGrid } from './ScenarioGrid'
 import { ScenarioRows } from './ScenarioRows'
+import { readSubtypeVariant, SubtypeVariantSwitcher } from './SubtypeVariantRound'
 
 const powerCards = powerCardsData as PowerCard[]
 const otherCards = otherCardsData as OtherCard[]
@@ -59,6 +60,9 @@ export function CardsTab() {
   const [powerGroup, setPowerGroup] = useState<PowerGroup>('none')
   const [otherFilter, setOtherFilter] = useState<OtherCardFilterState>(EMPTY_OTHER_CARD_FILTER)
   const [adversaryExpansion, setAdversaryExpansion] = useState<string>('')
+  // ROUND 04 scaffolding — delete this state + readSubtypeVariant/SubtypeVariantSwitcher and the
+  // `variant={subtypeVariant}` prop below on ship (see SubtypeVariantRound.tsx).
+  const [subtypeVariant, setSubtypeVariant] = useState(readSubtypeVariant)
 
   // phase-4 #19: the Powers pipeline is filter → sort → group; the locked call keeps every other
   // segment's ordering untouched (their data can't support more).
@@ -189,8 +193,9 @@ export function CardsTab() {
       ) : segment === 'Powers' ? (
         <CardRows cards={shownPowerCards} />
       ) : (
-        <OtherCardRows cards={shownOtherCards} />
+        <OtherCardRows cards={shownOtherCards} variant={subtypeVariant ?? undefined} />
       )}
+      {subtypeVariant && <SubtypeVariantSwitcher current={subtypeVariant} onPick={setSubtypeVariant} />}
     </section>
   )
 }

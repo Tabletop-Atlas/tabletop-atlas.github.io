@@ -1433,6 +1433,85 @@ button:disabled {
   font-size: 10px;
 }
 
+/* legibility-pass #04: fear/blight/event subtype tags in the Archive rows view — previously data
+ * that existed only as filters (v5 #02/#03). `.card-row-subtypes` holds 0..n chips (a card may
+ * match several keyword buckets). `.card-row-subtype-empty` is the true "Unclassified" case;
+ * `.card-row-subtype-plain` is the separate ROUND 04 unstyled-baseline text (no variant param —
+ * see SubtypeVariantRound.tsx) — same look today, kept as two classes so neither name lies about
+ * which case it renders. `.card-row-subtype-note` carries blight's `tagsSource: 'judgment'`
+ * provenance once per row, not repeated on every chip. THROWAWAY: the three `.subtype-chip-*`
+ * treatment rules (search "ROUND 04") — the winner's rule gets promoted to a plain
+ * `.subtype-chip` name on ship, the losing two deleted, mirroring how ticket 05 promoted its
+ * winning chip treatment. */
+.card-row-subtypes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  flex: 1 1 auto;
+}
+.card-row-subtype-empty,
+.card-row-subtype-plain {
+  flex: 1 1 auto;
+  font-size: 10px;
+  color: var(--deck-dim);
+  font-style: italic;
+}
+.card-row-subtype-note {
+  flex: 0 0 auto;
+  font-size: 10px;
+}
+.subtype-chip {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.subtype-chip-fill {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  color: #fff;
+}
+.subtype-chip-text {
+  font-weight: 700;
+}
+.subtype-chip-outline {
+  padding: 0.06rem 0.4rem;
+  border: 1px solid;
+  border-radius: 999px;
+  background: transparent;
+}
+
+/* ROUND 04 (legibility-pass) — THROWAWAY, delete this block on ship along with
+ * SubtypeVariantRound.tsx and the variant props it gates (see that file's header comment). */
+.variant-switcher {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(10, 13, 16, 0.92);
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+}
+.variant-switcher-tag {
+  font: 700 10px/1 var(--deck-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--deck-dim);
+}
+.variant-switcher-buttons {
+  display: flex;
+  gap: 0.3rem;
+}
+.variant-switcher-buttons button[data-active='true'] {
+  border-color: var(--deck-accent);
+  color: var(--deck-accent);
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

@@ -1,28 +1,6 @@
 import { BLIGHT_TAGS, EVENT_CLASSES, FEAR_TAGS, type BlightTag, type EventClass, type FearTag } from '../domain/types'
 import type { OtherCardFilterState } from '../domain/otherCardFilter'
-
-const FEAR_TAG_LABEL: Record<FearTag, string> = {
-  removal: 'Removal',
-  defensive: 'Defensive',
-  weaken: 'Weaken',
-  disruption: 'Disruption',
-  displacement: 'Displacement',
-}
-
-const BLIGHT_TAG_LABEL: Record<BlightTag, string> = {
-  presenceLoss: 'Presence loss',
-  boardChange: 'Board change',
-  damageBonus: 'Damage bonus',
-  resourceSwing: 'Resource swing',
-}
-
-const EVENT_CLASS_LABEL: Record<EventClass, string> = {
-  choice: 'Choice',
-  stage: 'Stage',
-  terrorLevel: 'Terror level',
-  healthyBlightedLand: 'Healthy/blighted land',
-  adversary: 'Adversary',
-}
+import { subtypeLabel } from './tagColors'
 
 type Segment = 'Fear' | 'Events' | 'Blight'
 
@@ -66,7 +44,7 @@ export function OtherCardFilters({
           <div className="card-filters-kinds">
             {FEAR_TAGS.map((tag) => (
               <button key={tag} type="button" aria-pressed={filter.fearTags?.includes(tag) ?? false} onClick={() => toggleFearTag(tag)}>
-                {FEAR_TAG_LABEL[tag]}
+                {subtypeLabel(tag)}
               </button>
             ))}
             <button type="button" aria-pressed={filter.fearTags?.includes('unclassified') ?? false} onClick={() => toggleFearTag('unclassified')}>
@@ -82,7 +60,7 @@ export function OtherCardFilters({
           <div className="card-filters-kinds">
             {BLIGHT_TAGS.map((tag) => (
               <button key={tag} type="button" aria-pressed={filter.blightTags?.includes(tag) ?? false} onClick={() => toggleBlightTag(tag)}>
-                {BLIGHT_TAG_LABEL[tag]}
+                {subtypeLabel(tag)}
               </button>
             ))}
             <button type="button" aria-pressed={filter.blightTags?.includes('unclassified') ?? false} onClick={() => toggleBlightTag('unclassified')}>
@@ -103,7 +81,7 @@ export function OtherCardFilters({
               <option value="">Any</option>
               {EVENT_CLASSES.map((cls) => (
                 <option key={cls} value={cls}>
-                  {EVENT_CLASS_LABEL[cls]}
+                  {subtypeLabel(cls)}
                 </option>
               ))}
             </select>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { CARD_KIND_COLOR, CARD_SPEED_COLOR, EXPANSION_COLOR, PANEL_COLOR, SCENARIO_BAND_COLOR, TAG_COLOR } from '../tagColors'
+import { CARD_KIND_COLOR, CARD_SPEED_COLOR, EXPANSION_COLOR, PANEL_COLOR, SCENARIO_BAND_COLOR, SUBTYPE_COLOR, TAG_COLOR } from '../tagColors'
 import { tierColor } from '../tierColors'
 
 /** The tier palette is module-private behind `tierColor(position)`; enumerate its seven positions
@@ -34,6 +34,35 @@ describe('card chip colours', () => {
       ...Object.values(SCENARIO_BAND_COLOR),
     ])
     for (const colour of [...kinds, ...speeds]) {
+      expect(others.has(colour), colour).toBe(false)
+    }
+  })
+})
+
+/**
+ * legibility-pass #04: fear/blight/event subtype colours, pinned apart from every other chip
+ * system the same way every prior palette in this file is — plus, since the three tag sets never
+ * co-occur on one card, pairwise-distinct from each other too (a fear tag must never render the
+ * same colour as a blight or event one, even seen out of context).
+ */
+describe('subtype colours', () => {
+  const subtypes = Object.values(SUBTYPE_COLOR)
+
+  it('has 14 pairwise-distinct values', () => {
+    expect(new Set(subtypes).size).toBe(subtypes.length)
+  })
+
+  it('shares no value byte-identically with any other chip/band/panel/tier palette', () => {
+    const others = new Set([
+      ...TIER_COLORS,
+      ...Object.values(EXPANSION_COLOR),
+      ...Object.values(TAG_COLOR),
+      ...Object.values(CARD_KIND_COLOR),
+      ...Object.values(CARD_SPEED_COLOR),
+      ...Object.values(SCENARIO_BAND_COLOR),
+      ...Object.values(PANEL_COLOR),
+    ])
+    for (const colour of subtypes) {
       expect(others.has(colour), colour).toBe(false)
     }
   })

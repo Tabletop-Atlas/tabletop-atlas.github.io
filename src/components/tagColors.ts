@@ -1,4 +1,4 @@
-import { EXPANSIONS, type Complexity, type ExpansionName } from '../domain/types'
+import { EXPANSIONS, type BlightTag, type Complexity, type EventClass, type ExpansionName, type FearTag } from '../domain/types'
 
 /**
  * v5 #08/#09: the spirit tile's colour scheme, decided via `/prototype` (variants A-H,
@@ -136,6 +136,65 @@ export const PANEL_COLOR = {
   body: '#c8b78f', // body text — proposed dark-translation of the ink-soft brown
   accent: '#d2b068', // bar fill, elements label — sampled band-tan
 } as const
+
+/**
+ * legibility-pass #04: fear/blight/event subtypes, surfaced in the Archive rows view (previously
+ * data that existed only as filters, per v5 #02/#03). Fear/blight tags are keyword-derived
+ * (`otherCardClassifier.ts`); blight's are explicitly `tagsSource: 'judgment'` (types.ts) — a
+ * presentation colour/label is fine, but the caller (`OtherCardRows`'s row-level note,
+ * `OtherCardFilters`'s section header) carries that provenance once, never dressing judgment as
+ * canon by baking it into the label itself. One combined record rather than three, since the
+ * three tag sets never co-occur on one card (a card is fear XOR blight XOR event) — the pairwise-
+ * distinctness `cardChipColors.test.ts` pins still holds across the whole set, kept simple rather
+ * than three near-identical mini-palettes. Each is its own hue family so a fear tag can't be
+ * mistaken for a blight or event one even out of context (e.g. in a legend).
+ */
+export const SUBTYPE_COLOR: Record<FearTag | BlightTag | EventClass, string> = {
+  // Fear — violet/pink family
+  removal: '#c23a5e',
+  defensive: '#3a8ac2',
+  weaken: '#a63ac2',
+  disruption: '#c2823a',
+  displacement: '#3ac28a',
+  // Blight — brown/rust family (judgment data; the caller carries that note, not the colour/label)
+  presenceLoss: '#6e3a1e',
+  boardChange: '#8a6e1e',
+  damageBonus: '#b23a1e',
+  resourceSwing: '#3a6e4a',
+  // Events — muted teal/slate family
+  choice: '#2e6e6e',
+  stage: '#5e5e8a',
+  terrorLevel: '#8a2e4a',
+  healthyBlightedLand: '#4a8a2e',
+  adversary: '#6e4a8a',
+}
+
+/** The one label source for a subtype tag, across all three buckets — plain text; the
+ * "(judgment)" provenance note is carried once per blight row/section by the caller
+ * (`OtherCardRows`'s judgment note, `OtherCardFilters`'s section header), not repeated on every
+ * individual tag chip. One combined, exhaustively-typed record rather than three lookups chained
+ * with `??` — the three unions are disjoint by construction (types.ts), so a merged record can't
+ * silently fall through to `undefined` the way a chained optional lookup could if that ever broke. */
+const SUBTYPE_LABEL: Record<FearTag | BlightTag | EventClass, string> = {
+  removal: 'Removal',
+  defensive: 'Defensive',
+  weaken: 'Weaken',
+  disruption: 'Disruption',
+  displacement: 'Displacement',
+  presenceLoss: 'Presence loss',
+  boardChange: 'Board change',
+  damageBonus: 'Damage bonus',
+  resourceSwing: 'Resource swing',
+  choice: 'Choice',
+  stage: 'Stage',
+  terrorLevel: 'Terror level',
+  healthyBlightedLand: 'Healthy/blighted land',
+  adversary: 'Adversary',
+}
+
+export function subtypeLabel(tag: FearTag | BlightTag | EventClass): string {
+  return SUBTYPE_LABEL[tag]
+}
 
 export const TAG_COLOR: Record<string, string> = {
   aggressive: '#e0475a',
