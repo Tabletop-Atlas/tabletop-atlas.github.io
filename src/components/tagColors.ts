@@ -1,4 +1,4 @@
-import type { Complexity } from '../domain/types'
+import { EXPANSIONS, type Complexity, type ExpansionName } from '../domain/types'
 
 /**
  * v5 #08/#09: the spirit tile's colour scheme, decided via `/prototype` (variants A-H,
@@ -29,6 +29,39 @@ export const EXPANSION_COLOR: Record<string, string> = {
   'Jagged Earth': '#7a4a6e',
   'Nature Incarnate': '#6e5a2a',
   Promo: '#5a5a7a',
+}
+
+/**
+ * legibility-pass #01: `EXPANSION_COLOR` keys off the 7 canonical `ExpansionName` values, but the
+ * card datasets (`other-cards.json`, `power-cards.json`, `adversaries.json`) transcribe expansion
+ * as whatever string the source printed, e.g. `Basegame`, `Horizons of Spirit Island`. This maps
+ * every raw string seen in those datasets onto the canonical set so colour resolves everywhere.
+ * `expansionCanon.test.ts` is the tripwire: it fails loudly if a future record's raw string isn't
+ * in this table, rather than silently falling back to no colour.
+ *
+ * `Promo2` / `Promo Pack 2 / Feather and Flame` both resolve to `Feather & Flame`. This is not a
+ * clean rename — `adversaries.json`'s own transcription ties Promo Pack 2 to Feather & Flame
+ * ("Scotland", expansion `Promo Pack 2 / Feather and Flame`), but the data disagrees with itself
+ * on the spirit side: Downpour Drenches the World is `Promo` (Promo Pack 1) in `spirits.json`, yet
+ * every one of its own power cards is tagged `Promo2` in `power-cards.json` — not an occasional
+ * bonus card, its whole card set. That contradiction couldn't be resolved from the data alone, so
+ * it was escalated; **owner call (legibility-pass #01, 2026-07-14): `Promo2` always resolves to
+ * `Feather & Flame`**, Downpour's own `Promo` tag notwithstanding. Bare `Promo` is untouched and
+ * stays its own canonical entry.
+ */
+const EXPANSION_ALIASES: Record<string, ExpansionName> = {
+  // Every canonical name is already its own alias (`spirits.json` uses these verbatim).
+  ...Object.fromEntries(EXPANSIONS.map((name) => [name, name])),
+  Basegame: 'Base',
+  'Branch and Claw': 'Branch & Claw',
+  'Horizons of Spirit Island': 'Horizons',
+  Promo2: 'Feather & Flame',
+  'Promo Pack 2 / Feather and Flame': 'Feather & Flame',
+}
+
+/** Absent means the raw string isn't in `EXPANSION_ALIASES` — never a guessed fallback. */
+export function normalizeExpansion(raw: string): ExpansionName | undefined {
+  return EXPANSION_ALIASES[raw]
 }
 
 /** Dot-meter position (●●○○) - ordinal, not a colour. */
