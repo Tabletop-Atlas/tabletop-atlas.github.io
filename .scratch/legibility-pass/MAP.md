@@ -60,15 +60,16 @@ future effort.
   scenario's own wiki page), 0 left absent; `scenarios.json` gained `expansion`, pinned by
   `scenarioCanon.test.ts`. *A Diversity of Spirits* / *Varied Terrains* hit the same Promo Pack 2 vs
   Feather & Flame shape ticket 01 already settled — carried forward, not re-escalated.
+- **[03](issues/03-adversary-subtype-canon.md)** — canon defines **no** adversary subtype/classification
+  (checked the wiki's Adversary glossary page, the Category:Adversaries index, and three individual
+  adversary pages). The owner's premise was mistaken, not a sourcing gap; `adversaries.json`'s
+  existing fields are already complete. "Adversary subtype display in rows" moves from fog to Out of
+  scope — nothing built.
 
 ## Not yet specified
 
 <!-- fog: in-scope, but not sharp until an upstream ticket resolves -->
 
-- **Adversary subtype display in rows** — only specifiable after
-  [03](issues/03-adversary-subtype-canon.md) says whether canon *defines* an adversary subtype at
-  all. If yes: a rows-display ticket mirroring [04](issues/04-subtypes-in-rows.md). If no: it never
-  graduates (honest absence — moves to Out of scope).
 - **Extending expansion colour to the tier board** — the phase-4 #21 open thread also named the tier
   board. Ticket [05](issues/05-expansion-colour-archive.md) surfaces it as an owner sub-decision
   during its round (the board already colours tiles by tier position, so it may conflict); if the
@@ -76,6 +77,9 @@ future effort.
 
 ## Out of scope
 
+- **Adversary subtype display in rows** — canon defines no adversary subtype/classification (ticket
+  [03](issues/03-adversary-subtype-canon.md)); the owner's premise was mistaken, not a gap to fill.
+  `adversaries.json`'s existing fields (name, expansion, escalation levels) are already complete.
 - **The floral / vibrant Spirit Island retheme** — moving the app off its intentional black/modern
   "command deck" look (`deck.css` `:root`, "dark by design"). Owner's call at charting: a **separate
   future wayfinder effort**, not this map. It is exactly the "spread" that panel-theming ticket
