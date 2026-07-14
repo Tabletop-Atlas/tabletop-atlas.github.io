@@ -65,15 +65,22 @@ future effort.
   adversary pages). The owner's premise was mistaken, not a sourcing gap; `adversaries.json`'s
   existing fields are already complete. "Adversary subtype display in rows" moves from fog to Out of
   scope — nothing built.
+- **[05](issues/05-expansion-colour-archive.md)** — owner picked variant **C, solid chip** after a
+  three-way round (stripe / tint / chip) on the real Archive grid + rows views. Shipped: a corner
+  badge on grid tiles, a coloured pill on rows, Powers rows gained the expansion column the owner
+  asked for. Flagged during the round: variant B (tint) would have been invisible on grid tiles —
+  full-bleed card art leaves no surface for a background wash to show through; moot since C won.
+  Tier-board sub-decision carried to fog below, unanswered.
 
 ## Not yet specified
 
 <!-- fog: in-scope, but not sharp until an upstream ticket resolves -->
 
 - **Extending expansion colour to the tier board** — the phase-4 #21 open thread also named the tier
-  board. Ticket [05](issues/05-expansion-colour-archive.md) surfaces it as an owner sub-decision
-  during its round (the board already colours tiles by tier position, so it may conflict); if the
-  owner wants it, it graduates from that ticket.
+  board. Ticket [05](issues/05-expansion-colour-archive.md) surfaced it as an owner sub-decision but
+  the round closed (owner picked variant C) without an answer — still open, doesn't graduate without
+  an explicit yes. The board already colours tiles by tier position, so a second colour signal may
+  conflict if this is ever picked up.
 
 ## Out of scope
 

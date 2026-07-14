@@ -1,6 +1,6 @@
 # 05 — Expansion colour across the Archive surfaces
 
-Status: needs-info
+Status: done
 Label: wayfinder:prototype (HITL — owner picks the look)
 Parent: [Legibility-pass map](../MAP.md)
 
@@ -44,7 +44,8 @@ treatment).
 - [x] Colour comes from the one `EXPANSION_COLOR` map (via ticket 01's normalisation) — no surface
       carries its own copy; an expansion matches its Browse-tile colour byte-for-byte
 - [x] `cardChipColors.test.ts` still green (no new collisions introduced)
-- [ ] Tier-board extension either shipped (owner said yes) or recorded as declined
+- [ ] Tier-board extension either shipped (owner said yes) or recorded as declined — **not yet
+      answered, carried to the map's fog list rather than assumed either way**
 - [x] `?variant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
 - [x] Legible on dark theme at 375px + desktop; test suite green
 
@@ -88,8 +89,17 @@ Screenshots (baseline + A/B/C, Powers rows + grid, Adversaries rows, at 375px + 
 
 ### The pick (owner)
 
-Which treatment ships across the Archive — **A** (left-edge stripe), **B** (background tint —
-note it needs a grid-tile answer if picked), or **C** (solid chip)? And separately: should
-expansion colour also extend to the tier board (map fog item), or stay out of scope? Any reaction
-("A but thinner", "C but smaller on grid") goes here. **This ticket does not self-close — it waits
-for your pick.**
+**Owner picked C (solid chip), 2026-07-14.**
+
+**Shipped:** variant C across `CardGrid`, `AdversaryGrid` (corner badge, colour from
+`expansionColorFor()`, absent when a raw expansion string doesn't normalize) and `CardRows`,
+`OtherCardRows`, `AdversaryRows` (the expansion column renders as a solid pill). Scaffolding
+deleted: `ExpansionColorRound.tsx` removed, the `variant` prop and its threading through
+`CardsTab.tsx` removed, `deck.css`'s throwaway switcher block removed — `.expansion-chip`/
+`.expansion-chip-corner`/`.card-row-expansion.expansion-chip` kept as the permanent rules. Shipped
+screenshots in [`../screenshots-05/`](../screenshots-05/) (`SHIPPED-*`). `tsc -b`, `oxlint`, and the
+full test suite (390 tests) all green after the ship.
+
+**Still open, not part of this ticket's close:** the tier-board sub-decision (should expansion
+colour extend to the tier board?) was never answered — carried to the map's "Not yet specified"
+fog list rather than assumed either way. It doesn't graduate without an explicit yes.

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import type { Element, PowerCard } from '../domain/types'
-import { expansionVariantStyle, type ExpansionVariant } from './ExpansionColorRound'
 import { CardViewer } from './CardViewer'
 import { CARD_KIND_COLOR, CARD_SPEED_COLOR, expansionColorFor } from './tagColors'
 
@@ -20,10 +19,9 @@ const ELEMENT_ICON: Record<Element, string> = {
  * judging the prototype).
  *
  * legibility-pass #05: gained an expansion column — Powers rows were the one rows view without
- * one (OtherCardRows/AdversaryRows already showed it as plain text). This column survives the
- * `?expansionColor=` round regardless of which treatment wins; only the `variant` prop and its styling
- * are scaffolding (see ExpansionColorRound.tsx). */
-export function CardRows({ cards, variant }: { cards: PowerCard[]; variant?: ExpansionVariant }) {
+ * one (OtherCardRows/AdversaryRows already showed it as plain text). Owner picked variant C
+ * (solid chip): the column renders as a coloured pill, matching SpiritTile's chip idiom. */
+export function CardRows({ cards }: { cards: PowerCard[] }) {
   const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
   const base = import.meta.env.BASE_URL
 
@@ -33,12 +31,7 @@ export function CardRows({ cards, variant }: { cards: PowerCard[]; variant?: Exp
         const color = expansionColorFor(card.expansion)
         return (
           <li key={card.name}>
-            <button
-              type="button"
-              className="card-row"
-              style={expansionVariantStyle(variant, color)}
-              onClick={() => setEnlarged({ src: `${base}${card.image}`, alt: card.name })}
-            >
+            <button type="button" className="card-row" onClick={() => setEnlarged({ src: `${base}${card.image}`, alt: card.name })}>
               <span className="card-row-type card-row-pill" style={{ background: CARD_KIND_COLOR[card.kind] }}>
                 {card.kind}
               </span>
@@ -56,8 +49,8 @@ export function CardRows({ cards, variant }: { cards: PowerCard[]; variant?: Exp
                 {card.speed}
               </span>
               <span
-                className={color && variant === 'C' ? 'card-row-expansion expansion-chip' : 'card-row-expansion'}
-                style={color && variant === 'C' ? { background: color } : undefined}
+                className={color ? 'card-row-expansion expansion-chip' : 'card-row-expansion'}
+                style={color ? { background: color } : undefined}
               >
                 {card.expansion}
               </span>
