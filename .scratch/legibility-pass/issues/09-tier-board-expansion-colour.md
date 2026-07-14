@@ -92,23 +92,30 @@ row without being confused for one another. Full suite (390 tests) + `tsc -b` + 
 
 ### The pick (owner)
 
+**Superseded same day.** The owner first picked A (left-edge stripe, logged below for the trail),
+then reconsidered: "I think the best approach will be to have a toggle between version B and C.
+Invisible by default, and expansion chips if toggle is on. Let's remove the variant A and have this
+nicer UI approach." **Final shape: not a locked treatment at all, but a user-facing toggle** —
+resolves the A/B tension the first pick left open by not forcing a single answer.
+
+**Shipped:** a "Show expansion colour" checkbox on the tier board (session-only, off by default,
+alongside the board's other view-preference toggles — "Only show spirits I own," "Edit tiers").
+Off = B (no colour signal — the board's original look). On = C (the Archive's solid-chip idiom,
+`.expansion-chip`/`.expansion-chip-corner`, already permanent from ticket 05) on every `TierTile`/
+`CardTile`, aspect tiles still colouring by the aspect's own expansion, not the base spirit's.
+Variant A's border-left stripe and its `box-sizing`/width CSS changes were reverted — `.tier-tile`/
+`.tier-tile-art` are back to their pre-#09 fixed widths, since the chip idiom needs none of that.
+Screenshots: `SHIPPED-toggle-off-1280.png` / `SHIPPED-toggle-on-1280.png` in
+[`../screenshots-09/`](../screenshots-09/). `tsc -b`, `oxlint`, and the full test suite (390 tests)
+all green after the ship.
+
+<details>
+<summary>Superseded pick (kept for the trail, no longer what's shipped)</summary>
+
 **Owner picked A (left-edge stripe), 2026-07-14** — after briefly considering C (the Archive's
-pick), then B (no visible signal at all — deliberately leaving the tier board uncoloured).
+pick), then B (no visible signal at all). Owner's own words at the time: "I am also leaning towards
+B, i.e. keeping it invisible — I will see after some time how I feel but for now let's go with C"
+(then changed the pick itself to A). That live tension between "some signal" and "no signal" is
+exactly what the toggle above resolves, rather than forcing a single static answer.
 
-**Owner's own words, worth carrying forward rather than losing in a status flip:** "I am also
-leaning towards B, i.e. keeping it invisible — I will see after some time how I feel but for now
-let's go with C" (then changed the pick itself to A immediately after). Read together: the owner is
-not fully settled between *some* colour signal (A) and *no* colour signal on this specific surface
-(B) — unlike the Archive, where C was a clear, confident pick. **This is a live tension to revisit,
-not a closed decision** — if a future pass feels the tier board is too busy or the expansion signal
-adds noise next to the tier-position colour, B (i.e. reverting to no tile-level colour, `git revert`
-this ticket's ship commit) is the documented fallback, not a fresh idea.
-
-**Shipped:** variant A across `TierTile` (border-left stripe, coloured by the aspect's own
-expansion when present, else the base spirit's) and `CardTile` (same treatment, `card.expansion`
-via `expansionColorFor()`). `.tier-tile-art` changed from a fixed 116px/150px width to `width: 100%`
-so the new `border-box` sizing on `.tier-tile` doesn't overflow the tile at either breakpoint.
-Scaffolding deleted: `TierExpansionRound.tsx` removed, the `variant` prop and its threading through
-`TierBoard.tsx` removed, `deck.css`'s throwaway switcher block removed. Shipped screenshots in
-[`../screenshots-09/`](../screenshots-09/) (`SHIPPED-*`). `tsc -b`, `oxlint`, and the full test
-suite (390 tests) all green after the ship.
+</details>

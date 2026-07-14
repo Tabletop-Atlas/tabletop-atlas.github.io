@@ -71,15 +71,12 @@ future effort.
   asked for. Flagged during the round: variant B (tint) would have been invisible on grid tiles —
   full-bleed card art leaves no surface for a background wash to show through; moot since C won.
   Tier-board sub-decision carried forward to ticket 09.
-- **[09](issues/09-tier-board-expansion-colour.md)** — owner picked variant **A, left-edge stripe**
-  for the tier board, after a three-way round mirroring ticket 05's. Shipped: `TierTile`/`CardTile`
-  border-left stripe, coloured by an aspect's *own* expansion (not its base spirit's — confirmed
-  31/31 aspects diverge from their spirit's expansion, so the spirit's colour would be uniformly
-  stale). Variant B (tint) confirmed invisible here too, same as ticket 05's Archive finding.
-  **⚠ Not a settled decision like ticket 05's — the owner is still weighing A against B (no colour
-  at all) and said so explicitly** ("leaning towards B... I will see after some time how I feel"),
-  after briefly picking C then changing to A. If a future pass finds the tier board too busy, revert
-  this ticket's ship commit (→ B) rather than treating A as locked in.
+- **[09](issues/09-tier-board-expansion-colour.md)** — after a three-way round (stripe / tint / chip)
+  and one changed mind (A, then reconsidered), the owner settled on **a toggle** rather than a fixed
+  treatment: "Show expansion colour" on the tier board, off by default (no signal — variant B) and
+  the Archive's solid-chip idiom when checked (variant C). Resolves the A-vs-B tension by not forcing
+  either as the only answer. Aspect tiles colour by the aspect's *own* expansion when the toggle is
+  on (not the base spirit's — confirmed 31/31 aspects diverge from their spirit's expansion).
 
 ## Out of scope
 

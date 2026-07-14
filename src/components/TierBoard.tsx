@@ -65,18 +65,21 @@ function TierTile({
   owned,
   edit,
   onOpen,
+  showExpansion,
 }: {
   config: Configuration
   owned: boolean
   edit?: ReactNode
   onOpen?: () => void
+  /** legibility-pass #09: opt-in, off by default — the owner wants the board's colour signal
+   * limited to tier position unless asked for. */
+  showExpansion: boolean
 }) {
-  // legibility-pass #09: an aspect tile colours by the aspect's OWN expansion, not its base
-  // spirit's — every aspect in the data ships in a later box than its spirit (31/31 diverge), so
-  // the spirit's expansion would be uniformly stale for aspect tiles. Owner picked variant A
-  // (left-edge stripe), the SpiritTile idiom.
+  // An aspect tile colours by the aspect's OWN expansion, not its base spirit's — every aspect in
+  // the data ships in a later box than its spirit (31/31 diverge), so the spirit's expansion
+  // would be uniformly stale for aspect tiles.
   const expansion = config.aspect ? config.aspect.expansion : config.spirit.expansion
-  const color = expansionColorFor(expansion)
+  const color = showExpansion ? expansionColorFor(expansion) : undefined
   return (
     <figure
       className={owned ? 'tier-tile' : 'tier-tile tier-tile-unowned'}
@@ -97,7 +100,6 @@ function TierTile({
             }
           : undefined
       }
-      style={color ? { borderLeftColor: color } : undefined}
     >
       <SpiritArt spirit={config.spirit} className="tier-tile-art" />
       {config.aspect ? (
@@ -109,6 +111,11 @@ function TierTile({
         <figcaption>{config.spirit.name}</figcaption>
       )}
       {edit}
+      {color && (
+        <span className="expansion-chip expansion-chip-corner" style={{ background: color }}>
+          {expansion}
+        </span>
+      )}
       {!owned && (
         <span className="unowned-badge" aria-hidden="true">
           ⊘
@@ -122,11 +129,19 @@ function TierTile({
 /** Card art with the same missing-file posture as the rest of the app: a plain placeholder,
  * never a broken image. Card lists are ungated by the collection (#16) — like the Archive,
  * browsing the full pool is the point. */
-function CardTile({ card, edit }: { card: PowerCard; edit?: ReactNode }) {
+function CardTile({
+  card,
+  edit,
+  showExpansion,
+}: {
+  card: PowerCard
+  edit?: ReactNode
+  showExpansion: boolean
+}) {
   const [failed, setFailed] = useState(false)
-  const color = expansionColorFor(card.expansion)
+  const color = showExpansion ? expansionColorFor(card.expansion) : undefined
   return (
-    <figure className="tier-tile" title={card.name} style={color ? { borderLeftColor: color } : undefined}>
+    <figure className="tier-tile" title={card.name}>
       {failed ? (
         <span className="tier-tile-card-art tier-tile-card-missing" aria-hidden="true" />
       ) : (
@@ -141,6 +156,11 @@ function CardTile({ card, edit }: { card: PowerCard; edit?: ReactNode }) {
       )}
       <figcaption>{card.name}</figcaption>
       {edit}
+      {color && (
+        <span className="expansion-chip expansion-chip-corner" style={{ background: color }}>
+          {card.expansion}
+        </span>
+      )}
     </figure>
   )
 }
@@ -152,6 +172,10 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
   const [, setVersion] = useState(0)
   const [hardFilter, setHardFilter] = useState(false)
   const [editing, setEditing] = useState(false)
+  // legibility-pass #09: invisible by default (owner's live call, not fully settled between "no
+  // signal" and "a signal") — a toggle rather than a locked-in treatment, session-only like the
+  // other view preferences on this board (not collection data, so not persisted).
+  const [showExpansion, setShowExpansion] = useState(false)
   // The board tracks which SUBJECT is on display; the list shown is always that subject's
   // active list, so the board and the store can never disagree about whose ratings render.
   const [viewedSubject, setViewedSubject] = useState<TierListSubject>(initialSubject ?? 'configurations')
@@ -194,10 +218,13 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
         onOpen={
           editingHere ? undefined : () => setDetail({ spirit: config.spirit, aspect: config.aspect?.name })
         }
+        showExpansion={showExpansion}
       />
     ))
   const cardTiles = (items: PowerCard[], current: string) =>
-    items.map((card) => <CardTile key={card.name} card={card} edit={editControl(card.name, card.name, current)} />)
+    items.map((card) => (
+      <CardTile key={card.name} card={card} edit={editControl(card.name, card.name, current)} showExpansion={showExpansion} />
+    ))
 
   // Hard-filter (#06's opt-in): excluded exactly as if annotation had removed them first, rather
   // than dimmed in place. Session-only - a view preference, not collection data, so it isn't
@@ -253,6 +280,10 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
           Edit tiers
         </label>
       )}
+      <label className="deck-field-inline">
+        <input type="checkbox" checked={showExpansion} onChange={(e) => setShowExpansion(e.target.checked)} />
+        Show expansion colour
+      </label>
       {tierStore.wasDiscarded(subject) && (
         <p className="notice">
           Your saved tier edits were discarded because the shipped tier list has changed since you

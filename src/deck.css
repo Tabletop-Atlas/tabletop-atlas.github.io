@@ -562,7 +562,8 @@ button:disabled {
   }
   /* v4 #14: tier tile captions at 8-8.8px were unreadable and several truncated mid-word
    * (v4 #07 finding 3) - there's slack at this width for wider tiles and bigger text. */
-  .tier-tile {
+  .tier-tile,
+  .tier-tile-art {
     width: 150px;
   }
   .tier-tile-art {
@@ -810,15 +811,10 @@ button:disabled {
   border-radius: 6px;
   align-content: flex-start;
 }
-/* legibility-pass #09 (owner picked variant A, left-edge stripe): expansion colour on the tier
- * board, the SpiritTile idiom. Colour comes inline from tagColors' expansionColorFor() — shape
- * only, `box-sizing: border-box` so the stripe doesn't grow the tile past its 116px column width. */
 .tier-tile {
   position: relative;
   width: 116px;
   margin: 0;
-  box-sizing: border-box;
-  border-left: 4px solid transparent;
 }
 .tier-tile-card-art {
   display: block;
@@ -843,7 +839,7 @@ button:disabled {
 }
 .tier-tile-art {
   display: block;
-  width: 100%;
+  width: 116px;
   height: 53px;
   object-fit: cover;
   border-radius: 4px;
