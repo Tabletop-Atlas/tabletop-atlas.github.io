@@ -1,6 +1,6 @@
 # 06 — Tier rank on the Browse tiles
 
-Status: ready-for-human
+Status: needs-info
 Label: wayfinder:prototype (HITL — owner picks the look)
 Parent: [Legibility-pass map](../MAP.md)
 
@@ -29,10 +29,49 @@ winner.
 
 ## Acceptance criteria
 
-- [ ] Each Browse tile shows its base spirit's rank from the **active** tier list; switching the
+- [x] Each Browse tile shows its base spirit's rank from the **active** tier list; switching the
       active list updates the tiles
-- [ ] Unrated spirits show honest absence (no invented tier)
-- [ ] Reuses the existing `tierColors.ts` palette; no collision with the tile's expansion colour
-- [ ] Aspects remain modal-only (no tile change there)
-- [ ] `?variant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
-- [ ] Legible on dark theme at 375px + desktop; test suite green
+- [x] Unrated spirits show honest absence (no invented tier)
+- [x] Reuses the existing `tierColors.ts` palette; no collision with the tile's expansion colour
+- [x] Aspects remain modal-only (no tile change there)
+- [x] `?variant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
+- [x] Legible on dark theme at 375px + desktop; test suite green
+
+## Comments
+
+**Round live (2026-07-15) — OWNER PICK NEEDED, question at the end.**
+
+The mechanical part ships regardless of the pick: every `SpiritTile` now reads its base
+configuration's rank from the **active** configurations tier list via a new
+`activeConfigTier(configId)` in `tierColors.ts` — shared with the detail modal's `TierChip`
+(refactored to use the same helper) so the tile and the modal can never disagree, the same
+guarantee `groupByTier` already gives the board. An unrated configuration (or a label outside the
+active list's own `tierLabels`, e.g. a stale override) comes back `undefined` and the tile renders
+no badge at all — honest absence, never a defaulted tier. Switching the active list on the Tier
+list tab changes what the tiles show on next render, since `activeConfigTier` reads
+`tierStore.getActiveList()` live. Aspects are untouched — the badge reads the *base* spirit's
+configId only, `toConfigId(spirit.id)`, no per-aspect tile change.
+
+Checked against all 68 configurations under the shipped Owner's board: all 37 base spirits are
+rated (no live unrated example on Browse today), so the honest-absence path is exercised by code
+inspection and the shared `tier-chip-unrated` precedent in the modal, not by a screenshot — noting
+this rather than fabricating an unrated tile to photograph.
+
+**What's gated behind the round:** only the badge's render treatment
+(`TierBadgeVariantRound.tsx`, `?tierVariant=A|B|C`). Without the param, tiles show no badge at all
+— same "mechanical ships, treatment is picked" split tickets 04/05/09 used.
+
+- **A — corner badge:** a small solid `tier-chip`-style letter chip pinned to the art's top-right
+  corner.
+- **B — ribbon:** a diagonal ribbon across the art's top-right corner, same fill.
+- **C — coloured ring:** the whole tile gets a tier-coloured inset ring (the expansion stripe
+  stays on the left edge; the ring runs the remaining three sides so the two signals don't
+  overlap) plus a small letter label in the corner for the cases a ring's hue alone doesn't read
+  clearly enough (e.g. two similar tiers side by side).
+
+Screenshots (baseline + A/B/C, Base expansion filter for a representative spread across every
+shipped tier, at 375px + 1280px) in [`../screenshots-06/`](../screenshots-06/).
+
+## The pick (owner)
+
+_(awaiting)_

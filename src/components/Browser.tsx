@@ -4,6 +4,7 @@ import { collectionStore } from '../domain/collectionStore'
 import type { Complexity, OCFDU, Spirit } from '../domain/types'
 import { SpiritDetail } from './SpiritDetail'
 import { SpiritTile } from './SpiritTile'
+import { readTierBadgeVariant, TierBadgeVariantSwitcher } from './TierBadgeVariantRound'
 
 const spirits = spiritsData as Spirit[]
 
@@ -27,6 +28,9 @@ export function Browser() {
   // Read once per render, not once per spirit/aspect - collectionStore.getExcluded() does a
   // storage read + JSON.parse + Set rebuild, and the earlier version called it per tile.
   const excluded = useMemo(() => new Set(collectionStore.getExcluded()), [])
+  // ROUND 06 scaffolding — delete this state + readTierBadgeVariant/TierBadgeVariantSwitcher and
+  // the `tierVariant={tierBadgeVariant}` prop below on ship (see TierBadgeVariantRound.tsx).
+  const [tierBadgeVariant, setTierBadgeVariant] = useState(readTierBadgeVariant)
 
   const shown = useMemo(() => {
     const filtered = spirits.filter(
@@ -101,9 +105,18 @@ export function Browser() {
 
       <ul className="spirit-grid">
         {shown.map((spirit) => (
-          <SpiritTile key={spirit.id} spirit={spirit} onSelect={setSelected} owned={!excluded.has(spirit.expansion)} excluded={excluded} />
+          <SpiritTile
+            key={spirit.id}
+            spirit={spirit}
+            onSelect={setSelected}
+            owned={!excluded.has(spirit.expansion)}
+            excluded={excluded}
+            tierVariant={tierBadgeVariant ?? undefined}
+          />
         ))}
       </ul>
+
+      {tierBadgeVariant && <TierBadgeVariantSwitcher current={tierBadgeVariant} onPick={setTierBadgeVariant} />}
 
       {selected && <SpiritDetail spirit={selected} onClose={() => setSelected(null)} />}
     </section>

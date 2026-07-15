@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { toConfigId } from '../domain/configurations'
 import type { ExpansionName, Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
 import { COMPLEXITY_LEVEL, EXPANSION_COLOR, tagColor, tagLabel } from './tagColors'
+import { type TierBadgeVariant, tierBadgeProps } from './TierBadgeVariantRound'
+import { activeConfigTier, tierColor } from './tierColors'
 
 /** v5 #07c: Browse annotates (never hides, unless the caller already dropped it via
  * hard-filter) a spirit outside the collection - dimmed with a note, same treatment as the
@@ -21,20 +24,25 @@ export function SpiritTile({
   onSelect,
   owned,
   excluded,
+  tierVariant,
 }: {
   spirit: Spirit
   onSelect?: (spirit: Spirit) => void
   owned: boolean
   excluded: ReadonlySet<ExpansionName>
+  /** #06: throwaway variant-round prop — delete alongside `TierBadgeVariantRound.tsx` on ship. */
+  tierVariant?: TierBadgeVariant
 }) {
   const [expanded, setExpanded] = useState(false)
   const level = COMPLEXITY_LEVEL[spirit.complexity]
   const expansionColor = EXPANSION_COLOR[spirit.expansion]
+  const tier = activeConfigTier(toConfigId(spirit.id))
+  const badge = tierVariant && tier ? tierBadgeProps(tierVariant, tierColor(tier.position)) : undefined
 
   return (
     <li
       className={owned ? 'spirit-tile' : 'spirit-tile spirit-tile-unowned'}
-      style={{ borderLeftColor: expansionColor }}
+      style={{ borderLeftColor: expansionColor, ...badge?.tileStyle }}
     >
       <button
         type="button"
@@ -42,7 +50,14 @@ export function SpiritTile({
         onClick={() => onSelect?.(spirit)}
         aria-label={`View ${spirit.name} details`}
       >
-        <SpiritArt spirit={spirit} />
+        <div className="spirit-tile-art-wrap">
+          <SpiritArt spirit={spirit} />
+          {badge && (
+            <span className={badge.className} style={badge.style}>
+              {tier?.label}
+            </span>
+          )}
+        </div>
         <div className="spirit-tile-name-row">
           <h3>{spirit.name}</h3>
           <span className="spirit-tile-complexity" title={spirit.complexity}>

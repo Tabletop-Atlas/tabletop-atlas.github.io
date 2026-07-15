@@ -778,6 +778,47 @@ button:disabled {
   white-space: nowrap;
 }
 
+/* --- #06 ROUND 06: tier badge on the Browse tile art. Delete this block on ship (keep only the
+   winning variant's rules, promoted without the `-corner`/`-ribbon`/`-ring-label` suffix, matching
+   how ticket 04/05 promoted their winning chip class). --- */
+.spirit-tile-art-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.tier-badge {
+  position: absolute;
+  font: 800 0.8rem/1 var(--deck-mono);
+  color: #10141a;
+}
+.tier-badge-corner {
+  top: 4px;
+  right: 4px;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  padding: 0 0.3rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+}
+.tier-badge-ribbon {
+  top: 10px;
+  right: -28px;
+  width: 100px;
+  padding: 0.1rem 0;
+  text-align: center;
+  transform: rotate(45deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+}
+.tier-badge-ring-label {
+  top: 4px;
+  right: 4px;
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(10, 14, 20, 0.78);
+}
+
 /* --- tier board --- */
 .tier-board {
   display: flex;

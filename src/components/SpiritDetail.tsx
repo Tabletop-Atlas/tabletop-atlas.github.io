@@ -7,7 +7,7 @@ import { OcfduBars } from './OcfduBars'
 import { PlaceholderArt } from './PlaceholderArt'
 import { SpiritArt } from './SpiritArt'
 import { COMPLEXITY_LEVEL, EXPANSION_COLOR, PANEL_COLOR, tagColor, tagLabel } from './tagColors'
-import { tierColor } from './tierColors'
+import { activeConfigTier, tierColor } from './tierColors'
 
 /** panel-theming #03: the modal's one colour source, injected as CSS custom properties on the
  * modal root and consumed by the `.modal.spirit-detail` rules in deck.css. */
@@ -26,12 +26,11 @@ const PANEL_VARS = {
  * the vocabulary (a stale override) also reads as unrated, the same rule `groupByTier` applies
  * on the board, so chip and board can never disagree. */
 function TierChip({ configId }: { configId: string }) {
-  const label = tierStore.getTier(configId)
-  const position = label === undefined ? -1 : tierStore.getActiveList().tierLabels.indexOf(label)
-  if (position === -1) return <span className="tier-chip tier-chip-unrated">unrated</span>
+  const tier = activeConfigTier(configId)
+  if (!tier) return <span className="tier-chip tier-chip-unrated">unrated</span>
   return (
-    <span className="tier-chip" style={{ backgroundColor: tierColor(position) }}>
-      {label}
+    <span className="tier-chip" style={{ backgroundColor: tierColor(tier.position) }}>
+      {tier.label}
     </span>
   )
 }
