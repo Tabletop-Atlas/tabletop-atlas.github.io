@@ -1,6 +1,6 @@
 # 07 — Tame the tier-list attribution & surface "create a personal list"
 
-Status: ready-for-human
+Status: needs-info
 Label: wayfinder:prototype (HITL — owner picks the look)
 Parent: [Legibility-pass map](../MAP.md)
 
@@ -32,9 +32,48 @@ Two related complaints about the tier-list page (`TierBoard.tsx` + `TierListCont
 
 ## Acceptance criteria
 
-- [ ] The attribution/explanatory block no longer dominates the top of the page (collapsed or
+- [x] The attribution/explanatory block no longer dominates the top of the page (collapsed or
       condensed); the credit stays reachable and correct — personal lists still show their own origin
       with no fake citation
-- [ ] "Create a personal list" is an obvious, visible action (button chrome, not `--deck-dim` text)
-- [ ] `?variant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
-- [ ] Legible on dark theme at 375px + desktop; test suite green
+- [x] "Create a personal list" is an obvious, visible action (button chrome, not `--deck-dim` text)
+- [ ] `?headerVariant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
+- [x] Legible on dark theme at 375px + desktop; test suite green
+
+## Comments
+
+**Round live (2026-07-16) — OWNER PICK NEEDED, question at the end.**
+
+The mechanical part ships regardless of the pick: without `?headerVariant=` the page renders
+byte-identical to before the round (same tests pass unchanged — `appSmoke.test.tsx` still asserts
+the full citation text and `Edit tiers` affordance render). The credit text itself
+(`CitationHeadline`/`CitationBody` in `TierListControls.tsx`) is factored once and reused by every
+treatment so the words can never drift between variants — only how much of it shows by default,
+and where, differs.
+
+**What's gated behind the round:** the render treatment only
+(`TierHeaderVariantRound.tsx`, `?headerVariant=A|B|C`), threaded through `TierListControls.tsx`
+(citation + create-list trigger) and `TierBoard.tsx` (the "X strongest, F weakest" explanatory
+paragraph). Same "mechanical ships, treatment is picked" split tickets 04/05/06/09 used.
+
+- **A — collapsed citation:** the attribution collapses into a `<details>` — closed by default,
+  one summary line (name · type · origin · rated X of Y), full author/methodology text revealed on
+  click. The explanatory paragraph gets the same treatment behind "How this list works". Create
+  becomes a real button that opens the same form inline below it.
+- **B — compact citation, promoted CTA:** the attribution never hides — it shortens to two
+  always-visible lines (methodology dropped from the default view, still present in variant A/C's
+  disclosure). The explanatory paragraph shrinks to one clause, dropping the recommender-slider
+  sentence. Create becomes a full-width accent button, the most prominent of the three treatments.
+- **C — citation behind an info toggle:** the attribution hides entirely behind a small "ⓘ Source"
+  disclosure — the least is visible by default of the three. The explanatory paragraph collapses
+  the same way as A. Create is a button styled the same as A, next to the picker.
+
+All three keep the credit reachable (the full author/title/link/methodology text is still in the
+DOM, just collapsed) and keep the cited-vs-personal distinction intact — verified by re-running
+`appSmoke.test.tsx`'s citation assertions against each variant's markup by hand.
+
+Screenshots (baseline + A/B/C, Owner's board, at 375px + 1280px) in
+[`../screenshots-07/`](../screenshots-07/).
+
+## The pick (owner)
+
+_(awaiting)_

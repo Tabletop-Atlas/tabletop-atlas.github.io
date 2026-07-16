@@ -1025,6 +1025,58 @@ button:disabled {
   margin-top: 0.5rem;
 }
 
+/* --- #07 ROUND 07: tamed attribution + a visible "create a personal list" action. Delete this
+   block on ship (keep only the winning variant's rules, matching how tickets 04/05/06 promoted
+   their winning treatment without the A/B/C suffix). --- */
+.tier-citation-a summary,
+.tier-citation-c summary {
+  cursor: pointer;
+  color: var(--deck-text);
+}
+.tier-citation-a summary::marker,
+.tier-citation-c summary::marker {
+  color: var(--deck-dim);
+}
+.tier-citation-a > p,
+.tier-citation-c > p {
+  margin-top: 0.4rem;
+}
+.tier-citation-b p {
+  margin: 0.2rem 0;
+}
+.tier-list-create-a,
+.tier-list-create-b,
+.tier-list-create-c {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.tier-list-create-trigger {
+  align-self: flex-start;
+  font-weight: 700;
+}
+.tier-list-create-b .tier-list-create-trigger {
+  align-self: stretch;
+  text-align: center;
+  padding: 0.6rem 0.9rem;
+}
+.tier-list-create-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--deck-panel-2);
+  border: 1px solid var(--deck-line);
+  border-radius: 6px;
+}
+.tier-explainer summary {
+  cursor: pointer;
+  color: var(--deck-dim);
+}
+.tier-explainer p {
+  margin-top: 0.4rem;
+}
+
 /* --- tier board: unrated row --- */
 .tier-label-unrated {
   background: var(--deck-panel-2);

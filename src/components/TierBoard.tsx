@@ -8,6 +8,7 @@ import type { PowerCard, Spirit, TierList, TierListSubject } from '../domain/typ
 import { SpiritArt } from './SpiritArt'
 import { SpiritDetail } from './SpiritDetail'
 import { expansionColorFor } from './tagColors'
+import { readTierHeaderVariant, TierHeaderVariantSwitcher } from './TierHeaderVariantRound'
 import { tierColor } from './tierColors'
 import { TierListControls } from './TierListControls'
 
@@ -176,6 +177,9 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
   // signal" and "a signal") — a toggle rather than a locked-in treatment, session-only like the
   // other view preferences on this board (not collection data, so not persisted).
   const [showExpansion, setShowExpansion] = useState(false)
+  // ROUND 07 scaffolding — delete this state + readTierHeaderVariant/TierHeaderVariantSwitcher and
+  // the `headerVariant={headerVariant}` prop below on ship (see TierHeaderVariantRound.tsx).
+  const [headerVariant, setHeaderVariant] = useState(readTierHeaderVariant)
   // The board tracks which SUBJECT is on display; the list shown is always that subject's
   // active list, so the board and the store can never disagree about whose ratings render.
   const [viewedSubject, setViewedSubject] = useState<TierListSubject>(initialSubject ?? 'configurations')
@@ -247,27 +251,60 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
         viewed={viewed}
         total={subjectTotal(subject)}
         allowCreate
+        headerVariant={headerVariant ?? undefined}
         onSelect={(list) => {
           tierStore.setActiveListId(list.id)
           setViewedSubject(list.subject)
           bump()
         }}
       />
-      <p>
-        {customised ? 'Your customised tier list' : 'The shipped tier list'} — <strong>{viewed.tierLabels[0]}</strong>{' '}
-        is strongest, <strong>{viewed.tierLabels[viewed.tierLabels.length - 1]}</strong> weakest.{' '}
-        {subject === 'configurations' && (
+      {(() => {
+        const explainer = (
           <>
-            This ordering feeds the recommender: the <em>raw power ↔ something fresh</em> slider decides how heavily a
-            spirit's tier counts toward its score.{' '}
+            {customised ? 'Your customised tier list' : 'The shipped tier list'} — <strong>{viewed.tierLabels[0]}</strong>{' '}
+            is strongest, <strong>{viewed.tierLabels[viewed.tierLabels.length - 1]}</strong> weakest.{' '}
+            {subject === 'configurations' && (
+              <>
+                This ordering feeds the recommender: the <em>raw power ↔ something fresh</em> slider decides how
+                heavily a spirit's tier counts toward its score.{' '}
+              </>
+            )}
+            {canEdit ? (
+              <>
+                Toggle <strong>Edit tiers</strong> to reassign {subject === 'configurations' ? 'spirits' : 'cards'} right
+                here.
+              </>
+            ) : (
+              <>A cited list can't be edited — switch to a personal list to make changes.</>
+            )}
           </>
-        )}
-        {canEdit ? (
-          <>Toggle <strong>Edit tiers</strong> to reassign {subject === 'configurations' ? 'spirits' : 'cards'} right here.</>
-        ) : (
-          <>A cited list can't be edited — switch to a personal list to make changes.</>
-        )}
-      </p>
+        )
+
+        if (!headerVariant) return <p>{explainer}</p>
+
+        if (headerVariant === 'B') {
+          return (
+            <p>
+              <strong>{viewed.tierLabels[0]}</strong> strongest, <strong>{viewed.tierLabels[viewed.tierLabels.length - 1]}</strong>{' '}
+              weakest.{' '}
+              {canEdit ? (
+                <>
+                  Toggle <strong>Edit tiers</strong> to reassign.
+                </>
+              ) : (
+                <>switch to a personal list to make changes.</>
+              )}
+            </p>
+          )
+        }
+
+        return (
+          <details className="tier-explainer">
+            <summary>How this list works</summary>
+            <p>{explainer}</p>
+          </details>
+        )
+      })()}
       {subject === 'configurations' && (
         <label className="deck-field-inline">
           <input type="checkbox" checked={hardFilter} onChange={(e) => setHardFilter(e.target.checked)} />
@@ -354,6 +391,7 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
       {detail && (
         <SpiritDetail spirit={detail.spirit} highlightAspect={detail.aspect} onClose={() => setDetail(null)} />
       )}
+      {headerVariant && <TierHeaderVariantSwitcher current={headerVariant} onPick={setHeaderVariant} />}
     </section>
   )
 }
