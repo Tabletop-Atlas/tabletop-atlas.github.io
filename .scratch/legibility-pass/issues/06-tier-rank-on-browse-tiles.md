@@ -1,6 +1,6 @@
 # 06 — Tier rank on the Browse tiles
 
-Status: needs-info
+Status: done
 Label: wayfinder:prototype (HITL — owner picks the look)
 Parent: [Legibility-pass map](../MAP.md)
 
@@ -34,7 +34,7 @@ winner.
 - [x] Unrated spirits show honest absence (no invented tier)
 - [x] Reuses the existing `tierColors.ts` palette; no collision with the tile's expansion colour
 - [x] Aspects remain modal-only (no tile change there)
-- [ ] `?variant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
+- [x] `?variant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
 - [x] Legible on dark theme at 375px + desktop; test suite green
 
 ## Comments
@@ -74,4 +74,11 @@ shipped tier, at 375px + 1280px) in [`../screenshots-06/`](../screenshots-06/).
 
 ## The pick (owner)
 
-_(awaiting)_
+**B — ribbon.** Shipped: `SpiritTile.tsx` renders a diagonal `.tier-badge-ribbon` (top-right corner
+of the art) whenever `activeConfigTier` resolves a rank; unrated spirits render no ribbon at all.
+Scaffolding removed — `TierBadgeVariantRound.tsx` deleted, the `tierVariant` prop/`?tierVariant=`
+reader/floating switcher pulled out of `SpiritTile.tsx` and `Browser.tsx`, and the three
+`.tier-badge-*` CSS rules in `deck.css` collapsed to one `.tier-badge-ribbon` rule (no suffix,
+matching how 04/05/09 promoted their winners). Screenshots kept in `../screenshots-06/`
+(`SHIPPED-375.png` / `SHIPPED-1280.png` added alongside the round's A/B/C/baseline set).
+`tsc -b`, `oxlint`, and the full test suite (392 tests) are clean post-ship.

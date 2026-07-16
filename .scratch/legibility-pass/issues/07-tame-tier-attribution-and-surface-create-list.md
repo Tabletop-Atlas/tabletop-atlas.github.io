@@ -1,6 +1,6 @@
 # 07 — Tame the tier-list attribution & surface "create a personal list"
 
-Status: needs-info
+Status: done
 Label: wayfinder:prototype (HITL — owner picks the look)
 Parent: [Legibility-pass map](../MAP.md)
 
@@ -36,7 +36,7 @@ Two related complaints about the tier-list page (`TierBoard.tsx` + `TierListCont
       condensed); the credit stays reachable and correct — personal lists still show their own origin
       with no fake citation
 - [x] "Create a personal list" is an obvious, visible action (button chrome, not `--deck-dim` text)
-- [ ] `?headerVariant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
+- [x] `?headerVariant=` round run, owner pick recorded, scaffolding deleted, screenshots kept
 - [x] Legible on dark theme at 375px + desktop; test suite green
 
 ## Comments
@@ -76,4 +76,17 @@ Screenshots (baseline + A/B/C, Owner's board, at 375px + 1280px) in
 
 ## The pick (owner)
 
-_(awaiting)_
+**C — citation behind an info toggle.** Shipped: `TierListCitation` in `TierListControls.tsx` now
+unconditionally renders the attribution behind a closed-by-default `<details>` with a "ⓘ Source"
+summary — the credit text (`CitationHeadline`/`CitationBody`) is unchanged, only its default
+visibility moved. `TierBoard.tsx`'s explanatory paragraph collapses the same way, behind "How this
+list works" (variant C shared A's treatment there). "Create a personal list" is a permanent
+`.tier-list-create` button next to the picker, opening the create form inline below it.
+Scaffolding removed — `TierHeaderVariantRound.tsx` deleted, the `headerVariant` prop/
+`?headerVariant=` reader/floating switcher pulled out of `TierListControls.tsx` and
+`TierBoard.tsx`, and the `-a`/`-b`/`-c` suffixed CSS rules in `deck.css` collapsed to their
+unsuffixed winners. Screenshots kept in `../screenshots-07/` (`SHIPPED-375.png` /
+`SHIPPED-1280.png` added alongside the round's A/B/C/baseline set). `tsc -b`, `oxlint`, and the
+full test suite (392 tests) are clean post-ship — `appSmoke.test.tsx`'s citation assertions
+(credit author/title/link text) still pass unchanged since `renderToStaticMarkup` renders a closed
+`<details>`'s children regardless of the open attribute.

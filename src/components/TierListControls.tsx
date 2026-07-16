@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { tierStore } from '../domain/tierStore'
 import { LIST_TYPES, TIER_LIST_SUBJECTS } from '../domain/types'
 import type { TierList, TierListSubject, TierListType } from '../domain/types'
-import type { TierHeaderVariant } from './TierHeaderVariantRound'
 
 /** Human labels for subject headings (#06: "UI may label subjects in human words"). */
 export const SUBJECT_LABEL: Record<TierListSubject, string> = {
@@ -61,63 +60,16 @@ function CitationBody({ list, rated, total }: { list: TierList; rated: number; t
   )
 }
 
-/** #07 baseline: unchanged from before the round — always fully expanded. Kept as its own
- * treatment (rather than folded into a variant) so the app renders byte-identical to before the
- * round whenever `?headerVariant=` is absent. */
-function TierListCitation({
-  list,
-  rated,
-  total,
-  headerVariant,
-}: {
-  list: TierList
-  rated: number
-  total: number
-  headerVariant?: TierHeaderVariant
-}) {
-  if (headerVariant === 'A') {
-    return (
-      <details className="tier-citation tier-citation-a">
-        <summary>
-          <strong>{list.name}</strong>{' '}
-          <span className="meta">
-            {list.type} ranking · {list.origin === 'cited' ? 'cited' : 'your list'} · rated {rated} of {total}
-          </span>
-          {!list.verified && <span className="badge-unverified"> Unverified</span>}
-        </summary>
-        <CitationBody list={list} rated={rated} total={total} />
-      </details>
-    )
-  }
-
-  if (headerVariant === 'B') {
-    return (
-      <div className="tier-citation tier-citation-b">
-        <CitationHeadline list={list} />
-        <p className="meta">
-          <CreditLine list={list} />
-          {' · '}
-          rated {rated} of {total}
-        </p>
-      </div>
-    )
-  }
-
-  if (headerVariant === 'C') {
-    return (
-      <details className="tier-citation tier-citation-c">
-        <summary>ⓘ Source</summary>
-        <CitationHeadline list={list} />
-        <CitationBody list={list} rated={rated} total={total} />
-      </details>
-    )
-  }
-
+/** legibility-pass #07 (owner picked variant C): the attribution hides behind a small "ⓘ Source"
+ * disclosure so it stops pushing the board down the page — the credit itself never drifts,
+ * `CitationHeadline`/`CitationBody` are shared with every surface that ever showed it. */
+function TierListCitation({ list, rated, total }: { list: TierList; rated: number; total: number }) {
   return (
-    <div className="tier-citation">
+    <details className="tier-citation">
+      <summary>ⓘ Source</summary>
       <CitationHeadline list={list} />
       <CitationBody list={list} rated={rated} total={total} />
-    </div>
+    </details>
   )
 }
 
@@ -132,15 +84,12 @@ export function TierListControls({
   total,
   onSelect,
   allowCreate,
-  headerVariant,
 }: {
   viewed: TierList
   /** Size of the viewed list's subject universe (68 configurations, 101 minors, 78 majors). */
   total: number
   onSelect: (list: TierList) => void
   allowCreate?: boolean
-  /** #07: throwaway variant-round prop — delete alongside `TierHeaderVariantRound.tsx` on ship. */
-  headerVariant?: TierHeaderVariant
 }) {
   const [typeFilter, setTypeFilter] = useState<TierListType | ''>('')
   const [newName, setNewName] = useState('')
@@ -204,7 +153,7 @@ export function TierListControls({
         </label>
       )}
 
-      <TierListCitation list={viewed} rated={rated} total={total} headerVariant={headerVariant} />
+      <TierListCitation list={viewed} rated={rated} total={total} />
 
       {allowCreate &&
         (() => {
@@ -250,17 +199,8 @@ export function TierListControls({
             </>
           )
 
-          if (!headerVariant) {
-            return (
-              <details className="tier-list-create">
-                <summary>Create a personal list</summary>
-                {fields}
-              </details>
-            )
-          }
-
           return (
-            <div className={`tier-list-create tier-list-create-${headerVariant.toLowerCase()}`}>
+            <div className="tier-list-create">
               <button type="button" className="deck-ghost-accent tier-list-create-trigger" onClick={() => setCreateOpen((v) => !v)}>
                 + Create a personal list
               </button>

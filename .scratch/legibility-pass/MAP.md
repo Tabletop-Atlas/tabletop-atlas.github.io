@@ -88,6 +88,17 @@ future effort.
   card had it — is replaced outright by its subtype tags, the owner's specific ask; a one-time
   row-level note carries the judgment provenance instead of repeating it per chip. Owner picked
   variant **A, filled pill** after a three-way round (pill / tinted text / outlined tag).
+- **[06](issues/06-tier-rank-on-browse-tiles.md)** — owner picked variant **B, ribbon** after a
+  three-way round (corner badge / ribbon / coloured ring) on the real Browse grid. A Browse tile
+  now carries a diagonal ribbon showing the base spirit's rank in the *active* configurations tier
+  list (shared `activeConfigTier` helper, so the tile and the modal's `TierChip` can never
+  disagree); unrated spirits show no ribbon, never a fabricated tier.
+- **[07](issues/07-tame-tier-attribution-and-surface-create-list.md)** — owner picked variant
+  **C, citation behind an info toggle** after a three-way round (collapsed citation / compact
+  citation with promoted CTA / info toggle) on the tier-list page. The attribution/explanatory
+  block now hides behind "ⓘ Source" and "How this list works" disclosures so the board leads the
+  page; "Create a personal list" is a real button next to the picker instead of dim `<details>`
+  text.
 
 ## Out of scope
 

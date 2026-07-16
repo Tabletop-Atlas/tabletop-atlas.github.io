@@ -779,56 +779,25 @@ button:disabled {
   white-space: nowrap;
 }
 
-/* --- #06 ROUND 06: tier badge on the Browse tile art. Delete this block on ship (keep only the
-   winning variant's rules, promoted without the `-corner`/`-ribbon`/`-ring-label` suffix, matching
-   how ticket 04/05 promoted their winning chip class). --- */
+/* legibility-pass #06 (owner picked variant B, ribbon): a Browse tile's active-list tier rank,
+   a diagonal ribbon across the art's top-right corner. Colour comes from the same `tierColor`
+   the tier board and modal chip use, via inline style. */
 .spirit-tile-art-wrap {
   position: relative;
   overflow: hidden;
   border-radius: 6px;
 }
-.tier-badge {
-  position: absolute;
-  font: 800 0.8rem/1 var(--deck-mono);
-  color: #10141a;
-}
-.tier-badge-corner {
-  top: 4px;
-  right: 4px;
-  min-width: 1.6rem;
-  height: 1.6rem;
-  display: grid;
-  place-items: center;
-  padding: 0 0.3rem;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
-}
 .tier-badge-ribbon {
+  position: absolute;
   top: 10px;
   right: -28px;
   width: 100px;
   padding: 0.1rem 0;
   text-align: center;
   transform: rotate(45deg);
+  font: 800 0.8rem/1 var(--deck-mono);
+  color: #10141a;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
-}
-.tier-badge-ring-label {
-  top: 4px;
-  right: 4px;
-  padding: 0.05rem 0.35rem;
-  border-radius: 4px;
-  background: rgba(10, 14, 20, 0.78);
-}
-/* The ring stops at the left edge - that's the expansion stripe's (`border-left`), so the two
-   signals never overlap. Inset shadows can't be one-sided, so this is top + right + bottom border
-   instead, matching the tile's own 8px corner radius only on the three sides it touches. */
-.tier-badge-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  border-style: solid;
-  border-width: 2px 2px 2px 0;
-  pointer-events: none;
 }
 
 /* --- tier board --- */
@@ -1012,41 +981,22 @@ button:disabled {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.tier-list-create {
-  flex: 1 1 220px;
-  min-width: 200px;
-}
-.tier-list-create summary {
-  cursor: pointer;
-  color: var(--deck-dim);
-  font-size: 12px;
-}
-.tier-list-create .deck-field {
-  margin-top: 0.5rem;
-}
-
-/* --- #07 ROUND 07: tamed attribution + a visible "create a personal list" action. Delete this
-   block on ship (keep only the winning variant's rules, matching how tickets 04/05/06 promoted
-   their winning treatment without the A/B/C suffix). --- */
-.tier-citation-a summary,
-.tier-citation-c summary {
+/* legibility-pass #07 (owner picked variant C): the citation hides behind a small "ⓘ Source"
+   disclosure so it stops pushing the board down the page, and "create a personal list" is a
+   visible button (not `--deck-dim` text) next to the picker. */
+.tier-citation summary {
   cursor: pointer;
   color: var(--deck-text);
 }
-.tier-citation-a summary::marker,
-.tier-citation-c summary::marker {
+.tier-citation summary::marker {
   color: var(--deck-dim);
 }
-.tier-citation-a > p,
-.tier-citation-c > p {
+.tier-citation > p {
   margin-top: 0.4rem;
 }
-.tier-citation-b p {
-  margin: 0.2rem 0;
-}
-.tier-list-create-a,
-.tier-list-create-b,
-.tier-list-create-c {
+.tier-list-create {
+  flex: 1 1 220px;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -1054,11 +1004,6 @@ button:disabled {
 .tier-list-create-trigger {
   align-self: flex-start;
   font-weight: 700;
-}
-.tier-list-create-b .tier-list-create-trigger {
-  align-self: stretch;
-  text-align: center;
-  padding: 0.6rem 0.9rem;
 }
 .tier-list-create-panel {
   display: flex;
@@ -1068,6 +1013,9 @@ button:disabled {
   background: var(--deck-panel-2);
   border: 1px solid var(--deck-line);
   border-radius: 6px;
+}
+.tier-list-create .deck-field {
+  margin-top: 0.5rem;
 }
 .tier-explainer summary {
   cursor: pointer;

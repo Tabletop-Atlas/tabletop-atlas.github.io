@@ -1,6 +1,6 @@
 # PRD — Legibility pass: subtypes, expansion colour, tier visibility, tier-page cleanup
 
-Status: ready-for-agent
+Status: shipped (all 9 tickets done; see MAP.md decisions)
 Assembled: 2026-07-14 (synthesised from the wayfinder charting session; see [MAP.md](MAP.md))
 
 This spec is the contract the seven tickets build against. The **map is the work plan** (which
