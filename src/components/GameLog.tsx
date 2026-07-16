@@ -3,6 +3,7 @@ import spiritsData from '../data/spirits.json'
 import { ADVERSARIES, findAdversary } from '../domain/adversaries'
 import { expand } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
+import { clampOptionalInt } from '../domain/logEntry'
 import { computeLogStats, type RateStat } from '../domain/logStats'
 import type { Spirit } from '../domain/types'
 
@@ -57,8 +58,11 @@ export function GameLog() {
   }
 
   const handleSetAdversaryLevel = (raw: string) => {
-    const found = findAdversary(adversary)
+    // #17: a non-numeric keystroke (a bad paste) must not turn the level into NaN - ignore it
+    // and keep whatever valid level was already set, rather than recording a corrupted entry.
     const level = Number(raw)
+    if (!Number.isFinite(level)) return
+    const found = findAdversary(adversary)
     setAdversaryLevel(found ? Math.min(Math.max(level, found.minLevel), found.maxLevel) : level)
   }
 
@@ -71,8 +75,11 @@ export function GameLog() {
       adversaryLevel,
       scenario: scenario.trim() || undefined,
       outcome,
-      terrorLevel: terrorLevel ? Number(terrorLevel) : undefined,
-      blightRemaining: blightRemaining ? Number(blightRemaining) : undefined,
+      // #17: Terror Level only ever reaches 3 (confirmed against the rulebook - there is no
+      // Terror Level 4); clamped here, not only in the input's advisory `max`, so a typed or
+      // pasted out-of-range value can't be recorded.
+      terrorLevel: clampOptionalInt(terrorLevel, 1, 3),
+      blightRemaining: clampOptionalInt(blightRemaining, 0),
     })
     setPlayers([{ ...EMPTY_PLAYER }])
     setAdversary('')

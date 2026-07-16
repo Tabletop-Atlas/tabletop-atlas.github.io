@@ -38,15 +38,20 @@ least *reports* the loss. v3 should assume it still applies.
 
 ## Still open
 
-- **#17 — terror-level range** (`ready-for-human`). The log's terror-level input caps at 3. It may
-  need to be 4; reaching Terror Level 4 is believed to be a win condition. Deliberately not handed
-  to an agent — see the failure mode below. Needs someone to read the rulebook.
-- **#21 — the random drawer still draws base spirits** (`needs-triage`). It filters on printed
-  `complexity`, so it cannot see that Shadows–Reach is simpler than base Shadows. A design call:
-  no user story covers the drawer.
-- **#22 — the aspect nudge and the sibling list overlap** (`needs-triage`). Looks like a cleanup,
-  isn't: `findAspectNudge` is the *only* consumer of `shiftsToward`, which the PRD defers to a
-  follow-on phase. Deleting the nudge loses the hint.
+Nothing. #17, #21 and #22 (below) are all resolved; this section is stale and kept only for the
+history.
+
+- **#17 — terror-level range.** Resolved 2026-07-16 at the owner's explicit direction: confirmed
+  against the Spirit Island Wiki that there are exactly three Terror Levels (no Terror Level 4);
+  the existing `max={3}` cap was already correct. Enforcement was still missing beyond the
+  markup — `clampOptionalInt` (`src/domain/logEntry.ts`) now clamps `terrorLevel`/
+  `blightRemaining` where the log entry is built, and a latent `adversaryLevel` NaN bug (a bad
+  paste could silently corrupt an entry to `null`) was fixed alongside it. See
+  `issues/17-terror-level-range.md`.
+- **#21 — the random drawer still draws base spirits.** Resolved 2026-07-11 — owner picked "yes,
+  draw configurations." See `issues/21-random-drawer-ignores-configurations.md`.
+- **#22 — the aspect nudge and the sibling list overlap.** Resolved 2026-07-11 — owner picked
+  "fold the hint into the sibling list." See `issues/22-aspect-nudge-vs-sibling-list.md`.
 
 ## Principles (from the PRD and CLAUDE.md)
 
@@ -91,7 +96,6 @@ Rules added during v2:
 
 ## Waiting on the human
 
-- **#17** — read the rulebook, settle the terror-level range.
-- **#21, #22** — two design calls, neither urgent.
+- #17, #21, #22 are all resolved (see "Still open" above) — nothing outstanding from this list.
 - Spot-check the 31 aspect tiers in #02 against `my-image.png` when convenient — they were
   transcribed and cross-checked against canon, but they are the owner's own data.
