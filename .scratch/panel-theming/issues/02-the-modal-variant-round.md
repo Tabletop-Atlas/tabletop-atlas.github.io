@@ -1,6 +1,6 @@
 # 02 — The modal variant round 🎨
 
-Status: needs-info
+Status: done
 Label: wayfinder:prototype (HITL — the owner picks)
 Parent: [Panel theming map](../MAP.md) · [PRD](../PRD.md)
 
@@ -96,3 +96,8 @@ Which composition ships as the modal's default — **A** (light parchment + node
 translation + nodes), or **C** (dark + retinted bars anchor)? Any reaction to carry ("B but the
 nodes larger", "A but warmer parchment", size notes) goes here, and #03 builds it. **This ticket
 does not self-close — it waits for your pick.**
+
+**Owner picked C — dark + retinted bars (anchor).** No reaction notes carried forward. Shipped in
+[#03](03-ship-the-winner.md); this ticket's status/pick section was left unfilled when the pick
+was made and is being closed out now for bookkeeping (see `../MAP.md`'s "Decisions so far" and
+"Status: COMPLETE").
