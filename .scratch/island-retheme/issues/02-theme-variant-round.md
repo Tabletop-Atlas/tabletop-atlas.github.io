@@ -1,6 +1,6 @@
 # 02 — Theme variant round: the owner picks a direction
 
-Status: needs-info
+Status: done
 Type: wayfinder:prototype
 Blocked by: — (01 closed, unblocked)
 Assignee: claude
@@ -42,7 +42,7 @@ Constraints:
 - [x] Chip systems stay legible and pairwise-distinct in every candidate; OCFDU figures and unrated
       markers stay honest.
 - [x] Screenshots at 375px + desktop captured to `screenshots-02/`.
-- [ ] The **owner's** pick + reaction notes recorded; the fog (ornament, chip-adaptation, modal
+- [x] The **owner's** pick + reaction notes recorded; the fog (ornament, chip-adaptation, modal
       re-alignment, per-surface rollout spec) graduated into fresh tickets.
 
 ## HITL
@@ -61,6 +61,31 @@ Behind `?theme=A|B|C` on any tab (floating switcher, bottom-right):
   (near-identical to the shipped modal's `PANEL_COLOR` — the "no modal changes needed" case).
 - **C — warm-dark, vibrant accent**: same umber surface as B, accent/warn swapped to the freshly
   sampled vibrant water-blue/fire-orange pair.
+
+## Resolution — owner's pick (2026-07-17)
+
+**Owner picked A — light-parchment.**
+
+Reaction notes: the shell direction itself lands, but "the other elements such as chips, the
+panel text are not really aligned with the light theme aesthetic" — i.e. the semantic chip
+systems (`tagColors.ts`'s expansion/tag/kind/speed/subtype palettes, all tuned for a dark field)
+and the spirit detail modal's dark `PANEL_COLOR` treatment now read as mismatched against the
+light shell around them. This confirms, rather than surprises: ticket 01's reconciliation flagged
+exactly this as "needs a look" for `EXPANSION_COLOR`/`TAG_COLOR` and a hard blocker for
+`PANEL_COLOR` (see [token-palette.md](../token-palette.md)'s reconciliation table), and the map's
+own fog carried both as **Chip-system adaptation** and **Modal re-alignment**, deliberately left
+unsharpened until a direction won.
+
+Both are sharp now. Graduated into fresh tickets:
+[03 — chip-system adaptation](03-chip-system-adaptation.md) and
+[04 — modal re-alignment](04-modal-realignment.md). **Ornament vocabulary**
+([05](05-ornament-vocabulary.md)) also graduates — it was gated on the same base-direction pick,
+which has now landed.
+
+Round scaffolding (`?theme=`, the switcher, the three candidates) is left in place for now rather
+than deleted — tickets 03/04 will want to render against the live A candidate to react to
+re-tinted chips/modal in context, not in isolation. Deletion is tracked as part of whichever
+ticket ships the winner (the `ThemeRound.tsx` docblock already lists the full teardown).
 
 Screenshots (desktop 1280 + mobile 375, Browse/Tiers/Archive, plus a `baseline-*` set with no
 param for comparison) are in [screenshots-02/](../screenshots-02/).

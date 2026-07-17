@@ -65,22 +65,23 @@ app-wide rollout is executed later, off this map.
   `bloom-pink` is the sheet's one judgment-only, flagged-for-rejection value. Chip reconciliation
   found one concrete re-tune risk for the round: `tierColors.ts`'s pastel palette reads poorly on
   a light field; everything else looks likely-fine pending real renders.
+- **[02 theme variant round](issues/02-theme-variant-round.md) (done):** owner picked **A —
+  light-parchment**. Candidates live behind `?theme=A|B|C` (scaffolding left in place for tickets
+  03/04 to build against). Reaction: the shell direction lands, but chips and the modal's panel
+  text don't feel aligned with it yet — confirms ticket 01's flagged risk and the map's own
+  deferred fog, both now graduated into tickets 03/04 (ornament, 05, graduates too — same gate).
+  Two latent dark-theme-only CSS bugs surfaced and fixed in passing (body's `--deck-*` scope,
+  a hardcoded active-nav-item colour).
 
 ## Not yet specified
 
 <!-- fog toward the destination; graduates as tickets resolve -->
 
-- **Ornament vocabulary.** Which CSS leaf/vine/flourish motifs, on which surfaces, how heavy —
-  sharp only once the base surface/palette direction is picked (ticket 02). Graduates then, likely
-  as its own prototype round on the winner.
-- **Chip-system adaptation.** How `tagColors.ts` / `tierColors.ts`'s dark-tuned semantic palettes
-  hold (or must re-tune) on the winning surface while preserving `cardChipColors.test.ts`
-  distinctness. Material mainly if a light / very-different surface wins; graduates after the pick.
-- **Modal re-alignment.** Whether the shipped `PANEL_COLOR` modal flips to light or re-tints to
-  match the winning direction. Graduates after the pick.
 - **The terminal deliverable.** Assembling the picked direction into locked design tokens + a
-  v6-style rollout PRD with per-surface issues. Blocked on everything above; graduates once the
-  direction + ornament are settled.
+  v6-style rollout PRD with per-surface issues. Blocked on tickets
+  [03](issues/03-chip-system-adaptation.md), [04](issues/04-modal-realignment.md), and
+  [05](issues/05-ornament-vocabulary.md) — graduates once chips, the modal, and ornament are all
+  settled on the winning (light-parchment) direction.
 
 ## Out of scope
 
