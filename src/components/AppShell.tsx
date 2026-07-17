@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { ChipVariantSwitcher, readChipVariant } from './ChipRound'
 import { readTheme, ThemeVariantSwitcher } from './ThemeRound'
 
 export interface NavItem<T extends string> {
@@ -29,6 +30,7 @@ export function AppShell<T extends string>({
   children: ReactNode
 }) {
   const [theme, setTheme] = useState(readTheme)
+  const [chips, setChips] = useState(readChipVariant)
 
   return (
     <div className={theme ? `deck theme-${theme}` : 'deck'}>
@@ -52,7 +54,12 @@ export function AppShell<T extends string>({
         {side}
       </aside>
       <main className="deck-main">{children}</main>
-      {theme && <ThemeVariantSwitcher current={theme} onPick={setTheme} />}
+      {(theme || chips) && (
+        <div className="variant-switcher-stack">
+          {theme && <ThemeVariantSwitcher current={theme} onPick={setTheme} />}
+          {chips && <ChipVariantSwitcher current={chips} onPick={setChips} />}
+        </div>
+      )}
     </div>
   )
 }

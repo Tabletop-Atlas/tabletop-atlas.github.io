@@ -6,7 +6,8 @@ import { CardViewer } from './CardViewer'
 import { OcfduBars } from './OcfduBars'
 import { PlaceholderArt } from './PlaceholderArt'
 import { SpiritArt } from './SpiritArt'
-import { COMPLEXITY_LEVEL, EXPANSION_COLOR, PANEL_COLOR, tagColor, tagLabel } from './tagColors'
+import { readWarmChipVariant } from './ChipRound'
+import { COMPLEXITY_LEVEL, expansionChipColor, PANEL_COLOR, tagColor, tagLabel } from './tagColors'
 import { activeConfigTier, tierColor } from './tierColors'
 
 /** panel-theming #03: the modal's one colour source, injected as CSS custom properties on the
@@ -97,7 +98,8 @@ export function SpiritDetail({
   const activeList = tierStore.getActiveList()
   const base = import.meta.env.BASE_URL
   const level = COMPLEXITY_LEVEL[spirit.complexity]
-  const expansionColor = EXPANSION_COLOR[spirit.expansion]
+  const chipVariant = readWarmChipVariant()
+  const expansionColor = expansionChipColor(spirit.expansion, chipVariant)
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -133,7 +135,7 @@ export function SpiritDetail({
                   <span
                     key={tag}
                     className="spirit-tile-tag-chip"
-                    style={{ borderColor: tagColor(tag), color: tagColor(tag) }}
+                    style={{ borderColor: tagColor(tag, chipVariant), color: tagColor(tag, chipVariant) }}
                   >
                     {tagLabel(tag)}
                   </span>

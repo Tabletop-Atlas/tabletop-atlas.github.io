@@ -1,5 +1,11 @@
 import { EXPANSIONS, type BlightTag, type Complexity, type EventClass, type ExpansionName, type FearTag } from '../domain/types'
 
+/** ROUND 03 (island-retheme) — THROWAWAY: the one place every colour getter below chooses
+ * between a shipped value and its warm re-tint. Delete alongside every `*_WARM` map/getter. */
+function pick<T>(shipped: T, warm: T, variant?: 'warm'): T {
+  return variant === 'warm' ? warm : shipped
+}
+
 /**
  * v5 #08/#09: the spirit tile's colour scheme, decided via `/prototype` (variants A-H,
  * screenshots in `.scratch/v5/screenshots-08/`). Two axes, two different treatments,
@@ -29,6 +35,32 @@ export const EXPANSION_COLOR: Record<string, string> = {
   'Jagged Earth': '#7a4a6e',
   'Nature Incarnate': '#6e5a2a',
   Promo: '#5a5a7a',
+}
+
+/**
+ * ROUND 03 (island-retheme) — THROWAWAY: the owner's reaction to the light-parchment theme
+ * (ticket 02) was that the chip systems don't feel aligned with it. Judgment values, every entry
+ * the same colour mixed 22% toward the vibe sheet's `gold` (`#eecb73`) — warms and slightly
+ * desaturates each hue without moving its rank in the family, so the seven stay pairwise-distinct
+ * (verified in `chipRoundColors.test.ts`) without becoming a fresh, unrelated palette. Delete this
+ * and every other `*_WARM` map/getter below, plus `chips-${variant}` call sites, when the round
+ * ships or is abandoned (see `ChipRound.tsx`'s docblock for the full teardown list).
+ */
+export const EXPANSION_COLOR_WARM: Record<string, string> = {
+  Base: '#6e8085',
+  'Branch & Claw': '#7c8c53',
+  'Feather & Flame': '#a07347',
+  Horizons: '#628c6f',
+  'Jagged Earth': '#94666f',
+  'Nature Incarnate': '#8a733a',
+  Promo: '#7b7378',
+}
+
+/** ROUND 03: the direct-index equivalent of `expansionColorFor`, for the callers
+ * (`SpiritTile.tsx`, `SpiritDetail.tsx`) that already hold a canonical `ExpansionName` and don't
+ * need the raw-string normalization. */
+export function expansionChipColor(name: string, variant?: 'warm'): string {
+  return pick(EXPANSION_COLOR[name], EXPANSION_COLOR_WARM[name], variant) ?? EXPANSION_COLOR[name]
 }
 
 /**
@@ -72,9 +104,9 @@ export function normalizeExpansion(raw: string): ExpansionName | undefined {
 
 /** legibility-pass #05: the one place raw expansion strings become a colour. Undefined for a raw
  * string `normalizeExpansion` can't place — honest absence, never a guessed fallback colour. */
-export function expansionColorFor(raw: string): string | undefined {
+export function expansionColorFor(raw: string, variant?: 'warm'): string | undefined {
   const canonical = normalizeExpansion(raw)
-  return canonical ? EXPANSION_COLOR[canonical] : undefined
+  return canonical ? expansionChipColor(canonical, variant) : undefined
 }
 
 /** Dot-meter position (●●○○) - ordinal, not a colour. */
@@ -97,6 +129,24 @@ export const CARD_SPEED_COLOR: Record<'Fast' | 'Slow', string> = {
   Slow: '#3a6fa5',
 }
 
+/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`. */
+export const CARD_KIND_COLOR_WARM: Record<'minor' | 'major' | 'unique', string> = {
+  minor: '#88a451',
+  major: '#ac6a82',
+  unique: '#7293a0',
+}
+export const CARD_SPEED_COLOR_WARM: Record<'Fast' | 'Slow', string> = {
+  Fast: '#be5c49',
+  Slow: '#62839a',
+}
+
+export function cardKindColor(kind: 'minor' | 'major' | 'unique', variant?: 'warm'): string {
+  return pick(CARD_KIND_COLOR[kind], CARD_KIND_COLOR_WARM[kind], variant)
+}
+export function cardSpeedColor(speed: 'Fast' | 'Slow', variant?: 'warm'): string {
+  return pick(CARD_SPEED_COLOR[speed], CARD_SPEED_COLOR_WARM[speed], variant)
+}
+
 /** phase-4 #20 (owner picked C, banded frame): scenario difficulty bands, keyed by the figure
  * ranges ScenarioGrid maps (≤0, 1–2, 3–4, 5+; `none` = no readable figure). Presentation only —
  * the verbatim printed value is what renders. Lives here so cardChipColors.test.ts can pin
@@ -108,6 +158,20 @@ export const SCENARIO_BAND_COLOR = {
   top: '#a33232',
   none: 'var(--deck-dim)',
 } as const
+
+/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`.
+ * `none` already tokenizes via `var(--deck-dim)` and needs no warm override. */
+export const SCENARIO_BAND_COLOR_WARM = {
+  low: '#628e4e',
+  mid: '#a08c31',
+  high: '#b77431',
+  top: '#b45440',
+  none: 'var(--deck-dim)',
+} as const
+
+export function scenarioBandColor(band: 'low' | 'mid' | 'high' | 'top' | 'none', variant?: 'warm'): string {
+  return pick(SCENARIO_BAND_COLOR[band], SCENARIO_BAND_COLOR_WARM[band], variant)
+}
 
 /**
  * panel-theming #02→#03: the owner picked variant C — a dark translation of the printed spirit
@@ -196,6 +260,28 @@ export function subtypeLabel(tag: FearTag | BlightTag | EventClass): string {
   return SUBTYPE_LABEL[tag]
 }
 
+/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`. */
+const SUBTYPE_COLOR_WARM: Record<FearTag | BlightTag | EventClass, string> = {
+  removal: '#cc5a63',
+  defensive: '#6298b1',
+  weaken: '#b65ab1',
+  disruption: '#cc9247',
+  displacement: '#62c485',
+  presenceLoss: '#8a5a31',
+  boardChange: '#a08231',
+  damageBonus: '#bf5a31',
+  resourceSwing: '#628253',
+  choice: '#58826f',
+  stage: '#7e7685',
+  terrorLevel: '#a05153',
+  healthyBlightedLand: '#6e983d',
+  adversary: '#8a6685',
+}
+
+export function subtypeColor(tag: FearTag | BlightTag | EventClass, variant?: 'warm'): string {
+  return pick(SUBTYPE_COLOR[tag], SUBTYPE_COLOR_WARM[tag], variant)
+}
+
 export const TAG_COLOR: Record<string, string> = {
   aggressive: '#e0475a',
   'blight-positive': '#e0862f',
@@ -211,14 +297,33 @@ export const TAG_COLOR: Record<string, string> = {
 }
 const TAG_FALLBACK_PALETTE = ['#e0475a', '#3f9de0', '#4fb84a', '#e0862f', '#8a5ce0', '#2fb8c4']
 
+/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`,
+ * including the fallback palette so a future tag not yet in `TAG_COLOR` still warms consistently. */
+const TAG_COLOR_WARM: Record<string, string> = {
+  aggressive: '#e36460',
+  'blight-positive': '#e3953e',
+  'blight-sensitive': '#dab83e',
+  'board-control': '#66a7c8',
+  coastal: '#59bcb2',
+  'dahan-synergy': '#72bc53',
+  'fast-tempo': '#e36495',
+  'fear-focused': '#a074c8',
+  incarnate: '#7cdb9c',
+  'ramping-economy': '#c4953e',
+  'token-heavy': '#7c8cc8',
+}
+const TAG_FALLBACK_PALETTE_WARM = ['#e36460', '#66a7c8', '#72bc53', '#e3953e', '#a074c8', '#59bcb2']
+
 function hashString(s: string): number {
   let h = 0
   for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0
   return h
 }
 
-export function tagColor(tag: string): string {
-  return TAG_COLOR[tag] ?? TAG_FALLBACK_PALETTE[hashString(tag) % TAG_FALLBACK_PALETTE.length]
+export function tagColor(tag: string, variant?: 'warm'): string {
+  const shipped = TAG_COLOR[tag] ?? TAG_FALLBACK_PALETTE[hashString(tag) % TAG_FALLBACK_PALETTE.length]
+  const warm = TAG_COLOR_WARM[tag] ?? TAG_FALLBACK_PALETTE_WARM[hashString(tag) % TAG_FALLBACK_PALETTE_WARM.length]
+  return pick(shipped, warm, variant)
 }
 
 export function tagLabel(tag: string): string {

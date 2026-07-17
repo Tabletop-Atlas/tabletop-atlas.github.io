@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import type { Element, PowerCard } from '../domain/types'
 import { CardViewer } from './CardViewer'
-import { CARD_KIND_COLOR, CARD_SPEED_COLOR, expansionColorFor } from './tagColors'
+import { readWarmChipVariant } from './ChipRound'
+import { cardKindColor, cardSpeedColor, expansionColorFor } from './tagColors'
 
 const ELEMENT_ICON: Record<Element, string> = {
   Sun: 'sun',
@@ -24,15 +25,16 @@ const ELEMENT_ICON: Record<Element, string> = {
 export function CardRows({ cards }: { cards: PowerCard[] }) {
   const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
   const base = import.meta.env.BASE_URL
+  const chipVariant = readWarmChipVariant()
 
   return (
     <ul className="card-rows">
       {cards.map((card) => {
-        const color = expansionColorFor(card.expansion)
+        const color = expansionColorFor(card.expansion, chipVariant)
         return (
           <li key={card.name}>
             <button type="button" className="card-row" onClick={() => setEnlarged({ src: `${base}${card.image}`, alt: card.name })}>
-              <span className="card-row-type card-row-pill" style={{ background: CARD_KIND_COLOR[card.kind] }}>
+              <span className="card-row-type card-row-pill" style={{ background: cardKindColor(card.kind, chipVariant) }}>
                 {card.kind}
               </span>
               <span className="card-row-name">
@@ -45,7 +47,7 @@ export function CardRows({ cards }: { cards: PowerCard[] }) {
                 ))}
               </span>
               <span className="card-row-cost">{card.cost}</span>
-              <span className="card-row-speed card-row-pill" style={{ background: CARD_SPEED_COLOR[card.speed] }}>
+              <span className="card-row-speed card-row-pill" style={{ background: cardSpeedColor(card.speed, chipVariant) }}>
                 {card.speed}
               </span>
               <span

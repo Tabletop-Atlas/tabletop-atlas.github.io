@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { toConfigId } from '../domain/configurations'
 import type { ExpansionName, Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
-import { COMPLEXITY_LEVEL, EXPANSION_COLOR, tagColor, tagLabel } from './tagColors'
+import { readWarmChipVariant } from './ChipRound'
+import { COMPLEXITY_LEVEL, expansionChipColor, tagColor, tagLabel } from './tagColors'
 import { readTheme, tierPaletteVariantFor } from './ThemeRound'
 import { activeConfigTier, tierColor } from './tierColors'
 
@@ -32,7 +33,8 @@ export function SpiritTile({
 }) {
   const [expanded, setExpanded] = useState(false)
   const level = COMPLEXITY_LEVEL[spirit.complexity]
-  const expansionColor = EXPANSION_COLOR[spirit.expansion]
+  const chipVariant = readWarmChipVariant()
+  const expansionColor = expansionChipColor(spirit.expansion, chipVariant)
   const tier = activeConfigTier(toConfigId(spirit.id))
   const tierPaletteVariant = tierPaletteVariantFor(readTheme())
 
@@ -71,7 +73,7 @@ export function SpiritTile({
       {spirit.tags.length > 0 && (
         <div className="spirit-tile-chip-row spirit-tile-tags">
           {spirit.tags.map((tag) => (
-            <span key={tag} className="spirit-tile-tag-chip" style={{ borderColor: tagColor(tag), color: tagColor(tag) }}>
+            <span key={tag} className="spirit-tile-tag-chip" style={{ borderColor: tagColor(tag, chipVariant), color: tagColor(tag, chipVariant) }}>
               {tagLabel(tag)}
             </span>
           ))}

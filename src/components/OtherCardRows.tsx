@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import type { BlightTag, EventClass, FearTag, OtherCard } from '../domain/types'
 import { CardViewer } from './CardViewer'
-import { expansionColorFor, SUBTYPE_COLOR, subtypeLabel } from './tagColors'
+import { readWarmChipVariant } from './ChipRound'
+import { expansionColorFor, subtypeColor, subtypeLabel } from './tagColors'
 
 /** legibility-pass #04: the subtype tags/class each card kind carries — fear/blight are 0..n
  * (a card may match several keyword buckets, or none), events are exactly one (the upstream
@@ -12,14 +13,14 @@ function subtypesFor(card: OtherCard): (FearTag | BlightTag | EventClass)[] {
 }
 
 /** Owner picked variant A (filled pill, the `CardRows` kind/speed idiom) after a three-way round. */
-function SubtypeChips({ tags }: { tags: (FearTag | BlightTag | EventClass)[] }) {
+function SubtypeChips({ tags, chipVariant }: { tags: (FearTag | BlightTag | EventClass)[]; chipVariant?: 'warm' }) {
   if (tags.length === 0) {
     return <span className="card-row-subtype-empty">Unclassified</span>
   }
   return (
     <span className="card-row-subtypes">
       {tags.map((tag) => (
-        <span key={tag} className="subtype-chip" style={{ background: SUBTYPE_COLOR[tag] }}>
+        <span key={tag} className="subtype-chip" style={{ background: subtypeColor(tag, chipVariant) }}>
           {subtypeLabel(tag)}
         </span>
       ))}
@@ -38,11 +39,12 @@ function SubtypeChips({ tags }: { tags: (FearTag | BlightTag | EventClass)[] }) 
 export function OtherCardRows({ cards }: { cards: OtherCard[] }) {
   const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
   const base = import.meta.env.BASE_URL
+  const chipVariant = readWarmChipVariant()
 
   return (
     <ul className="card-rows">
       {cards.map((card) => {
-        const color = expansionColorFor(card.expansion)
+        const color = expansionColorFor(card.expansion, chipVariant)
         return (
           <li key={card.name}>
             <button type="button" className="card-row" onClick={() => setEnlarged({ src: `${base}${card.image}`, alt: card.name })}>
@@ -52,7 +54,7 @@ export function OtherCardRows({ cards }: { cards: OtherCard[] }) {
                 </span>
               )}
               <span className="card-row-name">{card.name}</span>
-              <SubtypeChips tags={subtypesFor(card)} />
+              <SubtypeChips tags={subtypesFor(card)} chipVariant={chipVariant} />
               {card.kind === 'blight' && <span className="card-row-subtype-note meta">judgment</span>}
               <span
                 className={color ? 'card-row-expansion expansion-chip' : 'card-row-expansion'}

@@ -1,19 +1,20 @@
 import { useState } from 'react'
 import { SCENARIOS, scenarioDifficultyFigure } from '../domain/scenarios'
 import { CardViewer } from './CardViewer'
-import { SCENARIO_BAND_COLOR } from './tagColors'
+import { readWarmChipVariant } from './ChipRound'
+import { scenarioBandColor } from './tagColors'
 
 /** phase-4 #20 (owner picked variant C, banded frame): the difficulty band — presentation
  * only, the tab's TEXT is always the verbatim printed value. Bands: ≤0 green, 1–2 yellow,
  * 3–4 orange, 5+ red; no readable figure falls back to the neutral band. Colour comes inline
  * from the tagColors map (the SpiritTile idiom), so the chip-collision test can see it. */
-function bandColor(difficulty: string): string {
+function bandColor(difficulty: string, chipVariant?: 'warm'): string {
   const figure = scenarioDifficultyFigure(difficulty)
-  if (figure === undefined) return SCENARIO_BAND_COLOR.none
-  if (figure <= 0) return SCENARIO_BAND_COLOR.low
-  if (figure <= 2) return SCENARIO_BAND_COLOR.mid
-  if (figure <= 4) return SCENARIO_BAND_COLOR.high
-  return SCENARIO_BAND_COLOR.top
+  if (figure === undefined) return scenarioBandColor('none', chipVariant)
+  if (figure <= 0) return scenarioBandColor('low', chipVariant)
+  if (figure <= 2) return scenarioBandColor('mid', chipVariant)
+  if (figure <= 4) return scenarioBandColor('high', chipVariant)
+  return scenarioBandColor('top', chipVariant)
 }
 
 /** The Scenarios grid — CardGrid's shape plus the difficulty indicator the owner locked
@@ -24,11 +25,12 @@ function bandColor(difficulty: string): string {
 export function ScenarioGrid() {
   const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
   const base = import.meta.env.BASE_URL
+  const chipVariant = readWarmChipVariant()
 
   return (
     <div className="card-grid">
       {SCENARIOS.map((scenario) => {
-        const band = bandColor(scenario.difficulty)
+        const band = bandColor(scenario.difficulty, chipVariant)
         return (
           <button
             key={scenario.name}

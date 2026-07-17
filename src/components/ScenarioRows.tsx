@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Scenario } from '../domain/scenarios'
 import { CardViewer } from './CardViewer'
+import { readWarmChipVariant } from './ChipRound'
 import { expansionColorFor } from './tagColors'
 
 /** v5 #05b: rows view for Scenarios — name only, originally. legibility-pass #02 sourced an
@@ -10,11 +11,12 @@ import { expansionColorFor } from './tagColors'
 export function ScenarioRows({ scenarios }: { scenarios: Scenario[] }) {
   const [enlarged, setEnlarged] = useState<{ src: string; alt: string } | null>(null)
   const base = import.meta.env.BASE_URL
+  const chipVariant = readWarmChipVariant()
 
   return (
     <ul className="card-rows">
       {scenarios.map((scenario) => {
-        const color = expansionColorFor(scenario.expansion)
+        const color = expansionColorFor(scenario.expansion, chipVariant)
         return (
           <li key={scenario.name}>
             <button

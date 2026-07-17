@@ -1,9 +1,9 @@
 # 03 — Chip-system adaptation for the light-parchment win
 
-Status: ready-for-human
+Status: needs-info
 Type: wayfinder:prototype
 Blocked by: —
-Assignee: —
+Assignee: claude
 Parent: ../MAP.md
 
 ## Question
@@ -29,13 +29,40 @@ parchment/ink/gold family, or something else — that's for the owner to react t
 
 ## Acceptance criteria
 
-- [ ] At least one re-tint candidate per chip system (or a documented case for "leave as-is")
+- [x] At least one re-tint candidate per chip system (or a documented case for "leave as-is")
       rendered against the live light-parchment shell.
-- [ ] `cardChipColors.test.ts` stays green — re-tune, not collision.
-- [ ] Data honesty holds — OCFDU true, unrated absent, judgment-provenance tags still labelled.
+- [x] `cardChipColors.test.ts` stays green — re-tune, not collision.
+- [x] Data honesty holds — OCFDU true, unrated absent, judgment-provenance tags still labelled.
 - [ ] Owner's pick + reaction notes recorded.
 
 ## HITL
 
 The **OWNER** judges "aligned," never the agent — this is an aesthetic call, not a legibility
 check the agent can verify alone. Ticket waits at `needs-info` once candidates are live.
+
+## Candidates live (2026-07-17)
+
+Behind `?theme=A&chips=original|warm` on any tab (a second switcher stacks under ticket 02's
+theme switcher, bottom-right):
+
+- **original**: every chip system exactly as shipped today (dark-tuned hues, unchanged).
+- **warm**: every value in `EXPANSION_COLOR`, `TAG_COLOR`, `CARD_KIND_COLOR`, `CARD_SPEED_COLOR`,
+  `SCENARIO_BAND_COLOR`, and `SUBTYPE_COLOR` mixed 22% toward the vibe sheet's `gold` (`#eecb73`)
+  — warms and slightly desaturates each hue without moving its rank in the family, so every
+  system stays pairwise-distinct (a new `chipRoundColors.test.ts` pins the warm values apart from
+  each other and from every shipped palette, the tier rainbow, and `PANEL_COLOR`).
+
+`tierColors.ts`'s pastel palette is **left as-is beyond its ticket-02 legibility fix** — those
+seven hues are sampled from the owner's own TierMaker board, not a chip system this repo invented,
+so re-tinting them further would break the tie to that external reference rather than align an
+in-house palette. Documented here as the "leave as-is" case the acceptance criteria allows for.
+
+The spirit detail modal's `PANEL_COLOR` is untouched (out of scope — ticket
+[04](04-modal-realignment.md)'s job); screenshots below show it deliberately still clashing, so
+the two tickets stay visibly decoupled.
+
+Screenshots (desktop 1280 + mobile 375 where applicable) covering Browse, the spirit detail
+modal, Archive Powers/Fear rows, and the Scenarios grid+rows, for both `original` and `warm`, are
+in [screenshots-03/](../screenshots-03/).
+
+**Waiting on the owner's reaction** — this ticket stays at `needs-info`.
