@@ -46,11 +46,25 @@ Behind `?theme=A&chips=original|warm` on any tab (a second switcher stacks under
 theme switcher, bottom-right):
 
 - **original**: every chip system exactly as shipped today (dark-tuned hues, unchanged).
-- **warm**: every value in `EXPANSION_COLOR`, `TAG_COLOR`, `CARD_KIND_COLOR`, `CARD_SPEED_COLOR`,
-  `SCENARIO_BAND_COLOR`, and `SUBTYPE_COLOR` mixed 22% toward the vibe sheet's `gold` (`#eecb73`)
-  — warms and slightly desaturates each hue without moving its rank in the family, so every
-  system stays pairwise-distinct (a new `chipRoundColors.test.ts` pins the warm values apart from
-  each other and from every shipped palette, the tier rainbow, and `PANEL_COLOR`).
+- **warm** (v3): every value in `EXPANSION_COLOR`, `TAG_COLOR`, `CARD_KIND_COLOR`,
+  `CARD_SPEED_COLOR`, `SCENARIO_BAND_COLOR`, and `SUBTYPE_COLOR` pushed by a fixed
+  `R+50 / G+15 / B-50` channel shift, clamped to 0-255 (a new `chipRoundColors.test.ts` pins the
+  warm values apart from each other and from every shipped palette, the tier rainbow, and
+  `PANEL_COLOR`).
+
+  Two earlier attempts didn't land, both recorded in `tagColors.ts`'s comment for whoever reopens
+  this: **v1** (22% blend toward the vibe sheet's `gold`) came back from the owner as
+  indistinguishable from the shipped palette at a glance. **v2** (a gentler `R+28/G+6/B-26` fixed
+  push, deliberately tuned to hold luminance dead level for contrast safety) was still too shy. A
+  bolder *multiplicative* grade tried in between (`×1.35` red, `×0.5` blue) actually broke —
+  `blight-positive` and `ramping-economy` clamp to the exact same hex once boosted that hard, since
+  their only difference is a red channel both saturate past 255. v3 keeps the push additive (order-
+  preserving, no clamp-collision risk) but goes considerably further, verified collision-free by
+  direct computation against every palette in the app. This is a real, visible shift now (e.g. the
+  Browse tile's "Base" chip moves from blue `#4a6b8a` to olive-khaki `#7c7a58`) — confirmed by
+  zoomed-crop comparison, not just by eye on the full page (at full-page scale the shift still
+  reads as subtle, which is a legitimate finding about how visible any chip-level re-tint can be at
+  that size, not a sign the change isn't real).
 
 `tierColors.ts`'s pastel palette is **left as-is beyond its ticket-02 legibility fix** — those
 seven hues are sampled from the owner's own TierMaker board, not a chip system this repo invented,

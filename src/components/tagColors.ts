@@ -39,21 +39,33 @@ export const EXPANSION_COLOR: Record<string, string> = {
 
 /**
  * ROUND 03 (island-retheme) — THROWAWAY: the owner's reaction to the light-parchment theme
- * (ticket 02) was that the chip systems don't feel aligned with it. Judgment values, every entry
- * the same colour mixed 22% toward the vibe sheet's `gold` (`#eecb73`) — warms and slightly
- * desaturates each hue without moving its rank in the family, so the seven stay pairwise-distinct
- * (verified in `chipRoundColors.test.ts`) without becoming a fresh, unrelated palette. Delete this
- * and every other `*_WARM` map/getter below, plus `chips-${variant}` call sites, when the round
- * ships or is abandoned (see `ChipRound.tsx`'s docblock for the full teardown list).
+ * (ticket 02) was that the chip systems don't feel aligned with it. **v3** — two earlier attempts
+ * didn't land: v1 blended every hue 22% toward the vibe sheet's `gold` (`#eecb73`) and the owner
+ * reported it as indistinguishable from the shipped palette at a glance; a v2 fixed push
+ * (`R+28/G+6/B-26`, tuned to hold luminance dead level) was still too shy. A *multiplicative*
+ * bold grade tried in between (×1.35 red, ×0.5 blue) actually broke — `blight-positive` and
+ * `ramping-economy` clamp to the exact same hex once boosted that hard, since their only
+ * difference is a red channel that both saturate past 255. v3 keeps the *additive* push (order-
+ * preserving, no clamp-collision risk) but goes considerably further: `R+50 / G+15 / B-50`,
+ * clamped to 0-255. Verified by direct computation, not just by eye: zero collisions against every
+ * shipped palette, the tier rainbow (both variants), `PANEL_COLOR`, and this map's own six systems
+ * (the six `#...` values a naive dedup flags as "duplicate" are `TAG_FALLBACK_PALETTE_WARM`
+ * intentionally reusing `TAG_COLOR_WARM`'s own values — the *shipped* `TAG_FALLBACK_PALETTE` does
+ * the same thing). Luminance moves further this time (~+0.07 average, up from ~+0.03) but stays
+ * within a band that keeps both contrast dependents safe: the white pill-text
+ * (`.card-row-pill`/`.expansion-chip`/`.subtype-chip`) and the outline tag-chip's own colour (its
+ * text/border, read directly against the light-parchment page). Delete this and every other
+ * `*_WARM` map/getter below, plus every `chips-${variant}` call site, when the round ships or is
+ * abandoned (see `ChipRound.tsx`'s docblock for the full teardown list).
  */
 export const EXPANSION_COLOR_WARM: Record<string, string> = {
-  Base: '#6e8085',
-  'Branch & Claw': '#7c8c53',
-  'Feather & Flame': '#a07347',
-  Horizons: '#628c6f',
-  'Jagged Earth': '#94666f',
-  'Nature Incarnate': '#8a733a',
-  Promo: '#7b7378',
+  Base: '#7c7a58',
+  'Branch & Claw': '#8e8918',
+  'Feather & Flame': '#bc6908',
+  Horizons: '#6c893c',
+  'Jagged Earth': '#ac593c',
+  'Nature Incarnate': '#a06900',
+  Promo: '#8c6948',
 }
 
 /** ROUND 03: the direct-index equivalent of `expansionColorFor`, for the callers
@@ -129,15 +141,15 @@ export const CARD_SPEED_COLOR: Record<'Fast' | 'Slow', string> = {
   Slow: '#3a6fa5',
 }
 
-/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`. */
+/** ROUND 03 (island-retheme) — THROWAWAY: same fixed warm channel push as `EXPANSION_COLOR_WARM`. */
 export const CARD_KIND_COLOR_WARM: Record<'minor' | 'major' | 'unique', string> = {
-  minor: '#88a451',
-  major: '#ac6a82',
-  unique: '#7293a0',
+  minor: '#9da816',
+  major: '#cc5e54',
+  unique: '#81927b',
 }
 export const CARD_SPEED_COLOR_WARM: Record<'Fast' | 'Slow', string> = {
-  Fast: '#be5c49',
-  Slow: '#62839a',
+  Fast: '#e24c0b',
+  Slow: '#6c7e73',
 }
 
 export function cardKindColor(kind: 'minor' | 'major' | 'unique', variant?: 'warm'): string {
@@ -159,13 +171,13 @@ export const SCENARIO_BAND_COLOR = {
   none: 'var(--deck-dim)',
 } as const
 
-/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`.
+/** ROUND 03 (island-retheme) — THROWAWAY: same fixed warm channel push as `EXPANSION_COLOR_WARM`.
  * `none` already tokenizes via `var(--deck-dim)` and needs no warm override. */
 export const SCENARIO_BAND_COLOR_WARM = {
-  low: '#628e4e',
-  mid: '#a08c31',
-  high: '#b77431',
-  top: '#b45440',
+  low: '#6c8c12',
+  mid: '#bc8900',
+  high: '#da6a00',
+  top: '#d54100',
   none: 'var(--deck-dim)',
 } as const
 
@@ -260,22 +272,22 @@ export function subtypeLabel(tag: FearTag | BlightTag | EventClass): string {
   return SUBTYPE_LABEL[tag]
 }
 
-/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`. */
+/** ROUND 03 (island-retheme) — THROWAWAY: same fixed warm channel push as `EXPANSION_COLOR_WARM`. */
 const SUBTYPE_COLOR_WARM: Record<FearTag | BlightTag | EventClass, string> = {
-  removal: '#cc5a63',
-  defensive: '#6298b1',
-  weaken: '#b65ab1',
-  disruption: '#cc9247',
-  displacement: '#62c485',
-  presenceLoss: '#8a5a31',
-  boardChange: '#a08231',
-  damageBonus: '#bf5a31',
-  resourceSwing: '#628253',
-  choice: '#58826f',
-  stage: '#7e7685',
-  terrorLevel: '#a05153',
-  healthyBlightedLand: '#6e983d',
-  adversary: '#8a6685',
+  removal: '#f4492c',
+  defensive: '#6c9990',
+  weaken: '#d84990',
+  disruption: '#f49108',
+  displacement: '#6cd158',
+  presenceLoss: '#a04900',
+  boardChange: '#bc7d00',
+  damageBonus: '#e44900',
+  resourceSwing: '#6c7d18',
+  choice: '#607d3c',
+  stage: '#906d58',
+  terrorLevel: '#bc3d18',
+  healthyBlightedLand: '#7c9900',
+  adversary: '#a05958',
 }
 
 export function subtypeColor(tag: FearTag | BlightTag | EventClass, variant?: 'warm'): string {
@@ -297,22 +309,22 @@ export const TAG_COLOR: Record<string, string> = {
 }
 const TAG_FALLBACK_PALETTE = ['#e0475a', '#3f9de0', '#4fb84a', '#e0862f', '#8a5ce0', '#2fb8c4']
 
-/** ROUND 03 (island-retheme) — THROWAWAY: same 22%-toward-gold mix as `EXPANSION_COLOR_WARM`,
+/** ROUND 03 (island-retheme) — THROWAWAY: same fixed warm channel push as `EXPANSION_COLOR_WARM`,
  * including the fallback palette so a future tag not yet in `TAG_COLOR` still warms consistently. */
 const TAG_COLOR_WARM: Record<string, string> = {
-  aggressive: '#e36460',
-  'blight-positive': '#e3953e',
-  'blight-sensitive': '#dab83e',
-  'board-control': '#66a7c8',
-  coastal: '#59bcb2',
-  'dahan-synergy': '#72bc53',
-  'fast-tempo': '#e36495',
-  'fear-focused': '#a074c8',
-  incarnate: '#7cdb9c',
-  'ramping-economy': '#c4953e',
-  'token-heavy': '#7c8cc8',
+  aggressive: '#ff5628',
+  'blight-positive': '#ff9500',
+  'blight-sensitive': '#ffc200',
+  'board-control': '#71acae',
+  coastal: '#61c792',
+  'dahan-synergy': '#81c718',
+  'fast-tempo': '#ff566c',
+  'fear-focused': '#bc6bae',
+  incarnate: '#8eef76',
+  'ramping-economy': '#ea9500',
+  'token-heavy': '#8e89ae',
 }
-const TAG_FALLBACK_PALETTE_WARM = ['#e36460', '#66a7c8', '#72bc53', '#e3953e', '#a074c8', '#59bcb2']
+const TAG_FALLBACK_PALETTE_WARM = ['#ff5628', '#71acae', '#81c718', '#ff9500', '#bc6bae', '#61c792']
 
 function hashString(s: string): number {
   let h = 0
