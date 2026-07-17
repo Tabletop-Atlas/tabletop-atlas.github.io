@@ -1689,3 +1689,123 @@ button:disabled {
   border-color: var(--deck-accent);
   color: #10141a;
 }
+
+/* --- ROUND 05 (island-retheme) — THROWAWAY, delete on ship -------------------------------
+   `?ornament=rules|corners|vines` dresses two anchor surfaces (app shell sidebar, Browse tiles)
+   with a CSS-only motif, meant to be viewed against `?theme=B` (the corrected base-direction
+   pick). No new art assets: every shape below is a gradient, border, or pseudo-element. Delete
+   this whole block + `OrnamentRound.tsx` + the `ornament-${ornament}` class in `AppShell.tsx`. */
+
+/* candidate 1: minimal accent rules only */
+.deck.ornament-rules .deck-brand-button {
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+.deck.ornament-rules .deck-brand-button::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--deck-accent), transparent);
+}
+.deck.ornament-rules .deck-nav {
+  border-bottom: 1px solid var(--deck-line);
+  padding-bottom: 0.75rem;
+}
+.deck.ornament-rules .spirit-tile-name-row {
+  position: relative;
+  padding-bottom: 0.3rem;
+}
+.deck.ornament-rules .spirit-tile-name-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--deck-accent), transparent 70%);
+}
+
+/* candidate 2: corner flourishes (picture-frame corner marks) */
+.deck.ornament-corners .deck-side {
+  position: relative;
+}
+.deck.ornament-corners .deck-side::before,
+.deck.ornament-corners .deck-side::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--deck-accent);
+  opacity: 0.7;
+}
+.deck.ornament-corners .deck-side::before {
+  top: 8px;
+  left: 8px;
+  border-right: none;
+  border-bottom: none;
+}
+.deck.ornament-corners .deck-side::after {
+  bottom: 8px;
+  left: 8px;
+  border-right: none;
+  border-top: none;
+}
+.deck.ornament-corners .spirit-tile-art-wrap::before,
+.deck.ornament-corners .spirit-tile-art-wrap::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--deck-accent);
+  z-index: 1;
+}
+.deck.ornament-corners .spirit-tile-art-wrap::before {
+  top: 4px;
+  left: 4px;
+  border-right: none;
+  border-bottom: none;
+}
+.deck.ornament-corners .spirit-tile-art-wrap::after {
+  bottom: 4px;
+  right: 4px;
+  border-left: none;
+  border-top: none;
+}
+
+/* candidate 3: leaf/vine dividers (a dotted "bud" run standing in for a vine, CSS-only) */
+.deck.ornament-vines .deck-nav {
+  position: relative;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.75rem;
+}
+.deck.ornament-vines .deck-nav::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 12%;
+  bottom: 0;
+  height: 4px;
+  background-image: radial-gradient(circle, var(--deck-accent) 1.6px, transparent 1.8px);
+  background-size: 10px 4px;
+  background-repeat: repeat-x;
+  opacity: 0.85;
+}
+.deck.ornament-vines .spirit-tile-name-row {
+  position: relative;
+  padding-bottom: 0.35rem;
+}
+.deck.ornament-vines .spirit-tile-name-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 30%;
+  bottom: 0;
+  height: 4px;
+  background-image: radial-gradient(circle, var(--deck-accent) 1.4px, transparent 1.6px);
+  background-size: 8px 4px;
+  background-repeat: repeat-x;
+  opacity: 0.85;
+}

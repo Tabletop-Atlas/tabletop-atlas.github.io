@@ -93,11 +93,9 @@ app-wide rollout is executed later, off this map.
 
 - **The terminal deliverable.** Assembling the picked direction into locked design tokens + a
   v6-style rollout PRD with per-surface issues. Blocked on
-  [05](issues/05-ornament-vocabulary.md) (03 and 04 are now settled — original chips, stay modal) —
-  graduates once ornament is settled on the winning **B (warm-dark, nature accent)** direction.
-  Note ticket 05's own open question ("Now that the owner has picked candidate A...") is stale per
-  ticket 02's correction — whoever picks it up next should build ornament candidates against `?theme=B`,
-  not `?theme=A`.
+  [05](issues/05-ornament-vocabulary.md) — candidates are now built (`?ornament=rules|corners|
+  vines`, against `?theme=B` per the correction below) and waiting on the owner's pick
+  (`needs-info`); graduates once that pick lands.
 
 ## Out of scope
 

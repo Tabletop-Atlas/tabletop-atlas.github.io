@@ -1,6 +1,6 @@
 # 05 — Ornament vocabulary for the winning direction
 
-Status: ready-for-human
+Status: needs-info
 Type: wayfinder:prototype
 Blocked by: —
 Assignee: —
@@ -40,3 +40,34 @@ correction above: read as `?theme=B`).
 
 The **OWNER** picks the motif/density, never the agent. Ticket waits at `needs-info` once
 candidates are live.
+
+## Candidates built (2026-07-17)
+
+Three CSS-only motifs, gated on `?ornament=rules|corners|vines`, rendered against `?theme=B`
+(per the correction above) on the app shell sidebar and Browse tiles (`src/components/
+OrnamentRound.tsx`, `deck.css` "ROUND 05" block). No query param = the fourth, implicit
+candidate: the shipped look, undecorated.
+
+- **`rules`** — minimal accent rules only: a thin accent-coloured gradient line under the logo,
+  a hairline `--deck-line` rule closing off the nav block, and a fading accent underline below
+  each tile's name row.
+- **`corners`** — corner flourishes: open-cornered accent brackets (picture-frame style) at the
+  sidebar's top-left/bottom-left edges, and smaller matching brackets at each tile art's
+  top-left/bottom-right corners.
+- **`vines`** — leaf/vine dividers: a row of small accent-coloured dots (standing in for a vine's
+  leaf buds — no illustrated art) under the nav block and under each tile's name row.
+
+All three hold chip-system distinctness and modal legibility untouched — only `.deck-side`,
+`.deck-brand-button`, `.deck-nav`, and `.spirit-tile`/`.spirit-tile-art-wrap`/`.spirit-tile-
+name-row` are touched, and only via pseudo-elements/background-images layered on the existing
+surfaces. `cardChipColors.test.ts` and the full suite (414 tests) pass unchanged; the modal isn't
+touched by this round at all (no `.modal`/`.spirit-detail` selector appears in the new CSS), so
+tickets 03/04's outcomes stand untouched rather than re-verified.
+
+Screenshots (375px and 1280px, all three candidates plus the undecorated `baseline`) are in
+[screenshots-05/](../screenshots-05/), taken via `ornament_screenshots.mjs`. Each capture opens
+the Browse tab so the sidebar (app shell) and the tile grid (the other anchor surface) are both
+visible in one shot — filenames are `{variant}-Shell-Browse-{width}.png`, not a separate
+app-shell-only capture.
+
+Waiting on the owner's pick.
