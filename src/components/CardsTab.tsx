@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { ADVERSARIES } from '../domain/adversaries'
 import otherCardsData from '../data/other-cards.json'
 import powerCardsData from '../data/power-cards.json'
+import { groupOtherCards, type OtherGroup } from '../domain/otherCardArrange'
 import { EMPTY_OTHER_CARD_FILTER, filterOtherCards, type OtherCardFilterState } from '../domain/otherCardFilter'
 import { groupPowerCards, sortPowerCards, type PowerGroup, type PowerSort } from '../domain/powerCardArrange'
 import { EMPTY_POWER_CARD_FILTER, filterPowerCards, type PowerCardFilterState } from '../domain/powerCardFilter'
@@ -58,6 +59,7 @@ export function CardsTab() {
   const [powerSort, setPowerSort] = useState<PowerSort>('none')
   const [powerGroup, setPowerGroup] = useState<PowerGroup>('none')
   const [otherFilter, setOtherFilter] = useState<OtherCardFilterState>(EMPTY_OTHER_CARD_FILTER)
+  const [otherGroup, setOtherGroup] = useState<OtherGroup>('none')
   const [adversaryExpansion, setAdversaryExpansion] = useState<string>('')
 
   // phase-4 #19: the Powers pipeline is filter → sort → group; the locked call keeps every other
@@ -74,6 +76,10 @@ export function CardsTab() {
   )
   const otherExpansions = useMemo(() => [...new Set(segmentOtherCards.map((c) => c.expansion))].sort(), [segmentOtherCards])
   const shownOtherCards = useMemo(() => filterOtherCards(segmentOtherCards, otherFilter), [segmentOtherCards, otherFilter])
+  const otherGroups = useMemo(
+    () => (otherGroup === 'none' ? null : groupOtherCards(shownOtherCards, otherGroup)),
+    [shownOtherCards, otherGroup],
+  )
 
   const shownAdversaries = useMemo(
     () => (adversaryExpansion ? ADVERSARIES.filter((a) => a.expansion === adversaryExpansion) : ADVERSARIES),
@@ -83,6 +89,7 @@ export function CardsTab() {
   function selectSegment(next: Segment) {
     setSegment(next)
     setOtherFilter(EMPTY_OTHER_CARD_FILTER)
+    setOtherGroup('none')
     setAdversaryExpansion('')
   }
 
@@ -133,7 +140,19 @@ export function CardsTab() {
         </>
       )}
       {isOtherSegment(segment) && (
-        <OtherCardFilters segment={segment} filter={otherFilter} onChange={setOtherFilter} expansions={otherExpansions} />
+        <>
+          <OtherCardFilters segment={segment} filter={otherFilter} onChange={setOtherFilter} expansions={otherExpansions} />
+          <div className="card-filters-row filters">
+            <label>
+              Group by
+              <select value={otherGroup} onChange={(e) => setOtherGroup(e.target.value as OtherGroup)}>
+                <option value="none">No grouping</option>
+                <option value="expansion">Expansion</option>
+                <option value="subtype">Subtype</option>
+              </select>
+            </label>
+          </div>
+        </>
       )}
       {segment === 'Adversaries' && (
         <div className="card-filters">
@@ -184,6 +203,13 @@ export function CardsTab() {
           <section key={group.label} className="card-group">
             <h3>{group.label}</h3>
             {view === 'grid' ? <CardGrid cards={group.cards} /> : <CardRows cards={group.cards} />}
+          </section>
+        ))
+      ) : isOtherSegment(segment) && otherGroups ? (
+        otherGroups.map((group) => (
+          <section key={group.label} className="card-group">
+            <h3>{group.label}</h3>
+            {view === 'grid' ? <CardGrid cards={group.cards} /> : <OtherCardRows cards={group.cards} />}
           </section>
         ))
       ) : view === 'grid' ? (
