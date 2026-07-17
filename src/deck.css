@@ -1460,25 +1460,14 @@ button:disabled {
   text-align: center;
 }
 
-/* legibility-pass #05 (owner picked variant C, solid chip): expansion colour on Archive grid
- * tiles (corner badge) and rows (pill replacing the plain-text expansion column). Colour comes
+/* legibility-pass #05 (owner picked variant C, solid chip): expansion colour on Archive rows
+ * (pill replacing the plain-text expansion column). archive-grouping #01 removed the tile
+ * corner-badge usage — tiles show art, clean; the colour now lives only in rows. Colour comes
  * inline from tagColors' expansionColorFor() — shape only, same single-source idiom as
  * .card-row-pill above. */
 .expansion-chip {
   color: #fff;
   font-weight: 700;
-}
-.expansion-chip-corner {
-  position: absolute;
-  top: 0.3rem;
-  left: 0.3rem;
-  font-size: 9px;
-  padding: 0.15rem 0.4rem;
-  border-radius: 4px;
-  max-width: calc(100% - 0.6rem);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .card-row-expansion.expansion-chip {
   border-radius: 999px;

@@ -7,7 +7,6 @@ import { groupByTier, tierStore } from '../domain/tierStore'
 import type { PowerCard, Spirit, TierList, TierListSubject } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
 import { SpiritDetail } from './SpiritDetail'
-import { expansionColorFor } from './tagColors'
 import { tierColor } from './tierColors'
 import { TierListControls } from './TierListControls'
 
@@ -65,21 +64,12 @@ function TierTile({
   owned,
   edit,
   onOpen,
-  showExpansion,
 }: {
   config: Configuration
   owned: boolean
   edit?: ReactNode
   onOpen?: () => void
-  /** legibility-pass #09: opt-in, off by default — the owner wants the board's colour signal
-   * limited to tier position unless asked for. */
-  showExpansion: boolean
 }) {
-  // An aspect tile colours by the aspect's OWN expansion, not its base spirit's — every aspect in
-  // the data ships in a later box than its spirit (31/31 diverge), so the spirit's expansion
-  // would be uniformly stale for aspect tiles.
-  const expansion = config.aspect ? config.aspect.expansion : config.spirit.expansion
-  const color = showExpansion ? expansionColorFor(expansion) : undefined
   return (
     <figure
       className={owned ? 'tier-tile' : 'tier-tile tier-tile-unowned'}
@@ -111,11 +101,6 @@ function TierTile({
         <figcaption>{config.spirit.name}</figcaption>
       )}
       {edit}
-      {color && (
-        <span className="expansion-chip expansion-chip-corner" style={{ background: color }}>
-          {expansion}
-        </span>
-      )}
       {!owned && (
         <span className="unowned-badge" aria-hidden="true">
           ⊘
@@ -132,14 +117,11 @@ function TierTile({
 function CardTile({
   card,
   edit,
-  showExpansion,
 }: {
   card: PowerCard
   edit?: ReactNode
-  showExpansion: boolean
 }) {
   const [failed, setFailed] = useState(false)
-  const color = showExpansion ? expansionColorFor(card.expansion) : undefined
   return (
     <figure className="tier-tile" title={card.name}>
       {failed ? (
@@ -156,11 +138,6 @@ function CardTile({
       )}
       <figcaption>{card.name}</figcaption>
       {edit}
-      {color && (
-        <span className="expansion-chip expansion-chip-corner" style={{ background: color }}>
-          {card.expansion}
-        </span>
-      )}
     </figure>
   )
 }
@@ -172,10 +149,6 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
   const [, setVersion] = useState(0)
   const [hardFilter, setHardFilter] = useState(false)
   const [editing, setEditing] = useState(false)
-  // legibility-pass #09: invisible by default (owner's live call, not fully settled between "no
-  // signal" and "a signal") — a toggle rather than a locked-in treatment, session-only like the
-  // other view preferences on this board (not collection data, so not persisted).
-  const [showExpansion, setShowExpansion] = useState(false)
   // The board tracks which SUBJECT is on display; the list shown is always that subject's
   // active list, so the board and the store can never disagree about whose ratings render.
   const [viewedSubject, setViewedSubject] = useState<TierListSubject>(initialSubject ?? 'configurations')
@@ -218,12 +191,11 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
         onOpen={
           editingHere ? undefined : () => setDetail({ spirit: config.spirit, aspect: config.aspect?.name })
         }
-        showExpansion={showExpansion}
       />
     ))
   const cardTiles = (items: PowerCard[], current: string) =>
     items.map((card) => (
-      <CardTile key={card.name} card={card} edit={editControl(card.name, card.name, current)} showExpansion={showExpansion} />
+      <CardTile key={card.name} card={card} edit={editControl(card.name, card.name, current)} />
     ))
 
   // Hard-filter (#06's opt-in): excluded exactly as if annotation had removed them first, rather
@@ -286,10 +258,6 @@ export function TierBoard({ initialSubject }: { initialSubject?: TierListSubject
           Edit tiers
         </label>
       )}
-      <label className="deck-field-inline">
-        <input type="checkbox" checked={showExpansion} onChange={(e) => setShowExpansion(e.target.checked)} />
-        Show expansion colour
-      </label>
       {tierStore.wasDiscarded(subject) && (
         <p className="notice">
           Your saved tier edits were discarded because the shipped tier list has changed since you
