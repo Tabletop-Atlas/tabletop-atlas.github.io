@@ -65,38 +65,39 @@ app-wide rollout is executed later, off this map.
   `bloom-pink` is the sheet's one judgment-only, flagged-for-rejection value. Chip reconciliation
   found one concrete re-tune risk for the round: `tierColors.ts`'s pastel palette reads poorly on
   a light field; everything else looks likely-fine pending real renders.
-- **[02 theme variant round](issues/02-theme-variant-round.md) (done):** owner picked **A —
-  light-parchment**. Candidates live behind `?theme=A|B|C` (scaffolding left in place for tickets
-  03/04 to build against). Reaction: the shell direction lands, but chips and the modal's panel
-  text don't feel aligned with it yet — confirms ticket 01's flagged risk and the map's own
-  deferred fog, both now graduated into tickets 03/04 (ornament, 05, graduates too — same gate).
-  Two latent dark-theme-only CSS bugs surfaced and fixed in passing (body's `--deck-*` scope,
-  a hardcoded active-nav-item colour).
-- **[03 chip-system adaptation](issues/03-chip-system-adaptation.md) (done):** owner picked
-  **warm (v3)** — "it's aligned now." A fixed `R+50/G+15/B-50` channel push on every value in
-  `EXPANSION_COLOR`, `TAG_COLOR`, `CARD_KIND_COLOR`, `CARD_SPEED_COLOR`, `SCENARIO_BAND_COLOR`, and
-  `SUBTYPE_COLOR`. Two gentler attempts (a 22%-toward-gold blend, then a luminance-preserving fixed
-  push) both came back too subtle; a bolder multiplicative grade tried in between broke
-  distinctness outright (two tags clamped to the same hex) before landing on this additive,
-  verified-collision-free version. `tierColors.ts`'s pastel palette stays as shipped (sampled from
-  the owner's own TierMaker board, not this repo's to re-tint) — the documented "leave as-is" case.
-  Shipping the winner (deleting `?chips=`, making `*_WARM` the only values) is deferred to the
-  terminal deliverable, alongside tickets 04/05, so the shell doesn't shift under the owner between
-  every pick.
-- **[04 modal re-alignment](issues/04-modal-realignment.md) (needs-info):** both candidates built —
+- **[02 theme variant round](issues/02-theme-variant-round.md) (done):** owner **initially** picked
+  A — light-parchment, then **overrode to B — warm-dark, nature accent** (correction recorded
+  2026-07-17, after living with A through the 03/04 rounds). Candidates live behind `?theme=A|B|C`
+  (scaffolding left in place). Initial reaction to A drove the chip/modal fog into tickets 03/04
+  (ornament, 05, graduates too — same gate); once the pick moved to B — already noted at charting
+  as "near-identical to the shipped modal's `PANEL_COLOR` — no modal changes needed" — 03/04's
+  picks were revisited accordingly (see their own corrected entries below). Two latent dark-theme-
+  only CSS bugs surfaced and fixed in passing (body's `--deck-*` scope, a hardcoded active-nav-item
+  colour).
+- **[03 chip-system adaptation](issues/03-chip-system-adaptation.md) (done):** owner **initially**
+  picked warm (v3) — "it's aligned now" — a fixed `R+50/G+15/B-50` channel push, built specifically
+  to fix A's misalignment. **Corrected to `original` (shipped, unchanged)** once ticket 02's pick
+  moved to B, which sits close to the shipped dark palette already and doesn't have that
+  misalignment. `tierColors.ts`'s pastel palette stays as shipped either way (sampled from the
+  owner's own TierMaker board, not this repo's to re-tint). The `warm` re-tint code (`*_WARM` maps,
+  `ChipRound.tsx`) stays in place as inert scaffolding, not deleted.
+- **[04 modal re-alignment](issues/04-modal-realignment.md) (done):** both candidates built —
   `?modal=stay` (shipped dark `PANEL_COLOR`, unchanged) and `?modal=flip` (new `PANEL_COLOR_LIGHT`,
-  the same vibe-sheet roles sampled directly rather than dark-translated). Waiting on the owner's
-  flip-vs-stay pick.
+  the same vibe-sheet roles sampled directly rather than dark-translated). **Owner picked `stay`**
+  — consistent with ticket 02's revised B pick. `PANEL_COLOR_LIGHT` stays in place as inert
+  scaffolding, not deleted.
 
 ## Not yet specified
 
 <!-- fog toward the destination; graduates as tickets resolve -->
 
 - **The terminal deliverable.** Assembling the picked direction into locked design tokens + a
-  v6-style rollout PRD with per-surface issues. Blocked on tickets
-  [03](issues/03-chip-system-adaptation.md), [04](issues/04-modal-realignment.md), and
-  [05](issues/05-ornament-vocabulary.md) — graduates once chips, the modal, and ornament are all
-  settled on the winning (light-parchment) direction.
+  v6-style rollout PRD with per-surface issues. Blocked on
+  [05](issues/05-ornament-vocabulary.md) (03 and 04 are now settled — original chips, stay modal) —
+  graduates once ornament is settled on the winning **B (warm-dark, nature accent)** direction.
+  Note ticket 05's own open question ("Now that the owner has picked candidate A...") is stale per
+  ticket 02's correction — whoever picks it up next should build ornament candidates against `?theme=B`,
+  not `?theme=A`.
 
 ## Out of scope
 

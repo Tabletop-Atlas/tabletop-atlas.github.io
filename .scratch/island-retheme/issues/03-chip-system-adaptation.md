@@ -96,3 +96,18 @@ values, and tearing down `ChipRound.tsx`/`chipRoundColors.test.ts` — is delibe
 whichever ticket finalizes the whole island-retheme direction (the terminal deliverable fog item),
 so all three graduated tickets (03/04/05) ship together rather than the shell shifting under the
 owner's feet between each pick.
+
+## Correction — superseded by ticket 02's revised pick (2026-07-17)
+
+Ticket 02's base-direction pick changed from A (light-parchment) to **B** (warm-dark, nature
+accent) — see [02's correction note](02-theme-variant-round.md#correction--owners-revised-pick-2026-07-17).
+The `warm` re-tint above was built to fix A's specific misalignment; B sits close to the shipped
+dark palette already, so it doesn't have that problem. **Owner reverts the pick to `original`**
+(shipped chip colours, unchanged) — the "leave as-is" case this ticket's acceptance criteria
+always allowed for.
+
+No code change follows from this by itself: `*_WARM` maps, `ChipRound.tsx`, and
+`chipRoundColors.test.ts` stay in place as inert scaffolding (nothing currently reads
+`?chips=warm` as the app default), matching the standing "shipping deferred to the terminal
+ticket" convention. If the terminal ticket ships B as the app-wide default, it ships the
+*original* chip colours alongside it, not the warm re-tint.

@@ -1,6 +1,6 @@
 # 04 — Modal re-alignment for the light-parchment win
 
-Status: needs-info
+Status: done
 Type: wayfinder:prototype
 Blocked by: —
 Assignee: —
@@ -28,7 +28,7 @@ re-tinted one.
       unchanged) both rendered against the live `?theme=A` shell.
 - [x] OCFDU data-honesty rules (true figures, absent-unrated) hold in whichever wins.
 - [x] `cardChipColors.test.ts`'s `PANEL_COLOR` pairwise-distinctness pins stay green.
-- [ ] Owner's pick + reaction notes recorded.
+- [x] Owner's pick + reaction notes recorded.
 
 ## HITL
 
@@ -57,4 +57,13 @@ systems ticket 03 guarded, which can appear on-screen simultaneously.
 Screenshots (desktop 1280, spirit detail modal) for both `stay` and `flip` are in
 [screenshots-04/](../screenshots-04/).
 
-**Waiting on the owner's reaction** — this ticket stays at `needs-info`.
+## Resolution — owner's pick (2026-07-17)
+
+**Owner picked `stay`** — the modal keeps its shipped `PANEL_COLOR` (dark umber-parchment)
+unchanged, the deliberate "lantern" moment. Consistent with ticket 02's revised base-direction
+pick (B, warm-dark) — B was already noted at charting as "near-identical to the shipped modal's
+`PANEL_COLOR` — the 'no modal changes needed' case," so `stay` needs no further reconciliation.
+
+`PANEL_COLOR_LIGHT` (the `flip` candidate) is left in place as inert scaffolding rather than
+deleted, matching the standing "shipping deferred to the terminal ticket" convention — no code
+currently reads `?modal=flip` as the app default.

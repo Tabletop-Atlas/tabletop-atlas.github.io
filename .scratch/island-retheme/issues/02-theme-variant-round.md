@@ -115,3 +115,23 @@ assessment.
 Full test suite (412 tests) and `tsc --noEmit` pass unchanged.
 
 **Waiting on the owner's pick** — this ticket stays at `needs-info`.
+
+## Correction — owner's revised pick (2026-07-17)
+
+**Owner overrides the pick above: B — warm-dark, nature accent** (not A). Recorded after living
+with A a while longer via the ticket 03/04 rounds — the base-direction call now lands on B.
+
+Consequences for the fog graduated off the original A pick:
+- **Ticket 03** (chip-system adaptation): the `warm` re-tint was built specifically to fix A's
+  misalignment. B is close to shipped dark colours already, so the owner reverts this to
+  **original** (shipped) chips — see ticket 03's own correction note.
+- **Ticket 04** (modal re-alignment): owner picks **stay** (shipped dark `PANEL_COLOR`
+  unchanged) — see ticket 04's Resolution. Consistent with B: B was already described at
+  charting as "near-identical to the shipped modal's `PANEL_COLOR` — the 'no modal changes
+  needed' case," so `PANEL_COLOR` staying untouched needs no reconciliation against B.
+- **Ticket 05** (ornament vocabulary): still open: B's own ornament treatment (rather than A's)
+  is now the live question — unaffected by this correction beyond the base surface changing.
+
+`?theme=` scaffolding (`ThemeRound.tsx`) is unchanged code-wise; the correction is a tracker-only
+update. No app default changes — shipping the final direction is still deferred to the terminal
+deliverable ticket, per the standing convention.
