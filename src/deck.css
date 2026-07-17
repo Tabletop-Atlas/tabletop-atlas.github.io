@@ -32,17 +32,19 @@
 }
 
 :root {
-  --deck-bg: #0f1216;
-  --deck-panel: #121820;
-  --deck-panel-2: #0a0d10;
-  --deck-line: #1e262e;
-  --deck-line-soft: #161d24;
-  --deck-text: #e6f0f7;
-  --deck-body: #9fb0c0;
-  --deck-dim: #55636e;
-  --deck-accent: #4ade80;
+  /* island-retheme: ticket 02's owner-picked B (warm-dark, nature accent) — see
+     .scratch/island-retheme/MAP.md and token-palette.md for provenance. */
+  --deck-bg: #1c160e;
+  --deck-panel: #241d12;
+  --deck-panel-2: #150f09;
+  --deck-line: #463a24;
+  --deck-line-soft: #33291a;
+  --deck-text: #e7d19c;
+  --deck-body: #c8b78f;
+  --deck-dim: #6e5c3a;
+  --deck-accent: #3fae6a;
   --deck-accent-bg: #14351f;
-  --deck-warn: #fbbf24;
+  --deck-warn: #c56a3a;
   --deck-mono: ui-monospace, Consolas, monospace;
 }
 

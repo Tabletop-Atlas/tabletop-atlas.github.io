@@ -97,6 +97,14 @@ app-wide rollout is executed later, off this map.
   vines`, against `?theme=B` per the correction below) and waiting on the owner's pick
   (`needs-info`); graduates once that pick lands.
 
+**Early ship of B, ahead of the terminal deliverable (2026-07-17):** owner asked for the warm-dark
+palette live on the bare URL rather than only behind `?theme=B`, out of the standing "shipping
+deferred to the terminal ticket" convention. `:root` in `src/deck.css` now carries B's values
+directly (`--deck-bg: #1c160e`, etc. — the `.deck.theme-B` block's own numbers); `?theme=A/B/C`
+scaffolding is untouched and still works (`?theme=B` is now visually a no-op against the new
+default). Chips/modal stay at their already-settled picks (original chips, stay modal) — unaffected
+by this. Ticket 05 (ornament) remains open and independent of this early ship.
+
 ## Out of scope
 
 - **The mechanical app-wide rollout execution** — every non-anchor surface inheriting the winning
