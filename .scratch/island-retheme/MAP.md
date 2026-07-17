@@ -72,6 +72,17 @@ app-wide rollout is executed later, off this map.
   deferred fog, both now graduated into tickets 03/04 (ornament, 05, graduates too — same gate).
   Two latent dark-theme-only CSS bugs surfaced and fixed in passing (body's `--deck-*` scope,
   a hardcoded active-nav-item colour).
+- **[03 chip-system adaptation](issues/03-chip-system-adaptation.md) (done):** owner picked
+  **warm (v3)** — "it's aligned now." A fixed `R+50/G+15/B-50` channel push on every value in
+  `EXPANSION_COLOR`, `TAG_COLOR`, `CARD_KIND_COLOR`, `CARD_SPEED_COLOR`, `SCENARIO_BAND_COLOR`, and
+  `SUBTYPE_COLOR`. Two gentler attempts (a 22%-toward-gold blend, then a luminance-preserving fixed
+  push) both came back too subtle; a bolder multiplicative grade tried in between broke
+  distinctness outright (two tags clamped to the same hex) before landing on this additive,
+  verified-collision-free version. `tierColors.ts`'s pastel palette stays as shipped (sampled from
+  the owner's own TierMaker board, not this repo's to re-tint) — the documented "leave as-is" case.
+  Shipping the winner (deleting `?chips=`, making `*_WARM` the only values) is deferred to the
+  terminal deliverable, alongside tickets 04/05, so the shell doesn't shift under the owner between
+  every pick.
 
 ## Not yet specified
 

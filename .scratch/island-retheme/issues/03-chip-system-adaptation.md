@@ -1,6 +1,6 @@
 # 03 — Chip-system adaptation for the light-parchment win
 
-Status: needs-info
+Status: done
 Type: wayfinder:prototype
 Blocked by: —
 Assignee: claude
@@ -33,7 +33,7 @@ parchment/ink/gold family, or something else — that's for the owner to react t
       rendered against the live light-parchment shell.
 - [x] `cardChipColors.test.ts` stays green — re-tune, not collision.
 - [x] Data honesty holds — OCFDU true, unrated absent, judgment-provenance tags still labelled.
-- [ ] Owner's pick + reaction notes recorded.
+- [x] Owner's pick + reaction notes recorded.
 
 ## HITL
 
@@ -80,3 +80,19 @@ modal, Archive Powers/Fear rows, and the Scenarios grid+rows, for both `original
 in [screenshots-03/](../screenshots-03/).
 
 **Waiting on the owner's reaction** — this ticket stays at `needs-info`.
+
+## Resolution — owner's pick (2026-07-17)
+
+**Owner picked `warm` (v3)** — "it's aligned now." `EXPANSION_COLOR_WARM`, `TAG_COLOR_WARM`,
+`CARD_KIND_COLOR_WARM`, `CARD_SPEED_COLOR_WARM`, `SCENARIO_BAND_COLOR_WARM`, and
+`SUBTYPE_COLOR_WARM` in `tagColors.ts` — the `R+50/G+15/B-50` push — are the winning re-tint.
+`tierColors.ts`'s pastel palette stays as shipped (plus its ticket-02 light-variant fix); the
+modal's `PANEL_COLOR` is untouched, per ticket 04.
+
+This ticket resolved the *aesthetic* direction; it did not ship the winner as the shell's default
+(the `?chips=` scaffolding is still live, matching ticket 02's own "leave it in place for
+03/04/05 to build against" call). Shipping — deleting `chips=original`, making `*_WARM` the only
+values, and tearing down `ChipRound.tsx`/`chipRoundColors.test.ts` — is deliberately left for
+whichever ticket finalizes the whole island-retheme direction (the terminal deliverable fog item),
+so all three graduated tickets (03/04/05) ship together rather than the shell shifting under the
+owner's feet between each pick.
