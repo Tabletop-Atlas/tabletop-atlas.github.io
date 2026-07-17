@@ -57,6 +57,13 @@ body {
   display: grid;
   grid-template-columns: 264px 1fr;
   min-height: 100vh;
+  /* ROUND 02 (island-retheme): `body`'s own background/color (below) resolve `var(--deck-*)`
+     at the `body` element, which sits *outside* `.deck` — a `.deck.theme-X` override never
+     reaches it. Repeating the resolution here, scoped to `.deck`, is what actually makes the
+     round's CSS-var overrides visible; a no-op for the baseline (unthemed) app since these
+     match `body`'s values exactly. */
+  background: var(--deck-bg);
+  color: var(--deck-body);
 }
 
 .deck-side {
@@ -178,7 +185,10 @@ body {
   color: var(--deck-text);
 }
 .deck-nav button[data-active='true'] {
-  background: #16202a;
+  /* was a hardcoded `#16202a` (assumed a dark shell); island-retheme's round surfaced that this
+     broke on a light candidate — dark text on a dark box the theme couldn't lighten. Token-based
+     now so every variant, including future ones, gets a readable active state for free. */
+  background: var(--deck-line-soft);
   color: var(--deck-text);
   box-shadow: inset 2px 0 0 var(--deck-accent);
 }
@@ -1583,4 +1593,89 @@ button:disabled {
   .spirit-detail-head {
     flex-direction: column;
   }
+}
+
+/* --- ROUND 02 (island-retheme) — THROWAWAY, delete on ship -------------------------------
+   `?theme=A|B|C` overrides the shell's own `--deck-*` tokens (`src/components/tagColors.ts` and
+   inline chip/tier colours are untouched — see `.scratch/island-retheme/token-palette.md` for
+   the reconciliation notes and `tierColors.ts`'s `variant` param for the one flagged re-tune).
+   Base palette / surface / light-dark only — no ornament in this round. Delete this whole block
+   + `.variant-switcher` (shared with prior rounds; check no other round still needs it before
+   deleting) + `ThemeRound.tsx` + the `theme-${theme}` class in `AppShell.tsx`. */
+.deck.theme-A {
+  --deck-bg: #f2e7c8;
+  --deck-panel: #e7d19c;
+  --deck-panel-2: #cdb88c;
+  --deck-line: #a89368;
+  --deck-line-soft: #c8b282;
+  --deck-text: #2e2520;
+  --deck-body: #5b4e2d;
+  --deck-dim: #8a7a5a;
+  --deck-accent: #239850;
+  --deck-accent-bg: #d7ead9;
+  --deck-warn: #a4562f;
+}
+.deck.theme-B {
+  --deck-bg: #1c160e;
+  --deck-panel: #241d12;
+  --deck-panel-2: #150f09;
+  --deck-line: #463a24;
+  --deck-line-soft: #33291a;
+  --deck-text: #e7d19c;
+  --deck-body: #c8b78f;
+  --deck-dim: #6e5c3a;
+  --deck-accent: #3fae6a;
+  --deck-accent-bg: #14351f;
+  --deck-warn: #c56a3a;
+}
+.deck.theme-C {
+  --deck-bg: #1c160e;
+  --deck-panel: #241d12;
+  --deck-panel-2: #150f09;
+  --deck-line: #463a24;
+  --deck-line-soft: #33291a;
+  --deck-text: #e7d19c;
+  --deck-body: #c8b78f;
+  --deck-dim: #6e5c3a;
+  --deck-accent: #2992dc;
+  --deck-accent-bg: #16344a;
+  --deck-warn: #dd631f;
+}
+
+.variant-switcher {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--deck-panel-2);
+  border: 1px solid var(--deck-line);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  font-size: 11px;
+}
+.variant-switcher-tag {
+  color: var(--deck-dim);
+  white-space: nowrap;
+}
+.variant-switcher-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+.variant-switcher-buttons button {
+  min-width: 1.8rem;
+  padding: 0.15rem 0.4rem;
+  background: var(--deck-panel);
+  border: 1px solid var(--deck-line);
+  border-radius: 4px;
+  color: var(--deck-text);
+  cursor: pointer;
+}
+.variant-switcher-buttons button[data-active='true'] {
+  background: var(--deck-accent);
+  border-color: var(--deck-accent);
+  color: #10141a;
 }

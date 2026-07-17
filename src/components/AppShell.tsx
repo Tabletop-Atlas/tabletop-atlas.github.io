@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
+import { readTheme, ThemeVariantSwitcher } from './ThemeRound'
 
 export interface NavItem<T extends string> {
   id: T
@@ -27,8 +28,10 @@ export function AppShell<T extends string>({
   side?: ReactNode
   children: ReactNode
 }) {
+  const [theme, setTheme] = useState(readTheme)
+
   return (
-    <div className="deck">
+    <div className={theme ? `deck theme-${theme}` : 'deck'}>
       <aside className="deck-side">
         <button type="button" className="deck-brand-button" onClick={onHome} aria-label="Home">
           <img className="deck-brand" src={`${import.meta.env.BASE_URL}spirit-island-logo.webp`} alt="Spirit Island" />
@@ -49,6 +52,7 @@ export function AppShell<T extends string>({
         {side}
       </aside>
       <main className="deck-main">{children}</main>
+      {theme && <ThemeVariantSwitcher current={theme} onPick={setTheme} />}
     </div>
   )
 }

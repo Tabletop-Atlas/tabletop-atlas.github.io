@@ -52,6 +52,15 @@ only pins the chip *palettes* pairwise-distinct from each other, not from surfac
 isn't a test failure, but the round (ticket 02) should eyeball whether a Feather & Flame chip next
 to a `warn` banner reads as two different signals or blurs into one.
 
+**Addendum (ticket 02, added while building the round):** the round tried a *second* warm-dark
+candidate (C) that keeps B's umber surface roles but swaps `accent`/`warn` for the vibrant
+`water-bright` (`#2992dc`) / `fire-bright` (`#dd631f`) pair above, instead of the nature-green
+pair. That candidate needs its own `accent-bg` — `#16344a`, **judgment**: a dark navy tint of
+`water-bright`, mirroring exactly how `accent-bg`'s warm-dark column above is a dim tint of its
+own `accent` (`#14351f` is a dim tint of `#3fae6a`). Recorded here after the fact so this value
+carries the same provenance label as everything else in this sheet, not left as an unlabelled
+addition to the round's CSS.
+
 ## The vibrant/floral range — sampled off the spirit portraits
 
 The panels are earthy (parchment/gold/umber); the app wants *vibrant*. Sampled from

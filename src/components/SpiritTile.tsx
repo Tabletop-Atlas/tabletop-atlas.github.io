@@ -3,6 +3,7 @@ import { toConfigId } from '../domain/configurations'
 import type { ExpansionName, Spirit } from '../domain/types'
 import { SpiritArt } from './SpiritArt'
 import { COMPLEXITY_LEVEL, EXPANSION_COLOR, tagColor, tagLabel } from './tagColors'
+import { readTheme, tierPaletteVariantFor } from './ThemeRound'
 import { activeConfigTier, tierColor } from './tierColors'
 
 /** v5 #07c: Browse annotates (never hides, unless the caller already dropped it via
@@ -33,6 +34,7 @@ export function SpiritTile({
   const level = COMPLEXITY_LEVEL[spirit.complexity]
   const expansionColor = EXPANSION_COLOR[spirit.expansion]
   const tier = activeConfigTier(toConfigId(spirit.id))
+  const tierPaletteVariant = tierPaletteVariantFor(readTheme())
 
   return (
     <li className={owned ? 'spirit-tile' : 'spirit-tile spirit-tile-unowned'} style={{ borderLeftColor: expansionColor }}>
@@ -45,7 +47,7 @@ export function SpiritTile({
         <div className="spirit-tile-art-wrap">
           <SpiritArt spirit={spirit} />
           {tier && (
-            <span className="tier-badge-ribbon" style={{ background: tierColor(tier.position) }}>
+            <span className="tier-badge-ribbon" style={{ background: tierColor(tier.position, tierPaletteVariant) }}>
               {tier.label}
             </span>
           )}
