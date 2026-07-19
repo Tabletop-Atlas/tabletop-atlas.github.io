@@ -4,6 +4,7 @@ import spiritsData from '../../data/spirits.json'
 import type { Spirit } from '../../domain/types'
 import App from '../../App'
 import { tierStore } from '../../domain/tierStore'
+import { DashboardTab } from '../DashboardTab'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
 import { Settings } from '../Settings'
 import { SpiritDetail } from '../SpiritDetail'
@@ -49,11 +50,11 @@ describe('app smoke', () => {
     expect(html.match(/>Home</g)).toBeNull()
   })
 
-  it('nav reads exactly Browse, Recommend, Archive, Tier list, Log, Settings (#13/#14/#15)', () => {
+  it('nav reads exactly Browse, Recommend, Archive, Dashboard, Tier list, Log, Settings (#13/#14/#15/deck-dashboard #06)', () => {
     const html = renderToStaticMarkup(<App />)
     const nav = html.slice(html.indexOf('deck-nav'), html.indexOf('</nav>'))
     const labels = [...nav.matchAll(/<button[^>]*>([^<]+)<\/button>/g)].map((m) => m[1])
-    expect(labels).toEqual(['Browse', 'Recommend', 'Archive', 'Tier list', 'Log', 'Settings'])
+    expect(labels).toEqual(['Browse', 'Recommend', 'Archive', 'Dashboard', 'Tier list', 'Log', 'Settings'])
   })
 
   it('Settings holds exactly the three migrated sections (#14) plus the default-list pick (#18)', () => {
@@ -195,5 +196,17 @@ describe('app smoke', () => {
     const noCards: Spirit = { ...spirits[0], startingCards: undefined }
     const html = renderToStaticMarkup(<SpiritDetail spirit={noCards} onClose={() => {}} />)
     expect(html).not.toContain('Starting cards')
+  })
+
+  it('the Dashboard tab renders a Minor/Major/Fear/Event segmented control, with all 8 elements as rows in the Minor segment (deck-dashboard #06)', () => {
+    const html = renderToStaticMarkup(<DashboardTab />)
+    expect(html).toContain('>Dashboard<')
+    for (const segment of ['Minor', 'Major', 'Fear', 'Event']) {
+      expect(html).toContain(`>${segment}<`)
+    }
+    for (const element of ['Sun', 'Moon', 'Fire', 'Air', 'Water', 'Earth', 'Plant', 'Animal']) {
+      expect(html).toContain(`>${element}<`)
+    }
+    expect(html).toContain('cards')
   })
 })

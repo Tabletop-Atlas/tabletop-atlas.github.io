@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AppShell, type NavItem } from './components/AppShell'
 import { Browser } from './components/Browser'
 import { CardsTab } from './components/CardsTab'
+import { DashboardTab } from './components/DashboardTab'
 import { GameLog } from './components/GameLog'
 import { Homepage } from './components/Homepage'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from './components/Recommender'
@@ -10,7 +11,7 @@ import { TierBoard } from './components/TierBoard'
 
 /** 'home' is not a nav tab (#01 decision 3): the clickable logo is the only route home, and
  * while it is current no nav item matches it, so none shows active. */
-type Tab = 'home' | 'recommender' | 'browser' | 'cards' | 'tiers' | 'log' | 'settings'
+type Tab = 'home' | 'recommender' | 'browser' | 'cards' | 'dashboard' | 'tiers' | 'log' | 'settings'
 
 /** Nav is fixed at both ends (#02 decision 4): Browse first, Settings last. Customise tiers is
  * dissolved (#15): tier editing is an edit mode on the Tier list tab. */
@@ -18,6 +19,7 @@ const NAV: NavItem<Tab>[] = [
   { id: 'browser', label: 'Browse' },
   { id: 'recommender', label: 'Recommend' },
   { id: 'cards', label: 'Archive' },
+  { id: 'dashboard', label: 'Dashboard' },
   { id: 'tiers', label: 'Tier list' },
   { id: 'log', label: 'Log' },
   { id: 'settings', label: 'Settings' },
@@ -39,6 +41,7 @@ function App() {
         {tab === 'recommender' && <RecommenderMain />}
         {tab === 'browser' && <Browser />}
         {tab === 'cards' && <CardsTab />}
+        {tab === 'dashboard' && <DashboardTab />}
         {tab === 'tiers' && <TierBoard />}
         {tab === 'log' && <GameLog />}
         {tab === 'settings' && <Settings />}

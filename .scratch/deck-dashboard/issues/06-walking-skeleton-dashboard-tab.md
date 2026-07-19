@@ -1,6 +1,6 @@
 # Walking skeleton — Dashboard tab with Minor & Major composition
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

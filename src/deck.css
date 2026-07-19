@@ -1191,6 +1191,53 @@ button:disabled {
   padding: 0.22rem 0.75rem;
   white-space: nowrap;
 }
+/* --- Dashboard tab (deck-dashboard #06 walking skeleton) --- */
+.dashboard-deck {
+  margin-top: 0.8rem;
+}
+.dashboard-deck-size {
+  font: 600 13px/1 var(--deck-mono);
+  color: var(--deck-dim);
+  margin: 0 0 0.6rem;
+}
+.dashboard-stub {
+  color: var(--deck-dim);
+  margin-top: 0.8rem;
+}
+.deck-element-bars {
+  display: grid;
+  gap: 0.35rem;
+}
+.deck-element-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 2.5rem;
+  align-items: center;
+  gap: 0.6rem;
+}
+.deck-element-label {
+  font-size: 13px;
+  color: var(--deck-text);
+}
+.deck-element-track {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: #1a222b;
+  overflow: hidden;
+}
+.deck-element-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 999px;
+  background: var(--deck-accent);
+}
+.deck-element-count {
+  font: 600 12px/1 var(--deck-mono);
+  color: var(--deck-dim);
+  text-align: right;
+}
 .spirit-detail-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
