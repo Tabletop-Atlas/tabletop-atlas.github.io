@@ -1191,7 +1191,20 @@ button:disabled {
   padding: 0.22rem 0.75rem;
   white-space: nowrap;
 }
-/* --- Dashboard tab (deck-dashboard #06 walking skeleton, #07 draw odds) --- */
+/* --- Dashboard tab (deck-dashboard #06 walking skeleton, #07 draw odds, #08 expansion picker) --- */
+.dashboard-picker {
+  border: 1px solid #2c3a46;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  margin-bottom: 0.8rem;
+}
+.dashboard-picker legend {
+  font: 600 12px/1 var(--deck-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--deck-dim);
+  padding: 0 0.3rem;
+}
 .dashboard-deck {
   margin-top: 0.8rem;
 }

@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import spiritsData from '../../data/spirits.json'
-import type { Spirit } from '../../domain/types'
+import { EXPANSIONS, type Spirit } from '../../domain/types'
 import App from '../../App'
 import { tierStore } from '../../domain/tierStore'
 import { DashboardTab } from '../DashboardTab'
@@ -215,5 +215,16 @@ describe('app smoke', () => {
     expect(html).toContain('value="4"')
     expect(html).toContain('Odds assume a full deck, nothing drawn.')
     expect(html).toContain('deck-element-odds')
+  })
+
+  it('the Dashboard expansion picker lists all 7 expansions, checked by default (owns-everything Collection), no unowned annotation (deck-dashboard #08)', () => {
+    const html = renderToStaticMarkup(<DashboardTab />)
+    expect(html).toContain('Expansions in play')
+    for (const expansion of EXPANSIONS) {
+      expect(html).toContain(expansion.replace('&', '&amp;'))
+    }
+    expect((html.match(/type="checkbox"/g) ?? []).length).toBe(EXPANSIONS.length)
+    expect((html.match(/checked=""/g) ?? []).length).toBe(EXPANSIONS.length)
+    expect(html).not.toContain('unowned-note')
   })
 })
