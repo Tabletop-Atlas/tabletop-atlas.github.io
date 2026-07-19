@@ -1191,7 +1191,7 @@ button:disabled {
   padding: 0.22rem 0.75rem;
   white-space: nowrap;
 }
-/* --- Dashboard tab (deck-dashboard #06 walking skeleton, #07 draw odds, #08 expansion picker) --- */
+/* --- Dashboard tab (deck-dashboard #06 walking skeleton, #07 draw odds, #08 expansion picker, #10 spirit highlight) --- */
 .dashboard-picker {
   border: 1px solid #2c3a46;
   border-radius: 8px;
@@ -1204,6 +1204,14 @@ button:disabled {
   text-transform: uppercase;
   color: var(--deck-dim);
   padding: 0 0.3rem;
+}
+.dashboard-spirit-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 13px;
+  color: var(--deck-text);
+  margin-bottom: 0.8rem;
 }
 .dashboard-deck {
   margin-top: 0.8rem;
@@ -1273,6 +1281,10 @@ button:disabled {
   color: var(--deck-text);
   text-align: right;
 }
+.deck-element-row-highlight .deck-element-label {
+  color: var(--deck-accent);
+  font-weight: 600;
+}
 /* --- Element-combination dot-matrix + facets (deck-dashboard #09) --- */
 .deck-combo-matrix {
   display: grid;
@@ -1303,6 +1315,10 @@ button:disabled {
   text-align: center;
   color: var(--deck-dim);
 }
+.deck-combo-col-label-highlight {
+  color: var(--deck-accent);
+  font-weight: 600;
+}
 .deck-combo-dot {
   display: block;
   width: 10px;
@@ -1313,6 +1329,9 @@ button:disabled {
 }
 .deck-combo-dot-on {
   background: var(--deck-accent);
+}
+.deck-combo-dot-highlight {
+  box-shadow: 0 0 0 2px var(--deck-accent);
 }
 .deck-combo-count {
   font: 600 12px/1 var(--deck-mono);

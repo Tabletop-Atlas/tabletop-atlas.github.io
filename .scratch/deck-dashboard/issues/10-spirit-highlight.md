@@ -1,6 +1,6 @@
 # Spirit highlight
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

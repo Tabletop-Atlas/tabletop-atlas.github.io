@@ -4,7 +4,10 @@ import spiritsData from '../../data/spirits.json'
 import { EXPANSIONS, type Spirit } from '../../domain/types'
 import App from '../../App'
 import { tierStore } from '../../domain/tierStore'
+import { computeDeckComposition } from '../../domain/deckComposition'
 import { DashboardTab } from '../DashboardTab'
+import { DeckCombinationMatrix } from '../DeckCombinationMatrix'
+import { DeckElementBars } from '../DeckElementBars'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
 import { Settings } from '../Settings'
 import { SpiritDetail } from '../SpiritDetail'
@@ -236,5 +239,42 @@ describe('app smoke', () => {
     expect(html).toContain('Facets')
     expect(html).toContain('Fast')
     expect(html).toContain('Slow')
+  })
+
+  it('the Dashboard has a spirit picker defaulting to "No spirit", listing all 37 spirits, with no highlight rendered by default (deck-dashboard #10)', () => {
+    const html = renderToStaticMarkup(<DashboardTab />)
+    expect(html).toContain('Highlight my spirit')
+    expect(html).toContain('>No spirit<')
+    for (const spirit of spirits) {
+      expect(html).toContain(spirit.name.replace(/&/g, '&amp;').replace(/'/g, '&#x27;'))
+    }
+    expect(html).not.toContain('deck-element-row-highlight')
+    expect(html).not.toContain('deck-combo-col-label-highlight')
+    expect(html).not.toContain('deck-combo-dot-highlight')
+  })
+
+  it('DeckElementBars and DeckCombinationMatrix highlight exactly the given elements, none without a highlight set (deck-dashboard #10)', () => {
+    const composition = computeDeckComposition(
+      [
+        { kind: 'minor', name: 'A', expansion: 'Basegame', cost: 0, speed: 'Fast', elements: ['Fire', 'Air'], image: '' },
+        { kind: 'minor', name: 'B', expansion: 'Basegame', cost: 0, speed: 'Fast', elements: [], image: '' },
+      ],
+      4,
+    )
+    const highlighted = new Set(['Fire' as const])
+
+    const barsHtml = renderToStaticMarkup(<DeckElementBars composition={composition} highlightElements={highlighted} />)
+    expect(barsHtml.match(/deck-element-row-highlight/g)).toHaveLength(1)
+
+    const plainBarsHtml = renderToStaticMarkup(<DeckElementBars composition={composition} />)
+    expect(plainBarsHtml).not.toContain('deck-element-row-highlight')
+
+    const matrixHtml = renderToStaticMarkup(<DeckCombinationMatrix combinations={composition.combinations} highlightElements={highlighted} />)
+    expect(matrixHtml.match(/deck-combo-col-label-highlight/g)).toHaveLength(1)
+    expect(matrixHtml).toContain('deck-combo-dot-highlight')
+
+    const plainMatrixHtml = renderToStaticMarkup(<DeckCombinationMatrix combinations={composition.combinations} />)
+    expect(plainMatrixHtml).not.toContain('deck-combo-col-label-highlight')
+    expect(plainMatrixHtml).not.toContain('deck-combo-dot-highlight')
   })
 })

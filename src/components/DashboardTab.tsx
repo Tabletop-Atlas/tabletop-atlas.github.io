@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
 import powerCardsData from '../data/power-cards.json'
+import spiritsData from '../data/spirits.json'
 import { collectionStore } from '../domain/collectionStore'
 import { computeDeckComposition } from '../domain/deckComposition'
-import { EXPANSIONS, type ExpansionName, type PowerCard } from '../domain/types'
+import { EXPANSIONS, type ExpansionName, type PowerCard, type Spirit } from '../domain/types'
 import { normalizeExpansion } from './tagColors'
 import { DeckCombinationMatrix } from './DeckCombinationMatrix'
 import { DeckElementBars } from './DeckElementBars'
@@ -11,6 +12,10 @@ import { DeckFacets } from './DeckFacets'
 const powerCards = powerCardsData as PowerCard[]
 const MINOR_CARDS = powerCards.filter((c) => c.kind === 'minor')
 const MAJOR_CARDS = powerCards.filter((c) => c.kind === 'major')
+
+// deck-dashboard #10: by spirit, not Configuration — element data exists at spirit level only,
+// and aspects record no element changes (PRD's explicit call, not an oversight).
+const SPIRITS = (spiritsData as Spirit[]).slice().sort((a, b) => a.name.localeCompare(b.name))
 
 const SEGMENTS = ['Minor', 'Major', 'Fear', 'Event'] as const
 type Segment = (typeof SEGMENTS)[number]
@@ -33,20 +38,31 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
 }
 
 /**
- * v6 #06/#07/#08/#09: the Dashboard tab. Minor and Major show live composition, hypergeometric
+ * v6 #06/#07/#08/#09/#10: the Dashboard tab. Minor and Major show live composition, hypergeometric
  * draw odds, an element-combination dot-matrix, and the speed/cost facets, all against the
  * checked expansion set; Fear/Event's own views are #11/#12. An expansion picker (session-only
  * state, no storage key) defines the set, defaulting to the Collection; unowned expansions stay
  * listed and annotated, never hidden (PRD user story 6), consistent with Collection treatment
  * elsewhere (`SpiritTile`, `Recommender`'s `unowned-note`). A single N stepper (default 4, clamped
  * to [1, deck size] by the domain module) drives both power-deck segments' odds; the assumption
- * label keeps the static dashboard from reading as live tracking (PRD user story 27). Holds no
- * game state — a reload always reverts to the Collection default, N=4 (PRD user story 28).
+ * label keeps the static dashboard from reading as live tracking (PRD user story 27). An optional
+ * spirit pick (default "no spirit") highlights that spirit's own recorded elements in the bars and
+ * combination matrix — no new data, no judgment (PRD user stories 18-20). Holds no game state — a
+ * reload always reverts to the Collection default, N=4, no spirit (PRD user story 28).
  */
 export function DashboardTab() {
   const [segment, setSegment] = useState<Segment>('Minor')
   const [drawCount, setDrawCount] = useState(DEFAULT_DRAW_COUNT)
   const [checkedExpansions, setCheckedExpansions] = useState<Set<ExpansionName>>(defaultCheckedExpansions)
+  // '' is the default "no spirit" state (PRD user story 20) — never a storage key, never
+  // persisted, so a reload always reverts to it.
+  const [spiritId, setSpiritId] = useState('')
+
+  const highlightElements = useMemo(() => {
+    if (!spiritId) return undefined
+    const spirit = SPIRITS.find((s) => s.id === spiritId)
+    return spirit ? new Set(spirit.elements) : undefined
+  }, [spiritId])
 
   function toggleExpansion(expansion: ExpansionName, checked: boolean) {
     setCheckedExpansions((prev) => {
@@ -91,6 +107,18 @@ export function DashboardTab() {
         </ul>
       </fieldset>
 
+      <label className="dashboard-spirit-picker">
+        Highlight my spirit
+        <select value={spiritId} onChange={(e) => setSpiritId(e.target.value)}>
+          <option value="">No spirit</option>
+          {SPIRITS.map((spirit) => (
+            <option key={spirit.id} value={spirit.id}>
+              {spirit.name}
+            </option>
+          ))}
+        </select>
+      </label>
+
       <div className="card-view-switch" role="group" aria-label="Deck">
         {SEGMENTS.map((s) => (
           <button key={s} type="button" aria-pressed={segment === s} onClick={() => setSegment(s)}>
@@ -116,11 +144,11 @@ export function DashboardTab() {
             />
             <span>of {activeComposition.deckSize}</span>
           </label>
-          <DeckElementBars composition={activeComposition} />
+          <DeckElementBars composition={activeComposition} highlightElements={highlightElements} />
           <p className="dashboard-assumption">Odds assume a full deck, nothing drawn.</p>
 
           <h3>Element combinations</h3>
-          <DeckCombinationMatrix combinations={activeComposition.combinations} />
+          <DeckCombinationMatrix combinations={activeComposition.combinations} highlightElements={highlightElements} />
 
           <h3>Facets</h3>
           <DeckFacets composition={activeComposition} />
