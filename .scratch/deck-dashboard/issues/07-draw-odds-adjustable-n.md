@@ -1,6 +1,6 @@
 # Draw odds with adjustable N
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 
