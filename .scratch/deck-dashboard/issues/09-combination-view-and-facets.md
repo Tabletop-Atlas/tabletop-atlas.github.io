@@ -1,6 +1,6 @@
 # Element-combination view + cost/speed facets
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

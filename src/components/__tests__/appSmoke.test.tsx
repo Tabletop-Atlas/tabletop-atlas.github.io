@@ -227,4 +227,14 @@ describe('app smoke', () => {
     expect((html.match(/checked=""/g) ?? []).length).toBe(EXPANSIONS.length)
     expect(html).not.toContain('unowned-note')
   })
+
+  it('the Dashboard Minor segment shows the element-combination dot-matrix and the speed/cost facets (deck-dashboard #09)', () => {
+    const html = renderToStaticMarkup(<DashboardTab />)
+    expect(html).toContain('Element combinations')
+    expect(html).toContain('deck-combo-matrix')
+    expect(html).toContain('deck-combo-dot')
+    expect(html).toContain('Facets')
+    expect(html).toContain('Fast')
+    expect(html).toContain('Slow')
+  })
 })

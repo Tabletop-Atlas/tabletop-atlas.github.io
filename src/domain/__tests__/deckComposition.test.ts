@@ -89,4 +89,78 @@ describe('computeDeckComposition', () => {
       expect(result.elements.find((e) => e.element === 'Fire')!.probability).toBe(1)
     })
   })
+
+  describe('element combinations (deck-dashboard #09)', () => {
+    it('groups cards by their exact element set, sorted by frequency descending', () => {
+      const cards = [
+        card({ name: 'A', elements: ['Fire', 'Air'] }),
+        card({ name: 'B', elements: ['Fire', 'Air'] }),
+        card({ name: 'C', elements: ['Fire', 'Air'] }),
+        card({ name: 'D', elements: ['Water'] }),
+        card({ name: 'E', elements: ['Water'] }),
+        card({ name: 'F', elements: ['Sun'] }),
+      ]
+      const result = computeDeckComposition(cards, 4)
+      expect(result.combinations).toEqual([
+        { elements: ['Fire', 'Air'], label: 'Fire + Air', count: 3 },
+        { elements: ['Water'], label: 'Water', count: 2 },
+        { elements: ['Sun'], label: 'Sun', count: 1 },
+      ])
+    })
+
+    it('labels a card\'s element set in canonical ELEMENTS order regardless of input order', () => {
+      const result = computeDeckComposition([card({ name: 'A', elements: ['Air', 'Fire'] })], 4)
+      expect(result.combinations).toEqual([{ elements: ['Fire', 'Air'], label: 'Fire + Air', count: 1 }])
+    })
+
+    it('groups element-less cards under "No element", present only when such cards exist', () => {
+      const withNone = computeDeckComposition([card({ name: 'A', elements: [] }), card({ name: 'B', elements: ['Fire'] })], 4)
+      expect(withNone.combinations).toContainEqual({ elements: [], label: 'No element', count: 1 })
+
+      const withoutNone = computeDeckComposition([card({ name: 'A', elements: ['Fire'] })], 4)
+      expect(withoutNone.combinations.some((g) => g.label === 'No element')).toBe(false)
+    })
+
+    it('group counts sum to deck size — no card dropped, no card double-counted', () => {
+      const cards = [
+        card({ name: 'A', elements: ['Fire', 'Air'] }),
+        card({ name: 'B', elements: ['Fire'] }),
+        card({ name: 'C', elements: [] }),
+        card({ name: 'D', elements: ['Sun', 'Moon', 'Fire'] }),
+      ]
+      const result = computeDeckComposition(cards, 4)
+      expect(result.combinations.reduce((sum, g) => sum + g.count, 0)).toBe(cards.length)
+    })
+
+    it('an empty deck has no combination groups', () => {
+      expect(computeDeckComposition([], 4).combinations).toEqual([])
+    })
+  })
+
+  describe('speed split and cost distribution (deck-dashboard #09)', () => {
+    it('splits fast vs slow', () => {
+      const cards = [
+        card({ name: 'A', speed: 'Fast' }),
+        card({ name: 'B', speed: 'Fast' }),
+        card({ name: 'C', speed: 'Slow' }),
+      ]
+      const result = computeDeckComposition(cards, 4)
+      expect(result.speedSplit).toEqual({ fast: 2, slow: 1 })
+    })
+
+    it('buckets cost ascending, omitting costs no card has', () => {
+      const cards = [card({ name: 'A', cost: 3 }), card({ name: 'B', cost: 0 }), card({ name: 'C', cost: 3 })]
+      const result = computeDeckComposition(cards, 4)
+      expect(result.costDistribution).toEqual([
+        { cost: 0, count: 1 },
+        { cost: 3, count: 2 },
+      ])
+    })
+
+    it('an empty deck has a zero fast/slow split and no cost buckets', () => {
+      const result = computeDeckComposition([], 4)
+      expect(result.speedSplit).toEqual({ fast: 0, slow: 0 })
+      expect(result.costDistribution).toEqual([])
+    })
+  })
 })

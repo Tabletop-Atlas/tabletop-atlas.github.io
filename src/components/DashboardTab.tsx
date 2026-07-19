@@ -4,7 +4,9 @@ import { collectionStore } from '../domain/collectionStore'
 import { computeDeckComposition } from '../domain/deckComposition'
 import { EXPANSIONS, type ExpansionName, type PowerCard } from '../domain/types'
 import { normalizeExpansion } from './tagColors'
+import { DeckCombinationMatrix } from './DeckCombinationMatrix'
 import { DeckElementBars } from './DeckElementBars'
+import { DeckFacets } from './DeckFacets'
 
 const powerCards = powerCardsData as PowerCard[]
 const MINOR_CARDS = powerCards.filter((c) => c.kind === 'minor')
@@ -31,15 +33,15 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
 }
 
 /**
- * v6 #06/#07/#08: the Dashboard tab. Minor and Major show live composition and hypergeometric
- * draw odds against the checked expansion set; Fear/Event's own views are #11/#12. An expansion
- * picker (session-only state, no storage key) defines the set, defaulting to the Collection;
- * unowned expansions stay listed and annotated, never hidden (PRD user story 6), consistent with
- * Collection treatment elsewhere (`SpiritTile`, `Recommender`'s `unowned-note`). A single N
- * stepper (default 4, clamped to [1, deck size] by the domain module) drives both power-deck
- * segments' odds; the assumption label keeps the static dashboard from reading as live tracking
- * (PRD user story 27). Holds no game state — a reload always reverts to the Collection default,
- * N=4 (PRD user story 28).
+ * v6 #06/#07/#08/#09: the Dashboard tab. Minor and Major show live composition, hypergeometric
+ * draw odds, an element-combination dot-matrix, and the speed/cost facets, all against the
+ * checked expansion set; Fear/Event's own views are #11/#12. An expansion picker (session-only
+ * state, no storage key) defines the set, defaulting to the Collection; unowned expansions stay
+ * listed and annotated, never hidden (PRD user story 6), consistent with Collection treatment
+ * elsewhere (`SpiritTile`, `Recommender`'s `unowned-note`). A single N stepper (default 4, clamped
+ * to [1, deck size] by the domain module) drives both power-deck segments' odds; the assumption
+ * label keeps the static dashboard from reading as live tracking (PRD user story 27). Holds no
+ * game state — a reload always reverts to the Collection default, N=4 (PRD user story 28).
  */
 export function DashboardTab() {
   const [segment, setSegment] = useState<Segment>('Minor')
@@ -116,6 +118,12 @@ export function DashboardTab() {
           </label>
           <DeckElementBars composition={activeComposition} />
           <p className="dashboard-assumption">Odds assume a full deck, nothing drawn.</p>
+
+          <h3>Element combinations</h3>
+          <DeckCombinationMatrix combinations={activeComposition.combinations} />
+
+          <h3>Facets</h3>
+          <DeckFacets composition={activeComposition} />
         </div>
       )}
       {segment === 'Fear' && <p className="dashboard-stub">Fear segment — coming soon.</p>}

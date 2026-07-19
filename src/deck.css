@@ -1273,6 +1273,94 @@ button:disabled {
   color: var(--deck-text);
   text-align: right;
 }
+/* --- Element-combination dot-matrix + facets (deck-dashboard #09) --- */
+.deck-combo-matrix {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.6rem;
+  overflow-x: auto;
+}
+.deck-combo-row {
+  display: grid;
+  /* 8 columns = ELEMENTS.length (src/domain/types.ts) - one dot per canonical element. */
+  grid-template-columns: 9rem repeat(8, 1.4rem) 3rem;
+  align-items: center;
+  gap: 0.3rem;
+}
+.deck-combo-header {
+  font: 600 11px/1 var(--deck-mono);
+  color: var(--deck-dim);
+  text-transform: uppercase;
+}
+.deck-combo-label {
+  font-size: 13px;
+  color: var(--deck-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.deck-combo-col-label {
+  text-align: center;
+  color: var(--deck-dim);
+}
+.deck-combo-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: #1a222b;
+}
+.deck-combo-dot-on {
+  background: var(--deck-accent);
+}
+.deck-combo-count {
+  font: 600 12px/1 var(--deck-mono);
+  color: var(--deck-dim);
+  text-align: right;
+}
+.dashboard-facets {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+.dashboard-facet h4 {
+  margin: 0 0 0.4rem;
+  font-size: 13px;
+  color: var(--deck-text);
+}
+.dashboard-facet-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #1a222b;
+}
+.dashboard-facet-fast {
+  background: var(--deck-accent);
+}
+.dashboard-facet-slow {
+  background: #566573;
+}
+.dashboard-facet-legend {
+  font-size: 12px;
+  color: var(--deck-dim);
+  margin: 0.35rem 0 0;
+}
+.dashboard-cost-bars {
+  display: grid;
+  gap: 0.3rem;
+}
+.dashboard-cost-row {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr 2.5rem;
+  align-items: center;
+  gap: 0.6rem;
+}
+.dashboard-cost-label {
+  font: 600 12px/1 var(--deck-mono);
+  color: var(--deck-dim);
+}
 .spirit-detail-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
