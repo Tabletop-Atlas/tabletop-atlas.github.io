@@ -1,6 +1,6 @@
 # Event segment
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

@@ -18,6 +18,7 @@ const MAJOR_CARDS = powerCards.filter((c) => c.kind === 'major')
 
 const otherCards = otherCardsData as OtherCard[]
 const FEAR_CARDS = otherCards.filter((c) => c.kind === 'fear')
+const EVENT_CARDS = otherCards.filter((c) => c.kind === 'event')
 
 // deck-dashboard #10: by spirit, not Configuration — element data exists at spirit level only,
 // and aspects record no element changes (PRD's explicit call, not an oversight).
@@ -44,21 +45,23 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
 }
 
 /**
- * v6 #06/#07/#08/#09/#10/#11: the Dashboard tab. Minor and Major show live composition,
+ * v6 #06/#07/#08/#09/#10/#11/#12: the Dashboard tab. Minor and Major show live composition,
  * hypergeometric draw odds, an element-combination dot-matrix, and the speed/cost facets, all
- * against the checked expansion set; Event's own view is #12. An expansion picker (session-only
- * state, no storage key) defines the set, defaulting to the Collection; unowned expansions stay
- * listed and annotated, never hidden (PRD user story 6), consistent with Collection treatment
- * elsewhere (`SpiritTile`, `Recommender`'s `unowned-note`). A single N stepper (default 4, clamped
- * to [1, deck size] by the domain module) drives both power-deck segments' odds; the assumption
- * label keeps the static dashboard from reading as live tracking (PRD user story 27). An optional
- * spirit pick (default "no spirit") highlights that spirit's own recorded elements in the bars and
- * combination matrix — no new data, no judgment (PRD user stories 18-20). Fear reuses the
- * existing `groupOtherCards` seam (`otherCardArrange.ts`) for its by-tag and by-expansion
- * breakdowns rather than duplicating that grouping logic; its framing copy states the pool is a
- * hidden-subset fact, never a card counter (PRD user story 25), and carries no valence axis —
- * that's the map's open taxonomy thread, explicitly out of scope here. Holds no game state — a
- * reload always reverts to the Collection default, N=4, no spirit (PRD user story 28).
+ * against the checked expansion set. An expansion picker (session-only state, no storage key)
+ * defines the set, defaulting to the Collection; unowned expansions stay listed and annotated,
+ * never hidden (PRD user story 6), consistent with Collection treatment elsewhere (`SpiritTile`,
+ * `Recommender`'s `unowned-note`). A single N stepper (default 4, clamped to [1, deck size] by the
+ * domain module) drives both power-deck segments' odds; the assumption label keeps the static
+ * dashboard from reading as live tracking (PRD user story 27). An optional spirit pick (default
+ * "no spirit") highlights that spirit's own recorded elements in the bars and combination matrix —
+ * no new data, no judgment (PRD user stories 18-20). Fear and Event both reuse the existing
+ * `groupOtherCards` seam (`otherCardArrange.ts`) for their by-tag/by-class and by-expansion
+ * breakdowns rather than duplicating that grouping logic, and both carry no valence axis — that's
+ * the map's open taxonomy thread, explicitly out of scope here. Fear's framing copy states the
+ * pool is a hidden-subset fact, never a card counter (PRD user story 25); Event's empty state
+ * (a base-game-only set) reads as a rule of the game, not an error or blank screen (PRD user story
+ * 26). Holds no game state — a reload always reverts to the Collection default, N=4, no spirit
+ * (PRD user story 28).
  */
 /** `initialSegment` mirrors `TierBoard`'s `initialSubject` — lets the server-rendered smoke test
  * reach a non-default segment without simulating a click. */
@@ -99,6 +102,10 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
   const fearCardsInPlay = useMemo(() => FEAR_CARDS.filter((c) => isChecked(c.expansion, checkedExpansions)), [checkedExpansions])
   const fearByTag = useMemo(() => groupOtherCards(fearCardsInPlay, 'subtype'), [fearCardsInPlay])
   const fearByExpansion = useMemo(() => groupOtherCards(fearCardsInPlay, 'expansion'), [fearCardsInPlay])
+
+  const eventCardsInPlay = useMemo(() => EVENT_CARDS.filter((c) => isChecked(c.expansion, checkedExpansions)), [checkedExpansions])
+  const eventByClass = useMemo(() => groupOtherCards(eventCardsInPlay, 'subtype'), [eventCardsInPlay])
+  const eventByExpansion = useMemo(() => groupOtherCards(eventCardsInPlay, 'expansion'), [eventCardsInPlay])
 
   return (
     <section>
@@ -184,7 +191,22 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
           <DeckPoolBreakdown groups={fearByExpansion} poolSize={fearCardsInPlay.length} />
         </div>
       )}
-      {segment === 'Event' && <p className="dashboard-stub">Event segment — coming soon.</p>}
+      {segment === 'Event' && (
+        <div className="dashboard-deck">
+          <p className="dashboard-deck-size">{eventCardsInPlay.length} cards</p>
+          {eventCardsInPlay.length === 0 ? (
+            <p className="dashboard-empty-rule">No events in this set — the base game ships none; this reads as a rule of the game, not a bug.</p>
+          ) : (
+            <>
+              <h3>By event class</h3>
+              <DeckPoolBreakdown groups={eventByClass} poolSize={eventCardsInPlay.length} />
+
+              <h3>By expansion</h3>
+              <DeckPoolBreakdown groups={eventByExpansion} poolSize={eventCardsInPlay.length} />
+            </>
+          )}
+        </div>
+      )}
     </section>
   )
 }

@@ -79,6 +79,15 @@ describe('groupOtherCards by subtype — event (single-valued, never judgment)',
   it('omits classes no card has — no empty groups, and no Unclassified (every event has exactly one class)', () => {
     expect(groupOtherCards([choice], 'subtype')).toEqual([{ label: 'Choice', cards: [choice] }])
   })
+
+  // deck-dashboard #12: a base-game-only expansion set has zero event cards — the empty
+  // composition this produces must never throw (PRD user story 26's "rule of the game, not a
+  // bug" reads on top of this).
+  it('an empty card set (e.g. no events in the checked expansions) returns no groups, without throwing', () => {
+    expect(() => groupOtherCards([], 'subtype')).not.toThrow()
+    expect(groupOtherCards([], 'subtype')).toEqual([])
+    expect(groupOtherCards([], 'expansion')).toEqual([])
+  })
 })
 
 describe('groupOtherCards by expansion', () => {

@@ -1,9 +1,10 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import spiritsData from '../../data/spirits.json'
-import { EXPANSIONS, FEAR_TAGS, type Spirit } from '../../domain/types'
+import { EXPANSIONS, EVENT_CLASSES, FEAR_TAGS, type Spirit } from '../../domain/types'
 import { subtypeLabel } from '../tagColors'
 import App from '../../App'
+import { collectionStore } from '../../domain/collectionStore'
 import { tierStore } from '../../domain/tierStore'
 import { computeDeckComposition } from '../../domain/deckComposition'
 import { DashboardTab } from '../DashboardTab'
@@ -291,5 +292,34 @@ describe('app smoke', () => {
     expect(html).not.toContain('Fear segment — coming soon.')
     expect(html.toLowerCase()).not.toContain('good')
     expect(html.toLowerCase()).not.toContain('bad')
+  })
+
+  it('the Dashboard Event segment shows pool size, a by-class and by-expansion breakdown, with no valence classification (deck-dashboard #12)', () => {
+    const html = renderToStaticMarkup(<DashboardTab initialSegment="Event" />)
+    expect(html).toContain('cards')
+    expect(html).toContain('By event class')
+    for (const eventClass of EVENT_CLASSES) {
+      expect(html).toContain(subtypeLabel(eventClass))
+    }
+    expect(html).toContain('By expansion')
+    expect(html).not.toContain('Event segment — coming soon.')
+    expect(html.toLowerCase()).not.toContain('good')
+    expect(html.toLowerCase()).not.toContain('bad')
+  })
+
+  it('the Dashboard Event segment states plainly that a base-game-only set has no events, rather than an error or blank screen (deck-dashboard #12)', () => {
+    // Base-game-only: exclude every other expansion so the checked set (defaulting to the
+    // Collection) narrows to Base, which ships zero events.
+    for (const expansion of EXPANSIONS) {
+      if (expansion !== 'Base') collectionStore.setOwned(expansion, false)
+    }
+    try {
+      const html = renderToStaticMarkup(<DashboardTab initialSegment="Event" />)
+      expect(html).toContain('0 cards')
+      expect(html).toContain('No events in this set')
+      expect(html).not.toContain('By event class')
+    } finally {
+      collectionStore.resetAll()
+    }
   })
 })

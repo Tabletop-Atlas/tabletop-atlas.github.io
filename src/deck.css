@@ -1242,6 +1242,13 @@ button:disabled {
   color: var(--deck-dim);
   margin-top: 0.8rem;
 }
+/* deck-dashboard #12: visually identical to .dashboard-stub, but its own class - an empty pool
+ * that's a rule of the game (PRD user story 26) is a different fact than "not built yet", even
+ * though today they read the same. */
+.dashboard-empty-rule {
+  color: var(--deck-dim);
+  margin-top: 0.8rem;
+}
 .deck-element-bars {
   display: grid;
   gap: 0.35rem;
