@@ -11,7 +11,7 @@ recommender. This map decides; it does not build.
 
 ## Notes
 
-- **The charting input is [docs/phase-4-notes.md](../../docs/phase-4-notes.md)** — the owner's
+- **The charting input is [wayfinder-input.md](wayfinder-input.md)** — the owner's
   Phase 4 feedback, pre-structured into decided items, open decisions, fog, and out-of-scope. The
   "Already decided" items are **locked**: no grilling session re-opens them; they flow into the
   spec via [#09](issues/09-assemble-the-phase-4-spec.md). One carries a flag (see Decisions so far).
@@ -100,7 +100,7 @@ recommender. This map decides; it does not build.
   (OFL fonts, red/blue speed colours, FAQ-compliant disclaimer). **Destination reached.**
 
 Eight calls were made by the owner ahead of charting, locked in
-[docs/phase-4-notes.md](../../docs/phase-4-notes.md) — they are not tickets; #09 folds them into
+[wayfinder-input.md](wayfinder-input.md) — they are not tickets; #09 folds them into
 the spec:
 
 - **Spirit Island font for spirit names in Browse.** Contingent on
@@ -132,7 +132,7 @@ the spec:
 ## Out of scope
 
 - **The full AI composition-based recommender in the backend.** Exists, but explicitly not this
-  phase (owner, [docs/phase-4-notes.md](../../docs/phase-4-notes.md)) — the map does not route
+  phase (owner, [wayfinder-input.md](wayfinder-input.md)) — the map does not route
   toward it. Constrains [#08](issues/08-the-recommenders-short-term-shape.md): option B stays
   within data the frontend already has.
 - Standing rulings carried from the [v5 map](../v5/MAP.md): **free-text search** (owner declined;
