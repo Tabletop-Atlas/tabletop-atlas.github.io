@@ -7,8 +7,10 @@ import App from '../../App'
 import { collectionStore } from '../../domain/collectionStore'
 import { tierStore } from '../../domain/tierStore'
 import { computeDeckComposition } from '../../domain/deckComposition'
+import type { FearCard } from '../../domain/impactBreakdown'
 import { DashboardTab } from '../DashboardTab'
 import { DeckUpset } from '../DeckUpset'
+import { FearImpactView } from '../FearImpactView'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
 import { Settings } from '../Settings'
 import { SpiritDetail } from '../SpiritDetail'
@@ -308,18 +310,37 @@ describe('app smoke', () => {
     expect(plainHtml).not.toContain('deck-upset-dot-highlight')
   })
 
-  it('the Dashboard Fear segment shows pool size, a by-tag and by-expansion breakdown, and the hidden-subset framing copy, with no valence classification (deck-dashboard #11)', () => {
+  it('the Dashboard Fear segment shows the variant-D impact view: stat tiles, stacked bar, tag facet, hidden-subset framing copy, no by-expansion facet (deck-dashboard #19)', () => {
     const html = renderToStaticMarkup(<DashboardTab initialSegment="Fear" />)
     expect(html).toContain('cards')
     expect(html).toContain('hidden subset of this pool')
+    expect(html).toContain('rating-tiles')
+    expect(html).toContain('weak')
+    expect(html).toContain('solid')
+    expect(html).toContain('strong')
+    expect(html).toContain('rating-stacked-bar')
     expect(html).toContain('By fear tag')
     for (const tag of FEAR_TAGS) {
       expect(html).toContain(subtypeLabel(tag))
     }
-    expect(html).toContain('By expansion')
+    expect(html).not.toContain('By expansion')
+    expect(html).not.toContain('rating-chip-drill')
     expect(html).not.toContain('Fear segment — coming soon.')
-    expect(html.toLowerCase()).not.toContain('good')
-    expect(html.toLowerCase()).not.toContain('bad')
+  })
+
+  it('the Fear impact view drills a stat tile into its exact cards, with a clear control (deck-dashboard #19)', () => {
+    const cards: FearCard[] = [
+      { name: 'Weak One', expansion: 'Base', kind: 'fear', image: 'cards/fear/weak_one.webp', tags: [], impact: 1, impactSource: 'judgment' },
+      { name: 'Solid One', expansion: 'Base', kind: 'fear', image: 'cards/fear/solid_one.webp', tags: ['removal'], impact: 2, impactSource: 'judgment' },
+    ]
+    const html = renderToStaticMarkup(<FearImpactView cards={cards} />)
+    expect(html).not.toContain('rating-chip-drill')
+
+    const withDrill = renderToStaticMarkup(<FearImpactView cards={cards} initialPicked={{ impact: 1, tag: null }} />)
+    expect(withDrill).toContain('rating-chip-drill')
+    expect(withDrill).toContain('Weak One')
+    expect(withDrill).not.toContain('Solid One')
+    expect(withDrill).toContain('Clear')
   })
 
   it('the Dashboard Event segment shows pool size, a by-class and by-expansion breakdown, with no valence classification (deck-dashboard #12)', () => {

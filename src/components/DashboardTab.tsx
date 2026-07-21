@@ -5,6 +5,7 @@ import powerCardsData from '../data/power-cards.json'
 import spiritsData from '../data/spirits.json'
 import { collectionStore } from '../domain/collectionStore'
 import { computeDeckComposition } from '../domain/deckComposition'
+import type { FearCard } from '../domain/impactBreakdown'
 import { innateThresholdsFor } from '../domain/innateThresholds'
 import { groupOtherCards } from '../domain/otherCardArrange'
 import { EXPANSIONS, type ExpansionName, type InnatePower, type OtherCard, type PowerCard, type Spirit } from '../domain/types'
@@ -13,6 +14,7 @@ import { DeckFacets } from './DeckFacets'
 import { DeckGapOdds } from './DeckGapOdds'
 import { DeckPoolBreakdown } from './DeckPoolBreakdown'
 import { DeckUpset, type DeckUnit } from './DeckUpset'
+import { FearImpactView } from './FearImpactView'
 
 const powerCards = powerCardsData as PowerCard[]
 const MINOR_CARDS = powerCards.filter((c) => c.kind === 'minor')
@@ -20,7 +22,7 @@ const MAJOR_CARDS = powerCards.filter((c) => c.kind === 'major')
 const UNIQUE_CARDS = powerCards.filter((c) => c.kind === 'unique')
 
 const otherCards = otherCardsData as OtherCard[]
-const FEAR_CARDS = otherCards.filter((c) => c.kind === 'fear')
+const FEAR_CARDS = otherCards.filter((c): c is FearCard => c.kind === 'fear')
 const EVENT_CARDS = otherCards.filter((c) => c.kind === 'event')
 
 // deck-dashboard #10: by spirit, not Configuration — element data exists at spirit level only,
@@ -63,12 +65,14 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
  * spirit's innate threshold requirements — captioned as base-spirit-only when an aspect changes
  * its innate(s) (#16) — and can additionally fold that spirit's unique
  * powers into the Minor pool — labelled a hypothetical, because the physical minor deck never
- * contains them (uniques start in hand). Fear and Event reuse the existing `groupOtherCards` seam
- * for their by-tag/by-class and by-expansion breakdowns and carry no valence axis — that's the
- * map's open taxonomy thread. Fear's framing copy states the pool is a hidden-subset fact, never
- * a card counter (PRD user story 25); Event's empty state (a base-game-only set) reads as a rule
- * of the game, not an error (PRD user story 26). Holds no game state — a reload always reverts to
- * the Collection default, N=4, no spirit, counts (PRD user story 28).
+ * contains them (uniques start in hand). Fear renders the ratified variant-D impact view (#19):
+ * headline stat tiles, a stacked impact bar, the by-tag facet as clickable mini stacked bars, and
+ * click-to-drill card chips — no by-expansion facet (owner's call from the prototype). Event
+ * still reuses the existing `groupOtherCards` seam for its by-class and by-expansion breakdowns
+ * pending its own valence view (#20). Fear's framing copy states the pool is a hidden-subset
+ * fact, never a card counter (PRD user story 25); Event's empty state (a base-game-only set)
+ * reads as a rule of the game, not an error (PRD user story 26). Holds no game state — a reload
+ * always reverts to the Collection default, N=4, no spirit, counts (PRD user story 28).
  */
 /** `initialSegment` mirrors `TierBoard`'s `initialSubject` — lets the server-rendered smoke test
  * reach a non-default segment without simulating a click. `initialSpiritId` is the same escape
@@ -116,8 +120,6 @@ export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegme
   const activeComposition = segment === 'Minor' ? minorComposition : segment === 'Major' ? majorComposition : null
 
   const fearCardsInPlay = useMemo(() => FEAR_CARDS.filter((c) => isChecked(c.expansion, checkedExpansions)), [checkedExpansions])
-  const fearByTag = useMemo(() => groupOtherCards(fearCardsInPlay, 'subtype'), [fearCardsInPlay])
-  const fearByExpansion = useMemo(() => groupOtherCards(fearCardsInPlay, 'expansion'), [fearCardsInPlay])
 
   const eventCardsInPlay = useMemo(() => EVENT_CARDS.filter((c) => isChecked(c.expansion, checkedExpansions)), [checkedExpansions])
   const eventByClass = useMemo(() => groupOtherCards(eventCardsInPlay, 'subtype'), [eventCardsInPlay])
@@ -207,11 +209,7 @@ export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegme
             The in-play fear deck is a small hidden subset of this pool, built at setup — these are pool odds, never a card counter.
           </p>
 
-          <h3>By fear tag</h3>
-          <DeckPoolBreakdown groups={fearByTag} poolSize={fearCardsInPlay.length} />
-
-          <h3>By expansion</h3>
-          <DeckPoolBreakdown groups={fearByExpansion} poolSize={fearCardsInPlay.length} />
+          <FearImpactView cards={fearCardsInPlay} />
         </div>
       )}
       {segment === 'Event' && (
