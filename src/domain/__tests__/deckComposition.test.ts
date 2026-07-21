@@ -90,6 +90,84 @@ describe('computeDeckComposition', () => {
     })
   })
 
+  describe('gap odds for k = 1, 2, 3 (deck-dashboard #14)', () => {
+    // 6-card deck, 3 carrying Fire, draw 3.
+    function sixCardDeck() {
+      return [
+        card({ name: 'A', elements: ['Fire'] }),
+        card({ name: 'B', elements: ['Fire'] }),
+        card({ name: 'C', elements: ['Fire'] }),
+        card({ name: 'D', elements: [] }),
+        card({ name: 'E', elements: [] }),
+        card({ name: 'F', elements: [] }),
+      ]
+    }
+
+    it('gapOdds[0] agrees with the existing k=1 probability', () => {
+      const result = computeDeckComposition(sixCardDeck(), 3)
+      const fire = result.elements.find((e) => e.element === 'Fire')!
+      expect(fire.gapOdds[0]).toBe(fire.probability)
+    })
+
+    it('matches hand-computed odds for at least 2 and at least 3 of 3', () => {
+      // P(X>=1) = 1 - C(3,3)/C(6,3) = 1 - 1/20 = 0.95
+      // P(X>=2) = 1 - [C(3,0)C(3,3) + C(3,1)C(3,2)]/C(6,3) = 1 - [1 + 9]/20 = 0.5
+      // P(X>=3) = C(3,3)C(3,0)/C(6,3) = 1/20 = 0.05
+      const result = computeDeckComposition(sixCardDeck(), 3)
+      const fire = result.elements.find((e) => e.element === 'Fire')!
+      expect(fire.gapOdds[0]).toBeCloseTo(0.95)
+      expect(fire.gapOdds[1]).toBeCloseTo(0.5)
+      expect(fire.gapOdds[2]).toBeCloseTo(0.05)
+    })
+
+    it('is 0 for k exceeding the element\'s deck count', () => {
+      // Only 3 Fire cards exist — "at least 3" is possible, but this fixture's element (Air)
+      // has zero, so every k is 0.
+      const result = computeDeckComposition(sixCardDeck(), 3)
+      const air = result.elements.find((e) => e.element === 'Air')!
+      expect(air.gapOdds).toEqual([0, 0, 0])
+    })
+
+    it('is 0 for at-least-4 style asks beyond an element with only 3 in the deck', () => {
+      // draw all 6 -> exactly 3 Fire cards seen, never 4+; probAtLeast(deckSize, count, n, 4)
+      // isn't exposed directly, but gapOdds only goes to k=3, which is certain here.
+      const result = computeDeckComposition(sixCardDeck(), 6)
+      const fire = result.elements.find((e) => e.element === 'Fire')!
+      expect(fire.gapOdds).toEqual([1, 1, 1])
+    })
+
+    it('is certainty (1) for every k the element count allows once N >= deck size', () => {
+      const result = computeDeckComposition(sixCardDeck(), 99)
+      const fire = result.elements.find((e) => e.element === 'Fire')!
+      expect(result.drawCount).toBe(6)
+      expect(fire.gapOdds).toEqual([1, 1, 1])
+    })
+
+    it('an empty deck gives every gapOdds entry 0', () => {
+      const result = computeDeckComposition([], 4)
+      expect(result.elements.every((e) => e.gapOdds.every((o) => o === 0))).toBe(true)
+    })
+
+    it('at N >= deck size, certainty holds only up to the element\'s own count — not for a k it can\'t reach', () => {
+      // 8-card deck, exactly 2 carrying Water, draw the whole deck: seeing >=1 and >=2 Water is
+      // guaranteed, but >=3 is impossible since only 2 exist — certainty is per-k, not blanket.
+      const cards = [
+        card({ name: 'A', elements: ['Water'] }),
+        card({ name: 'B', elements: ['Water'] }),
+        card({ name: 'C', elements: [] }),
+        card({ name: 'D', elements: [] }),
+        card({ name: 'E', elements: [] }),
+        card({ name: 'F', elements: [] }),
+        card({ name: 'G', elements: [] }),
+        card({ name: 'H', elements: [] }),
+      ]
+      const result = computeDeckComposition(cards, 8)
+      const water = result.elements.find((e) => e.element === 'Water')!
+      expect(result.drawCount).toBe(8)
+      expect(water.gapOdds).toEqual([1, 1, 0])
+    })
+  })
+
   describe('element combinations (deck-dashboard #09)', () => {
     it('groups cards by their exact element set, sorted by frequency descending', () => {
       const cards = [

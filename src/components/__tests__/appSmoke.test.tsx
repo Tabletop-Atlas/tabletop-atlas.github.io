@@ -208,10 +208,10 @@ describe('app smoke', () => {
     for (const segment of ['Minor', 'Major', 'Fear', 'Event']) {
       expect(html).toContain(`>${segment}<`)
     }
-    // #03: element rows are icons, not words — each element appears as its icon's alt text,
-    // once in the must-include filter and once as a matrix row.
+    // #03/#14: element rows are icons, not words — each element appears as its icon's alt text,
+    // once in the must-include filter, once as a matrix row, once as a gap-odds table row.
     for (const element of ['Sun', 'Moon', 'Fire', 'Air', 'Water', 'Earth', 'Plant', 'Animal']) {
-      expect((html.match(new RegExp(`alt="${element}"`, 'g')) ?? []).length).toBe(2)
+      expect((html.match(new RegExp(`alt="${element}"`, 'g')) ?? []).length).toBe(3)
     }
     expect(html).toContain('cards')
   })
@@ -242,6 +242,19 @@ describe('app smoke', () => {
     expect(html).toContain('Facets')
     expect(html).toContain('Fast')
     expect(html).toContain('Slow')
+  })
+
+  it('the Dashboard shows the element-gap odds block on both the Minor and Major segments (deck-dashboard #14)', () => {
+    const minorHtml = renderToStaticMarkup(<DashboardTab />)
+    expect(minorHtml).toContain('Element-gap odds')
+    expect(minorHtml).toContain('dashboard-gap-odds-table')
+    expect(minorHtml).toContain('≥1')
+    expect(minorHtml).toContain('≥2')
+    expect(minorHtml).toContain('≥3')
+
+    const majorHtml = renderToStaticMarkup(<DashboardTab initialSegment="Major" />)
+    expect(majorHtml).toContain('Element-gap odds')
+    expect(majorHtml).toContain('dashboard-gap-odds-table')
   })
 
   it('the Dashboard has a spirit picker defaulting to "No spirit", listing all 37 spirits, with no highlight rendered by default (deck-dashboard #10)', () => {

@@ -5,8 +5,11 @@ export interface ElementCount {
   count: number
   share: number
   /** deck-dashboard #07: exact hypergeometric "at least one among `drawCount` draws" chance,
-   * for a full, untouched deck. */
+   * for a full, untouched deck. Equal to `gapOdds[0]`. */
   probability: number
+  /** deck-dashboard #14: exact hypergeometric "at least k among `drawCount` draws" chance for
+   * k = 1, 2, 3, full deck, nothing drawn. `gapOdds[0]` === `probability`. */
+  gapOdds: [number, number, number]
 }
 
 export interface ElementCombinationGroup {
@@ -41,22 +44,34 @@ export interface DeckComposition {
   costDistribution: CostBucket[]
 }
 
-/**
- * P(at least one of the `k` cards carrying an element among `n` draws from a `deckSize`-card
- * deck), without replacement. Computed as 1 minus the "every draw misses" product, term by term
- * (`(deckSize-k-i)/(deckSize-i)` for i in [0, n)) rather than via `nCr`, so it never overflows or
- * loses precision on real deck sizes. A negative numerator means missing entirely is already
- * impossible, so the miss-probability is 0 and this element's odds are certain (1).
- */
-function probAtLeastOne(deckSize: number, k: number, n: number): number {
-  if (deckSize <= 0 || k <= 0) return 0
-  let missProbability = 1
-  for (let i = 0; i < n; i++) {
-    const numerator = deckSize - k - i
-    if (numerator < 0) return 1
-    missProbability *= numerator / (deckSize - i)
+/** Exact `n choose r`, computed incrementally so every intermediate product is itself a whole
+ * binomial coefficient (`result * (n-i) / (i+1)` divides evenly at each step) — no factorial
+ * blowup, no precision loss, for the deck sizes this app ever sees. */
+function nCr(n: number, r: number): bigint {
+  if (r < 0 || r > n || n < 0) return 0n
+  const k = Math.min(r, n - r)
+  let result = 1n
+  for (let i = 0; i < k; i++) {
+    result = (result * BigInt(n - i)) / BigInt(i + 1)
   }
-  return 1 - missProbability
+  return result
+}
+
+/**
+ * P(at least `minHits` of the `elementCount` element-carrying cards among `n` draws from a
+ * `deckSize`-card deck), without replacement (exact hypergeometric tail). Computed as
+ * 1 - P(X < minHits), summing the hypergeometric pmf via exact `nCr` — safe from overflow because
+ * every combinatorial call converts to `Number` only in the final ratio, not mid-computation.
+ */
+function probAtLeast(deckSize: number, elementCount: number, n: number, minHits: number): number {
+  if (deckSize <= 0 || elementCount <= 0) return 0
+  const total = nCr(deckSize, n)
+  if (total === 0n) return 0
+  let belowMinHits = 0n
+  for (let hits = 0; hits < minHits; hits++) {
+    belowMinHits += nCr(elementCount, hits) * nCr(deckSize - elementCount, n - hits)
+  }
+  return 1 - Number(belowMinHits) / Number(total)
 }
 
 /** Canonical-order element set for a card, e.g. ['Air', 'Fire'] -> ['Fire', 'Air'] — the input
@@ -111,11 +126,17 @@ export function computeDeckComposition(cards: PowerCard[], requestedDrawCount: n
   const drawCount = deckSize === 0 ? 0 : Math.min(Math.max(requestedDrawCount, 1), deckSize)
   const elements = ELEMENTS.map((element) => {
     const count = cards.filter((c) => c.elements.includes(element)).length
+    const gapOdds: [number, number, number] = [
+      probAtLeast(deckSize, count, drawCount, 1),
+      probAtLeast(deckSize, count, drawCount, 2),
+      probAtLeast(deckSize, count, drawCount, 3),
+    ]
     return {
       element,
       count,
       share: deckSize === 0 ? 0 : count / deckSize,
-      probability: probAtLeastOne(deckSize, count, drawCount),
+      probability: gapOdds[0],
+      gapOdds,
     }
   })
   return {

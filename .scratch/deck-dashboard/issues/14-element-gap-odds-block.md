@@ -1,6 +1,6 @@
 # Element-gap odds block on the power decks
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 
@@ -17,14 +17,14 @@ annotations ticket.
 
 ## Acceptance criteria
 
-- [ ] The deck-composition domain seam exposes per-element exact hypergeometric tail odds
+- [x] The deck-composition domain seam exposes per-element exact hypergeometric tail odds
       for k = 1, 2, 3 (k = 1 agrees with the odds the segment already shows).
-- [ ] Domain tests cover hand-computed cases plus edges: k exceeding the element's deck
+- [x] Domain tests cover hand-computed cases plus edges: k exceeding the element's deck
       count (odds 0), N ≥ deck size (certainty where the element count allows), empty deck.
-- [ ] The block renders inside both power-deck segments, inheriting the shared N stepper
+- [x] The block renders inside both power-deck segments, inheriting the shared N stepper
       and expansion set; no new tab, segment, or storage key; state is session-only.
-- [ ] The full-pool assumption label is present; percentages accompany counts.
-- [ ] Smoke test asserts the block on both segments; type check, lint, full suite pass.
+- [x] The full-pool assumption label is present; percentages accompany counts.
+- [x] Smoke test asserts the block on both segments; type check, lint, full suite pass.
 
 ## Blocked by
 

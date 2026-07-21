@@ -2256,3 +2256,34 @@ button:disabled {
 .deck-upset-legend.deck-upset-size3 { color: #d7b56a; }
 .deck-upset-legend.deck-upset-size4 { color: var(--deck-warn); }
 .deck-upset-legend.deck-upset-size5 { color: #9a6fc4; }
+
+/* deck-dashboard #14: element-gap odds block, a plain table beneath the facets. */
+.dashboard-gap-odds {
+  margin-top: 1.2rem;
+}
+.dashboard-gap-odds h3 {
+  margin: 0 0 0.4rem;
+}
+.dashboard-gap-odds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.dashboard-gap-odds-table th,
+.dashboard-gap-odds-table td {
+  padding: 0.3rem 0.6rem;
+  text-align: right;
+  border-bottom: 1px solid #1a222b;
+  color: var(--deck-text);
+}
+.dashboard-gap-odds-table thead th {
+  color: var(--deck-dim);
+  font-weight: 600;
+}
+.dashboard-gap-odds-elrow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: left;
+  font-weight: 600;
+}

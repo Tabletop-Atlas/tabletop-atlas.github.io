@@ -8,6 +8,7 @@ import { groupOtherCards } from '../domain/otherCardArrange'
 import { EXPANSIONS, type ExpansionName, type OtherCard, type PowerCard, type Spirit } from '../domain/types'
 import { normalizeExpansion } from './tagColors'
 import { DeckFacets } from './DeckFacets'
+import { DeckGapOdds } from './DeckGapOdds'
 import { DeckPoolBreakdown } from './DeckPoolBreakdown'
 import { DeckUpset, type DeckUnit } from './DeckUpset'
 
@@ -187,6 +188,8 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
 
           <h3>Facets</h3>
           <DeckFacets composition={activeComposition} unit={unit} />
+
+          <DeckGapOdds composition={activeComposition} />
         </div>
       )}
       {segment === 'Fear' && (
