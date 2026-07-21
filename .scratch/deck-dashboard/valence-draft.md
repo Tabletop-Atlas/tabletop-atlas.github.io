@@ -73,7 +73,7 @@ for the owner's attention — an unflagged row isn't automatically correct, just
 | Cities Rise | harmful | Healthy side upgrades Towns to Cities (invader advancement) and Blighted side makes Blight easier to add — both branches worsen the invaders' position for players. | |
 | Civic Engagement | harmful | Healthy side removes a Dahan or increases Ravage damage (harmful either way); Blighted side only triggers a further Blight add on high-Blight boards — no branch favors the players. | ratified — owner agreed, amended from mixed |
 | Coastal Towns Multiply | harmful | Healthy side adds a Town, Blighted side adds Ravage damage where there's no Dahan — both branches straightforwardly favor the invaders. | |
-| Cultural Assimilation | harmful | Healthy side converts a Dahan into an Explorer, Blighted side does direct damage to Dahan ignoring Defend — both branches directly hurt the players' Dahan presence. | **flag** — `terrorLevel` cards are usually state-dependent, but here both thresholds are uniformly anti-Dahan |
+| Cultural Assimilation | harmful | Healthy side converts a Dahan into an Explorer, Blighted side does direct damage to Dahan ignoring Defend — both branches directly hurt the players' Dahan presence. | ratified — owner confirmed harmful |
 | Dahan Trade with the Invaders | mixed | Free option pauses Dahan participation; the two paid options trade Energy/Power Cards for either generating Fear or gaining permanent Dahan Defend — a genuine cost/benefit choice. | |
 | Distant Exploration | harmful | Stage I extends Explore range, Stage II/III adds heavy Ravage damage — both thresholds harm players with no favorable branch. | ratified — owner agreed, amended from mixed |
 | Eager Explorers | harmful | Stage I adds an Explorer after a Build; Stage II/III shifts damage from land to Dahan where present — both thresholds harm players with no favorable branch. | ratified — owner agreed, amended from mixed |
@@ -82,11 +82,11 @@ for the owner's attention — an unflagged row isn't automatically correct, just
 | Farmers Seek the Dahan for Aid | mixed | "Spurn" damages Dahan and adds Blight but weakens Invaders; "Teach" adds a Town but converts a future Ravage into a Build — a genuine two-sided trade-off. | |
 | Focused Farming | harmful | Healthy side adds both an Explorer and a Town; Blighted side forces Spirits to Forget a Power Card or lose Energy/Sacred Site — both branches cost the players. | |
 | Fortune-Seekers | harmful | Healthy side redirects the next Explore Card to match all non-Town/City lands (net-harmful even where swingy by layout); Blighted side only makes Blight easier without Dahan present — no branch favors the players. | ratified — owner agreed, amended from mixed |
-| Gradual Corruption | mixed | Healthy side adds Blight but Spirits can pay Energy to fully prevent it; Blighted side removes Beasts/Wilds from Blighted lands, a minor player-favoring cleanup. | **flag** — Blighted branch reads closer to neutral/minor than clearly favorable |
+| Gradual Corruption | harmful | Healthy side adds Blight, avoidable only at an Energy cost; Blighted side's Beast/Wilds cleanup is too minor to count as a real favorable branch — nets harmful. | ratified — owner agreed, amended from mixed |
 | Hard-Working Settlers | mixed | "Act Cautiously" adds an Explorer and forces an extra Ravage; "Create Unnerving Distractions" skips Ravages and removes Stage II/III cards from the deck at the cost of Fear — a genuine high-stakes trade. | |
-| Harvest Bounty, Harvest Dust | harmful | Healthy-island forces an extra Ravage; Blighted-island pushes a Town off the board only if already saturated (a wash at best); Stage III adds Blight unless Spirits pay a heavy token cost — nets harmful. | **flag** — the Blighted-side "push a Town" branch is arguably player-favorable; confirm it's not mixed |
+| Harvest Bounty, Harvest Dust | harmful | Healthy-island forces an extra Ravage; Blighted-island pushes a Town off the board only if already saturated (a wash at best); Stage III adds Blight unless Spirits pay a heavy token cost — nets harmful. | ratified — owner confirmed harmful |
 | Heavy Farming | harmful | Healthy side boosts Ravage damage from Towns; Blighted side adds Blight, preventable only by destroying Wilds/Sacred Sites — both branches cost the players. | |
-| Influx of Settlers | harmful | Healthy side adds multiple Explorers; Blighted side skips a Ravage but adds Blight to the same board — net invader advancement despite the preventable-by-Energy caveat. | **flag** — "skip the first Ravage" is genuinely player-favoring, bundled with a Blight add; closer to mixed |
+| Influx of Settlers | mixed | Healthy side adds multiple Explorers (harmful); Blighted side skips a Ravage — a real, meaningful benefit — bundled with a Blight add on the same board, a genuine trade-off. | ratified — owner agreed, amended from harmful |
 | Interesting Discoveries | harmful | Stage I gathers and adds Explorers; Stage II/III increases all Ravage damage — both stages advance the invasion with no favorable branch. | |
 | Invaders Surge Inland | harmful | Healthy branch pushes an Explorer further inland; Blighted branch adds a Town/City near existing Invaders — both branches advance the invasion, the rubric's own harmful example. | |
 | Invested Aristocracy | harmful | Stages I/II add an Explorer to the highest empty land; Stage III does +2 Ravage damage (healthy) or drops a Fear Card on the deck (blighted, at best neutral) — no branch favors players. | |
@@ -96,16 +96,16 @@ for the owner's attention — an unflagged row isn't automatically correct, just
 | Mapmakers Chart the Wild | harmful | Stages I/II add an extra Explorer per successful Explore; Stage III gives Invaders +1 Ravage damage per land — both tiers only benefit the invasion. | |
 | Missionaries Arrive | mixed | Converting a Dahan to a Town/pushing Dahan (Option A) vs. paying Energy to add Blight and boost the next Ravage in exchange for extra Fear (Option B) — genuine trade-off, no dominant option. | |
 | New Species Spread | mixed | A chance to add Blight near Towns/Cities (Option A) vs. paying Energy for guaranteed Fear but also guaranteed Blight (Option B) — both cost and gain something. | |
-| No Bravery without Numbers | mixed | Suppressing Ravages unless Invaders outnumber Terror Level is a real benefit only when Terror is high; when Terror is low, Stage III's added Ravage damage lands in full — outcome swings on Terror Level. | **flag** — non-choice (`terrorLevel`) card rated mixed; verify the Terror-vs-Invader-count swing is roughly even in practice |
+| No Bravery without Numbers | mixed | Suppressing Ravages unless Invaders outnumber Terror Level is a real benefit only when Terror is high; when Terror is low, Stage III's added Ravage damage lands in full — outcome swings on Terror Level. | ratified — owner confirmed mixed |
 | Numinous Crisis | mixed | "Draw Strength" purely benefits players (removes Blight, gains Energy); "Pour Your Strength" costs real resources and adds Blight — a genuine two-sided choice. | |
 | Outpaced | mixed | Per-Spirit choice between discarding a Slow power for a small refund vs. paying Energy/Presence to resolve it early — a real resource trade-off with no dominant option. | |
 | Overconfidence | harmful | Terror I discards earned Fear Cards or stockpiles Fear markers; Terror II/III scales Invader Ravage damage directly with the earned-Fear pile — consistently punishes prior progress. | |
-| Population Rises | mixed | Healthy branch adds a Town near an Explorer/Town (harmful); Blighted branch lets each Spirit optionally remove a Blight for free (beneficial) — genuinely board-state dependent. | **flag** — non-choice card rated mixed; confirm the free Blight-removal option is really cost-free and dominant |
+| Population Rises | mixed | Healthy branch adds a Town near an Explorer/Town (harmful); Blighted branch lets each Spirit optionally remove a Blight for free (beneficial) — genuinely board-state dependent. | ratified — owner confirmed mixed |
 | Promising Farmland | harmful | Healthy branch upgrades an Explorer straight to a Town during Explore; Blighted branch forces an extra Ravage in untouched terrain, preventable only at a Presence cost — both branches advance Invaders. | |
 | Provincial Seat | harmful | Healthy branch Builds in a Town's land (adds a City); Blighted branch adds Blight to an undefended land — both branches straightforwardly favor Invaders. | |
-| Pull Together in Adversity | mixed | Terror I/II denies players a Fear-related benefit (harmful); Terror III trades removing all Towns from a crowded land (beneficial) against adding Blight and reshaping terrain (harmful) — swings with Terror Level and board state. | **flag** — non-choice card rated mixed; double-check the Terror I/II clause is genuinely negative for players |
+| Pull Together in Adversity | mixed | Terror I/II denies players a Fear-related benefit (harmful); Terror III trades removing all Towns from a crowded land (beneficial) against adding Blight and reshaping terrain (harmful) — swings with Terror Level and board state. | ratified — owner confirmed mixed |
 | Putting down Roots | harmful | Healthy branch upgrades an Explorer to a Town inland; Blighted branch adds Blight to an inland land with Invaders, preventable only at a 3-Presence cost — both branches favor Invaders. | |
-| Relentless Optimism | mixed | Terror I denies players Fear from destroying Towns/Cities (harmful); Terror II/III's Dahan/Invader ratio swap can go either direction depending on which side currently outnumbers the other — a genuine, board-dependent swing. | **flag** — non-choice card rated mixed; verify the ratio swing is roughly even across typical board states |
+| Relentless Optimism | mixed | Terror I denies players Fear from destroying Towns/Cities (harmful); Terror II/III's Dahan/Invader ratio swap can go either direction depending on which side currently outnumbers the other — a genuine, board-dependent swing. | ratified — owner confirmed mixed |
 | Remnants of a Spirit's Heart | mixed | A big temporary Dahan Health buff (with a small Invader Health cost) versus a Defend-4 investment that weakens this turn's Spirit defense first — a genuine short-term-vs-long-term trade-off. | |
 | Resourceful Populace | harmful | Terror I re-adds a Town/City adjacent to wherever one was just destroyed, undercutting the kill; Terror II/III gives Towns +1 Ravage damage and adds Blight after Ravaging, with only a minor consolation removal — invader-favoring effects dominate both tiers. | |
 | Rising Interest in the Island | mixed | Removing a card from the Invader deck but adding an Explorer (Option A); paying Energy to discard a Fear Card and grant Invaders +1 Ravage damage (Option B) — both options mix a benefit with a real cost. | |
@@ -116,12 +116,12 @@ for the owner's attention — an unflagged row isn't automatically correct, just
 | Seeking the Interior | harmful | Stage I pushes an Explorer inland; Stages II+III push Explorers/Towns outward from the most-invaded land — both stages spread invaders with no player upside. | |
 | Slave Rebellion | beneficial | Both stages only ever add Fear and then damage/destroy Invaders that carry it — the rubric's own beneficial example. | |
 | Smaller Ports Spring Up | harmful | Stage I+II adds a Town to a coastal land; Stage III Builds in an unmatched land — both stages advance the Invaders. | |
-| Sprawl Contained by the Wilds | mixed | Healthy branch simultaneously adds a Dahan (good) and Builds in the busiest land (bad); Blighted branch forces every Spirit into a genuine lose-lose trade (destroy Presence vs. lock Powers to Innate) — net effect swings on board state. | **flag** — non-choice card rated mixed; confirm the within-branch trade-off reasoning |
+| Sprawl Contained by the Wilds | mixed | Healthy branch simultaneously adds a Dahan (good) and Builds in the busiest land (bad); Blighted branch forces every Spirit into a genuine lose-lose trade (destroy Presence vs. lock Powers to Innate) — net effect swings on board state. | ratified — owner confirmed mixed |
 | Strange Tales attract Explorers | harmful | Stage I's minor Fear gain is outweighed by adding an Explorer to every Dahan land; Stages II+III Build in an unrepresented terrain — both stages net-advance the Invaders. | |
 | Temporary Truce | beneficial | Both Terror levels exempt Dahan-heavy lands from Ravage or skip a Ravage Action outright — pure damage reduction for the players. | |
 | Terror Spikes Upwards | mixed | Lower Terror levels just add Fear (good) or bump a Fear Card's resolution (variable); Final Harvest trades harsher Ravage damage for removing an Invader piece per Ravage Action after — the net swings with which Terror level is active. | |
 | The Frontier Calls | harmful | Healthy branch buffs Explore Actions (more Explorers); Blighted branch costs every Spirit Presence to delay Blight-card depletion — both cost the players even with a delayed upside. | |
-| The Struggles of Growth | mixed | Healthy branch is a genuine even trade for each Spirit (Presence-for-Power-Card vs. Power-Card-for-Energy-and-move); Blighted branch's Blight addition is preventable by destroying Presence — outcome depends on board state and Spirit choices. | **flag** — non-choice card rated mixed; confirm the Blighted-branch severity assumption |
+| The Struggles of Growth | mixed | Healthy branch is a genuine even trade for each Spirit (Presence-for-Power-Card vs. Power-Card-for-Energy-and-move); Blighted branch's Blight addition is preventable by destroying Presence — outcome depends on board state and Spirit choices. | ratified — owner confirmed mixed |
 | Thriving Trade | harmful | Healthy branch adds a Town to a Town-heavy coastal land; Blighted branch adds a Blight card once 4+ lands have Towns — both advance the Invaders. | |
 | Tight-Knit Communities | harmful | Healthy branch gives Towns/Cities +1 Health (tougher Ravage); Blighted branch spreads Blight adjacent to existing Blight — both branches favor the Invaders. | |
 | Urban Development | harmful | Healthy branch gives Towns/Cities +2 Ravage damage; Blighted branch adds Blight to an already-Blighted land — both branches hurt the players. | |
@@ -129,7 +129,7 @@ for the owner's attention — an unflagged row isn't automatically correct, just
 | War Touches the Island's Shores | mixed | "Allow the Attacks" discards a Major Power to damage Invaders/land while "Help Repel the Newcomers" spends Energy to add a Fear Card — a real cost-for-benefit trade either way. | |
 | Wave of Reconnaissance | harmful | Stage I adds an extra Explorer per Exploration; Stages II+III upgrade Explorers into Towns — both stages accelerate the Invasion. | |
 | Well-Prepared Explorers | harmful | Healthy branch gives Explorers +1 Health (harder to kill); Blighted branch spreads Blight adjacent to existing Blight — both branches favor the Invaders. | |
-| Wounded Lands Attract Explorers | mixed | Healthy branch adds an Explorer to a Blighted land (bad); Blighted branch removes Blight from the Blight Card back to the box (good, delaying the Blight-card loss condition) — the two branches pull in opposite directions. | **flag** — non-choice card rated mixed; confirm the Blight-card-removal benefit outweighs the Explorer-add cost |
+| Wounded Lands Attract Explorers | mixed | Healthy branch adds an Explorer to a Blighted land (bad); Blighted branch removes Blight from the Blight Card back to the box (good, delaying the Blight-card loss condition) — the two branches pull in opposite directions. | ratified — owner confirmed mixed |
 | Years of Little Rain | mixed | The rubric's own mixed example — a real drought trade-off between letting things wither now (cheap, harmful) vs. paying Energy to ease it (costly, beneficial). | |
 
 ## Cross-check summary
@@ -140,16 +140,19 @@ event cards — all `terrorLevel` or `healthyBlightedLand` (non-`choice`) cards 
 flagged because one of their two branches may read more one-sidedly (harmful or beneficial)
 than the draft credited it.
 
-**Partial ratification (this session):** owner reviewed 5 of the 16 flagged rows.
+**All 16 flagged rows ratified.**
 - **Plan for Departure** — confirmed weak (1); the Coastal-only restriction caps the effect
   despite the disruptive tag pair.
-- **Civic Engagement**, **Distant Exploration**, **Eager Explorers**, **Fortune-Seekers** —
-  amended from mixed to **harmful**, agreeing that neither branch actually favors the players.
+- Amended from mixed to **harmful**: **Civic Engagement**, **Distant Exploration**,
+  **Eager Explorers**, **Fortune-Seekers**, **Gradual Corruption** — neither branch actually
+  favors the players on any of these five.
+- Amended from harmful to **mixed**: **Influx of Settlers** — skipping a Ravage is a real,
+  meaningful benefit even bundled with a Blight add.
+- Confirmed as originally drafted: **Cultural Assimilation** (harmful), **Harvest Bounty,
+  Harvest Dust** (harmful), **No Bravery without Numbers**, **Population Rises**, **Pull
+  Together in Adversity**, **Relentless Optimism**, **Sprawl Contained by the Wilds**,
+  **The Struggles of Growth**, **Wounded Lands Attract Explorers** (all mixed).
 
-**Still open** — 11 flagged event rows awaiting owner review: Cultural Assimilation (owner
-should confirm harmful, not mixed), Gradual Corruption, Harvest Bounty Harvest Dust, Influx of
-Settlers, No Bravery without Numbers, Population Rises, Pull Together in Adversity, Relentless
-Optimism, Sprawl Contained by the Wilds, The Struggles of Growth, Wounded Lands Attract
-Explorers. None of the 99 unflagged rows have been reviewed row-by-row yet either — full
-ratification per [#18](issues/18-valence-ratification.md) still requires the owner to confirm
-all 115 rows before anything lands on `other-cards.json`.
+**Still open** — the 99 unflagged rows have not been reviewed row-by-row; full ratification per
+[#18](issues/18-valence-ratification.md) still requires the owner to confirm all 115 rows
+before anything lands on `other-cards.json`.
