@@ -164,7 +164,7 @@
   {
     "id": "heart-of-the-wildfire",
     "name": "Heart of the Wildfire",
-    "expansion": "Promo",
+    "expansion": "Feather & Flame",
     "complexity": "High",
     "ratings": { "offense": 5, "control": 3, "fear": 4, "defense": 1, "utility": 2 },
     "elements": ["Fire", "Earth"],
@@ -178,7 +178,7 @@
   {
     "id": "serpent-slumbering-beneath-the-island",
     "name": "Serpent Slumbering Beneath the Island",
-    "expansion": "Promo",
+    "expansion": "Feather & Flame",
     "complexity": "High",
     "ratings": { "offense": 2, "control": 2, "fear": 2, "defense": 4, "utility": 5 },
     "elements": ["Earth", "Water", "Animal"],
@@ -323,7 +323,7 @@
   {
     "id": "downpour-drenches-the-world",
     "name": "Downpour Drenches the World",
-    "expansion": "Promo",
+    "expansion": "Feather & Flame",
     "complexity": "High",
     "ratings": { "offense": 2, "control": 1, "fear": 3, "defense": 5, "utility": 3 },
     "elements": ["Water", "Air"],
@@ -347,7 +347,7 @@
   {
     "id": "hearth-vigil",
     "name": "Hearth-Vigil",
-    "expansion": "Feather & Flame",
+    "expansion": "Nature Incarnate",
     "complexity": "Moderate",
     "ratings": { "offense": 3, "control": 2, "fear": 3, "defense": 4, "utility": 4 },
     "elements": ["Fire", "Sun", "Animal"],

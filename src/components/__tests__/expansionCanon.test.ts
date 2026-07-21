@@ -40,7 +40,7 @@ describe('expansion canon', () => {
       'Horizons of Spirit Island': 'Horizons',
       'Jagged Earth': 'Jagged Earth',
       'Nature Incarnate': 'Nature Incarnate',
-      Promo: 'Promo',
+      Promo: 'Feather & Flame',
       Promo2: 'Feather & Flame',
     })
   })

@@ -21,9 +21,17 @@ const BASE: Spirit = { ...JAGGED, id: 'base-spirit', name: 'Base Spirit', expans
 describe('createCollectionStore', () => {
   it('owns everything by default, on a fresh install', () => {
     const store = createCollectionStore(memoryStorage())
-    for (const expansion of ['Base', 'Branch & Claw', 'Feather & Flame', 'Horizons', 'Jagged Earth', 'Nature Incarnate', 'Promo'] as const) {
+    for (const expansion of ['Base', 'Branch & Claw', 'Feather & Flame', 'Horizons', 'Jagged Earth', 'Nature Incarnate'] as const) {
       expect(store.owns(expansion)).toBe(true)
     }
+  })
+
+  it('drops a persisted exclusion for a no-longer-canonical expansion (qa-revision #02: Promo folded into Feather & Flame)', () => {
+    const storage = memoryStorage()
+    storage.setItem('spirit-island:collection', JSON.stringify({ excluded: ['Promo', 'Jagged Earth'] }))
+    const store = createCollectionStore(storage)
+    expect(store.getExcluded()).toEqual(['Jagged Earth'])
+    expect(store.owns('Feather & Flame')).toBe(true)
   })
 
   it('round-trips setOwned(false) then owns()', () => {

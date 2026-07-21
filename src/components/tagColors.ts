@@ -15,7 +15,7 @@ function pick<T>(shipped: T, warm: T, variant?: 'warm'): T {
  * can never be mistaken for a tier badge. If either palette is ever brightened independently,
  * re-check the near-hue pairs for a genuine collision, not just this comment's claim.
  *
- * - Expansion: categorical (7 values) - muted, deep "jewel tone" hues, one per canonical
+ * - Expansion: categorical (6 values) - muted, deep "jewel tone" hues, one per canonical
  *   expansion name. Used on both the tile's left-edge stripe and its solid expansion chip -
  *   same value in both places, verified byte-identical, so the two reinforce one signal.
  * - Playstyle tags: categorical, open-ish (11 seen today) - a distinct, saturated palette, one
@@ -34,7 +34,6 @@ export const EXPANSION_COLOR: Record<string, string> = {
   Horizons: '#3a7a6e',
   'Jagged Earth': '#7a4a6e',
   'Nature Incarnate': '#6e5a2a',
-  Promo: '#5a5a7a',
 }
 
 /**
@@ -65,7 +64,6 @@ export const EXPANSION_COLOR_WARM: Record<string, string> = {
   Horizons: '#6c893c',
   'Jagged Earth': '#ac593c',
   'Nature Incarnate': '#a06900',
-  Promo: '#8c6948',
 }
 
 /** ROUND 03: the direct-index equivalent of `expansionColorFor`, for the callers
@@ -90,8 +88,13 @@ export function expansionChipColor(name: string, variant?: 'warm'): string {
  * every one of its own power cards is tagged `Promo2` in `power-cards.json` — not an occasional
  * bonus card, its whole card set. That contradiction couldn't be resolved from the data alone, so
  * it was escalated; **owner call (legibility-pass #01, 2026-07-14): `Promo2` always resolves to
- * `Feather & Flame`**, Downpour's own `Promo` tag notwithstanding. Bare `Promo` is untouched and
- * stays its own canonical entry.
+ * `Feather & Flame`**, Downpour's own `Promo` tag notwithstanding.
+ *
+ * **Owner call (qa-revision #02, 2026-07-21): bare `Promo` also resolves to `Feather & Flame` and
+ * is no longer a canonical expansion.** Feather & Flame is the retail box combining Promo Packs 1
+ * and 2 (wiki-verified: its four spirits are Heart of the Wildfire, Serpent Slumbering Beneath
+ * the Island, Finder of Paths Unseen, Downpour Drenches the World), so a separate Promo category
+ * duplicated it.
  */
 const EXPANSION_ALIASES: Record<string, ExpansionName> = {
   // Every canonical name is already its own alias (`spirits.json` uses these verbatim).
@@ -100,6 +103,7 @@ const EXPANSION_ALIASES: Record<string, ExpansionName> = {
   'Base Game': 'Base',
   'Branch and Claw': 'Branch & Claw',
   'Horizons of Spirit Island': 'Horizons',
+  Promo: 'Feather & Flame',
   Promo2: 'Feather & Flame',
   'Promo Pack 2 / Feather and Flame': 'Feather & Flame',
   // legibility-pass #02: scenarios.json transcribes the wiki's own "Part of Promo Pack 2" line

@@ -67,8 +67,12 @@ export interface OCFDU {
  * `spirits.json`'s own expansion strings, which already use these names verbatim - cards' raw
  * expansion strings differ (`Basegame`, `Horizons of Spirit Island`, `Promo2`) and are mapped onto
  * this canonical set where the collection needs to reach cards (#07c), not here.
+ *
+ * qa-revision #02 (owner call, 2026-07-21): `Promo` is no longer canonical. Feather & Flame is
+ * the retail box that combined Promo Packs 1 and 2 (wiki-verified), so promo content lives under
+ * it; the raw string `Promo` now resolves via `EXPANSION_ALIASES`, like every other promo spelling.
  */
-export const EXPANSIONS = ['Base', 'Branch & Claw', 'Feather & Flame', 'Horizons', 'Jagged Earth', 'Nature Incarnate', 'Promo'] as const
+export const EXPANSIONS = ['Base', 'Branch & Claw', 'Feather & Flame', 'Horizons', 'Jagged Earth', 'Nature Incarnate'] as const
 export type ExpansionName = (typeof EXPANSIONS)[number]
 
 /** Printed on the aspect card as an up/level/down arrow. */
