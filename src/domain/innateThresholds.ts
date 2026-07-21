@@ -39,15 +39,23 @@ export function thresholdElements(thresholds: SpiritInnateThresholds): Set<Eleme
   return elements
 }
 
-/** One line per innate power naming the element counts it wants, e.g. "Massive Flooding wants 1
- * Sun, 2 Water" for its lowest (first) threshold — the gap-odds row cares about clearing the
- * first rung, not every rung the panel prints. */
+/** One line per innate power per threshold rung it prints for this element, e.g. "Massive
+ * Flooding I wants 1 Sun, 2 Water" - Roman numerals name the rung (I = first/lowest) because the
+ * panel itself numbers thresholds that way, and a player may be tracking any rung, not just the
+ * first one clearable. */
 export function thresholdAnnotationsFor(element: Element, thresholds: SpiritInnateThresholds): string[] {
   const lines: string[] = []
   for (const power of thresholds.powers) {
-    const first = power.thresholds[0]
-    const count = first?.[element]
-    if (count !== undefined) lines.push(`${power.name} wants ${count} ${element}`)
+    power.thresholds.forEach((threshold, i) => {
+      const count = threshold[element]
+      if (count !== undefined) lines.push(`${power.name} ${toRoman(i + 1)} wants ${count} ${element}`)
+    })
   }
   return lines
+}
+
+const ROMAN_NUMERALS = ['I', 'II', 'III', 'IV', 'V', 'VI']
+
+function toRoman(n: number): string {
+  return ROMAN_NUMERALS[n - 1] ?? String(n)
 }

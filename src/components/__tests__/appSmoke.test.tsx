@@ -260,7 +260,7 @@ describe('app smoke', () => {
   it('picking a spirit annotates the gap-odds rows its innate thresholds reference and captions base-only when an aspect changes it (deck-dashboard #16)', () => {
     const html = renderToStaticMarkup(<DashboardTab initialSpiritId="lightnings-swift-strike" />)
     expect(html).toContain('dashboard-gap-odds-annotation')
-    expect(html).toContain('Thundering Destruction wants')
+    expect(html).toContain('Thundering Destruction I wants')
     expect(html).toContain('Thresholds shown are the base spirit&#x27;s')
   })
 

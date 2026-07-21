@@ -74,10 +74,10 @@ describe('thresholdElements', () => {
 })
 
 describe('thresholdAnnotationsFor', () => {
-  it('names the first threshold\'s count for a referenced element', () => {
+  it('names every rung\'s count for a referenced element, numbered by rung', () => {
     const result = innateThresholdsFor('lightnings-swift-strike', [LIGHTNING, RIVER], POWERS)!
-    expect(thresholdAnnotationsFor('Fire', result)).toEqual(['Thundering Destruction wants 3 Fire'])
-    expect(thresholdAnnotationsFor('Air', result)).toEqual(['Thundering Destruction wants 2 Air'])
+    expect(thresholdAnnotationsFor('Fire', result)).toEqual(['Thundering Destruction I wants 3 Fire', 'Thundering Destruction II wants 4 Fire'])
+    expect(thresholdAnnotationsFor('Air', result)).toEqual(['Thundering Destruction I wants 2 Air', 'Thundering Destruction II wants 3 Air'])
   })
 
   it('returns no annotation for an element the innate does not reference', () => {

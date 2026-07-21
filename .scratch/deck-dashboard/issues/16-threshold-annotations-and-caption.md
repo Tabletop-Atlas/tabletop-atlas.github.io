@@ -1,6 +1,6 @@
 # Spirit threshold annotations + aspect caption
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 
