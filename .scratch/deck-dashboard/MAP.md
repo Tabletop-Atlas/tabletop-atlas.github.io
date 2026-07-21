@@ -48,7 +48,8 @@ Standing constraints for every session on this map:
 - **Route redrawn 2026-07-19:** the owner ran `/to-spec` immediately after charting rather
   than resolving tickets first. `PRD.md` (ready-for-agent) specs the decided core — no
   valence, no innates, baseline chart forms. Tickets 01–05 stay open: 02+04 feed a follow-up
-  valence spec, 01+05 the innates decision, 03 may refine chart forms (component-level only;
+  valence spec, 01+05 the innates decision (both resolved 2026-07-21 — the follow-up spec now
+  covers valence AND element-gap odds), 03 may refine chart forms (component-level only;
   the domain seam's outputs are fixed by the spec).
 
 ## Decisions so far
@@ -60,6 +61,14 @@ Standing constraints for every session on this map:
   of transcription. Unblocks the #05 scope decision.
   [#01](issues/01-innate-thresholds-sourcing.md), findings in
   [innate-thresholds-research.md](innate-thresholds-research.md).
+- Innate-threshold odds ARE in scope — as a **follow-up spec** (same lane as valence), reframed
+  as **element-gap odds**: "odds the next N draws give ≥k of element X", single elements only,
+  reusing #07's N control, placed as a block inside each power-deck segment. Spirit innate
+  thresholds (spirits only, aspect changes captioned) get transcribed this effort and serve as
+  row annotations for the picked spirit, pinned by an `innateCanon.test.ts` tripwire. From-zero
+  threshold-meeting odds rejected as not decision-useful; baseline-aware exploration spun off to
+  [#13](issues/13-probability-exploration-brainstorm.md).
+  [#05](issues/05-threshold-odds-in-scope.md).
 - Power-deck chart vocabulary: UpSet wins, but only with filters (must-include, set-size,
   min-cards, top-N) — shipped as `DeckUpset.tsx` after four owner-feedback rounds; hand-rolled,
   no chart library. [#03](issues/03-power-deck-chart-vocabulary.md).
@@ -77,6 +86,10 @@ Standing constraints for every session on this map:
 - **Live in-game tracking / conditional probabilities** updated by user input ("two defend
   fear cards are gone — now what?"). Explicitly deferred by the owner at charting; the
   destination is a static dashboard. A future effort, redrawn from scratch if it comes.
+- **Baseline-aware probability exploration** (presence-track elements, unique-card element
+  profiles, user-entered board state) — brainstorm captured in
+  [#13](issues/13-probability-exploration-brainstorm.md); adjacent to the live-tracking line
+  above.
 - **Blight card visualization** — no draw-odds question worth plotting.
 - **Implementation itself** — this map produces the decided design; building it belongs to
   the `/to-spec` → `/to-tickets` pipeline that follows.
