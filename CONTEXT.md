@@ -40,6 +40,20 @@ matches — the owner's board holds until the owner says which list they meant; 
 "Left open".)
 _Avoid_: primary list
 
+**Impact (fear)**:
+How strongly a fear card helps the players — a three-level ordinal (1 minor / 2 solid / 3
+major), judged per card overall across its terror levels. Judgment data: rated from the card
+image against a written rubric, owner-ratified, marked `impactSource: "judgment"`. Not a
+good/bad axis — every fear card is good for the players.
+_Avoid_: fear valence, strength (that means tier-list strength)
+
+**Valence (event)**:
+Whether an event card is good or bad for the players — `harmful`, `mixed`, or `beneficial`.
+"Mixed" is the honest rating for condition-dependent and choice cards, not a fallback. Same
+judgment provenance as fear impact (`valenceSource: "judgment"`). Distinct axis from fear
+impact; the two are never compared on one scale.
+_Avoid_: event impact, severity
+
 **Collection**:
 The expansions the user owns, at expansion granularity. Surfaces annotate unowned content by
 default; hiding is an explicit, session-only choice.

@@ -61,6 +61,12 @@ Standing constraints for every session on this map:
   of transcription. Unblocks the #05 scope decision.
   [#01](issues/01-innate-thresholds-sourcing.md), findings in
   [innate-thresholds-research.md](innate-thresholds-research.md).
+- Fear/event valence taxonomy: **two deck-specific axes** — fear `impact: 1|2|3` (overall, not
+  per terror level), event `valence: harmful|mixed|beneficial`. Agent classifies all 115 cards
+  from card images against a written rubric (existing `tags`/`eventClass` are cross-checks, not
+  inputs); owner ratifies the full table; ratings land in `other-cards.json` with
+  `impactSource`/`valenceSource: "judgment"`, pinned by `valenceCanon.test.ts`. Domain terms in
+  `CONTEXT.md`. Unblocks #04. [#02](issues/02-fear-event-valence-taxonomy.md).
 - Innate-threshold odds ARE in scope — as a **follow-up spec** (same lane as valence), reframed
   as **element-gap odds**: "odds the next N draws give ≥k of element X", single elements only,
   reusing #07's N control, placed as a block inside each power-deck segment. Spirit innate

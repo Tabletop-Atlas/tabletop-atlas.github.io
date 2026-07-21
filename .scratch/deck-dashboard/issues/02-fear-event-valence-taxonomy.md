@@ -1,6 +1,6 @@
 # Fear/event valence taxonomy
 
-Status: ready-for-human
+Status: done
 Labels: wayfinder:grilling
 Map: ../MAP.md
 
@@ -25,3 +25,27 @@ Settled at charting: the axis *will* exist, as marked-judgment data (precedent: 
 Blocks: [Fear/event view prototype](04-fear-event-view-prototype.md).
 
 ## Comments
+
+**2026-07-21 — decided via `/grilling` + `/domain-modeling`.** Owner's decisions:
+
+1. **Two deck-specific axes, no shared scale.** Fear cards all help the players, so their axis
+   is **impact strength**; events genuinely vary, so theirs is **valence**. The segments never
+   share a chart, so cross-deck comparability buys nothing.
+2. **Fear shape:** three-level ordinal `impact: 1|2|3` (minor / solid / major), judged per card
+   *overall* — not per terror level (that would triple the work and need a terror-level control
+   the dashboard doesn't have). Three levels: coarse enough for judgment data to be defensible,
+   fine enough for a distribution.
+3. **Event shape:** three-level `valence: "harmful"|"mixed"|"beneficial"`. "Mixed" is a real
+   category, the honest rating for conditional (`healthyBlightedLand`) and `choice` cards.
+4. **Process:** written rubric first; an agent classifies all 115 cards **from the card images**
+   — the keyword-derived fear `tags` and mechanical `eventClass` are never inputs, only sanity
+   cross-checks — and the owner ratifies the complete table before anything ships. Ratification
+   is what makes `judgment` mean *owner's* judgment.
+5. **Data + tripwire:** ratings live per card in `other-cards.json` with
+   `impactSource`/`valenceSource: "judgment"` (blight `tagsSource` precedent).
+   `valenceCanon.test.ts` pins the complete ratified table (name → rating) *and* completeness
+   (every fear/event card rated and source-marked); the rubric doc is linked from the test.
+
+Domain terms **Impact (fear)** and **Valence (event)** recorded in `CONTEXT.md`. The
+classification work itself is implementation — it lands via the follow-up spec. Unblocks
+[#04](04-fear-event-view-prototype.md).
