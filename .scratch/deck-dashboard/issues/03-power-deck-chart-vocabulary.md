@@ -1,6 +1,6 @@
 # Power-deck chart vocabulary
 
-Status: ready-for-human
+Status: done
 Labels: wayfinder:prototype
 Map: ../MAP.md
 
@@ -46,3 +46,18 @@ All three derive from the existing `DeckComposition` — no domain or data chang
 library needed for any candidate (hand-rolled per `OcfduBars` precedent). Facets (speed/cost)
 stay below in every variant, so the vocabulary question is isolated. Teardown list in
 `DeckChartRound.tsx`'s docblock; winner folds back as a rewrite of the shipped components.
+
+**2026-07-21 — resolved: the owner picked B (classic UpSet) after four feedback rounds, and it
+shipped.** The rounds added, at the owner's direction: readability filters (must-include
+elements, elements-per-set buckets, min-cards, top-N, with a "showing X of Y" honesty line),
+element icons instead of words, set-size colour coding (≤2/3/4/5+), element-coloured total
+bars, pill-styled controls, count/A–Z row sort, a Counts/% unit toggle shared with the facets,
+red-fast/blue-slow speed colours with the official wiki icons, a raised chart panel, a promoted
+display-size deck switch, and an opt-in "fold this spirit's uniques into the Minor pool"
+hypothetical. Folded in as `DeckUpset.tsx` (replacing `DeckElementBars`/`DeckCombinationMatrix`)
+plus rewrites of `DeckFacets`/`DashboardTab`; the per-element draw-odds column (PRD user story
+10) was restored at fold-in — the prototype had dropped it. Round scaffolding
+(`DeckChartRound.tsx`, `?deckchart=` gate) deleted. No chart library; no domain changes.
+Verdict on the ticket's actual question: UpSet is the right vocabulary *with filters* — the
+unfiltered form was unreadable at 76 element sets. Screenshots in `../screenshots-03/`
+(`final-shipped.png` is the landed form).

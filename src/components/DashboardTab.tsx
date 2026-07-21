@@ -7,17 +7,13 @@ import { computeDeckComposition } from '../domain/deckComposition'
 import { groupOtherCards } from '../domain/otherCardArrange'
 import { EXPANSIONS, type ExpansionName, type OtherCard, type PowerCard, type Spirit } from '../domain/types'
 import { normalizeExpansion } from './tagColors'
-import { DeckChartVariantSwitcher, DeckChartVariantView, readDeckChartVariant } from './DeckChartRound'
-import { DeckCombinationMatrix } from './DeckCombinationMatrix'
-import { DeckElementBars } from './DeckElementBars'
 import { DeckFacets } from './DeckFacets'
 import { DeckPoolBreakdown } from './DeckPoolBreakdown'
+import { DeckUpset, type DeckUnit } from './DeckUpset'
 
 const powerCards = powerCardsData as PowerCard[]
 const MINOR_CARDS = powerCards.filter((c) => c.kind === 'minor')
 const MAJOR_CARDS = powerCards.filter((c) => c.kind === 'major')
-// ROUND 03 — THROWAWAY, delete with DeckChartRound.tsx (owner asked to try folding a spirit's
-// unique powers into the Minor deck's composition).
 const UNIQUE_CARDS = powerCards.filter((c) => c.kind === 'unique')
 
 const otherCards = otherCardsData as OtherCard[]
@@ -49,23 +45,24 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
 }
 
 /**
- * v6 #06/#07/#08/#09/#10/#11/#12: the Dashboard tab. Minor and Major show live composition,
- * hypergeometric draw odds, an element-combination dot-matrix, and the speed/cost facets, all
- * against the checked expansion set. An expansion picker (session-only state, no storage key)
- * defines the set, defaulting to the Collection; unowned expansions stay listed and annotated,
- * never hidden (PRD user story 6), consistent with Collection treatment elsewhere (`SpiritTile`,
- * `Recommender`'s `unowned-note`). A single N stepper (default 4, clamped to [1, deck size] by the
- * domain module) drives both power-deck segments' odds; the assumption label keeps the static
- * dashboard from reading as live tracking (PRD user story 27). An optional spirit pick (default
- * "no spirit") highlights that spirit's own recorded elements in the bars and combination matrix —
- * no new data, no judgment (PRD user stories 18-20). Fear and Event both reuse the existing
- * `groupOtherCards` seam (`otherCardArrange.ts`) for their by-tag/by-class and by-expansion
- * breakdowns rather than duplicating that grouping logic, and both carry no valence axis — that's
- * the map's open taxonomy thread, explicitly out of scope here. Fear's framing copy states the
- * pool is a hidden-subset fact, never a card counter (PRD user story 25); Event's empty state
- * (a base-game-only set) reads as a rule of the game, not an error or blank screen (PRD user story
- * 26). Holds no game state — a reload always reverts to the Collection default, N=4, no spirit
- * (PRD user story 28).
+ * v6 #06/#07/#08/#09/#10/#11/#12, reshaped by #03's prototype rounds (owner picked the UpSet):
+ * the Dashboard tab. The Minor/Major/Fear/Event switch leads the tab — the owner's call that
+ * "what deck am I looking at" outranks the expansion picker. Minor and Major render `DeckUpset`
+ * (composition, hypergeometric draw odds, filterable combination matrix) plus the speed/cost
+ * facets; a Counts/% unit is lifted here so the UpSet and the facets always agree. An expansion
+ * picker (session-only state, no storage key) defines the set, defaulting to the Collection;
+ * unowned expansions stay listed and annotated, never hidden (PRD user story 6). A single N
+ * stepper (default 4, clamped to [1, deck size] by the domain module) drives both power-deck
+ * segments' odds; the assumption label keeps the static dashboard from reading as live tracking
+ * (PRD user story 27). An optional spirit pick (default "no spirit") highlights that spirit's own
+ * recorded elements (PRD user stories 18-20), and can additionally fold that spirit's unique
+ * powers into the Minor pool — labelled a hypothetical, because the physical minor deck never
+ * contains them (uniques start in hand). Fear and Event reuse the existing `groupOtherCards` seam
+ * for their by-tag/by-class and by-expansion breakdowns and carry no valence axis — that's the
+ * map's open taxonomy thread. Fear's framing copy states the pool is a hidden-subset fact, never
+ * a card counter (PRD user story 25); Event's empty state (a base-game-only set) reads as a rule
+ * of the game, not an error (PRD user story 26). Holds no game state — a reload always reverts to
+ * the Collection default, N=4, no spirit, counts (PRD user story 28).
  */
 /** `initialSegment` mirrors `TierBoard`'s `initialSubject` — lets the server-rendered smoke test
  * reach a non-default segment without simulating a click. */
@@ -76,10 +73,8 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
   // '' is the default "no spirit" state (PRD user story 20) — never a storage key, never
   // persisted, so a reload always reverts to it.
   const [spiritId, setSpiritId] = useState('')
-  // ROUND 03 (deck-dashboard #03) — THROWAWAY, delete with DeckChartRound.tsx. Null without
-  // the `?deckchart=` param, so the shipped view stays byte-identical.
-  const [chartVariant, setChartVariant] = useState(readDeckChartVariant)
   const [includeUniques, setIncludeUniques] = useState(false)
+  const [unit, setUnit] = useState<DeckUnit>('count')
 
   const highlightElements = useMemo(() => {
     if (!spiritId) return undefined
@@ -96,12 +91,9 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
     })
   }
 
-  // ROUND 03: optionally folds the picked spirit's unique powers into the Minor pool — a
-  // hypothetical the owner wants to explore, clearly not how the physical deck is built
-  // (uniques start in hand, they are never shuffled into the minor deck).
   const spiritUniques = useMemo(
-    () => (chartVariant && includeUniques && spiritId ? UNIQUE_CARDS.filter((c) => c.spirit === spiritId) : []),
-    [chartVariant, includeUniques, spiritId],
+    () => (includeUniques && spiritId ? UNIQUE_CARDS.filter((c) => c.spirit === spiritId) : []),
+    [includeUniques, spiritId],
   )
   const minorComposition = useMemo(
     () => computeDeckComposition([...MINOR_CARDS.filter((c) => isChecked(c.expansion, checkedExpansions)), ...spiritUniques], drawCount),
@@ -122,23 +114,19 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
   const eventByClass = useMemo(() => groupOtherCards(eventCardsInPlay, 'subtype'), [eventCardsInPlay])
   const eventByExpansion = useMemo(() => groupOtherCards(eventCardsInPlay, 'expansion'), [eventCardsInPlay])
 
-  const segmentSwitch = (
-    <div className={chartVariant ? 'deckchart-b-segments' : 'card-view-switch'} role="group" aria-label="Deck">
-      {SEGMENTS.map((s) => (
-        <button key={s} type="button" aria-pressed={segment === s} data-active={segment === s} onClick={() => setSegment(s)}>
-          {s}
-        </button>
-      ))}
-    </div>
-  )
-
   return (
     <section>
       <h2>Dashboard</h2>
 
-      {/* ROUND 03: the deck switch is the core "what am I looking at" control — promoted above
-       * the expansion picker and enlarged when the round is active. */}
-      {chartVariant && segmentSwitch}
+      {/* deck-dashboard #03: the deck switch is the core "what am I looking at" control — it
+       * leads the tab, above the expansion picker, at display size. */}
+      <div className="dashboard-segments" role="group" aria-label="Deck">
+        {SEGMENTS.map((s) => (
+          <button key={s} type="button" aria-pressed={segment === s} data-active={segment === s} onClick={() => setSegment(s)}>
+            {s}
+          </button>
+        ))}
+      </div>
 
       <fieldset className="dashboard-picker">
         <legend>Expansions in play</legend>
@@ -159,7 +147,7 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
         </ul>
       </fieldset>
 
-      <label className={chartVariant ? 'dashboard-spirit-picker deckchart-b-selectpill' : 'dashboard-spirit-picker'}>
+      <label className="dashboard-spirit-picker dashboard-selectpill">
         Highlight my spirit
         <select value={spiritId} onChange={(e) => setSpiritId(e.target.value)}>
           <option value="">No spirit</option>
@@ -170,19 +158,17 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
           ))}
         </select>
       </label>
-      {chartVariant && spiritId && (
+      {spiritId && (
         <label className="dashboard-spirit-picker">
           <input type="checkbox" checked={includeUniques} onChange={(e) => setIncludeUniques(e.target.checked)} />
           Fold this spirit's unique powers into the Minor deck (hypothetical — uniques start in hand)
         </label>
       )}
 
-      {!chartVariant && segmentSwitch}
-
       {activeComposition && (
         <div className="dashboard-deck">
           <p className="dashboard-deck-size">{activeComposition.deckSize} cards</p>
-          <label className={chartVariant ? 'deckchart-b-filterpill deckchart-b-drawpill' : 'dashboard-draw-stepper'}>
+          <label className="dashboard-pill dashboard-drawpill">
             Draw
             <input
               type="number"
@@ -196,26 +182,11 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
             />
             <span>of {activeComposition.deckSize}</span>
           </label>
-          {chartVariant ? (
-            <DeckChartVariantView variant={chartVariant} composition={activeComposition} highlightElements={highlightElements} />
-          ) : (
-            <DeckElementBars composition={activeComposition} highlightElements={highlightElements} />
-          )}
+          <DeckUpset composition={activeComposition} highlightElements={highlightElements} unit={unit} onUnitChange={setUnit} />
           <p className="dashboard-assumption">Odds assume a full deck, nothing drawn.</p>
 
-          {!chartVariant && (
-            <>
-              <h3>Element combinations</h3>
-              <DeckCombinationMatrix combinations={activeComposition.combinations} highlightElements={highlightElements} />
-            </>
-          )}
-
-          {chartVariant !== 'B' && (
-            <>
-              <h3>Facets</h3>
-              <DeckFacets composition={activeComposition} />
-            </>
-          )}
+          <h3>Facets</h3>
+          <DeckFacets composition={activeComposition} unit={unit} />
         </div>
       )}
       {segment === 'Fear' && (
@@ -246,11 +217,6 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
               <DeckPoolBreakdown groups={eventByExpansion} poolSize={eventCardsInPlay.length} />
             </>
           )}
-        </div>
-      )}
-      {chartVariant && (
-        <div className="variant-switcher-stack">
-          <DeckChartVariantSwitcher current={chartVariant} onPick={setChartVariant} />
         </div>
       )}
     </section>

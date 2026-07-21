@@ -60,6 +60,9 @@ Standing constraints for every session on this map:
   of transcription. Unblocks the #05 scope decision.
   [#01](issues/01-innate-thresholds-sourcing.md), findings in
   [innate-thresholds-research.md](innate-thresholds-research.md).
+- Power-deck chart vocabulary: UpSet wins, but only with filters (must-include, set-size,
+  min-cards, top-N) — shipped as `DeckUpset.tsx` after four owner-feedback rounds; hand-rolled,
+  no chart library. [#03](issues/03-power-deck-chart-vocabulary.md).
 
 ## Not yet specified
 

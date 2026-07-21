@@ -8,8 +8,7 @@ import { collectionStore } from '../../domain/collectionStore'
 import { tierStore } from '../../domain/tierStore'
 import { computeDeckComposition } from '../../domain/deckComposition'
 import { DashboardTab } from '../DashboardTab'
-import { DeckCombinationMatrix } from '../DeckCombinationMatrix'
-import { DeckElementBars } from '../DeckElementBars'
+import { DeckUpset } from '../DeckUpset'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
 import { Settings } from '../Settings'
 import { SpiritDetail } from '../SpiritDetail'
@@ -203,23 +202,25 @@ describe('app smoke', () => {
     expect(html).not.toContain('Starting cards')
   })
 
-  it('the Dashboard tab renders a Minor/Major/Fear/Event segmented control, with all 8 elements as rows in the Minor segment (deck-dashboard #06)', () => {
+  it('the Dashboard tab renders a Minor/Major/Fear/Event segmented control, with all 8 elements as icon rows in the Minor segment (deck-dashboard #06/#03)', () => {
     const html = renderToStaticMarkup(<DashboardTab />)
     expect(html).toContain('>Dashboard<')
     for (const segment of ['Minor', 'Major', 'Fear', 'Event']) {
       expect(html).toContain(`>${segment}<`)
     }
+    // #03: element rows are icons, not words — each element appears as its icon's alt text,
+    // once in the must-include filter and once as a matrix row.
     for (const element of ['Sun', 'Moon', 'Fire', 'Air', 'Water', 'Earth', 'Plant', 'Animal']) {
-      expect(html).toContain(`>${element}<`)
+      expect((html.match(new RegExp(`alt="${element}"`, 'g')) ?? []).length).toBe(2)
     }
     expect(html).toContain('cards')
   })
 
-  it('the Dashboard Minor segment defaults its draw stepper to 4 and shows the full-deck assumption label (deck-dashboard #07)', () => {
+  it('the Dashboard Minor segment defaults its draw stepper to 4 and shows per-element draw odds and the full-deck assumption label (deck-dashboard #07)', () => {
     const html = renderToStaticMarkup(<DashboardTab />)
     expect(html).toContain('value="4"')
     expect(html).toContain('Odds assume a full deck, nothing drawn.')
-    expect(html).toContain('deck-element-odds')
+    expect(html).toContain('deck-upset-odds')
   })
 
   it('the Dashboard expansion picker lists all 7 expansions, checked by default (owns-everything Collection), no unowned annotation (deck-dashboard #08)', () => {
@@ -233,11 +234,11 @@ describe('app smoke', () => {
     expect(html).not.toContain('unowned-note')
   })
 
-  it('the Dashboard Minor segment shows the element-combination dot-matrix and the speed/cost facets (deck-dashboard #09)', () => {
+  it('the Dashboard Minor segment shows the element-combination UpSet matrix and the speed/cost facets (deck-dashboard #09/#03)', () => {
     const html = renderToStaticMarkup(<DashboardTab />)
-    expect(html).toContain('Element combinations')
-    expect(html).toContain('deck-combo-matrix')
-    expect(html).toContain('deck-combo-dot')
+    expect(html).toContain('deck-upset-grid')
+    expect(html).toContain('deck-upset-dot')
+    expect(html).toContain('element sets')
     expect(html).toContain('Facets')
     expect(html).toContain('Fast')
     expect(html).toContain('Slow')
@@ -250,12 +251,11 @@ describe('app smoke', () => {
     for (const spirit of spirits) {
       expect(html).toContain(spirit.name.replace(/&/g, '&amp;').replace(/'/g, '&#x27;'))
     }
-    expect(html).not.toContain('deck-element-row-highlight')
-    expect(html).not.toContain('deck-combo-col-label-highlight')
-    expect(html).not.toContain('deck-combo-dot-highlight')
+    expect(html).not.toContain('deck-upset-rowlabel-highlight')
+    expect(html).not.toContain('deck-upset-dot-highlight')
   })
 
-  it('DeckElementBars and DeckCombinationMatrix highlight exactly the given elements, none without a highlight set (deck-dashboard #10)', () => {
+  it('DeckUpset highlights exactly the given elements, none without a highlight set (deck-dashboard #10/#03)', () => {
     const composition = computeDeckComposition(
       [
         { kind: 'minor', name: 'A', expansion: 'Basegame', cost: 0, speed: 'Fast', elements: ['Fire', 'Air'], image: '' },
@@ -265,19 +265,15 @@ describe('app smoke', () => {
     )
     const highlighted = new Set(['Fire' as const])
 
-    const barsHtml = renderToStaticMarkup(<DeckElementBars composition={composition} highlightElements={highlighted} />)
-    expect(barsHtml.match(/deck-element-row-highlight/g)).toHaveLength(1)
+    const html = renderToStaticMarkup(
+      <DeckUpset composition={composition} highlightElements={highlighted} unit="count" onUnitChange={() => {}} />,
+    )
+    expect(html.match(/deck-upset-rowlabel-highlight/g)).toHaveLength(1)
+    expect(html).toContain('deck-upset-dot-highlight')
 
-    const plainBarsHtml = renderToStaticMarkup(<DeckElementBars composition={composition} />)
-    expect(plainBarsHtml).not.toContain('deck-element-row-highlight')
-
-    const matrixHtml = renderToStaticMarkup(<DeckCombinationMatrix combinations={composition.combinations} highlightElements={highlighted} />)
-    expect(matrixHtml.match(/deck-combo-col-label-highlight/g)).toHaveLength(1)
-    expect(matrixHtml).toContain('deck-combo-dot-highlight')
-
-    const plainMatrixHtml = renderToStaticMarkup(<DeckCombinationMatrix combinations={composition.combinations} />)
-    expect(plainMatrixHtml).not.toContain('deck-combo-col-label-highlight')
-    expect(plainMatrixHtml).not.toContain('deck-combo-dot-highlight')
+    const plainHtml = renderToStaticMarkup(<DeckUpset composition={composition} unit="count" onUnitChange={() => {}} />)
+    expect(plainHtml).not.toContain('deck-upset-rowlabel-highlight')
+    expect(plainHtml).not.toContain('deck-upset-dot-highlight')
   })
 
   it('the Dashboard Fear segment shows pool size, a by-tag and by-expansion breakdown, and the hidden-subset framing copy, with no valence classification (deck-dashboard #11)', () => {
