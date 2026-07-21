@@ -257,6 +257,25 @@ describe('app smoke', () => {
     expect(majorHtml).toContain('dashboard-gap-odds-table')
   })
 
+  it('picking a spirit annotates the gap-odds rows its innate thresholds reference and captions base-only when an aspect changes it (deck-dashboard #16)', () => {
+    const html = renderToStaticMarkup(<DashboardTab initialSpiritId="lightnings-swift-strike" />)
+    expect(html).toContain('dashboard-gap-odds-annotation')
+    expect(html).toContain('Thundering Destruction wants')
+    expect(html).toContain('Thresholds shown are the base spirit&#x27;s')
+  })
+
+  it('a spirit whose aspects never touch its innate(s) gets rows annotated with no caption (deck-dashboard #16)', () => {
+    const html = renderToStaticMarkup(<DashboardTab initialSpiritId="oceans-hungry-grasp" />)
+    expect(html).toContain('dashboard-gap-odds-annotation')
+    expect(html).not.toContain('Thresholds shown are the base spirit&#x27;s')
+  })
+
+  it('with no spirit picked, the gap-odds block reads unchanged (deck-dashboard #16)', () => {
+    const html = renderToStaticMarkup(<DashboardTab />)
+    expect(html).not.toContain('dashboard-gap-odds-annotation')
+    expect(html).not.toContain('Thresholds shown are the base spirit&#x27;s')
+  })
+
   it('the Dashboard has a spirit picker defaulting to "No spirit", listing all 37 spirits, with no highlight rendered by default (deck-dashboard #10)', () => {
     const html = renderToStaticMarkup(<DashboardTab />)
     expect(html).toContain('Highlight my spirit')

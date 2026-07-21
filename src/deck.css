@@ -2287,3 +2287,15 @@ button:disabled {
   text-align: left;
   font-weight: 600;
 }
+
+/* deck-dashboard #16: per-row innate threshold annotation + base-thresholds caption. */
+.dashboard-gap-odds-annotation {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--deck-dim);
+}
+.dashboard-gap-odds-caption {
+  font-style: italic;
+}

@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react'
+import innatePowersData from '../data/innate-powers.json'
 import otherCardsData from '../data/other-cards.json'
 import powerCardsData from '../data/power-cards.json'
 import spiritsData from '../data/spirits.json'
 import { collectionStore } from '../domain/collectionStore'
 import { computeDeckComposition } from '../domain/deckComposition'
+import { innateThresholdsFor } from '../domain/innateThresholds'
 import { groupOtherCards } from '../domain/otherCardArrange'
-import { EXPANSIONS, type ExpansionName, type OtherCard, type PowerCard, type Spirit } from '../domain/types'
+import { EXPANSIONS, type ExpansionName, type InnatePower, type OtherCard, type PowerCard, type Spirit } from '../domain/types'
 import { normalizeExpansion } from './tagColors'
 import { DeckFacets } from './DeckFacets'
 import { DeckGapOdds } from './DeckGapOdds'
@@ -24,6 +26,7 @@ const EVENT_CARDS = otherCards.filter((c) => c.kind === 'event')
 // deck-dashboard #10: by spirit, not Configuration — element data exists at spirit level only,
 // and aspects record no element changes (PRD's explicit call, not an oversight).
 const SPIRITS = (spiritsData as Spirit[]).slice().sort((a, b) => a.name.localeCompare(b.name))
+const INNATE_POWERS = innatePowersData as InnatePower[]
 
 const SEGMENTS = ['Minor', 'Major', 'Fear', 'Event'] as const
 type Segment = (typeof SEGMENTS)[number]
@@ -56,7 +59,9 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
  * stepper (default 4, clamped to [1, deck size] by the domain module) drives both power-deck
  * segments' odds; the assumption label keeps the static dashboard from reading as live tracking
  * (PRD user story 27). An optional spirit pick (default "no spirit") highlights that spirit's own
- * recorded elements (PRD user stories 18-20), and can additionally fold that spirit's unique
+ * recorded elements (PRD user stories 18-20), annotates the gap-odds block's rows with that
+ * spirit's innate threshold requirements — captioned as base-spirit-only when an aspect changes
+ * its innate(s) (#16) — and can additionally fold that spirit's unique
  * powers into the Minor pool — labelled a hypothetical, because the physical minor deck never
  * contains them (uniques start in hand). Fear and Event reuse the existing `groupOtherCards` seam
  * for their by-tag/by-class and by-expansion breakdowns and carry no valence axis — that's the
@@ -66,14 +71,15 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
  * the Collection default, N=4, no spirit, counts (PRD user story 28).
  */
 /** `initialSegment` mirrors `TierBoard`'s `initialSubject` — lets the server-rendered smoke test
- * reach a non-default segment without simulating a click. */
-export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = {}) {
+ * reach a non-default segment without simulating a click. `initialSpiritId` is the same escape
+ * hatch for #16's annotated/captioned gap-odds states. */
+export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegment?: Segment; initialSpiritId?: string } = {}) {
   const [segment, setSegment] = useState<Segment>(initialSegment ?? 'Minor')
   const [drawCount, setDrawCount] = useState(DEFAULT_DRAW_COUNT)
   const [checkedExpansions, setCheckedExpansions] = useState<Set<ExpansionName>>(defaultCheckedExpansions)
   // '' is the default "no spirit" state (PRD user story 20) — never a storage key, never
   // persisted, so a reload always reverts to it.
-  const [spiritId, setSpiritId] = useState('')
+  const [spiritId, setSpiritId] = useState(initialSpiritId ?? '')
   const [includeUniques, setIncludeUniques] = useState(false)
   const [unit, setUnit] = useState<DeckUnit>('count')
 
@@ -82,6 +88,8 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
     const spirit = SPIRITS.find((s) => s.id === spiritId)
     return spirit ? new Set(spirit.elements) : undefined
   }, [spiritId])
+
+  const innateThresholds = useMemo(() => (spiritId ? innateThresholdsFor(spiritId, SPIRITS, INNATE_POWERS) : undefined), [spiritId])
 
   function toggleExpansion(expansion: ExpansionName, checked: boolean) {
     setCheckedExpansions((prev) => {
@@ -189,7 +197,7 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
           <h3>Facets</h3>
           <DeckFacets composition={activeComposition} unit={unit} />
 
-          <DeckGapOdds composition={activeComposition} />
+          <DeckGapOdds composition={activeComposition} thresholds={innateThresholds} />
         </div>
       )}
       {segment === 'Fear' && (
