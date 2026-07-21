@@ -18,7 +18,7 @@ Parent: [phase-4 map](../MAP.md)
 ## Question
 
 Nothing to decide — consolidate. Fold the eight locked owner calls
-([docs/phase-4-notes.md](../../docs/phase-4-notes.md), mirrored on the map) and the eight ticket
+([wayfinder-input.md](../wayfinder-input.md), mirrored on the map) and the eight ticket
 resolutions into `.scratch/phase-4/PRD.md`: the locked Phase 4 spec, ready to hand to
 /to-spec → /to-tickets → /implement.
 
