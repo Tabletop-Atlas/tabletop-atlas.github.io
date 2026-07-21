@@ -113,10 +113,22 @@ behind one. Locked tokens: `token-palette.md` (already the live source, now unco
 `:root`). Rollout spec: `PRD-2.md`, handing off the app-wide sweep beyond the four anchor surfaces
 as its own future v6 effort (per Out of scope, below) — this map's job (decide + spec) is done.
 
+**The handed-off rollout, closed (2026-07-21):** [PRD-2.md](PRD-2.md)'s five execution tickets
+([06](issues/06-card-row-chrome-tokens.md), [07](issues/07-dashboard-chrome-tokens.md),
+[08](issues/08-tier-board-chrome-tokens.md), [09](issues/09-misc-chrome-tokens.md),
+[10](issues/10-sweep-closing-audit.md)) are all `done`. Every hardcoded hex outside the four anchor
+surfaces was swept onto `--deck-*` tokens or, where none fit, left as a documented escalation in
+that ticket's own Comments. Ticket 10's closing audit re-ran the hex grep and confirmed every
+remaining hardcoded value in `src/deck.css` is either a token definition, the light-theme override
+block, a locked semantic system (`tagColors.ts`/`tierColors.ts`/`DeckUpset.tsx`, guarded by
+`cardChipColors.test.ts`), or one of those documented escalations. This map's own destination
+(decide + spec) and its handed-off rollout are both now closed.
+
 ## Out of scope
 
 - **The mechanical app-wide rollout execution** — every non-anchor surface inheriting the winning
-  tokens. Handed off per the deliverable decision; a future v6 effort, not this map.
+  tokens. Handed off per the deliverable decision as PRD-2.md's own future v6 effort — now closed,
+  see above.
 - **Literal botanical art assets** — flowers/vines/painted backgrounds as image files. Ruled out
   by the "figurative + CSS ornament" pick.
 - **New fonts / icon sourcing** — settled by phase-4 #22 and the official-assets research;
