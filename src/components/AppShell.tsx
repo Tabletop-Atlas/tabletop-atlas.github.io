@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { ChipVariantSwitcher, readChipVariant } from './ChipRound'
 import { ModalVariantSwitcher, readModalVariant } from './ModalRound'
 import { OrnamentVariantSwitcher, readOrnamentVariant } from './OrnamentRound'
+import { readSideVariant, SideVariantSwitcher } from './SideRound'
 import { readTheme, ThemeVariantSwitcher } from './ThemeRound'
 
 export interface NavItem<T extends string> {
@@ -35,8 +36,11 @@ export function AppShell<T extends string>({
   const [chips, setChips] = useState(readChipVariant)
   const [modal, setModal] = useState(readModalVariant)
   const [ornament, setOrnament] = useState(readOrnamentVariant)
+  const [sideVariant, setSideVariant] = useState(readSideVariant)
 
-  const deckClass = ['deck', theme && `theme-${theme}`, ornament && `ornament-${ornament}`].filter(Boolean).join(' ')
+  const deckClass = ['deck', theme && `theme-${theme}`, ornament && `ornament-${ornament}`, sideVariant && `side-${sideVariant.toLowerCase()}`]
+    .filter(Boolean)
+    .join(' ')
 
   return (
     <div className={deckClass}>
@@ -60,9 +64,10 @@ export function AppShell<T extends string>({
         {side}
       </aside>
       <main className="deck-main">{children}</main>
-      {(theme || chips || modal || ornament) && (
+      {(theme || chips || modal || ornament || sideVariant) && (
         <div className="variant-switcher-stack">
           {theme && <ThemeVariantSwitcher current={theme} onPick={setTheme} />}
+          {sideVariant && <SideVariantSwitcher current={sideVariant} onPick={setSideVariant} />}
           {chips && <ChipVariantSwitcher current={chips} onPick={setChips} />}
           {modal && <ModalVariantSwitcher current={modal} onPick={setModal} />}
           {ornament && <OrnamentVariantSwitcher current={ornament} onPick={setOrnament} />}

@@ -2047,3 +2047,73 @@ button:disabled {
   background-repeat: repeat-x;
   opacity: 0.85;
 }
+
+/* ============================================================================
+   qa-revision #01 (sidebar visibility) — THROWAWAY, delete on ship.
+   Three coloring candidates for `.deck-side`, gated on `?side=A|B|C` via
+   `.deck.side-a/b/c` (see SideRound.tsx's docblock for the teardown list).
+   Values reuse the shipped token families (parchment/umber/presence-green) so
+   whichever wins folds back as a token-level change, not new colors.
+   ========================================================================== */
+
+/* A — raised-panel: the sidebar takes the *lighter* panel surface (one step above the main
+   pane's bg instead of one below), a stronger edge, and warm parchment-dim inactive nav
+   (replacing the hardcoded cool slate #7d8f9f that fought the warm palette). */
+.deck.side-a .deck-side {
+  background: #2b2214; /* one lightness step above --deck-panel (#241d12) */
+  border-right: 1px solid #5a4a2e; /* stronger than --deck-line (#463a24) */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.35);
+}
+.deck.side-a .deck-nav button {
+  color: #a8946a; /* warm dim — belongs to the parchment family */
+}
+.deck.side-a .deck-nav button:hover {
+  color: var(--deck-text);
+}
+.deck.side-a .deck-nav button[data-active='true'] {
+  background: #3a2f1c;
+  color: var(--deck-text);
+}
+
+/* B — accent-rail: keeps a deep surface but tints it toward the presence-green accent and
+   hangs a full-height accent rail on the sidebar's outer edge; nav brightens on the tinted
+   ground and the active item fills with the accent-bg green. */
+.deck.side-b .deck-side {
+  background: #121a10; /* --deck-panel-2 pulled toward green */
+  border-right: 2px solid var(--deck-accent);
+}
+.deck.side-b .deck-nav button {
+  color: #9aad8e; /* green-tinted dim to sit on the tinted ground */
+}
+.deck.side-b .deck-nav button:hover {
+  color: var(--deck-text);
+}
+.deck.side-b .deck-nav button[data-active='true'] {
+  background: var(--deck-accent-bg);
+  color: #cfe8d5;
+  box-shadow: inset 2px 0 0 var(--deck-accent);
+}
+
+/* C — inverted-parchment: the strong flip — the sidebar becomes the printed parchment
+   (PANEL_COLOR_LIGHT's sampled hexes) with ink text, maximum separation from the dark main
+   pane. Sidebar-scoped tokens are re-pointed so the knobs/selects inside it invert too. */
+.deck.side-c .deck-side {
+  --deck-panel: #f2e7c8;
+  --deck-line: #cdb88c;
+  --deck-text: #2e2520;
+  --deck-body: #5b4e2d;
+  --deck-dim: #8a7a52;
+  background: #e7d19c; /* sampled parchment field */
+  border-right: 1px solid #cdb88c;
+}
+.deck.side-c .deck-nav button {
+  color: #5b4e2d; /* ink-soft */
+}
+.deck.side-c .deck-nav button:hover {
+  color: #2e2520;
+}
+.deck.side-c .deck-nav button[data-active='true'] {
+  background: #cdb88c;
+  color: #2e2520;
+  box-shadow: inset 2px 0 0 #2e7a4a; /* darker presence-green for contrast on parchment */
+}
