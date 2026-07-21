@@ -179,3 +179,22 @@ export interface Spirit {
    * shipped, so #12 can safely map card image n to this array's index n. */
   startingCards?: string[]
 }
+
+/**
+ * deck-dashboard #15: one spirit's innate power, sourced from the wiki's raw wikitext
+ * `{{Threshold|...}}` templates and cross-checked against the on-disk TTS mod JSON's
+ * element-count strings (panel images are the tiebreaker on a mismatch - none arose across all
+ * 37 spirits). Effect text, range, and target are deliberately omitted: omitting is safer than
+ * paraphrasing, and only element counts matter for the gap-odds annotations this feeds (#16).
+ * Spirits only; aspect modifications are a marked future extension.
+ */
+export interface InnatePower {
+  /** `Spirit['id']`. */
+  spirit: string
+  name: string
+  speed: 'Fast' | 'Slow'
+  /** Ordered ascending (the panel's top-to-bottom order); each entry only keys the elements it
+   * requires - an element absent from a threshold contributes nothing to it. */
+  thresholds: Partial<Record<Element, number>>[]
+  source: 'wiki+tts'
+}

@@ -1,0 +1,1421 @@
+[
+  {
+    "spirit": "lightnings-swift-strike",
+    "name": "Thundering Destruction",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 3,
+        "Air": 2
+      },
+      {
+        "Fire": 4,
+        "Air": 3
+      },
+      {
+        "Fire": 5,
+        "Air": 4,
+        "Water": 1
+      },
+      {
+        "Fire": 5,
+        "Air": 5,
+        "Water": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "river-surges-in-sunlight",
+    "name": "Massive Flooding",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 1,
+        "Water": 2
+      },
+      {
+        "Sun": 2,
+        "Water": 3
+      },
+      {
+        "Sun": 3,
+        "Water": 4,
+        "Earth": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "vital-strength-of-the-earth",
+    "name": "Gift of Strength",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Sun": 1,
+        "Earth": 2,
+        "Plant": 2
+      },
+      {
+        "Sun": 2,
+        "Earth": 3,
+        "Plant": 2
+      },
+      {
+        "Sun": 2,
+        "Earth": 4,
+        "Plant": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "shadows-flicker-like-flame",
+    "name": "Darkness Swallows the Unwary",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 2,
+        "Fire": 1
+      },
+      {
+        "Moon": 3,
+        "Fire": 2
+      },
+      {
+        "Moon": 4,
+        "Fire": 3,
+        "Air": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "thunderspeaker",
+    "name": "Gather the Warriors",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Air": 4
+      },
+      {
+        "Animal": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "thunderspeaker",
+    "name": "Lead the Furious Assault",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Air": 4
+      },
+      {
+        "Sun": 2,
+        "Fire": 1
+      },
+      {
+        "Sun": 4,
+        "Fire": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "a-spread-of-rampant-green",
+    "name": "Creepers Tear into Mortar",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Plant": 2
+      },
+      {
+        "Moon": 2,
+        "Plant": 3
+      },
+      {
+        "Moon": 3,
+        "Plant": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "a-spread-of-rampant-green",
+    "name": "All-Enveloping Green",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Water": 1,
+        "Plant": 3
+      },
+      {
+        "Water": 2,
+        "Plant": 4
+      },
+      {
+        "Water": 3,
+        "Earth": 1,
+        "Plant": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "oceans-hungry-grasp",
+    "name": "Pound Ships to Splinters",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Air": 1,
+        "Water": 2
+      },
+      {
+        "Moon": 2,
+        "Air": 1,
+        "Water": 3
+      },
+      {
+        "Moon": 3,
+        "Air": 2,
+        "Water": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "oceans-hungry-grasp",
+    "name": "Ocean Breaks the Shore",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Water": 2,
+        "Earth": 1
+      },
+      {
+        "Water": 3,
+        "Earth": 2
+      },
+      {
+        "Water": 4,
+        "Earth": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "name": "Spirits May Yet Dream",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 2,
+        "Air": 2
+      },
+      {
+        "Moon": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "bringer-of-dreams-and-nightmares",
+    "name": "Night Terrors",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Air": 1
+      },
+      {
+        "Moon": 2,
+        "Air": 1,
+        "Animal": 1
+      },
+      {
+        "Moon": 3,
+        "Air": 2,
+        "Animal": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "name": "Ranging Hunt",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Animal": 2
+      },
+      {
+        "Plant": 2,
+        "Animal": 3
+      },
+      {
+        "Animal": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "sharp-fangs-behind-the-leaves",
+    "name": "Frenzied Assault",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Fire": 1,
+        "Animal": 4
+      },
+      {
+        "Moon": 1,
+        "Fire": 2,
+        "Animal": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "name": "Punish Those Who Trespass",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 2,
+        "Fire": 1,
+        "Plant": 2
+      },
+      {
+        "Sun": 2,
+        "Fire": 2,
+        "Plant": 3
+      },
+      {
+        "Plant": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "keeper-of-the-forbidden-wilds",
+    "name": "Spreading Wilds",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 2
+      },
+      {
+        "Plant": 1
+      },
+      {
+        "Plant": 3
+      },
+      {
+        "Air": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "heart-of-the-wildfire",
+    "name": "Firestorm",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Plant": 1
+      },
+      {
+        "Plant": 3
+      },
+      {
+        "Fire": 4,
+        "Air": 2
+      },
+      {
+        "Fire": 7
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "heart-of-the-wildfire",
+    "name": "The Burned Land Regrows",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 4,
+        "Plant": 1
+      },
+      {
+        "Fire": 4,
+        "Plant": 2
+      },
+      {
+        "Fire": 5,
+        "Plant": 2,
+        "Earth": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "name": "Serpent Wakes in Power",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 2,
+        "Water": 1,
+        "Plant": 1
+      },
+      {
+        "Water": 2,
+        "Earth": 3,
+        "Plant": 2
+      },
+      {
+        "Fire": 3,
+        "Water": 3,
+        "Earth": 3,
+        "Plant": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "serpent-slumbering-beneath-the-island",
+    "name": "Serpent Rouses in Anger",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 1,
+        "Earth": 1
+      },
+      {
+        "Moon": 2,
+        "Earth": 2
+      },
+      {
+        "Moon": 5,
+        "Fire": 6,
+        "Earth": 6
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "stones-unyielding-defiance",
+    "name": "Hold the Island Fast with a Bulwark of Will",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Earth": 2
+      },
+      {
+        "Earth": 4
+      },
+      {
+        "Earth": 6,
+        "Plant": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "stones-unyielding-defiance",
+    "name": "Let Them Break Themselves Against the Stone",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Earth": 3
+      },
+      {
+        "Earth": 5
+      },
+      {
+        "Earth": 7,
+        "Sun": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "shifting-memory-of-ages",
+    "name": "Learn the Invaders' Tactics",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Earth": 2
+      },
+      {
+        "Air": 1,
+        "Earth": 2
+      },
+      {
+        "Moon": 2,
+        "Air": 3,
+        "Earth": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "shifting-memory-of-ages",
+    "name": "Observe the Ever-Changing World",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 1
+      },
+      {
+        "Moon": 2,
+        "Air": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "name": "Let's See What Happens",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Fire": 1,
+        "Air": 2
+      },
+      {
+        "Moon": 2,
+        "Fire": 1,
+        "Air": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "grinning-trickster-stirs-up-trouble",
+    "name": "Why Don't You and Them Fight",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 3
+      },
+      {
+        "Air": 3
+      },
+      {
+        "Sun": 3
+      },
+      {
+        "Fire": 3
+      },
+      {
+        "Animal": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "lure-of-the-deep-wilderness",
+    "name": "Forsake Society to Chase After Dreams",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Moon": 2
+      },
+      {
+        "Moon": 2,
+        "Air": 1
+      },
+      {
+        "Moon": 3,
+        "Air": 2,
+        "Animal": 1
+      },
+      {
+        "Air": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "lure-of-the-deep-wilderness",
+    "name": "Never Heard from Again",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 1,
+        "Plant": 3
+      },
+      {
+        "Plant": 2
+      },
+      {
+        "Plant": 4,
+        "Animal": 1
+      },
+      {
+        "Plant": 6
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "many-minds-move-as-one",
+    "name": "The Teeming Host Arrives",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Air": 2,
+        "Animal": 1
+      },
+      {
+        "Air": 3,
+        "Water": 1,
+        "Animal": 2
+      },
+      {
+        "Fire": 1,
+        "Air": 4,
+        "Animal": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "many-minds-move-as-one",
+    "name": "Beset and Confound the Invaders",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Air": 1,
+        "Animal": 2
+      },
+      {
+        "Air": 2,
+        "Animal": 3
+      },
+      {
+        "Air": 3,
+        "Animal": 4
+      },
+      {
+        "Air": 4,
+        "Earth": 1,
+        "Animal": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "volcano-looming-high",
+    "name": "Explosive Eruption",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Fire": 2,
+        "Earth": 2
+      },
+      {
+        "Fire": 3,
+        "Earth": 3
+      },
+      {
+        "Fire": 4,
+        "Air": 2,
+        "Earth": 4
+      },
+      {
+        "Fire": 5,
+        "Air": 3,
+        "Earth": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "volcano-looming-high",
+    "name": "Powered by the Furnace of the Earth",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Earth": 3
+      },
+      {
+        "Fire": 3
+      },
+      {
+        "Earth": 4,
+        "Fire": 4
+      },
+      {
+        "Fire": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "shroud-of-silent-mist",
+    "name": "Suffocating Shroud",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Air": 2,
+        "Water": 1
+      },
+      {
+        "Moon": 2,
+        "Air": 3,
+        "Water": 2
+      },
+      {
+        "Moon": 4,
+        "Air": 4,
+        "Water": 3
+      },
+      {
+        "Moon": 5,
+        "Air": 6,
+        "Water": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "shroud-of-silent-mist",
+    "name": "Lost in the Swirling Haze",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Air": 1,
+        "Water": 2
+      },
+      {
+        "Air": 2,
+        "Water": 3
+      },
+      {
+        "Air": 3,
+        "Water": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "vengeance-as-a-burning-plague",
+    "name": "Epidemics Run Rampant",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Fire": 1,
+        "Animal": 3
+      },
+      {
+        "Water": 1,
+        "Fire": 2,
+        "Animal": 4
+      },
+      {
+        "Water": 3,
+        "Fire": 3,
+        "Animal": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "vengeance-as-a-burning-plague",
+    "name": "Savage Revenge",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Air": 3
+      },
+      {
+        "Fire": 3,
+        "Animal": 1
+      },
+      {
+        "Fire": 4,
+        "Animal": 2
+      },
+      {
+        "Fire": 5,
+        "Air": 2,
+        "Animal": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "starlight-seeks-its-form",
+    "name": "Air Moves, Earth Endures",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Air": 3
+      },
+      {
+        "Earth": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "starlight-seeks-its-form",
+    "name": "Fire Burns, Water Soothes",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 3
+      },
+      {
+        "Water": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "starlight-seeks-its-form",
+    "name": "Wood Seeks Growth, Humans Seek Freedom",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Plant": 3
+      },
+      {
+        "Animal": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "starlight-seeks-its-form",
+    "name": "Sidereal Guidance",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Moon": 2
+      },
+      {
+        "Moon": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "starlight-seeks-its-form",
+    "name": "Stars Blaze in the Daytime Sky",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "fractured-days-split-the-sky",
+    "name": "Slip the Flow of Time",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 3,
+        "Air": 1
+      },
+      {
+        "Sun": 2,
+        "Moon": 2
+      },
+      {
+        "Sun": 3,
+        "Air": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "fractured-days-split-the-sky",
+    "name": "Visions of a Shifting Future",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 1,
+        "Moon": 2,
+        "Air": 2
+      },
+      {
+        "Sun": 2,
+        "Moon": 3,
+        "Air": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "downpour-drenches-the-world",
+    "name": "Rain and Mud Suppress Conflict",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Air": 1,
+        "Water": 3
+      },
+      {
+        "Water": 5,
+        "Earth": 1
+      },
+      {
+        "Air": 3,
+        "Water": 9,
+        "Earth": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "downpour-drenches-the-world",
+    "name": "Water Nourishes Life's Growth",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Water": 3,
+        "Plant": 2
+      },
+      {
+        "Water": 5,
+        "Earth": 1,
+        "Plant": 2
+      },
+      {
+        "Water": 7,
+        "Earth": 2,
+        "Plant": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "finder-of-paths-unseen",
+    "name": "Lay Paths They Cannot Help But Walk",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 2,
+        "Air": 2
+      },
+      {
+        "Sun": 2,
+        "Air": 2
+      },
+      {
+        "Moon": 2,
+        "Air": 4,
+        "Water": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "finder-of-paths-unseen",
+    "name": "Close the Ways",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Air": 1,
+        "Water": 2
+      },
+      {
+        "Air": 2,
+        "Earth": 2
+      },
+      {
+        "Air": 3,
+        "Plant": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "hearth-vigil",
+    "name": "Warn of Impending Conflict",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Sun": 2,
+        "Earth": 1
+      },
+      {
+        "Sun": 3,
+        "Earth": 1
+      },
+      {
+        "Sun": 4,
+        "Earth": 2
+      },
+      {
+        "Sun": 5,
+        "Earth": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "hearth-vigil",
+    "name": "Keep Watch For New Incursions",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Animal": 1
+      },
+      {
+        "Sun": 1,
+        "Air": 2,
+        "Animal": 3
+      },
+      {
+        "Sun": 2,
+        "Air": 3,
+        "Animal": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "towering-roots-of-the-jungle",
+    "name": "Shelter Under Towering Branches",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 1,
+        "Plant": 1
+      },
+      {
+        "Sun": 1,
+        "Earth": 1,
+        "Plant": 2
+      },
+      {
+        "Sun": 2,
+        "Earth": 1,
+        "Plant": 3
+      },
+      {
+        "Sun": 3,
+        "Earth": 2,
+        "Plant": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "towering-roots-of-the-jungle",
+    "name": "Revoke Sanctuary and Cast Out",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 1,
+        "Moon": 1,
+        "Plant": 2
+      },
+      {
+        "Sun": 2,
+        "Moon": 1,
+        "Plant": 3
+      },
+      {
+        "Sun": 2,
+        "Moon": 2,
+        "Plant": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "ember-eyed-behemoth",
+    "name": "Smash, Stomp, and Flatten",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 2,
+        "Earth": 1
+      },
+      {
+        "Fire": 3,
+        "Earth": 1,
+        "Plant": 1
+      },
+      {
+        "Fire": 4,
+        "Earth": 2,
+        "Plant": 1
+      },
+      {
+        "Fire": 5,
+        "Earth": 2,
+        "Plant": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "relentless-gaze-of-the-sun",
+    "name": "Scorching Convergence",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 2
+      },
+      {
+        "Sun": 3,
+        "Fire": 1
+      },
+      {
+        "Sun": 4,
+        "Fire": 2,
+        "Air": 1
+      },
+      {
+        "Sun": 5,
+        "Fire": 3,
+        "Air": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "relentless-gaze-of-the-sun",
+    "name": "Consider a Harmonious Nature",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Sun": 3,
+        "Moon": 1
+      },
+      {
+        "Sun": 3,
+        "Water": 1
+      },
+      {
+        "Sun": 3,
+        "Plant": 1
+      },
+      {
+        "Sun": 3,
+        "Water": 1,
+        "Plant": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "wandering-voice-keens-delirium",
+    "name": "Inscrutable Journeying",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Air": 1
+      },
+      {
+        "Air": 3
+      },
+      {
+        "Air": 5
+      },
+      {
+        "Moon": 2,
+        "Fire": 1,
+        "Air": 4,
+        "Plant": 1
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "wandering-voice-keens-delirium",
+    "name": "Mind-Shattering Song",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Air": 2
+      },
+      {
+        "Sun": 1,
+        "Air": 2
+      },
+      {
+        "Moon": 1,
+        "Sun": 1,
+        "Air": 4
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "wounded-waters-bleeding",
+    "name": "Swirl and Spill",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Water": 2
+      },
+      {
+        "Water": 3,
+        "Animal": 1
+      },
+      {
+        "Water": 5,
+        "Plant": 2,
+        "Animal": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "wounded-waters-bleeding",
+    "name": "Sanguinary Taint",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Animal": 2
+      },
+      {
+        "Water": 1,
+        "Animal": 3
+      },
+      {
+        "Fire": 2,
+        "Water": 2,
+        "Animal": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "breath-of-darkness-down-your-spine",
+    "name": "Leave a Trail of Deathly Silence",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 2,
+        "Animal": 1
+      },
+      {
+        "Moon": 3,
+        "Air": 1,
+        "Animal": 1
+      },
+      {
+        "Moon": 4,
+        "Air": 2,
+        "Animal": 2
+      },
+      {
+        "Moon": 5,
+        "Air": 2,
+        "Animal": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "breath-of-darkness-down-your-spine",
+    "name": "Lost in the Endless Dark",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Moon": 2,
+        "Air": 1
+      },
+      {
+        "Moon": 4,
+        "Air": 3
+      },
+      {
+        "Moon": 3,
+        "Animal": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "dances-up-earthquakes",
+    "name": "Land Creaks with Tension",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Earth": 1
+      },
+      {
+        "Moon": 1,
+        "Earth": 1
+      },
+      {
+        "Moon": 1,
+        "Earth": 2
+      },
+      {
+        "Moon": 2,
+        "Earth": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "dances-up-earthquakes",
+    "name": "Earth Shudders, Buildings Fall",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 2,
+        "Earth": 3
+      },
+      {
+        "Fire": 3,
+        "Earth": 4
+      },
+      {
+        "Fire": 4,
+        "Earth": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "devouring-teeth-lurk-underfoot",
+    "name": "Death Approaches from Beneath the Surface",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 1,
+        "Animal": 1
+      },
+      {
+        "Fire": 2,
+        "Earth": 1,
+        "Animal": 2
+      },
+      {
+        "Fire": 3,
+        "Earth": 1,
+        "Animal": 3
+      },
+      {
+        "Fire": 4,
+        "Earth": 2,
+        "Animal": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "eyes-watch-from-the-trees",
+    "name": "Mischief and Sabotage",
+    "speed": "Fast",
+    "thresholds": [
+      {
+        "Moon": 1,
+        "Plant": 2
+      },
+      {
+        "Moon": 2,
+        "Plant": 3
+      },
+      {
+        "Moon": 2,
+        "Air": 2,
+        "Plant": 4
+      },
+      {
+        "Moon": 3,
+        "Air": 3,
+        "Plant": 5
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "fathomless-mud-of-the-swamp",
+    "name": "Spreading and Dreadful Mire",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Water": 1
+      },
+      {
+        "Moon": 1,
+        "Water": 2,
+        "Earth": 1
+      },
+      {
+        "Moon": 2,
+        "Water": 3,
+        "Earth": 2
+      },
+      {
+        "Moon": 3,
+        "Water": 4,
+        "Earth": 3,
+        "Plant": 2
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "rising-heat-of-stone-and-sand",
+    "name": "Scorch with Waves of Heat",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Fire": 2,
+        "Air": 2
+      },
+      {
+        "Fire": 3,
+        "Earth": 2
+      },
+      {
+        "Fire": 4,
+        "Air": 1,
+        "Earth": 3
+      },
+      {
+        "Fire": 5,
+        "Air": 2,
+        "Earth": 3
+      }
+    ],
+    "source": "wiki+tts"
+  },
+  {
+    "spirit": "sun-bright-whirlwind",
+    "name": "Violent Windstorms",
+    "speed": "Slow",
+    "thresholds": [
+      {
+        "Sun": 1,
+        "Air": 2
+      },
+      {
+        "Sun": 2,
+        "Air": 3
+      },
+      {
+        "Sun": 2,
+        "Air": 4
+      },
+      {
+        "Sun": 3,
+        "Air": 5
+      }
+    ],
+    "source": "wiki+tts"
+  }
+]
