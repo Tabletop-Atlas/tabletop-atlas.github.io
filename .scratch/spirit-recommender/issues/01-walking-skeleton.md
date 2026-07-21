@@ -1,6 +1,6 @@
 # 01 — Walking skeleton: scaffold + seed data + rank-by-axis board
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

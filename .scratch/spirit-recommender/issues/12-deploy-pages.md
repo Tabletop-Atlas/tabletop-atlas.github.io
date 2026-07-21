@@ -1,6 +1,6 @@
 # 12 — Deploy pipeline to GitHub Pages
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

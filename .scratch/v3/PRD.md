@@ -1,6 +1,6 @@
 # PRD: Spirit Island Recommender v3 — tier lists as cited documents
 
-Status: ready-for-agent
+Status: done
 
 ## Problem Statement
 

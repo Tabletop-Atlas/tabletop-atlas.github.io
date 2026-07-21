@@ -1,6 +1,6 @@
 # 06 — Results polish: why-you + wildcard + reroll + OCFDU radar
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

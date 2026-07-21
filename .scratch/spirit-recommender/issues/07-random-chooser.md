@@ -1,6 +1,6 @@
 # 07 — Random chooser mode
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

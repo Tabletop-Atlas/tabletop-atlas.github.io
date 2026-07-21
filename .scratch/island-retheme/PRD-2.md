@@ -1,6 +1,6 @@
 # PRD-2 — Island retheme rollout: the app-wide token sweep
 
-Status: ready-for-agent
+Status: done
 Assembled: 2026-07-21 (the terminal deliverable of [MAP.md](MAP.md), produced once
 [05](issues/05-ornament-vocabulary.md) resolved and the decided direction shipped)
 Parent: [PRD.md](PRD.md) (the decision effort this rollout was deferred from — see its

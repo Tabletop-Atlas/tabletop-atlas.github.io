@@ -1,6 +1,6 @@
 # 03 — Seed tiers.json (provisional community-consensus flat list)
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

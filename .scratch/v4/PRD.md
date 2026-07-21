@@ -1,6 +1,6 @@
 # v4 — the knowledge base
 
-Status: ready-for-agent
+Status: done
 
 The spec behind [`.scratch/v4/MAP.md`](MAP.md). The map is the route; this is the destination
 written out in full. Where the two disagree, the map's ticket Comments win — they record what was

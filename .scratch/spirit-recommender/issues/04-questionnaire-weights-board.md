@@ -1,6 +1,6 @@
 # 04 — Questionnaire wizard → weights → live re-rankable board
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

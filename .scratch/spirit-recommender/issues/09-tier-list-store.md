@@ -1,6 +1,6 @@
 # 09 — Tier list tab + store + persistence
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

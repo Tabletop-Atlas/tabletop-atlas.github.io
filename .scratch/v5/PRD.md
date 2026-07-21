@@ -1,6 +1,6 @@
 # v5 — the controls tell the truth
 
-Status: ready-for-agent
+Status: done
 
 The spec behind [`.scratch/v5/MAP.md`](MAP.md). The map is the route; this is the destination written
 out in full. Where the two disagree, the map's ticket Comments win — they record what was actually

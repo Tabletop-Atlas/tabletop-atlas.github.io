@@ -1,6 +1,6 @@
 # 11 — Aspect nudge
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

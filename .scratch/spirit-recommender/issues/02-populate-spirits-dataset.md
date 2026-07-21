@@ -1,6 +1,6 @@
 # 02 — Populate full spirits.json dataset
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

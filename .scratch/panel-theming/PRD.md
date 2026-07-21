@@ -1,6 +1,6 @@
 # PRD — Panel theming for the spirit detail modal
 
-Status: ready-for-agent
+Status: done
 Parent map: [Panel theming wayfinder map](MAP.md) — the map's tickets are the work plan; this
 spec is the assembled contract they build against.
 

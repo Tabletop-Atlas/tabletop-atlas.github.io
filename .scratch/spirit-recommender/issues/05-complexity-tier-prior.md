@@ -1,6 +1,6 @@
 # 05 — Complexity penalty + tier prior knob + player count
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

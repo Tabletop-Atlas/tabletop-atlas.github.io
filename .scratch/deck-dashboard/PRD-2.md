@@ -1,6 +1,6 @@
 # Deck Dashboard follow-up spec: valence views + element-gap odds
 
-Status: ready-for-agent
+Status: done
 Parent: MAP.md (decisions: issues/02, 04, 05; research: issues/01 + innate-thresholds-research.md)
 Predecessor: PRD.md (shipped — this spec extends the Dashboard it built)
 

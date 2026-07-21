@@ -1,6 +1,6 @@
 # PRD — Archive tab: grouping & tile-chip polish
 
-Status: ready-for-agent
+Status: done
 Assembled: 2026-07-17 (from the archive-grouping issues 01–03; seams confirmed with the owner)
 
 The path-and-line-level implementation notes live in the three issue files under this directory

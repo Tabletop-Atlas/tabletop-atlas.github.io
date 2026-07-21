@@ -1,6 +1,6 @@
 # Deck Dashboard — spec
 
-Status: ready-for-agent
+Status: done
 Date: 2026-07-19
 Map: MAP.md (wayfinder — tickets 01–05 remain open for the deferred threads; see Out of Scope)
 

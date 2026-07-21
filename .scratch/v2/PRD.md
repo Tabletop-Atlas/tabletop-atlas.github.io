@@ -1,6 +1,6 @@
 # PRD: Spirit Island Recommender v2 — configurations, personal complexity, and a game log
 
-Status: ready-for-agent
+Status: done
 
 ## Problem Statement
 

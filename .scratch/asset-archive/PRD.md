@@ -1,6 +1,6 @@
 # PRD — Spirit Island asset archive
 
-Status: ready-for-agent
+Status: done
 
 Companion documents: [MAP.md](MAP.md) (the wayfinder map working this spec, with its seven wired
 tickets) and [REFERENCE.md](REFERENCE.md) (the owner's verified sources and retrieval methods —

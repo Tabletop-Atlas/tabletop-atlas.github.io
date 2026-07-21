@@ -1,6 +1,6 @@
 # PRD: Spirit Island Spirit Recommender (v1)
 
-Status: ready-for-agent
+Status: done
 
 ## Problem Statement
 

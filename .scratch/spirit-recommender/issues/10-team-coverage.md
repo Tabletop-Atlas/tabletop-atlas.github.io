@@ -1,6 +1,6 @@
 # 10 — Team coverage panel + gap-nudge
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 

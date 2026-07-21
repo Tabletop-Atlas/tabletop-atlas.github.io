@@ -1,6 +1,6 @@
 # Phase 4 — restructure, interconnect, honest recommender
 
-Status: ready-for-agent
+Status: done
 Date: 2026-07-13
 
 The locked Phase 4 spec, assembled from the [wayfinder map](MAP.md)'s eight pre-charting owner

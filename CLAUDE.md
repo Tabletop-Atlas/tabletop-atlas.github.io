@@ -5,10 +5,11 @@ Local-first web app (Vite + React + TypeScript) for browsing and recommending Sp
 The unit of recommendation is a **configuration**: a base spirit, or that spirit with exactly one
 aspect applied. 37 spirits + 31 aspects = 68 configurations.
 
-Current state: `.scratch/v2/README.md` (shipped, three items open). Design rationale:
-`.scratch/v2/PRD.md`. Domain glossary: `CONTEXT.md`; decisions: `docs/adr/`. The printed OCFDU
-ratings live authoritatively in `src/data/spirits.json`, pinned by tests. (The pre-v1
-`HANDOFF_*.md` was removed 2026-07-21; recoverable from git history.)
+Current state: a shipped knowledge base — Browse, Recommend, Archive, Dashboard, Tier list, Log,
+Settings (see `README.md` for the overview). Per-effort specs and history live in
+`.scratch/<effort>/` (latest: `island-retheme`); the domain glossary is `CONTEXT.md` and decisions
+are in `docs/adr/`. The printed OCFDU ratings live authoritatively in `src/data/spirits.json`,
+pinned by tests. (The pre-v1 `HANDOFF_*.md` was removed 2026-07-21; recoverable from git history.)
 
 **This repo has a documented failure mode: agents invent data when a source cannot answer.** It has
 shipped fabricated OCFDU ratings, wrong elements, and five aspects that do not exist. A field that

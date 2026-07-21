@@ -1,6 +1,6 @@
 # 08 — Browser tab
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 
