@@ -1,6 +1,6 @@
 # Baseline-aware probability exploration (brainstorm)
 
-Status: needs-triage
+Status: wontfix
 Labels: wayfinder:brainstorm
 Map: ../MAP.md
 
@@ -29,3 +29,11 @@ already exist in `power-cards.json`; innate thresholds will exist once the #05 f
 ships its transcription.
 
 ## Comments
+
+**2026-07-21 — triaged: wontfix, within this tracker.** MAP.md already records this brainstorm
+under "Out of scope," adjacent to the owner's charting-time call to exclude live in-game
+tracking (see `../MAP.md`). This ticket isn't rejected as an idea — it's parked as "a future
+effort, redrawn from scratch if it comes" (the map's own words), meaning any pursuit of it
+would start as a fresh map/PRD, not a resumption of this file. `wontfix` reflects that this
+issue, as filed, will not be actioned inside the deck-dashboard tracker; it was left on
+`needs-triage` only because nobody had flipped the line after #05 made the call.
