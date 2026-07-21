@@ -2284,3 +2284,105 @@ button:disabled {
 .deckchart-b-filterlabel input {
   width: 3.2rem;
 }
+
+/* ROUND 03 follow-up 2: icons, set-size colours, pill filters, sort (delete with the round). */
+.deckchart-b-elicon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.deckchart-b-elchip {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--deck-line);
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.deckchart-b-elchip[data-active='true'] {
+  border-color: var(--deck-accent);
+  background: var(--deck-accent-bg);
+  box-shadow: 0 0 0 1px var(--deck-accent);
+}
+.deckchart-b-sizechip {
+  min-width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--deck-line);
+  background: none;
+  color: var(--deck-body);
+  font: 600 12px/1 var(--deck-mono);
+  cursor: pointer;
+}
+.deckchart-b-sizechip[data-active='true'] {
+  color: #10130d;
+}
+.deckchart-b-sizechip.deckchart-b-size1[data-active='true'] {
+  background: #d7b56a;
+  border-color: #d7b56a;
+}
+.deckchart-b-sizechip.deckchart-b-size2[data-active='true'] {
+  background: var(--deck-accent);
+  border-color: var(--deck-accent);
+}
+.deckchart-b-sizechip.deckchart-b-size3[data-active='true'] {
+  background: var(--deck-warn);
+  border-color: var(--deck-warn);
+}
+.deckchart-b-filterpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  padding: 0.3rem 0.4rem 0.3rem 0.8rem;
+  font-size: 12px;
+  color: var(--deck-dim);
+}
+.deckchart-b-filterpill input {
+  width: 3rem;
+  border: 1px solid var(--deck-line-soft);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  color: var(--deck-text);
+  font: 600 12px/1.6 var(--deck-mono);
+  text-align: center;
+  padding: 0.15rem 0.4rem;
+}
+.deckchart-b-sort {
+  display: inline-flex;
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.deckchart-b-sort button {
+  border: none;
+  background: none;
+  color: var(--deck-dim);
+  font-size: 12px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+.deckchart-b-sort button[data-active='true'] {
+  background: var(--deck-accent-bg);
+  color: var(--deck-accent);
+  font-weight: 600;
+}
+/* set-size colours on column bars and dots; size0 = the "No element" set */
+.deckchart-b-colfill.deckchart-b-size0 { background: var(--deck-dim); }
+.deckchart-b-colfill.deckchart-b-size1 { background: #d7b56a; }
+.deckchart-b-colfill.deckchart-b-size2 { background: var(--deck-accent); }
+.deckchart-b-colfill.deckchart-b-size3 { background: var(--deck-warn); }
+.deckchart-b-dot-on.deckchart-b-size1 { background: #d7b56a; }
+.deckchart-b-dot-on.deckchart-b-size2 { background: var(--deck-accent); }
+.deckchart-b-dot-on.deckchart-b-size3 { background: var(--deck-warn); }
+.deckchart-b-legend {
+  font-weight: 600;
+}
+.deckchart-b-legend.deckchart-b-size1 { color: #d7b56a; }
+.deckchart-b-legend.deckchart-b-size2 { color: var(--deck-accent); }
+.deckchart-b-legend.deckchart-b-size3 { color: var(--deck-warn); }

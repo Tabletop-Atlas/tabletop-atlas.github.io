@@ -135,12 +135,42 @@ function VariantA({ composition, highlightElements }: { composition: DeckComposi
 
 /* ----------------------------------- B — classic UpSet ------------------------------------ */
 
-/** ROUND 03 follow-up (owner: "UpSet wins but needs more filters to be readable"):
- * element-inclusion chips (AND), a min-cards threshold, and a top-N cap. All prototype-grade. */
+/** Same names the Cards tab's `CardFilters`/`CardRows` use for `public/elements/*.webp`. */
+const ELEMENT_ICON: Record<Element, string> = {
+  Sun: 'sun',
+  Moon: 'moon',
+  Fire: 'fire',
+  Air: 'air',
+  Water: 'water',
+  Earth: 'earth',
+  Plant: 'plant',
+  Animal: 'animal',
+}
+
+function ElementIcon({ element }: { element: Element }) {
+  return <img className="deckchart-b-elicon" src={`${import.meta.env.BASE_URL}elements/${ELEMENT_ICON[element]}.webp`} alt={element} title={element} />
+}
+
+/** Set-size palette (owner: 1 / 2 / 3+ element sets read as different colors). */
+function setSizeClass(size: number): string {
+  if (size === 0) return 'deckchart-b-size0'
+  if (size === 1) return 'deckchart-b-size1'
+  if (size === 2) return 'deckchart-b-size2'
+  return 'deckchart-b-size3'
+}
+
+type SetSizeBucket = '1' | '2' | '3+'
+type RowSort = 'count' | 'alpha'
+
+/** ROUND 03 follow-up rounds (owner picked B, then asked for): element icons instead of words,
+ * set-size colour coding (1 / 2 / 3+), pill-styled filters, element-row sort (count/alphabetical),
+ * and a set-size filter alongside must-include / min-cards / top-N. All prototype-grade. */
 function VariantB({ composition, highlightElements }: { composition: DeckComposition; highlightElements?: ReadonlySet<Element> }) {
   const [mustInclude, setMustInclude] = useState<Set<Element>>(new Set())
+  const [sizeBuckets, setSizeBuckets] = useState<Set<SetSizeBucket>>(new Set())
   const [minCount, setMinCount] = useState(1)
   const [topN, setTopN] = useState(20)
+  const [rowSort, setRowSort] = useState<RowSort>('count')
 
   function toggleElement(element: Element) {
     setMustInclude((prev) => {
@@ -151,14 +181,32 @@ function VariantB({ composition, highlightElements }: { composition: DeckComposi
     })
   }
 
+  function toggleSizeBucket(bucket: SetSizeBucket) {
+    setSizeBuckets((prev) => {
+      const next = new Set(prev)
+      if (next.has(bucket)) next.delete(bucket)
+      else next.add(bucket)
+      return next
+    })
+  }
+
+  function inSizeBuckets(size: number): boolean {
+    if (sizeBuckets.size === 0) return true
+    return sizeBuckets.has(size >= 3 ? '3+' : size === 2 ? '2' : '1') && size > 0
+  }
+
   const allCombos = composition.combinations
   const combos = allCombos
-    .filter((g) => g.count >= minCount && [...mustInclude].every((e) => g.elements.includes(e)))
+    .filter((g) => g.count >= minCount && inSizeBuckets(g.elements.length) && [...mustInclude].every((e) => g.elements.includes(e)))
     .slice(0, topN)
   const shownCards = combos.reduce((sum, g) => sum + g.count, 0)
   const comboMax = Math.max(1, ...combos.map((g) => g.count))
   const totalMax = Math.max(1, ...composition.elements.map((e) => e.count))
   const countFor = (element: Element) => composition.elements.find((e) => e.element === element)?.count ?? 0
+  const rows =
+    rowSort === 'alpha'
+      ? [...ELEMENTS].sort((a, b) => a.localeCompare(b))
+      : [...ELEMENTS].sort((a, b) => countFor(b) - countFor(a))
 
   return (
     <div className="deckchart-b">
@@ -168,21 +216,43 @@ function VariantB({ composition, highlightElements }: { composition: DeckComposi
           <button
             key={element}
             type="button"
-            className={mustInclude.has(element) ? 'deckchart-c-chip deckchart-c-chip-highlight' : 'deckchart-c-chip'}
+            className="deckchart-b-elchip"
             aria-pressed={mustInclude.has(element)}
+            data-active={mustInclude.has(element)}
             onClick={() => toggleElement(element)}
           >
-            {element}
+            <ElementIcon element={element} />
           </button>
         ))}
-        <label className="deckchart-b-filterlabel">
+        <span className="deckchart-b-filterlabel">Elements per set</span>
+        {(['1', '2', '3+'] as const).map((bucket) => (
+          <button
+            key={bucket}
+            type="button"
+            className={`deckchart-b-sizechip ${setSizeClass(bucket === '3+' ? 3 : Number(bucket))}`}
+            aria-pressed={sizeBuckets.has(bucket)}
+            data-active={sizeBuckets.has(bucket)}
+            onClick={() => toggleSizeBucket(bucket)}
+          >
+            {bucket}
+          </button>
+        ))}
+        <label className="deckchart-b-filterpill">
           Min cards
           <input type="number" min={1} max={99} value={minCount} onChange={(e) => setMinCount(Math.max(1, Number(e.target.value) || 1))} />
         </label>
-        <label className="deckchart-b-filterlabel">
+        <label className="deckchart-b-filterpill">
           Top
           <input type="number" min={1} max={99} value={topN} onChange={(e) => setTopN(Math.max(1, Number(e.target.value) || 1))} />
         </label>
+        <div className="deckchart-b-sort" role="group" aria-label="Sort elements">
+          <button type="button" data-active={rowSort === 'count'} onClick={() => setRowSort('count')}>
+            By count
+          </button>
+          <button type="button" data-active={rowSort === 'alpha'} onClick={() => setRowSort('alpha')}>
+            A–Z
+          </button>
+        </div>
       </div>
       <p className="deckchart-muted">
         Showing {combos.length} of {allCombos.length} element sets ({shownCards} of {composition.deckSize} cards).
@@ -194,13 +264,13 @@ function VariantB({ composition, highlightElements }: { composition: DeckComposi
           {combos.map((g) => (
             <div key={g.label} className="deckchart-b-colbar" title={`${g.label}: ${g.count}`}>
               <span className="deckchart-b-colcount">{g.count}</span>
-              <span className="deckchart-b-colfill" style={{ height: `${(g.count / comboMax) * 100}%` }} />
+              <span className={`deckchart-b-colfill ${setSizeClass(g.elements.length)}`} style={{ height: `${(g.count / comboMax) * 100}%` }} />
             </div>
           ))}
-          {ELEMENTS.map((element) => (
+          {rows.map((element) => (
             <div key={element} className="deckchart-b-rowgroup">
               <div className={isHighlighted(element, highlightElements) ? 'deckchart-b-rowlabel deckchart-b-rowlabel-highlight' : 'deckchart-b-rowlabel'}>
-                <span>{element}</span>
+                <ElementIcon element={element} />
                 <span className="deckchart-b-totaltrack">
                   <span className="deckchart-b-totalfill" style={{ width: `${(countFor(element) / totalMax) * 100}%` }} />
                 </span>
@@ -211,7 +281,7 @@ function VariantB({ composition, highlightElements }: { composition: DeckComposi
                   key={g.label}
                   className={[
                     'deckchart-b-dot',
-                    g.elements.includes(element) && 'deckchart-b-dot-on',
+                    g.elements.includes(element) && `deckchart-b-dot-on ${setSizeClass(g.elements.length)}`,
                     isHighlighted(element, highlightElements) && 'deckchart-b-dot-highlight',
                   ]
                     .filter(Boolean)
@@ -222,7 +292,11 @@ function VariantB({ composition, highlightElements }: { composition: DeckComposi
           ))}
         </div>
       </div>
-      <p className="deckchart-muted">Columns are exact element sets, tallest first; left bars are each element's deck total.</p>
+      <p className="deckchart-muted">
+        Columns are exact element sets, tallest first — <span className="deckchart-b-legend deckchart-b-size1">1 element</span>,{' '}
+        <span className="deckchart-b-legend deckchart-b-size2">2 elements</span>, <span className="deckchart-b-legend deckchart-b-size3">3+</span>;
+        left bars are each element's deck total.
+      </p>
     </div>
   )
 }
