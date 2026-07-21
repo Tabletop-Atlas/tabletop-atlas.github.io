@@ -122,9 +122,23 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
   const eventByClass = useMemo(() => groupOtherCards(eventCardsInPlay, 'subtype'), [eventCardsInPlay])
   const eventByExpansion = useMemo(() => groupOtherCards(eventCardsInPlay, 'expansion'), [eventCardsInPlay])
 
+  const segmentSwitch = (
+    <div className={chartVariant ? 'deckchart-b-segments' : 'card-view-switch'} role="group" aria-label="Deck">
+      {SEGMENTS.map((s) => (
+        <button key={s} type="button" aria-pressed={segment === s} data-active={segment === s} onClick={() => setSegment(s)}>
+          {s}
+        </button>
+      ))}
+    </div>
+  )
+
   return (
     <section>
       <h2>Dashboard</h2>
+
+      {/* ROUND 03: the deck switch is the core "what am I looking at" control — promoted above
+       * the expansion picker and enlarged when the round is active. */}
+      {chartVariant && segmentSwitch}
 
       <fieldset className="dashboard-picker">
         <legend>Expansions in play</legend>
@@ -145,7 +159,7 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
         </ul>
       </fieldset>
 
-      <label className="dashboard-spirit-picker">
+      <label className={chartVariant ? 'dashboard-spirit-picker deckchart-b-selectpill' : 'dashboard-spirit-picker'}>
         Highlight my spirit
         <select value={spiritId} onChange={(e) => setSpiritId(e.target.value)}>
           <option value="">No spirit</option>
@@ -163,18 +177,12 @@ export function DashboardTab({ initialSegment }: { initialSegment?: Segment } = 
         </label>
       )}
 
-      <div className="card-view-switch" role="group" aria-label="Deck">
-        {SEGMENTS.map((s) => (
-          <button key={s} type="button" aria-pressed={segment === s} onClick={() => setSegment(s)}>
-            {s}
-          </button>
-        ))}
-      </div>
+      {!chartVariant && segmentSwitch}
 
       {activeComposition && (
         <div className="dashboard-deck">
           <p className="dashboard-deck-size">{activeComposition.deckSize} cards</p>
-          <label className="dashboard-draw-stepper">
+          <label className={chartVariant ? 'deckchart-b-filterpill deckchart-b-drawpill' : 'dashboard-draw-stepper'}>
             Draw
             <input
               type="number"

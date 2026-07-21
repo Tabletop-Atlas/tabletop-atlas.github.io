@@ -2422,3 +2422,43 @@ button:disabled {
   width: 22px;
   height: auto;
 }
+
+/* ROUND 03 follow-up 4: speed colours, pill selects, promoted deck switch (delete with round). */
+.deckchart-b-speedfast {
+  background: #d4502e;
+}
+.deckchart-b-speedslow {
+  background: #3a7ca5;
+}
+.deckchart-b-selectpill select {
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  color: var(--deck-text);
+  padding: 0.35rem 0.9rem;
+  font-size: 13px;
+}
+.deckchart-b-drawpill {
+  margin: 0.4rem 0;
+}
+.deckchart-b-segments {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.4rem 0 1rem;
+}
+.deckchart-b-segments button {
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  color: var(--deck-body);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0.6rem 1.6rem;
+  cursor: pointer;
+}
+.deckchart-b-segments button[data-active='true'] {
+  background: var(--deck-accent-bg);
+  border-color: var(--deck-accent);
+  color: var(--deck-accent);
+  box-shadow: 0 0 0 1px var(--deck-accent);
+}

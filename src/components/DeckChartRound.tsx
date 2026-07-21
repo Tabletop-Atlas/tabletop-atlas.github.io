@@ -256,6 +256,8 @@ function VariantB({ composition, highlightElements }: { composition: DeckComposi
             {bucket}
           </button>
         ))}
+      </div>
+      <div className="deckchart-b-filters">
         <label className="deckchart-b-filterpill">
           Min cards
           <input type="number" min={1} max={99} value={minCount} onChange={(e) => setMinCount(Math.max(1, Number(e.target.value) || 1))} />
@@ -341,11 +343,11 @@ function VariantB({ composition, highlightElements }: { composition: DeckComposi
             </span>
             <div className="dashboard-facet-bar">
               <span
-                className="dashboard-facet-fast"
+                className="deckchart-b-speedfast"
                 style={{ width: `${composition.deckSize === 0 ? 0 : (composition.speedSplit.fast / composition.deckSize) * 100}%` }}
               />
               <span
-                className="dashboard-facet-slow"
+                className="deckchart-b-speedslow"
                 style={{ width: `${composition.deckSize === 0 ? 0 : (composition.speedSplit.slow / composition.deckSize) * 100}%` }}
               />
             </div>
