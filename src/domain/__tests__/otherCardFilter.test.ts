@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest'
 import { EMPTY_OTHER_CARD_FILTER, filterOtherCards } from '../otherCardFilter'
 import type { OtherCard } from '../types'
 
-const fear1 = { name: 'A Fear Card', expansion: 'Basegame', kind: 'fear', image: 'x.webp', tags: ['removal'] } satisfies OtherCard
-const fear2 = { name: 'Another Fear Card', expansion: 'Basegame', kind: 'fear', image: 'x.webp', tags: ['defensive', 'removal'] } satisfies OtherCard
-const fearUnclassified = { name: 'A Blank Fear Card', expansion: 'Basegame', kind: 'fear', image: 'x.webp', tags: [] } satisfies OtherCard
-const event = { name: 'An Event Card', expansion: 'Branch & Claw', kind: 'event', image: 'x.webp', eventClass: 'choice' } satisfies OtherCard
+const fear1 = { name: 'A Fear Card', expansion: 'Basegame', kind: 'fear', image: 'x.webp', tags: ['removal'], impact: 2, impactSource: 'judgment' } satisfies OtherCard
+const fear2 = { name: 'Another Fear Card', expansion: 'Basegame', kind: 'fear', image: 'x.webp', tags: ['defensive', 'removal'], impact: 2, impactSource: 'judgment' } satisfies OtherCard
+const fearUnclassified = { name: 'A Blank Fear Card', expansion: 'Basegame', kind: 'fear', image: 'x.webp', tags: [], impact: 1, impactSource: 'judgment' } satisfies OtherCard
+const event = { name: 'An Event Card', expansion: 'Branch & Claw', kind: 'event', image: 'x.webp', eventClass: 'choice', valence: 'mixed', valenceSource: 'judgment' } satisfies OtherCard
 const blight = {
   name: 'A Blight Card',
   expansion: 'Basegame',
