@@ -1,6 +1,6 @@
 # Element demand/supply domain module
 
-Status: ready-for-agent
+Status: done
 
 ## Parent
 
