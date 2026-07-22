@@ -74,6 +74,10 @@ export function DeckUpset({
   onUnitChange: (unit: DeckUnit) => void
 }) {
   const [mustInclude, setMustInclude] = useState<Set<Element>>(new Set())
+  // mobile-panel: on phone the per-element totals are the default view and the wide matrix is
+  // an opt-in. Both always render; deck.css gates the matrix (and the combo-only chrome) with
+  // this flag at the phone breakpoint only — desktop never sees the toggle.
+  const [matrixOpen, setMatrixOpen] = useState(false)
   const [sizeBuckets, setSizeBuckets] = useState<Set<SetSizeBucket>>(new Set())
   const [minCount, setMinCount] = useState(1)
   const [topN, setTopN] = useState(20)
@@ -118,7 +122,7 @@ export function DeckUpset({
       : [...ELEMENTS].sort((a, b) => (statFor(b)?.count ?? 0) - (statFor(a)?.count ?? 0))
 
   return (
-    <div className="deck-upset">
+    <div className="deck-upset" data-matrix-open={matrixOpen}>
       <div className="deck-upset-filters">
         <span className="deck-upset-filterlabel">Must include</span>
         {ELEMENTS.map((element) => (
@@ -176,6 +180,9 @@ export function DeckUpset({
       <p className="deck-upset-muted">
         Showing {combos.length} of {allCombos.length} element sets ({shownCards} of {composition.deckSize} cards).
       </p>
+      <button type="button" className="deck-upset-matrix-toggle" aria-expanded={matrixOpen} onClick={() => setMatrixOpen((open) => !open)}>
+        {matrixOpen ? 'Hide full matrix' : 'Show full matrix'}
+      </button>
       <div className="deck-upset-panel">
         <div className="deck-upset-scroll">
           <div className="deck-upset-grid" style={{ ['--combos' as string]: combos.length }}>
@@ -224,6 +231,9 @@ export function DeckUpset({
           </div>
         </div>
       </div>
+      <p className="deck-upset-muted deck-upset-mobile-note">
+        Each element&rsquo;s deck total, with its chance of ≥1 in {composition.drawCount} draws.
+      </p>
       <p className="deck-upset-muted">
         Columns are exact element sets, tallest first — <span className="deck-upset-legend deck-upset-size2">≤2 elements</span>,{' '}
         <span className="deck-upset-legend deck-upset-size3">3</span>, <span className="deck-upset-legend deck-upset-size4">4</span>,{' '}

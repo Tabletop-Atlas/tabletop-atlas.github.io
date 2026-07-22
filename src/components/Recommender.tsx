@@ -58,11 +58,13 @@ function useRecommender(): RecommenderState {
   return ctx
 }
 
-export function RecommenderProvider({ children }: { children: ReactNode }) {
+/** `initialPhase` mirrors `DashboardTab`'s `initialSegment` — lets the server-rendered smoke
+ * test reach a non-default phase (e.g. the results board) without simulating clicks. */
+export function RecommenderProvider({ children, initialPhase }: { children: ReactNode; initialPhase?: Phase }) {
   const restored = useMemo(() => answersStore.load(), [])
   const hasRestored = !!restored && Object.keys(restored).length > 0
 
-  const [phase, setPhase] = useState<Phase>(hasRestored ? 'resume' : 'wizard')
+  const [phase, setPhase] = useState<Phase>(initialPhase ?? (hasRestored ? 'resume' : 'wizard'))
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>(restored ?? {})
   const [teamIds, setTeamIds] = useState<string[]>([])
@@ -328,6 +330,14 @@ function ResultsBoard() {
 
   return (
     <>
+      {/* mobile-panel: on phone the sidebar (and its `side` slot) is hidden, so the same live
+       * controls surface here as a disclosure — collapsed by default so the recommendations
+       * lead. Desktop hides this via CSS and keeps the sidebar knobs; both render, one shows.
+       * Gating is unchanged: RecommenderSide itself returns null until phase === 'board'. */}
+      <details className="deck-answers-disclosure">
+        <summary>Your answers</summary>
+        <RecommenderSide />
+      </details>
       <div className="deck-head">
         <h2>Your top {SHORTLIST_SIZE}</h2>
         <button type="button" className="deck-ghost" onClick={() => setPhase('random')}>

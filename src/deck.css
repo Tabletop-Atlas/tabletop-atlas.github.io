@@ -61,13 +61,16 @@ body {
   min-height: 100vh;
 }
 
-.deck-side {
+.deck-side,
+.deck-topbar {
   /* qa-revision #01 (owner picked prototype variant C, "inverted-parchment"): the sidebar is the
      printed parchment against the dark main pane — the panel scans' sampled hexes, the same
      parchment roles the panel vibe sheet documents. Scoped token re-pointing, so everything inside
      the sidebar (nav, knobs, selects) inverts with it; the dark tokens resume at `.deck-main`.
      The accent darkens to hold contrast on parchment (presence-green #3fae6a reads washed-out
-     there). Provenance: .scratch/qa-revision/issues/01 + screenshots-01/. */
+     there). Provenance: .scratch/qa-revision/issues/01 + screenshots-01/.
+     mobile-panel: the phone top bar is the same parchment identity in a new shape, so it shares
+     this scope (ADR 0011 — chrome points at tokens, not re-sampled literals). */
   --deck-panel: #f2e7c8; /* parchment-lit — raised surfaces, selects */
   --deck-line: #cdb88c; /* parchment-aged — borders */
   --deck-line-soft: #cdb88c; /* doubles as the active-nav fill, matching the picked variant */
@@ -75,6 +78,9 @@ body {
   --deck-body: #5b4e2d; /* ink-soft */
   --deck-dim: #8a7a52;
   --deck-accent: #2e7a4a; /* presence-green, darkened for parchment contrast */
+}
+
+.deck-side {
   background: #e7d19c; /* sampled parchment field */
   border-right: 1px solid #cdb88c;
   color: var(--deck-body);
@@ -2291,4 +2297,246 @@ button:disabled {
 }
 .dashboard-gap-odds-caption {
   font-style: italic;
+}
+
+/* --- mobile-panel: the phone treatment ---------------------------------------------------------
+   Base state first: the phone-only chrome (top bar, hamburger, drawer backdrop, Recommend
+   disclosure, UpSet matrix toggle + mobile note) renders in the DOM at every width — a11y and
+   the appSmoke markup contracts depend on that — and is display-gated here, off by default.
+   The drawer itself is a plain block inside the sidebar until the phone block repositions it. */
+.deck-topbar,
+.deck-menu-toggle,
+.deck-drawer-backdrop,
+.deck-answers-disclosure,
+.deck-upset-matrix-toggle,
+.deck-upset-mobile-note {
+  display: none;
+}
+
+/* THE phone breakpoint (≤640px) — single source of truth, per the mobile-panel PRD. Media
+   queries cannot consume CSS custom properties, so the "one recorded value" is this one block:
+   every phone rule lives inside it and the 640px literal appears nowhere else. The 640–900px
+   band keeps the older 900px rules above, and desktop is untouched. */
+@media (max-width: 640px) {
+  /* -- shell: sticky top bar + off-canvas drawer -- */
+  .deck {
+    display: block;
+  }
+  /* The sidebar dissolves: its parchment tokens still cascade to the drawer, but the box, the
+     in-flow logo and the tab's side slot leave the page — the top bar and each tab's own pane
+     take those jobs over. */
+  .deck-side {
+    display: contents;
+  }
+  .deck-side > .deck-brand-button,
+  .deck-side-slot {
+    display: none;
+  }
+  .deck-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    /* the sidebar's sampled parchment field — the same raw literal `.deck-side` uses; the scoped
+       parchment tokens (shared above) cover everything else in here */
+    background: #e7d19c;
+    border-bottom: 1px solid var(--deck-line);
+    padding: 0.35rem 0.75rem;
+  }
+  .deck-topbar .deck-brand-button {
+    padding-bottom: 0.35rem;
+  }
+  .deck-topbar .deck-brand {
+    width: 132px;
+    margin-bottom: 0;
+  }
+  .deck-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; /* v4 #07's 44px tap-target guideline */
+    height: 44px;
+    border: 1px solid var(--deck-line);
+    border-radius: 6px;
+    background: var(--deck-panel);
+    cursor: pointer;
+    padding: 0;
+  }
+  .deck-menu-toggle:focus-visible {
+    outline: 2px solid var(--deck-accent);
+    outline-offset: 2px;
+  }
+  .deck-menu-icon,
+  .deck-menu-icon::before,
+  .deck-menu-icon::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--deck-text);
+  }
+  .deck-menu-icon {
+    position: relative;
+  }
+  .deck-menu-icon::before,
+  .deck-menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .deck-menu-icon::before {
+    top: -6px;
+  }
+  .deck-menu-icon::after {
+    top: 6px;
+  }
+  .deck-drawer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(78vw, 280px);
+    z-index: 60;
+    background: #e7d19c; /* the parchment field again — `.deck-side`'s own literal */
+    border-right: 1px solid var(--deck-line);
+    padding: 1.25rem 1rem;
+    overflow-y: auto;
+    transform: translateX(-105%);
+    transition: transform 0.2s ease;
+  }
+  [data-drawer-open='true'] .deck-drawer {
+    transform: translateX(0);
+  }
+  [data-drawer-open='true'] .deck-drawer-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.74); /* the modal scrim's existing value, not a new judgment */
+  }
+  .deck-main {
+    padding: 1rem 1rem 3rem;
+  }
+
+  /* -- Recommend: "Your answers" as an in-pane disclosure, collapsed by default -- */
+  .deck-answers-disclosure {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--deck-line);
+    border-radius: 8px;
+    background: var(--deck-panel);
+  }
+  .deck-answers-disclosure summary {
+    cursor: pointer;
+    padding: 0.65rem 0.8rem;
+    font: 600 11px/1 var(--deck-mono);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--deck-text);
+  }
+  .deck-answers-disclosure .deck-knobs {
+    padding: 0.2rem 0.8rem 0.8rem;
+  }
+  /* the summary already says "Your answers" — the knobs' own title would repeat it */
+  .deck-answers-disclosure .deck-knobs-title {
+    display: none;
+  }
+
+  /* -- Dashboard: UpSet phone fallback (totals by default, matrix behind the toggle) -- */
+  .deck-upset-matrix-toggle {
+    display: inline-block;
+    margin: 0.5rem 0 0.2rem;
+    border: 1px solid var(--deck-line);
+    border-radius: 999px;
+    background: var(--deck-panel-2);
+    color: var(--deck-body);
+    font-size: 12px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+  }
+  .deck-upset-matrix-toggle[aria-expanded='true'] {
+    border-color: var(--deck-accent);
+    color: var(--deck-accent);
+  }
+  /* Collapsed: the grid's matrix cells vanish, its rows reflow to one full-width totals bar per
+     element, and the combo-only chrome (filters, showing-line, column legend) goes with them. */
+  .deck-upset[data-matrix-open='false'] .deck-upset-corner,
+  .deck-upset[data-matrix-open='false'] .deck-upset-colbar,
+  .deck-upset[data-matrix-open='false'] .deck-upset-dot,
+  .deck-upset[data-matrix-open='false'] .deck-upset-filters,
+  .deck-upset[data-matrix-open='false'] .deck-upset-muted {
+    display: none;
+  }
+  .deck-upset[data-matrix-open='false'] .deck-upset-mobile-note {
+    display: block;
+  }
+  .deck-upset[data-matrix-open='false'] .deck-upset-grid {
+    grid-template-columns: 1fr;
+    width: auto;
+    gap: 0.35rem;
+  }
+  .deck-upset[data-matrix-open='false'] .deck-upset-rowgroup {
+    grid-template-columns: 1fr;
+    grid-column: auto;
+  }
+  .deck-upset[data-matrix-open='false'] .deck-upset-rowlabel {
+    padding-right: 0;
+  }
+
+  /* -- Dashboard: phone-legibility pass on the other plots (spacing / min-width / contained
+        scroll only — no structural rework) -- */
+  .dashboard-segments {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .dashboard-segments button {
+    padding: 0.5rem 1.1rem;
+    font-size: 14px;
+  }
+  .deck-upset-panel {
+    padding: 0.7rem;
+  }
+  .dashboard-facets {
+    gap: 0.8rem;
+  }
+  .dashboard-speed-row {
+    gap: 0.5rem;
+  }
+  /* the wide matrix (when opened) scrolls inside its own panel, never the page */
+  .deck-upset-scroll {
+    max-width: 100%;
+  }
+  .deck-upset[data-matrix-open='true'] .deck-upset-grid {
+    grid-template-columns: 14rem repeat(var(--combos), 1.3rem);
+  }
+  .dashboard-gap-odds {
+    overflow-x: auto;
+  }
+  .dashboard-gap-odds-table {
+    min-width: 420px;
+  }
+  .dashboard-gap-odds-table th,
+  .dashboard-gap-odds-table td {
+    padding: 0.3rem 0.4rem;
+    font-size: 12px;
+  }
+  .deck-pool-row {
+    grid-template-columns: 7rem 1fr 2.2rem;
+    gap: 0.4rem;
+  }
+  .rating-tiles {
+    gap: 0.4rem;
+  }
+  .rating-tile {
+    padding: 0.4rem 0.6rem;
+  }
+  .rating-tile-pct {
+    font-size: 14px;
+  }
+  .rating-chip-preview {
+    width: 160px;
+  }
 }

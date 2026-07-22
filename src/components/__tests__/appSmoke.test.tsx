@@ -65,6 +65,36 @@ describe('app smoke', () => {
     expect(labels).toEqual(['Browse', 'Recommend', 'Archive', 'Dashboard', 'Tier list', 'Log', 'Settings'])
   })
 
+  it('phone shell: the hamburger toggle carries aria-expanded/aria-controls/label, and the closed drawer still holds the nav (mobile-panel)', () => {
+    const html = renderToStaticMarkup(<App />)
+    // The drawer starts closed…
+    expect(html).toContain('data-drawer-open="false"')
+    expect(html).toContain('aria-expanded="false" aria-controls="deck-drawer" aria-label="Menu"')
+    // …but the nav destinations are rendered-but-off-canvas, never absent: the full label list
+    // lives inside the drawer element itself.
+    const drawer = html.slice(html.indexOf('id="deck-drawer"'), html.indexOf('</nav>'))
+    expect(drawer).toContain('deck-nav')
+    for (const label of ['Browse', 'Recommend', 'Archive', 'Dashboard', 'Tier list', 'Log', 'Settings']) {
+      expect(drawer).toContain(`>${label}<`)
+    }
+    // The top bar's logo is a second Home button — still the only route home, no >Home< label.
+    expect(html.match(/aria-label="Home"/g)!.length).toBe(2)
+  })
+
+  it('Recommend phone disclosure: "Your answers" is a details element above the results, collapsed by default (mobile-panel)', () => {
+    const html = renderToStaticMarkup(
+      <RecommenderProvider initialPhase="board">
+        <RecommenderMain />
+      </RecommenderProvider>,
+    )
+    // Collapsed by default: no `open` attribute on the disclosure.
+    expect(html).toMatch(/<details class="deck-answers-disclosure">/)
+    expect(html).toContain('<summary')
+    expect(html).toContain('Your answers')
+    // The disclosure precedes the results in the markup — controls sit above the shortlist.
+    expect(html.indexOf('deck-answers-disclosure')).toBeLessThan(html.indexOf('Your top'))
+  })
+
   it('Settings holds exactly the three migrated sections (#14) plus the default-list pick (#18)', () => {
     const settings = renderToStaticMarkup(<Settings />)
     expect(settings).toContain('Backup')
@@ -246,6 +276,16 @@ describe('app smoke', () => {
     expect(html).toContain('Facets')
     expect(html).toContain('Fast')
     expect(html).toContain('Slow')
+  })
+
+  it('the UpSet phone fallback: totals and matrix both render, matrix default-hidden behind a show-full-matrix toggle (mobile-panel)', () => {
+    const html = renderToStaticMarkup(<DashboardTab />)
+    // Both representations are in the DOM; CSS (not unmounting) gates the matrix on phone.
+    expect(html).toContain('data-matrix-open="false"')
+    expect(html).toContain('>Show full matrix<')
+    expect(html).toContain('deck-upset-grid')
+    expect(html).toContain('deck-upset-dot')
+    expect(html).toContain('deck-upset-totaltrack')
   })
 
   it('the Dashboard shows the element-gap odds block on both the Minor and Major segments (deck-dashboard #14)', () => {
