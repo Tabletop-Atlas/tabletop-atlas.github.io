@@ -1,5 +1,5 @@
 import { groupOtherCards } from './otherCardArrange'
-import type { OtherCard, Valence } from './types'
+import type { EventClass, OtherCard, Valence } from './types'
 import { VALENCES } from './types'
 
 export type EventCard = Extract<OtherCard, { kind: 'event' }>
@@ -21,6 +21,8 @@ export function valenceBreakdown(cards: EventCard[]): ValenceBucket[] {
 
 export interface ClassValenceGroup {
   label: string
+  /** Raw event class when the group is a named bucket. */
+  subtype?: EventClass
   cards: EventCard[]
   byValence: ValenceBucket[]
 }
@@ -31,6 +33,11 @@ export interface ClassValenceGroup {
 export function classValenceBreakdown(cards: EventCard[]): ClassValenceGroup[] {
   return groupOtherCards(cards, 'subtype').map((group) => {
     const groupCards = group.cards as EventCard[]
-    return { label: group.label, cards: groupCards, byValence: valenceBreakdown(groupCards) }
+    return {
+      label: group.label,
+      subtype: group.subtype as EventClass | undefined,
+      cards: groupCards,
+      byValence: valenceBreakdown(groupCards),
+    }
   })
 }

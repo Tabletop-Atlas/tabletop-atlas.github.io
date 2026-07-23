@@ -14,6 +14,8 @@ export interface LogEntry {
   outcome: 'win' | 'loss'
   terrorLevel?: number
   blightRemaining?: number
+  /** Optional free-text recap. Absent on older entries; never stored as "". */
+  notes?: string
 }
 
 /** listId -> configId -> label. A flat map can no longer say which list an edit belongs to,

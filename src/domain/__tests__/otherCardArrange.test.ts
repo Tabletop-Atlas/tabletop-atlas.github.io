@@ -28,20 +28,22 @@ describe('groupOtherCards by subtype — fear', () => {
 
   it('a multi-tag card appears under EVERY tag it carries; groups follow the canonical FEAR_TAGS order', () => {
     expect(groupOtherCards([removalAndWeaken, removalOnly], 'subtype')).toEqual([
-      { label: 'Removal', cards: [removalAndWeaken, removalOnly] },
-      { label: 'Weaken', cards: [removalAndWeaken] },
+      { label: 'Removal', subtype: 'removal', cards: [removalAndWeaken, removalOnly] },
+      { label: 'Weaken', subtype: 'weaken', cards: [removalAndWeaken] },
     ])
   })
 
   it('zero-tag cards land in a trailing "Unclassified" group, no judgment note', () => {
     expect(groupOtherCards([removalOnly, untagged], 'subtype')).toEqual([
-      { label: 'Removal', cards: [removalOnly] },
+      { label: 'Removal', subtype: 'removal', cards: [removalOnly] },
       { label: 'Unclassified', cards: [untagged] },
     ])
   })
 
   it('omits tags no card carries — no empty groups', () => {
-    expect(groupOtherCards([removalOnly], 'subtype')).toEqual([{ label: 'Removal', cards: [removalOnly] }])
+    expect(groupOtherCards([removalOnly], 'subtype')).toEqual([
+      { label: 'Removal', subtype: 'removal', cards: [removalOnly] },
+    ])
   })
 })
 
@@ -52,14 +54,14 @@ describe('groupOtherCards by subtype — blight (judgment)', () => {
 
   it('a multi-tag card appears under EVERY tag it carries; group headers carry the "(judgment)" note', () => {
     expect(groupOtherCards([presenceLossAndBoard, presenceLossOnly], 'subtype')).toEqual([
-      { label: 'Presence loss (judgment)', cards: [presenceLossAndBoard, presenceLossOnly] },
-      { label: 'Board change (judgment)', cards: [presenceLossAndBoard] },
+      { label: 'Presence loss (judgment)', subtype: 'presenceLoss', cards: [presenceLossAndBoard, presenceLossOnly] },
+      { label: 'Board change (judgment)', subtype: 'boardChange', cards: [presenceLossAndBoard] },
     ])
   })
 
   it('zero-tag cards land in a trailing "Unclassified (judgment)" group', () => {
     expect(groupOtherCards([presenceLossOnly, untagged], 'subtype')).toEqual([
-      { label: 'Presence loss (judgment)', cards: [presenceLossOnly] },
+      { label: 'Presence loss (judgment)', subtype: 'presenceLoss', cards: [presenceLossOnly] },
       { label: 'Unclassified (judgment)', cards: [untagged] },
     ])
   })
@@ -71,13 +73,13 @@ describe('groupOtherCards by subtype — event (single-valued, never judgment)',
 
   it('groups follow the canonical EVENT_CLASSES order; no judgment note', () => {
     expect(groupOtherCards([stage, choice], 'subtype')).toEqual([
-      { label: 'Choice', cards: [choice] },
-      { label: 'Stage', cards: [stage] },
+      { label: 'Choice', subtype: 'choice', cards: [choice] },
+      { label: 'Stage', subtype: 'stage', cards: [stage] },
     ])
   })
 
   it('omits classes no card has — no empty groups, and no Unclassified (every event has exactly one class)', () => {
-    expect(groupOtherCards([choice], 'subtype')).toEqual([{ label: 'Choice', cards: [choice] }])
+    expect(groupOtherCards([choice], 'subtype')).toEqual([{ label: 'Choice', subtype: 'choice', cards: [choice] }])
   })
 
   // deck-dashboard #12: a base-game-only expansion set has zero event cards — the empty

@@ -28,14 +28,26 @@ function writeEntries(storage: KeyValueStorage, entries: LogEntry[]): void {
  */
 export function createGameLog(storage: KeyValueStorage = defaultStorage()) {
   return {
-    /** Stamps a stable id at creation - cross-device de-duplication on import depends on it. */
-    append(entry: Omit<LogEntry, 'id'>): LogEntry {
-      const full: LogEntry = { ...entry, id: crypto.randomUUID() }
+    /** Stamps a stable id at creation - cross-device de-duplication on import depends on it.
+     * An explicit `id` is the undo path: re-append a removed entry with its original id. */
+    append(entry: Omit<LogEntry, 'id'> & { id?: string }): LogEntry {
+      const full: LogEntry = { ...entry, id: entry.id ?? crypto.randomUUID() }
       writeEntries(storage, [...readEntries(storage), full])
       return full
     },
     list(): LogEntry[] {
       return readEntries(storage)
+    },
+    /** Drops exactly the entry with this id; returns it so the caller can undo via re-append. */
+    remove(id: string): LogEntry | undefined {
+      const entries = readEntries(storage)
+      const removed = entries.find((e) => e.id === id)
+      if (!removed) return undefined
+      writeEntries(
+        storage,
+        entries.filter((e) => e.id !== id),
+      )
+      return removed
     },
     /** Counts entries where some player played this configuration. A fact, not a score. */
     timesPlayed(configId: string): number {

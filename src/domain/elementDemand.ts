@@ -144,3 +144,23 @@ export function computeElementDemand(
     aspectModifiesInnates: thresholds.aspectModifiesInnates,
   }
 }
+
+export interface ElementPickSeed {
+  element: Element
+  count: number
+}
+
+/**
+ * Free-form picker seed for the Dashboard: the demanded element the spirit is least likely to
+ * hit, with that element's first-rung demand as the count. Ties break in ELEMENTS order (the
+ * rows arrive already sorted that way, so the first lowest wins). Rows with no first-rung
+ * demand (odds/demand absent) are skipped — there is nothing to seed a count from.
+ */
+export function seedElementPick(supply: ElementDemandSupply): ElementPickSeed | undefined {
+  let best: ElementDemandRow | undefined
+  for (const row of supply.elements) {
+    if (row.demand === undefined || row.odds === undefined) continue
+    if (!best || row.odds < best.odds!) best = row
+  }
+  return best && best.demand !== undefined ? { element: best.element, count: best.demand } : undefined
+}

@@ -3,6 +3,7 @@ import type { Valence } from '../domain/types'
 import { classValenceBreakdown, valenceBreakdown, type EventCard } from '../domain/valenceBreakdown'
 import { CardChipList } from './CardChipList'
 import { pct, RatingStackedBar } from './RatingStackedBar'
+import { Term } from './Term'
 
 /** Diverging poles, owner-ratified at PRD-2/#04 — harmful warm-orange / beneficial cool-blue
  * (never red/green), with a neutral grey mixed since the accent green fails CVD separation
@@ -50,19 +51,25 @@ export function EventValenceView({ cards, initialPicked }: { cards: EventCard[];
       <p className="dashboard-assumption">Percentages are this pool's share, not next-draw odds off the physical deck.</p>
       <div className="rating-tiles" role="group" aria-label="Event valence">
         {overall.map((bucket) => (
-          <button
+          <span
             key={bucket.valence}
-            type="button"
             className="rating-tile"
-            aria-pressed={picked?.valence === bucket.valence && picked.eventClass === null}
             data-active={picked?.valence === bucket.valence && picked.eventClass === null}
-            onClick={() => toggle(bucket.valence, null)}
           >
-            <span className="rating-tile-dot" style={{ background: VALENCE_COLOR[bucket.valence] }} />
-            <span className="rating-tile-pct">{pct(bucket.cards.length, cards.length)}</span>
-            <span className="rating-tile-count">({bucket.cards.length})</span>
-            <span className="rating-tile-label">{VALENCE_LABEL[bucket.valence]}</span>
-          </button>
+            <button
+              type="button"
+              className="rating-tile-pick"
+              aria-pressed={picked?.valence === bucket.valence && picked.eventClass === null}
+              onClick={() => toggle(bucket.valence, null)}
+            >
+              <span className="rating-tile-dot" style={{ background: VALENCE_COLOR[bucket.valence] }} />
+              <span className="rating-tile-pct">{pct(bucket.cards.length, cards.length)}</span>
+              <span className="rating-tile-count">({bucket.cards.length})</span>
+            </button>
+            <Term id={`valence-${bucket.valence}`} className="rating-tile-label">
+              {VALENCE_LABEL[bucket.valence]}
+            </Term>
+          </span>
         ))}
       </div>
 
@@ -80,7 +87,9 @@ export function EventValenceView({ cards, initialPicked }: { cards: EventCard[];
         {byClass.map((group) => (
           <div key={group.label} className="rating-tag-row">
             <div className="deck-pool-row">
-              <span className="deck-pool-label">{group.label}</span>
+              <span className="deck-pool-label">
+                <Term id={group.subtype ? `event-class-${group.subtype}` : 'event-class-unclassified'}>{group.label}</Term>
+              </span>
               <RatingStackedBar
                 segments={group.byValence.map((b) => ({ key: b.valence, label: VALENCE_LABEL[b.valence], count: b.cards.length, color: VALENCE_COLOR[b.valence] }))}
                 total={group.cards.length}

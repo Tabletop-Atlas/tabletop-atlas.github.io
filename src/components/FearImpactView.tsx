@@ -3,6 +3,7 @@ import { impactBreakdown, tagImpactBreakdown, type FearCard } from '../domain/im
 import type { Impact } from '../domain/types'
 import { CardChipList } from './CardChipList'
 import { pct, RatingStackedBar } from './RatingStackedBar'
+import { Term } from './Term'
 
 /** Sequential green ramp (light→dark, magnitude not polarity) — owner-ratified at #04, one hue
  * so "more" reads as "stronger", never a different category (PRD-2 user story 16). The middle
@@ -49,19 +50,25 @@ export function FearImpactView({ cards, initialPicked }: { cards: FearCard[]; in
       <p className="dashboard-assumption">Percentages are this pool's share, not next-draw odds off the physical deck.</p>
       <div className="rating-tiles" role="group" aria-label="Fear impact">
         {overall.map((bucket) => (
-          <button
+          <span
             key={bucket.impact}
-            type="button"
             className="rating-tile"
-            aria-pressed={picked?.impact === bucket.impact && picked.tag === null}
             data-active={picked?.impact === bucket.impact && picked.tag === null}
-            onClick={() => toggle(bucket.impact, null)}
           >
-            <span className="rating-tile-dot" style={{ background: IMPACT_COLOR[bucket.impact] }} />
-            <span className="rating-tile-pct">{pct(bucket.cards.length, cards.length)}</span>
-            <span className="rating-tile-count">({bucket.cards.length})</span>
-            <span className="rating-tile-label">{bucket.label}</span>
-          </button>
+            <button
+              type="button"
+              className="rating-tile-pick"
+              aria-pressed={picked?.impact === bucket.impact && picked.tag === null}
+              onClick={() => toggle(bucket.impact, null)}
+            >
+              <span className="rating-tile-dot" style={{ background: IMPACT_COLOR[bucket.impact] }} />
+              <span className="rating-tile-pct">{pct(bucket.cards.length, cards.length)}</span>
+              <span className="rating-tile-count">({bucket.cards.length})</span>
+            </button>
+            <Term id={`impact-${bucket.label}`} className="rating-tile-label">
+              {bucket.label}
+            </Term>
+          </span>
         ))}
       </div>
 
@@ -79,7 +86,9 @@ export function FearImpactView({ cards, initialPicked }: { cards: FearCard[]; in
         {byTag.map((group) => (
           <div key={group.label} className="rating-tag-row">
             <div className="deck-pool-row">
-              <span className="deck-pool-label">{group.label}</span>
+              <span className="deck-pool-label">
+                <Term id={group.subtype ? `fear-tag-${group.subtype}` : 'fear-tag-unclassified'}>{group.label}</Term>
+              </span>
               <RatingStackedBar
                 segments={group.byImpact.map((b) => ({ key: String(b.impact), label: b.label, count: b.cards.length, color: IMPACT_COLOR[b.impact] }))}
                 total={group.cards.length}

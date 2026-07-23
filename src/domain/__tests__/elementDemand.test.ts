@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import innatePowersData from '../../data/innate-powers.json'
 import powerCardsData from '../../data/power-cards.json'
 import spiritsData from '../../data/spirits.json'
-import { computeElementDemand, type ElementDemandSupply } from '../elementDemand'
+import { computeElementDemand, seedElementPick, type ElementDemandSupply } from '../elementDemand'
 import type { Element, InnatePower, PowerCard, Spirit } from '../types'
 
 const SPIRITS = spiritsData as Spirit[]
@@ -150,6 +150,44 @@ describe('computeElementDemand', () => {
   })
 })
 
+describe('seedElementPick', () => {
+  it('returns the demanded element with the lowest odds, with its first-rung count', () => {
+    // Two innates open on different elements: Air wants 3 of 2 supplied (low odds); Fire wants
+    // 1 of 4 (high odds) — Air is the gap.
+    const powers = [innate('s', [{ Fire: 1 }]), innate('s', [{ Air: 3 }])]
+    const cards = [
+      card({ name: 'A', elements: ['Fire', 'Air'] }),
+      card({ name: 'B', elements: ['Air'] }),
+      card({ name: 'C', elements: ['Fire'] }),
+      card({ name: 'D', elements: ['Fire'] }),
+      card({ name: 'E', elements: ['Fire'] }),
+    ]
+    const supply = must(computeElementDemand('s', [spirit('s', ['Fire'])], powers, cards, 2))
+    expect(seedElementPick(supply)).toEqual({ element: 'Air', count: 3 })
+  })
+
+  it('breaks an odds tie in canonical ELEMENTS order', () => {
+    // Sun and Moon: same demand, same supply, same pool — identical odds. Sun comes first.
+    const powers = [innate('s', [{ Moon: 1, Sun: 1 }])]
+    const cards = [card({ name: 'A', elements: ['Sun', 'Moon'] }), card({ name: 'B', elements: ['Sun', 'Moon'] })]
+    const supply = must(computeElementDemand('s', [spirit('s', ['Sun'])], powers, cards, 2))
+    expect(seedElementPick(supply)).toEqual({ element: 'Sun', count: 1 })
+  })
+
+  it('never seeds an element demanded only at a later rung (no first-rung count to pick)', () => {
+    const powers = [innate('s', [{ Fire: 1 }, { Water: 2 }])]
+    const cards = [card({ name: 'A', elements: ['Fire'] })]
+    const supply = must(computeElementDemand('s', [spirit('s', ['Fire'])], powers, cards, 1))
+    expect(elementOf(supply, 'Water').demanded).toBe(true)
+    expect(seedElementPick(supply)).toEqual({ element: 'Fire', count: 1 })
+  })
+
+  it('returns undefined when nothing is demanded', () => {
+    const supply = must(computeElementDemand('s', [spirit('s', ['Fire'])], [], [card({ name: 'A', elements: ['Fire'] })], 4))
+    expect(seedElementPick(supply)).toBeUndefined()
+  })
+})
+
 // Tripwire against the shipped data, per ADR 0003: these numbers are the reason the Dashboard
 // stopped showing deck-wide element aggregates (ADR 0013). If they drift, the view's premise has
 // changed and must be re-argued, not silently re-rendered.
@@ -185,5 +223,16 @@ describe('computeElementDemand over the shipped data', () => {
     expect(water.demand).toBeUndefined()
     expect(water.ceiling).toBe(2)
     expect(water.affinity).toBe(false)
+  })
+
+  it('seeds every spirit within the free-form count chip cap (1–6)', () => {
+    for (const s of SPIRITS) {
+      const supply = computeElementDemand(s.id, SPIRITS, INNATE_POWERS, MINORS, 4)
+      if (!supply) continue
+      const seed = seedElementPick(supply)
+      if (!seed) continue
+      expect(seed.count, `${s.id} seed count`).toBeGreaterThanOrEqual(1)
+      expect(seed.count, `${s.id} seed count`).toBeLessThanOrEqual(6)
+    }
   })
 })

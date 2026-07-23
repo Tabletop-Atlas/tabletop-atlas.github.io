@@ -5,12 +5,15 @@ import { EXPANSIONS, EVENT_CLASSES, FEAR_TAGS, type Spirit } from '../../domain/
 import { subtypeLabel } from '../tagColors'
 import App from '../../App'
 import { collectionStore } from '../../domain/collectionStore'
+import { gameLog } from '../../domain/gameLog'
 import { tierStore } from '../../domain/tierStore'
 import type { FearCard } from '../../domain/impactBreakdown'
 import type { EventCard } from '../../domain/valenceBreakdown'
+import { AvatarChip } from '../AvatarChip'
 import { DashboardTab } from '../DashboardTab'
 import { EventValenceView } from '../EventValenceView'
 import { FearImpactView } from '../FearImpactView'
+import { GameLog } from '../GameLog'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
 import { Settings } from '../Settings'
 import { SpiritDetail } from '../SpiritDetail'
@@ -319,6 +322,27 @@ describe('app smoke', () => {
     }
   })
 
+  it('the free-form element picker is an 8-chip icon strip and a 1–6 count chip row, not a native select/number (dashboard-picker-glossary #01)', () => {
+    const html = renderToStaticMarkup(<DashboardTab />)
+    expect(html).toContain('dashboard-element-strip')
+    expect(html).toContain('dashboard-count-chips')
+    expect(html).toContain('How many of an element do I want?')
+    // Eight element chips (icon + name) and six count chips (class names are exact, not the strip containers).
+    expect((html.match(/class="dashboard-element-chip"/g) ?? []).length).toBe(8)
+    expect((html.match(/class="dashboard-count-chip"/g) ?? []).length).toBe(6)
+    // The free-form block no longer ships a "Pick one" dropdown or a number box.
+    expect(html).not.toContain('>Pick one<')
+    expect(html).not.toMatch(/type="number"/)
+  })
+
+  it('picking a spirit seeds the free-form picker to that spirit\u2019s lowest-odds demanded element (dashboard-picker-glossary #02)', () => {
+    // Lightning\u2019s first-rung demand is Fire 3 / Air 1; Fire has the lower odds on the minor pool.
+    const html = renderToStaticMarkup(<DashboardTab initialSpiritId="lightnings-swift-strike" />)
+    expect(html).toMatch(/dashboard-element-chip[^>]*data-active="true"[^>]*>[\s\S]*?Fire/)
+    expect(html).toMatch(/dashboard-count-chip[^>]*data-active="true"[^>]*>3</)
+    expect(html).toMatch(/% chance of drawing at least 3 Fire/)
+  })
+
   it('the Dashboard Fear segment shows the variant-D impact view: stat tiles, stacked bar, tag facet, hidden-subset framing copy, no by-expansion facet (deck-dashboard #19)', () => {
     const html = renderToStaticMarkup(<DashboardTab initialSegment="Fear" />)
     expect(html).toContain('cards')
@@ -336,6 +360,25 @@ describe('app smoke', () => {
     expect(html).not.toContain('By expansion')
     expect(html).not.toContain('rating-chip-drill')
     expect(html).not.toContain('Fear segment — coming soon.')
+  })
+
+  it('Fear and Event views wire defined glossary terms as dotted-underline Term buttons (dashboard-picker-glossary #03)', () => {
+    const fear = renderToStaticMarkup(<DashboardTab initialSegment="Fear" />)
+    expect(fear).toContain('class="term"')
+    expect(fear).toContain('>weak<')
+    expect(fear).toContain('>solid<')
+    expect(fear).toContain('>strong<')
+    // Fear tags are defined in the map → Term affordance present.
+    expect(fear).toContain('>Removal<')
+
+    const event = renderToStaticMarkup(<DashboardTab initialSegment="Event" />)
+    expect(event).toContain('class="term"')
+    expect(event).toContain('>Harmful<')
+    expect(event).toContain('>Mixed<')
+    expect(event).toContain('>Beneficial<')
+    // Event classes have no in-repo definition → plain text (no term button wrapping Choice alone
+    // would be hard to assert; the owner-TODO list documents the absence). Labels still render.
+    expect(event).toContain('Choice')
   })
 
   it('the Fear impact view drills a stat tile into its exact cards, with a clear control (deck-dashboard #19)', () => {
@@ -384,6 +427,60 @@ describe('app smoke', () => {
     expect(withDrill).toContain('Harmful One')
     expect(withDrill).not.toContain('Beneficial One')
     expect(withDrill).toContain('Clear')
+  })
+
+  it('AvatarChip renders spirit, adversary and scenario modes without crashing (log-modernize #02)', () => {
+    const spirit = spirits[0]
+    expect(() => renderToStaticMarkup(<AvatarChip kind="spirit" spirit={spirit} name={spirit.name} />)).not.toThrow()
+    expect(() => renderToStaticMarkup(<AvatarChip kind="adversary" name="England" />)).not.toThrow()
+    expect(() => renderToStaticMarkup(<AvatarChip kind="scenario" name="Blitz" />)).not.toThrow()
+    const html = renderToStaticMarkup(
+      <>
+        <AvatarChip kind="spirit" spirit={spirit} name={spirit.name} />
+        <AvatarChip kind="adversary" name="England" />
+        <AvatarChip kind="scenario" name="Blitz" />
+      </>,
+    )
+    expect((html.match(/avatar-chip/g) ?? []).length).toBeGreaterThanOrEqual(3)
+    expect(html).toContain(spirit.name.replace(/&/g, '&amp;').replace(/'/g, '&#x27;'))
+    expect(html).toContain('England')
+    expect(html).toContain('Blitz')
+  })
+
+  it('the modernised Log renders the panelled form, table history, avatar chips and delete control (log-modernize #01/#03/#04)', () => {
+    const previous = gameLog.list()
+    gameLog.replaceAll([])
+    try {
+      gameLog.append({
+        date: '2026-07-23T12:00:00.000Z',
+        players: [
+          { name: 'Adam', configId: 'lightnings-swift-strike' },
+          { name: 'Jo', configId: 'river-surges-in-sunlight' },
+        ],
+        adversary: 'England',
+        adversaryLevel: 3,
+        scenario: 'Blitz',
+        outcome: 'win',
+        notes: 'close game',
+      })
+      const html = renderToStaticMarkup(<GameLog />)
+      expect(html).toContain('Game log')
+      expect(html).toContain('log-panel')
+      expect(html).toContain('Record a game')
+      expect(html).toContain('Notes (optional)')
+      expect(html).toContain('log-textarea')
+      expect(html).toContain('Statistics')
+      expect(html).toContain('log-table')
+      expect(html).toContain('avatar-chip')
+      expect(html).toContain('England')
+      expect(html).toContain('Blitz')
+      expect(html).toContain('close game')
+      expect(html).toContain('log-delete')
+      expect(html).toContain('only in this browser')
+      expect(html).toContain('backup export')
+    } finally {
+      gameLog.replaceAll(previous)
+    }
   })
 
   it('the Dashboard Event segment states plainly that a base-game-only set has no events, rather than an error or blank screen (deck-dashboard #12)', () => {

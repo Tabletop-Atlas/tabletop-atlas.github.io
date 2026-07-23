@@ -1,5 +1,5 @@
 import { groupOtherCards } from './otherCardArrange'
-import type { Impact, OtherCard } from './types'
+import type { FearTag, Impact, OtherCard } from './types'
 
 export type FearCard = Extract<OtherCard, { kind: 'fear' }>
 
@@ -30,6 +30,8 @@ export function impactBreakdown(cards: FearCard[]): ImpactBucket[] {
 
 export interface TagImpactGroup {
   label: string
+  /** Raw fear tag when the group is a named bucket; absent for Unclassified. */
+  subtype?: FearTag
   cards: FearCard[]
   byImpact: ImpactBucket[]
 }
@@ -40,6 +42,11 @@ export interface TagImpactGroup {
 export function tagImpactBreakdown(cards: FearCard[]): TagImpactGroup[] {
   return groupOtherCards(cards, 'subtype').map((group) => {
     const groupCards = group.cards as FearCard[]
-    return { label: group.label, cards: groupCards, byImpact: impactBreakdown(groupCards) }
+    return {
+      label: group.label,
+      subtype: group.subtype as FearTag | undefined,
+      cards: groupCards,
+      byImpact: impactBreakdown(groupCards),
+    }
   })
 }

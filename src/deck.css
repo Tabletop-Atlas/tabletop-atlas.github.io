@@ -1315,7 +1315,7 @@ button:disabled {
   margin-bottom: 0.8rem;
 }
 .rating-tile {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 0.8rem;
@@ -1323,11 +1323,56 @@ button:disabled {
   border: 1px solid var(--deck-line);
   background: var(--deck-panel);
   color: var(--deck-text);
+}
+.rating-tile-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  padding: 0;
   cursor: pointer;
+  font: inherit;
 }
 .rating-tile[data-active='true'] {
   border-color: var(--deck-text);
   background: var(--deck-accent-bg);
+}
+.term-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+}
+.term {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: help;
+  border-bottom: 1px dotted var(--deck-dim);
+  text-transform: inherit;
+}
+.term-popover {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  width: max-content;
+  max-width: 16rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--deck-line);
+  border-radius: 8px;
+  background: var(--deck-panel);
+  color: var(--deck-text);
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.35;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
 }
 .rating-tile-dot {
   width: 10px;
@@ -2082,6 +2127,53 @@ button:disabled {
   padding: 0.35rem 0.9rem;
   font-size: 13px;
 }
+.dashboard-element-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem 0 0.6rem;
+}
+.dashboard-element-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  color: var(--deck-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+}
+.dashboard-element-chip[data-active='true'] {
+  background: var(--deck-accent-bg);
+  border-color: var(--deck-accent);
+  color: var(--deck-accent);
+  box-shadow: 0 0 0 1px var(--deck-accent);
+}
+.dashboard-count-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.4rem;
+}
+.dashboard-count-chip {
+  min-width: 2.2rem;
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  color: var(--deck-body);
+  font: 600 13px/1 var(--deck-mono);
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+}
+.dashboard-count-chip[data-active='true'] {
+  background: var(--deck-accent-bg);
+  border-color: var(--deck-accent);
+  color: var(--deck-accent);
+  box-shadow: 0 0 0 1px var(--deck-accent);
+}
 .dashboard-pill {
   display: inline-flex;
   align-items: center;
@@ -2418,5 +2510,262 @@ button:disabled {
   }
   .rating-chip-preview {
     width: 160px;
+  }
+}
+
+/* --- Game log modernization (log-modernize) ----------------------------------------------- */
+.log-panel {
+  border: 1px solid var(--deck-line);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem 0.9rem;
+  margin: 0 0 1rem;
+}
+.log-panel legend {
+  font: 600 12px/1 var(--deck-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--deck-dim);
+  padding: 0 0.3rem;
+}
+.log-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.log-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.log-field-grow {
+  flex: 1 1 12rem;
+}
+.log-field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.6rem;
+}
+.log-field-label {
+  font: 600 11px/1 var(--deck-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--deck-dim);
+}
+.log-input,
+.log-select,
+.log-textarea {
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  color: var(--deck-text);
+  padding: 0.4rem 0.85rem;
+  font-size: 13px;
+  font-family: inherit;
+}
+.log-textarea {
+  border-radius: 10px;
+  resize: vertical;
+  min-height: 2.5rem;
+}
+.log-input-narrow {
+  width: 4.5rem;
+}
+.log-chip-group {
+  display: flex;
+  gap: 0.35rem;
+}
+.log-chip,
+.log-chip-button,
+.log-submit,
+.log-delete,
+.log-toast-undo {
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  color: var(--deck-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+}
+.log-chip[data-active='true'] {
+  background: var(--deck-accent-bg);
+  border-color: var(--deck-accent);
+  color: var(--deck-accent);
+  box-shadow: 0 0 0 1px var(--deck-accent);
+}
+.log-submit {
+  background: var(--deck-accent-bg);
+  border-color: var(--deck-accent);
+  color: var(--deck-accent);
+}
+.log-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.log-stat-list {
+  margin: 0.2rem 0 0.6rem 1.1rem;
+  padding: 0;
+}
+.log-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--deck-accent);
+  background: var(--deck-accent-bg);
+  color: var(--deck-text);
+  font-size: 13px;
+}
+.log-toast-undo {
+  padding: 0.25rem 0.7rem;
+  font-size: 12px;
+}
+.log-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.log-table th {
+  text-align: left;
+  font: 600 11px/1 var(--deck-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--deck-dim);
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--deck-line);
+  white-space: nowrap;
+}
+.log-table td {
+  padding: 0.55rem 0.5rem;
+  border-bottom: 1px solid var(--deck-line-soft, var(--deck-line));
+  vertical-align: middle;
+}
+.log-outcome {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.log-outcome[data-outcome='win'] {
+  color: var(--deck-accent);
+}
+.log-outcome-meta {
+  display: block;
+  margin-top: 0.15rem;
+}
+.log-chip-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.log-notes-cell {
+  display: block;
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: none;
+  background: none;
+  color: var(--deck-body);
+  font: inherit;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+}
+.log-notes-cell-expanded {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  max-width: none;
+}
+.log-delete {
+  font-size: 12px;
+  padding: 0.3rem 0.7rem;
+  color: var(--deck-dim);
+}
+.avatar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 100%;
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  background: var(--deck-panel-2);
+  padding: 0.15rem 0.55rem 0.15rem 0.15rem;
+  font-size: 12px;
+  color: var(--deck-text);
+}
+.avatar-chip-art {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+.avatar-chip-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--deck-panel);
+  color: var(--deck-dim);
+  font: 600 10px/1 var(--deck-mono);
+  letter-spacing: 0.04em;
+}
+.avatar-chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 14rem;
+}
+
+@media (max-width: 720px) {
+  .log-table thead {
+    display: none;
+  }
+  .log-table,
+  .log-table tbody,
+  .log-table tr,
+  .log-table td {
+    display: block;
+    width: 100%;
+  }
+  .log-table tr {
+    border: 1px solid var(--deck-line);
+    border-radius: 8px;
+    padding: 0.5rem 0.65rem;
+    margin-bottom: 0.6rem;
+    background: var(--deck-panel);
+  }
+  .log-table td {
+    border: none;
+    padding: 0.3rem 0;
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 0.4rem;
+    align-items: start;
+  }
+  .log-table td::before {
+    content: attr(data-label);
+    font: 600 11px/1.3 var(--deck-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--deck-dim);
+  }
+  .log-notes-cell {
+    max-width: none;
+  }
+  .avatar-chip-name {
+    max-width: 10rem;
   }
 }

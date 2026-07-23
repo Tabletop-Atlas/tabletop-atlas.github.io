@@ -5,14 +5,17 @@ import powerCardsData from '../data/power-cards.json'
 import spiritsData from '../data/spirits.json'
 import { collectionStore } from '../domain/collectionStore'
 import { computeDeckComposition, probAtLeast } from '../domain/deckComposition'
-import { computeElementDemand } from '../domain/elementDemand'
+import { computeElementDemand, seedElementPick } from '../domain/elementDemand'
 import type { FearCard } from '../domain/impactBreakdown'
 import { ELEMENTS, EXPANSIONS, type Element, type ExpansionName, type InnatePower, type OtherCard, type PowerCard, type Spirit } from '../domain/types'
 import { normalizeExpansion } from './tagColors'
 import { DeckDemand } from './DeckDemand'
 import { DeckFacets } from './DeckFacets'
+import { ElementIcon } from './ElementIcon'
 import { EventValenceView } from './EventValenceView'
 import { FearImpactView } from './FearImpactView'
+
+const COUNT_CHIPS = [1, 2, 3, 4, 5, 6] as const
 
 const powerCards = powerCardsData as PowerCard[]
 const MINOR_CARDS = powerCards.filter((c) => c.kind === 'minor')
@@ -73,6 +76,18 @@ function isChecked(expansion: string, checked: ReadonlySet<ExpansionName>): bool
 /** `initialSegment` mirrors `TierBoard`'s `initialSubject` — lets the server-rendered smoke test
  * reach a non-default segment without simulating a click. `initialSpiritId` is the same escape
  * hatch for the demand block's spirit-picked states. */
+function seedWant(
+  nextConfigId: string,
+  poolCards: PowerCard[],
+  requestedDrawCount: number,
+): { element: Element | ''; count: number } {
+  const [nextSpiritId, nextAspect] = nextConfigId.split('::')
+  if (!nextSpiritId) return { element: '', count: 1 }
+  const supply = computeElementDemand(nextSpiritId, SPIRITS, INNATE_POWERS, poolCards, requestedDrawCount, nextAspect)
+  const seed = supply ? seedElementPick(supply) : undefined
+  return seed ? { element: seed.element, count: seed.count } : { element: '', count: 1 }
+}
+
 export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegment?: Segment; initialSpiritId?: string } = {}) {
   const [segment, setSegment] = useState<Segment>(initialSegment ?? 'Minor')
   const drawCount = DEFAULT_DRAW_COUNT
@@ -83,8 +98,17 @@ export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegme
   // are base-spirit-only, PRD's explicit call), the aspect half only sharpens the caption.
   const [configId, setConfigId] = useState(initialSpiritId ?? '')
   const [spiritId, aspectName] = configId.split('::')
-  const [wantElement, setWantElement] = useState<Element | ''>('')
-  const [wantCount, setWantCount] = useState(1)
+  // Seeded from the picked spirit (issue 02); re-seeded only on spirit change via handleConfigChange.
+  // initialSpiritId hatch seeds once from the default-checked pool of the initial segment.
+  const [want, setWant] = useState<{ element: Element | ''; count: number }>(() => {
+    if (!initialSpiritId) return { element: '', count: 1 }
+    const pool = (initialSegment === 'Major' ? MAJOR_CARDS : MINOR_CARDS).filter((c) =>
+      isChecked(c.expansion, defaultCheckedExpansions()),
+    )
+    return seedWant(initialSpiritId, pool, DEFAULT_DRAW_COUNT)
+  })
+  const wantElement = want.element
+  const wantCount = want.count
 
   function toggleExpansion(expansion: ExpansionName, checked: boolean) {
     setCheckedExpansions((prev) => {
@@ -113,8 +137,20 @@ export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegme
     [spiritId, aspectName, activePoolCards, drawCount],
   )
 
-  // A free-form odds calculator, independent of any spirit's own demand: "at least N of this
-  // element" for any element/N you pick, off the same active pool and draw count.
+  function handleConfigChange(next: string) {
+    const prevSpiritId = configId.split('::')[0]
+    const nextSpiritId = next.split('::')[0]
+    setConfigId(next)
+    // Re-seed only when the base spirit changes — not on aspect-only switches, segment
+    // switches, or manual chip edits (issue 02 / PRD).
+    if (nextSpiritId === prevSpiritId) return
+    const pool = segment === 'Major' ? majorPoolCards : minorPoolCards
+    setWant(seedWant(next, pool, drawCount))
+  }
+
+  // A free-form odds calculator: "at least N of this element" for any element/N you pick, off
+  // the same active pool and draw count. Seeded from the picked spirit (issue 02) but still
+  // freely editable.
   const wantOdds = useMemo(() => {
     if (!wantElement || !activeComposition) return undefined
     const supply = activeComposition.elements.find((e) => e.element === wantElement)?.count ?? 0
@@ -164,7 +200,7 @@ export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegme
         <>
           <label className="dashboard-spirit-picker dashboard-selectpill">
             Highlight my spirit
-            <select value={configId} onChange={(e) => setConfigId(e.target.value)}>
+            <select value={configId} onChange={(e) => handleConfigChange(e.target.value)}>
               <option value="">No spirit</option>
               {SPIRITS.map((spirit) => (
                 <optgroup key={spirit.id} label={spirit.name}>
@@ -181,27 +217,40 @@ export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegme
 
           <fieldset className="dashboard-picker">
             <legend>How many of an element do I want?</legend>
-            <label className="dashboard-spirit-picker dashboard-selectpill">
-              Element
-              <select value={wantElement} onChange={(e) => setWantElement(e.target.value as Element | '')}>
-                <option value="">Pick one</option>
-                {ELEMENTS.map((element) => (
-                  <option key={element} value={element}>
-                    {element}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="dashboard-spirit-picker dashboard-selectpill">
-              At least
-              <input
-                type="number"
-                min={1}
-                max={Math.max(1, activeComposition?.deckSize ?? 1)}
-                value={wantCount}
-                onChange={(e) => setWantCount(Number(e.target.value) || 1)}
-              />
-            </label>
+            <div className="dashboard-element-strip" role="group" aria-label="Element">
+              {ELEMENTS.map((element) => (
+                <button
+                  key={element}
+                  type="button"
+                  className="dashboard-element-chip"
+                  aria-pressed={wantElement === element}
+                  data-active={wantElement === element}
+                  onClick={() =>
+                    setWant((prev) => ({
+                      ...prev,
+                      element: prev.element === element ? '' : element,
+                    }))
+                  }
+                >
+                  <ElementIcon element={element} />
+                  {element}
+                </button>
+              ))}
+            </div>
+            <div className="dashboard-count-chips" role="group" aria-label="At least">
+              {COUNT_CHIPS.map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  className="dashboard-count-chip"
+                  aria-pressed={wantCount === n}
+                  data-active={wantCount === n}
+                  onClick={() => setWant((prev) => ({ ...prev, count: n }))}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
             {wantOdds !== undefined && (
               <p className="dashboard-assumption">
                 {Math.round(wantOdds * 100)}% chance of drawing at least {wantCount} {wantElement} in {activeComposition?.drawCount}{' '}

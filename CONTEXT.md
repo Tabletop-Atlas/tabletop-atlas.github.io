@@ -125,6 +125,16 @@ element they have no affinity for — that gap is the point.
 _Avoid_: element coverage, element odds (each names one half as if it were the whole); affinity
 (that means a spirit's printed `elements`, which is not demand).
 
+**Glossary term**:
+A user-facing plain-language definition of a domain word (e.g. `removal`, `weak`, a `Stage`
+event), surfaced inline wherever the word appears via a dotted-underline term that reveals a
+popover. Held in one central keyed map; every entry carries a `source` (`context` — restates an
+owner-ratified `CONTEXT.md` definition; `owner` — authored by the owner; `wiki`), and a tripwire
+test fails on any entry missing text or source, because rules prose is a fabrication risk (the
+same discipline as `aspectCanon`). A term with no in-repo source ships absent (a visible owner
+TODO), never invented.
+_Avoid_: tooltip, help text, definition (that names the mechanism, not the sourced datum).
+
 **Collection**:
 The expansions the user owns, at expansion granularity. Surfaces annotate unowned content by
 default; hiding is an explicit, session-only choice.

@@ -1,19 +1,27 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import spiritsData from '../data/spirits.json'
 import { ADVERSARIES, findAdversary } from '../domain/adversaries'
+import type { LogEntry } from '../domain/backup'
 import { expand } from '../domain/configurations'
 import { gameLog } from '../domain/gameLog'
 import { clampOptionalInt } from '../domain/logEntry'
 import { computeLogStats, type RateStat } from '../domain/logStats'
 import type { Spirit } from '../domain/types'
+import { AvatarChip } from './AvatarChip'
 
 const spirits = spiritsData as Spirit[]
 const configurations = expand(spirits)
+const spiritById = new Map(spirits.map((s) => [s.id, s]))
 
 function configLabel(configId: string): string {
   const config = configurations.find((c) => c.configId === configId)
   if (!config) return configId
   return config.aspect ? `${config.spirit.name} — ${config.aspect.name}` : config.spirit.name
+}
+
+function spiritForConfig(configId: string): Spirit | undefined {
+  const baseId = configId.split('::')[0]
+  return spiritById.get(baseId)
 }
 
 /** "60% (3/5)", or just the count below the small-sample threshold. */
@@ -29,6 +37,22 @@ interface PlayerRow {
 }
 
 const EMPTY_PLAYER: PlayerRow = { name: '', configId: '' }
+const UNDO_MS = 10_000
+
+function NotesCell({ notes }: { notes?: string }) {
+  const [expanded, setExpanded] = useState(false)
+  if (!notes) return <span className="meta">—</span>
+  return (
+    <button
+      type="button"
+      className={expanded ? 'log-notes-cell log-notes-cell-expanded' : 'log-notes-cell'}
+      title={notes}
+      onClick={() => setExpanded((e) => !e)}
+    >
+      {notes}
+    </button>
+  )
+}
 
 /** Record a played game and browse history. A journal, not a feedback loop - see gameLog.ts:
  * outcomes are shown here, never fed back into scoring. */
@@ -41,6 +65,15 @@ export function GameLog() {
   const [outcome, setOutcome] = useState<'win' | 'loss'>('win')
   const [terrorLevel, setTerrorLevel] = useState('')
   const [blightRemaining, setBlightRemaining] = useState('')
+  const [notes, setNotes] = useState('')
+  const [undoEntry, setUndoEntry] = useState<LogEntry | null>(null)
+  const undoTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  useEffect(() => {
+    return () => {
+      if (undoTimer.current !== undefined) clearTimeout(undoTimer.current)
+    }
+  }, [])
 
   // version is a deliberate re-run trigger for gameLog's mutable read, not a real dependency.
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,6 +113,7 @@ export function GameLog() {
       // pasted out-of-range value can't be recorded.
       terrorLevel: clampOptionalInt(terrorLevel, 1, 3),
       blightRemaining: clampOptionalInt(blightRemaining, 0),
+      notes: notes.trim() || undefined,
     })
     setPlayers([{ ...EMPTY_PLAYER }])
     setAdversary('')
@@ -88,182 +122,299 @@ export function GameLog() {
     setOutcome('win')
     setTerrorLevel('')
     setBlightRemaining('')
+    setNotes('')
+    setVersion((v) => v + 1)
+  }
+
+  const handleDelete = (id: string) => {
+    const removed = gameLog.remove(id)
+    if (!removed) return
+    setUndoEntry(removed)
+    if (undoTimer.current !== undefined) clearTimeout(undoTimer.current)
+    undoTimer.current = setTimeout(() => setUndoEntry(null), UNDO_MS)
+    setVersion((v) => v + 1)
+  }
+
+  const handleUndo = () => {
+    if (!undoEntry) return
+    gameLog.append(undoEntry)
+    setUndoEntry(null)
+    if (undoTimer.current !== undefined) clearTimeout(undoTimer.current)
     setVersion((v) => v + 1)
   }
 
   return (
-    <section>
+    <section className="log-tab">
       <h2>Game log</h2>
-      <p>Record what you played. This never adjusts your tier list or your weights.</p>
+      <p className="meta">
+        Record what you played. This never adjusts your tier list or your weights. Your log lives
+        only in this browser — the backup export in Settings is the durable copy.
+      </p>
 
-      <h3>Record a game</h3>
-      {players.map((player, i) => (
-        <p key={i}>
-          <label>
-            <span className="visually-hidden">Player name</span>
-            <input
-              type="text"
-              placeholder="Player name"
-              value={player.name}
-              onChange={(e) =>
-                setPlayers((rows) => rows.map((r, j) => (j === i ? { ...r, name: e.target.value } : r)))
-              }
-            />
-          </label>{' '}
-          <label>
-            <span className="visually-hidden">Configuration played</span>
-            <select
-              value={player.configId}
-              onChange={(e) =>
-                setPlayers((rows) => rows.map((r, j) => (j === i ? { ...r, configId: e.target.value } : r)))
-              }
-            >
-              <option value="">Which spirit/aspect?</option>
-              {configurations.map((c) => (
-                <option key={c.configId} value={c.configId}>
-                  {configLabel(c.configId)}
+      <fieldset className="log-panel">
+        <legend>Record a game</legend>
+
+        {players.map((player, i) => (
+          <div key={i} className="log-row">
+            <label className="log-field">
+              <span className="log-field-label">Player</span>
+              <input
+                className="log-input"
+                type="text"
+                placeholder="Name"
+                value={player.name}
+                onChange={(e) =>
+                  setPlayers((rows) => rows.map((r, j) => (j === i ? { ...r, name: e.target.value } : r)))
+                }
+              />
+            </label>
+            <label className="log-field log-field-grow">
+              <span className="log-field-label">Spirit / aspect</span>
+              <select
+                className="log-select"
+                value={player.configId}
+                onChange={(e) =>
+                  setPlayers((rows) => rows.map((r, j) => (j === i ? { ...r, configId: e.target.value } : r)))
+                }
+              >
+                <option value="">Which spirit/aspect?</option>
+                {configurations.map((c) => (
+                  <option key={c.configId} value={c.configId}>
+                    {configLabel(c.configId)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {players.length > 1 && (
+              <button type="button" className="log-chip-button" onClick={() => setPlayers((rows) => rows.filter((_, j) => j !== i))}>
+                Remove
+              </button>
+            )}
+          </div>
+        ))}
+        <div className="log-row">
+          <button type="button" className="log-chip-button" onClick={() => setPlayers((rows) => [...rows, { ...EMPTY_PLAYER }])}>
+            Add player
+          </button>
+        </div>
+
+        <div className="log-row">
+          <label className="log-field log-field-grow">
+            <span className="log-field-label">Adversary</span>
+            <select className="log-select" value={adversary} onChange={(e) => handleSetAdversary(e.target.value)}>
+              <option value="">Which adversary?</option>
+              {ADVERSARIES.map((a) => (
+                <option key={a.name} value={a.name}>
+                  {a.name}
                 </option>
               ))}
             </select>
-          </label>{' '}
-          {players.length > 1 && (
-            <button type="button" onClick={() => setPlayers((rows) => rows.filter((_, j) => j !== i))}>
-              Remove
-            </button>
-          )}
+          </label>
+          <label className="log-field">
+            <span className="log-field-label">Level</span>
+            <input
+              className="log-input log-input-narrow"
+              type="number"
+              min={selectedAdversary?.minLevel ?? 0}
+              max={selectedAdversary?.maxLevel ?? 6}
+              value={adversaryLevel}
+              onChange={(e) => handleSetAdversaryLevel(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <div className="log-row">
+          <label className="log-field log-field-grow">
+            <span className="log-field-label">Scenario (optional)</span>
+            <input className="log-input" type="text" value={scenario} onChange={(e) => setScenario(e.target.value)} />
+          </label>
+        </div>
+
+        <div className="log-row">
+          <span className="log-field-label">Outcome</span>
+          <div className="log-chip-group" role="group" aria-label="Outcome">
+            {(['win', 'loss'] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                className="log-chip"
+                aria-pressed={outcome === value}
+                data-active={outcome === value}
+                onClick={() => setOutcome(value)}
+              >
+                {value === 'win' ? 'Win' : 'Loss'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="log-row">
+          <label className="log-field">
+            <span className="log-field-label">Terror level</span>
+            <input
+              className="log-input log-input-narrow"
+              type="number"
+              min={1}
+              max={3}
+              value={terrorLevel}
+              onChange={(e) => setTerrorLevel(e.target.value)}
+              placeholder="—"
+            />
+          </label>
+          <label className="log-field">
+            <span className="log-field-label">Blight remaining</span>
+            <input
+              className="log-input log-input-narrow"
+              type="number"
+              min={0}
+              value={blightRemaining}
+              onChange={(e) => setBlightRemaining(e.target.value)}
+              placeholder="—"
+            />
+          </label>
+        </div>
+
+        <label className="log-field log-field-block">
+          <span className="log-field-label">Notes (optional)</span>
+          <textarea
+            className="log-textarea"
+            rows={2}
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="How did it go?"
+          />
+        </label>
+
+        <div className="log-row">
+          <button type="button" className="log-submit" onClick={handleSubmit} disabled={!canSubmit}>
+            Record game
+          </button>
+        </div>
+      </fieldset>
+
+      <fieldset className="log-panel">
+        <legend>Statistics</legend>
+        <p className="meta">
+          Descriptive only — read these yourself; nothing here adjusts a tier, a weight, or a complexity override.
         </p>
-      ))}
-      <p>
-        <button type="button" onClick={() => setPlayers((rows) => [...rows, { ...EMPTY_PLAYER }])}>
-          Add player
-        </button>
-      </p>
+        {stats.gamesPlayed === 0 ? (
+          <p className="meta">No games logged yet.</p>
+        ) : (
+          <>
+            <p>
+              Games played: {stats.gamesPlayed} · Overall win rate: {formatRate(stats.overall)}
+            </p>
+            <p className="meta">Win rate by configuration:</p>
+            <ul className="log-stat-list">
+              {Object.entries(stats.byConfiguration).map(([configId, stat]) => (
+                <li key={configId}>
+                  {configLabel(configId)}: {formatRate(stat)}
+                </li>
+              ))}
+            </ul>
+            <p className="meta">Win rate by effective complexity:</p>
+            <ul className="log-stat-list">
+              {Object.entries(stats.byComplexity).map(([complexity, stat]) => (
+                <li key={complexity}>
+                  {complexity}: {formatRate(stat)}
+                </li>
+              ))}
+            </ul>
+            <p className="meta">Win rate by adversary:</p>
+            <ul className="log-stat-list">
+              {Object.entries(stats.byAdversary).map(([adversaryName, stat]) => (
+                <li key={adversaryName}>
+                  {adversaryName}: {formatRate(stat)}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </fieldset>
 
-      <p>
-        <label>
-          <span>Adversary</span>{' '}
-          <select value={adversary} onChange={(e) => handleSetAdversary(e.target.value)}>
-            <option value="">Which adversary?</option>
-            {ADVERSARIES.map((a) => (
-              <option key={a.name} value={a.name}>
-                {a.name}
-              </option>
-            ))}
-          </select>
-        </label>{' '}
-        <label>
-          <span>Level</span>{' '}
-          <input
-            type="number"
-            min={selectedAdversary?.minLevel ?? 0}
-            max={selectedAdversary?.maxLevel ?? 6}
-            value={adversaryLevel}
-            onChange={(e) => handleSetAdversaryLevel(e.target.value)}
-          />
-        </label>
-      </p>
-      <p>
-        <label>
-          <span>Scenario (optional)</span>{' '}
-          <input type="text" value={scenario} onChange={(e) => setScenario(e.target.value)} />
-        </label>
-      </p>
-      <p>
-        <label>
-          <span>Outcome</span>{' '}
-          <select value={outcome} onChange={(e) => setOutcome(e.target.value as 'win' | 'loss')}>
-            <option value="win">Win</option>
-            <option value="loss">Loss</option>
-          </select>
-        </label>
-      </p>
-      <p>
-        <label>
-          <span>Terror level (optional)</span>{' '}
-          <input type="number" min={1} max={3} value={terrorLevel} onChange={(e) => setTerrorLevel(e.target.value)} />
-        </label>{' '}
-        <label>
-          <span>Blight remaining (optional)</span>{' '}
-          <input
-            type="number"
-            min={0}
-            value={blightRemaining}
-            onChange={(e) => setBlightRemaining(e.target.value)}
-          />
-        </label>
-      </p>
-      <p>
-        <button type="button" onClick={handleSubmit} disabled={!canSubmit}>
-          Record game
-        </button>
-      </p>
-
-      <h3>Statistics</h3>
-      <p className="meta">
-        Descriptive only — read these yourself; nothing here adjusts a tier, a weight, or a
-        complexity override.
-      </p>
-      {stats.gamesPlayed === 0 ? (
-        <p className="meta">No games logged yet.</p>
-      ) : (
-        <>
-          <p>
-            Games played: {stats.gamesPlayed} · Overall win rate: {formatRate(stats.overall)}
+      <fieldset className="log-panel">
+        <legend>History ({entries.length})</legend>
+        {undoEntry && (
+          <p className="log-toast" role="status">
+            Deleted —{' '}
+            <button type="button" className="log-toast-undo" onClick={handleUndo}>
+              Undo
+            </button>
           </p>
-          <p className="meta">Win rate by configuration:</p>
-          <ul>
-            {Object.entries(stats.byConfiguration).map(([configId, stat]) => (
-              <li key={configId}>
-                {configLabel(configId)}: {formatRate(stat)}
-              </li>
-            ))}
-          </ul>
-          <p className="meta">Win rate by effective complexity:</p>
-          <ul>
-            {Object.entries(stats.byComplexity).map(([complexity, stat]) => (
-              <li key={complexity}>
-                {complexity}: {formatRate(stat)}
-              </li>
-            ))}
-          </ul>
-          <p className="meta">Win rate by adversary:</p>
-          <ul>
-            {Object.entries(stats.byAdversary).map(([adversaryName, stat]) => (
-              <li key={adversaryName}>
-                {adversaryName}: {formatRate(stat)}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-
-      <h3>History ({entries.length})</h3>
-      {entries.length === 0 ? (
-        <p className="meta">No games logged yet.</p>
-      ) : (
-        <ul>
-          {entries.map((entry) => (
-            <li key={entry.id}>
-              <strong>{entry.date.slice(0, 10)}</strong> — {entry.outcome} vs {entry.adversary} (level{' '}
-              {entry.adversaryLevel}){entry.scenario ? ` — ${entry.scenario}` : ''}
-              <ul>
-                {entry.players.map((p, i) => (
-                  <li key={i}>
-                    {p.name}: {configLabel(p.configId)}
-                  </li>
+        )}
+        {entries.length === 0 ? (
+          <p className="meta">No games logged yet.</p>
+        ) : (
+          <div className="log-table-wrap">
+            <table className="log-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Outcome</th>
+                  <th>Spirits</th>
+                  <th>Adversary</th>
+                  <th>Scenario</th>
+                  <th>Notes</th>
+                  <th>
+                    <span className="visually-hidden">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {entries.map((entry) => (
+                  <tr key={entry.id}>
+                    <td data-label="Date">{entry.date.slice(0, 10)}</td>
+                    <td data-label="Outcome">
+                      <span className="log-outcome" data-outcome={entry.outcome}>
+                        {entry.outcome === 'win' ? 'Win' : 'Loss'}
+                      </span>
+                      {(entry.terrorLevel !== undefined || entry.blightRemaining !== undefined) && (
+                        <span className="meta log-outcome-meta">
+                          {entry.terrorLevel !== undefined ? `Terror ${entry.terrorLevel}` : null}
+                          {entry.terrorLevel !== undefined && entry.blightRemaining !== undefined ? ' · ' : null}
+                          {entry.blightRemaining !== undefined ? `Blight remaining ${entry.blightRemaining}` : null}
+                        </span>
+                      )}
+                    </td>
+                    <td data-label="Spirits">
+                      <span className="log-chip-cluster">
+                        {entry.players.map((p, i) => {
+                          const spirit = spiritForConfig(p.configId)
+                          const label = `${p.name}: ${configLabel(p.configId)}`
+                          return spirit ? (
+                            <AvatarChip key={i} kind="spirit" spirit={spirit} name={label} />
+                          ) : (
+                            <span key={i} className="avatar-chip">
+                              <span className="avatar-chip-name">{label}</span>
+                            </span>
+                          )
+                        })}
+                      </span>
+                    </td>
+                    <td data-label="Adversary">
+                      <span className="log-chip-cluster">
+                        <AvatarChip kind="adversary" name={entry.adversary} />
+                        <span className="meta">Lv {entry.adversaryLevel}</span>
+                      </span>
+                    </td>
+                    <td data-label="Scenario">
+                      {entry.scenario ? <AvatarChip kind="scenario" name={entry.scenario} /> : <span className="meta">—</span>}
+                    </td>
+                    <td data-label="Notes">
+                      <NotesCell notes={entry.notes} />
+                    </td>
+                    <td data-label="Actions">
+                      <button type="button" className="log-delete" onClick={() => handleDelete(entry.id)} aria-label="Delete game">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
                 ))}
-              </ul>
-              {(entry.terrorLevel !== undefined || entry.blightRemaining !== undefined) && (
-                <p className="meta">
-                  {entry.terrorLevel !== undefined ? `Terror ${entry.terrorLevel}` : null}
-                  {entry.terrorLevel !== undefined && entry.blightRemaining !== undefined ? ' · ' : null}
-                  {entry.blightRemaining !== undefined ? `Blight remaining ${entry.blightRemaining}` : null}
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </fieldset>
     </section>
   )
 }

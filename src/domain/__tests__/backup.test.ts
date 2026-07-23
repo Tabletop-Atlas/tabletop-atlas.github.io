@@ -47,6 +47,16 @@ describe('backup', () => {
     expect(unresolved).toEqual([])
   })
 
+  it('round-trips a log entry with notes intact, and an entry without notes is unaffected', () => {
+    const withNotes: LogEntry = { ...entryA, id: 'game-notes', notes: 'close game, blight cascade turn 5' }
+    const withoutNotes: LogEntry = { ...entryB, id: 'game-no-notes' }
+    const json = serialise({ ...fullState, log: [withNotes, withoutNotes] })
+    const { state, unresolved } = parse(json, KNOWN)
+    expect(unresolved).toEqual([])
+    expect(state.log.find((e) => e.id === 'game-notes')?.notes).toBe('close game, blight cascade turn 5')
+    expect(state.log.find((e) => e.id === 'game-no-notes')?.notes).toBeUndefined()
+  })
+
   it('stamps the current schema version (3) and an exportedAt timestamp', () => {
     const bundle = JSON.parse(serialise(fullState))
     expect(bundle.schemaVersion).toBe(CURRENT_SCHEMA_VERSION)

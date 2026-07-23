@@ -5,6 +5,8 @@ export type OtherGroup = 'none' | 'expansion' | 'subtype'
 
 export interface OtherCardGroup {
   label: string
+  /** Set when grouped by subtype — the raw fear/blight/event tag; absent for expansion groups and Unclassified. */
+  subtype?: FearTag | BlightTag | EventClass
   cards: OtherCard[]
 }
 
@@ -44,8 +46,12 @@ export function groupOtherCards(cards: OtherCard[], group: Exclude<OtherGroup, '
     kind === 'fear' ? FEAR_TAGS : kind === 'blight' ? BLIGHT_TAGS : EVENT_CLASSES
   const label = (text: string) => (isJudgment ? `${text} (judgment)` : text)
 
-  const groups = canonicalOrder
-    .map((tag) => ({ label: label(subtypeLabel(tag)), cards: cards.filter((c) => subtypesOf(c).includes(tag)) }))
+  const groups: OtherCardGroup[] = canonicalOrder
+    .map((tag) => ({
+      label: label(subtypeLabel(tag)),
+      subtype: tag,
+      cards: cards.filter((c) => subtypesOf(c).includes(tag)),
+    }))
     .filter((g) => g.cards.length > 0)
 
   const unclassified = cards.filter((c) => subtypesOf(c).length === 0)

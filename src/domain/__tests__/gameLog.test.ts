@@ -107,6 +107,41 @@ describe('gameLog', () => {
     })
   })
 
+  describe('remove', () => {
+    it('drops exactly that entry and leaves others', () => {
+      const log = createGameLog(memoryStorage())
+      const a = log.append(entry({ players: [{ name: 'A', configId: 'a' }] }))
+      const b = log.append(entry({ players: [{ name: 'B', configId: 'b' }] }))
+      const removed = log.remove(a.id)
+      expect(removed).toEqual(a)
+      expect(log.list()).toEqual([b])
+    })
+
+    it('returns undefined for an unknown id', () => {
+      const log = createGameLog(memoryStorage())
+      log.append(entry())
+      expect(log.remove('nope')).toBeUndefined()
+      expect(log.list()).toHaveLength(1)
+    })
+
+    it('re-append of a removed entry restores it with its original id (undo)', () => {
+      const log = createGameLog(memoryStorage())
+      const recorded = log.append(entry({ players: [{ name: 'A', configId: 'a' }] }))
+      const removed = log.remove(recorded.id)!
+      const restored = log.append(removed)
+      expect(restored.id).toBe(recorded.id)
+      expect(log.list()).toEqual([restored])
+    })
+
+    it('timesPlayed reflects removal', () => {
+      const log = createGameLog(memoryStorage())
+      const recorded = log.append(entry({ players: [{ name: 'A', configId: 'a' }] }))
+      expect(log.timesPlayed('a')).toBe(1)
+      log.remove(recorded.id)
+      expect(log.timesPlayed('a')).toBe(0)
+    })
+  })
+
   it('drops an entry with no players array, rather than throwing on every later read', () => {
     const storage = memoryStorage()
     storage.setItem(
