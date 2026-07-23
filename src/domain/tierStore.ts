@@ -63,7 +63,11 @@ function rankOf(label: string, tierLabels: string[]): number | undefined {
  * map — see `.scratch/v3/tier-list-schema.md`. Multiple lists can be shipped; the store holds
  * one *active* list and keys overrides by list id. `origin: 'cited'` lists never take edits. */
 export function createTierStore(storage: KeyValueStorage = defaultStorage(), shippedLists: TierList[] = SHIPPED_LISTS) {
-  const ownersBoardList = shippedLists.find((l) => l.origin === 'personal') ?? shippedLists[0]
+  // The shipped configurations default (Red's list, id 'owners-board') — the board the app boots
+  // into and the tier-vocabulary template new personal lists copy. It was the sole 'personal'
+  // shipped list until it was correctly re-credited to Red as a `cited` list (grill 2026-07-23),
+  // so it's now pinned by id rather than by a `personal` origin no shipped list carries.
+  const ownersBoardList = shippedLists.find((l) => l.id === 'owners-board') ?? shippedLists[0]
 
   // Sticky for the life of this store instance (one page load) — see tierStore v2's original
   // rationale, now tracked per list id since a discard on one list must not read as a discard
@@ -108,6 +112,10 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage(), shi
    * discarded rather than masking the new seed.
    */
   function readOverridesFor(list: TierList): Record<string, string> {
+    // A `cited` list never takes edits — enforced on the write path (setTier/clearTier), and here
+    // on the read path too, so stale overrides (e.g. from before a list was re-credited from
+    // personal to cited) can never shadow the citation via getAll/getTier.
+    if (list.origin === 'cited') return {}
     const raw = storage.getItem(overridesKey(list.id))
     if (!raw) return {}
     let parsed: unknown
@@ -185,12 +193,12 @@ export function createTierStore(storage: KeyValueStorage = defaultStorage(), shi
     return list?.subject === subject ? list : undefined
   }
 
-  /** The durable boot pick. Unset or unresolvable falls back to the owner's board for
-   * configurations and to the first shipped list for any other subject. #18 verified the seed
-   * and ESCALATED instead of flipping it: the owner's named default video
-   * (`watch?v=LoP2T4GO4xo`, MAP.md) matches no shipped citation — 3mbg was scraped from a
-   * different video — so seeding the cited list would be guessing which list the owner meant.
-   * Stays the owner's board until the owner answers (#12/#18 resolutions, ADR 0002). */
+  /** The durable boot pick. Unset or unresolvable falls back to the shipped configurations
+   * default (Red's list) for configurations and to the first shipped list for any other subject.
+   * #18 ESCALATED which video the owner's board transcribed — its named default
+   * (`watch?v=LoP2T4GO4xo`, MAP.md) matched no shipped citation because 3mbg was scraped from a
+   * different video. The owner answered (grill 2026-07-23): that video IS Red's Final Tier List,
+   * the board transcribes it, and it's now credited to Red as a `cited` list. */
   function defaultListFor(subject: TierListSubject): TierList | undefined {
     const stored = listOfSubject(storage.getItem(defaultListKey(subject)), subject)
     if (stored) return stored

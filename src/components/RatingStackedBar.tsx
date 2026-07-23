@@ -37,12 +37,17 @@ export function RatingStackedBar({
               <span className="rating-segment-pct">{share}</span>
             </>
           )
+          // flex-basis:0 (not the default `auto`) so width is the segment's true share, not
+          // its share of the *leftover* space after each segment's text sets a min width — that
+          // bug made 74% and 67% render near-identical. minWidth:0 lets a thin segment shrink
+          // its label rather than force the bar wider than its share.
+          const flex = { flexGrow: segment.count, flexShrink: 1, flexBasis: 0, minWidth: 0 }
           return onSegmentClick ? (
             <button
               key={segment.key}
               type="button"
               className="rating-segment rating-segment-button"
-              style={{ flexGrow: segment.count, background: segment.color }}
+              style={{ ...flex, background: segment.color }}
               aria-pressed={activeKey === segment.key}
               data-active={activeKey === segment.key}
               title={`${segment.label} ${share}`}
@@ -51,7 +56,7 @@ export function RatingStackedBar({
               {content}
             </button>
           ) : (
-            <span key={segment.key} className="rating-segment" style={{ flexGrow: segment.count, background: segment.color }} title={`${segment.label} ${share}`}>
+            <span key={segment.key} className="rating-segment" style={{ ...flex, background: segment.color }} title={`${segment.label} ${share}`}>
               {content}
             </span>
           )

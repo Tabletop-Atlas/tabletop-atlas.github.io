@@ -1641,6 +1641,70 @@ button:disabled {
   background: var(--deck-text);
   color: var(--deck-panel-2);
 }
+/* Cost/Speed/Expansion folded behind a disclosure so the bar leads with Type + Elements. */
+.card-filters-more {
+  border: 1px solid var(--deck-line);
+  border-radius: 8px;
+  background: var(--deck-panel);
+}
+.card-filters-more > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+  font: 600 11px/1 var(--deck-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--deck-dim);
+  list-style: none;
+}
+.card-filters-more > summary::-webkit-details-marker {
+  display: none;
+}
+.card-filters-more > summary::before {
+  content: '▸';
+}
+.card-filters-more[open] > summary::before {
+  content: '▾';
+}
+.card-filters-more[open] > summary {
+  border-bottom: 1px solid var(--deck-line);
+}
+.card-filters-more .card-filters-row {
+  padding: 0.6rem 0.7rem;
+}
+.card-filters-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--deck-text);
+  color: var(--deck-panel-2);
+  font: 600 10px/1 var(--deck-mono);
+}
+.card-filters-speed {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.card-filters-clear {
+  align-self: flex-start;
+  background: var(--deck-panel);
+  border: 1px solid var(--deck-line);
+  color: var(--deck-text);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font: 600 11px/1 var(--deck-mono);
+  cursor: pointer;
+}
+.card-filters-clear:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
 
 /* --- Cards tab (v4 #11), lifted from the v4 #04 prototype's variants A and B --- */
 .card-view-switch {

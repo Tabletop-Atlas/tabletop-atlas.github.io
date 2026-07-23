@@ -29,7 +29,10 @@ export function CardFilters({
   expansions: string[]
 }) {
   const base = import.meta.env.BASE_URL
-  const isCleared = filter.elements.length === 0 && filter.kinds.length === 0 && !filter.maxCost && !filter.speed && !filter.expansion
+  // maxCost === 0 (Cost ≤ 0) is a real selection, so test for `undefined`, not falsiness —
+  // otherwise Clear greys out while the More-filters badge still counts it.
+  const isCleared =
+    filter.elements.length === 0 && filter.kinds.length === 0 && filter.maxCost === undefined && !filter.speed && !filter.expansion
 
   function toggleElement(el: Element) {
     const has = filter.elements.includes(el)
@@ -40,6 +43,15 @@ export function CardFilters({
     const has = filter.kinds.includes(kind)
     onChange({ ...filter, kinds: has ? filter.kinds.filter((k) => k !== kind) : [...filter.kinds, kind] })
   }
+
+  function toggleSpeed(speed: PowerCard['speed']) {
+    onChange({ ...filter, speed: filter.speed === speed ? undefined : speed })
+  }
+
+  // Cost/Speed/Expansion fold behind "More filters"; the badge keeps a set-but-hidden filter
+  // visible. maxCost can legitimately be 0 (Cost ≤ 0), so test for `undefined`, not falsiness.
+  const advancedCount =
+    (filter.maxCost !== undefined ? 1 : 0) + (filter.speed ? 1 : 0) + (filter.expansion ? 1 : 0)
 
   return (
     <div className="card-filters">
@@ -71,44 +83,59 @@ export function CardFilters({
         </div>
       </div>
 
-      <div className="card-filters-row filters">
-        <label>
-          Cost ≤
-          <select
-            value={filter.maxCost ?? ''}
-            onChange={(e) => onChange({ ...filter, maxCost: e.target.value === '' ? undefined : Number(e.target.value) })}
-          >
-            <option value="">Any</option>
-            {COST_OPTIONS.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
+      <details className="card-filters-more">
+        <summary>
+          More filters
+          {advancedCount > 0 && <span className="card-filters-badge">{advancedCount}</span>}
+        </summary>
+        <div className="card-filters-row filters">
+          <label>
+            Cost ≤
+            <select
+              value={filter.maxCost ?? ''}
+              onChange={(e) => onChange({ ...filter, maxCost: e.target.value === '' ? undefined : Number(e.target.value) })}
+            >
+              <option value="">Any</option>
+              {COST_OPTIONS.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </label>
+          <div className="card-filters-speed">
+            <span className="card-filters-label">Speed</span>
+            {(['Fast', 'Slow'] as const).map((speed) => (
+              <button
+                key={speed}
+                type="button"
+                className="card-filters-element"
+                aria-pressed={filter.speed === speed}
+                aria-label={speed}
+                title={speed}
+                onClick={() => toggleSpeed(speed)}
+              >
+                <img src={`${base}elements/${speed.toLowerCase()}.png`} alt={speed} />
+              </button>
             ))}
-          </select>
-        </label>
-        <label>
-          Speed
-          <select value={filter.speed ?? ''} onChange={(e) => onChange({ ...filter, speed: (e.target.value || undefined) as PowerCard['speed'] })}>
-            <option value="">Any</option>
-            <option value="Fast">Fast</option>
-            <option value="Slow">Slow</option>
-          </select>
-        </label>
-        <label>
-          Expansion
-          <select value={filter.expansion ?? ''} onChange={(e) => onChange({ ...filter, expansion: e.target.value || undefined })}>
-            <option value="">Any</option>
-            {expansions.map((exp) => (
-              <option key={exp} value={exp}>
-                {exp}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button type="button" disabled={isCleared} onClick={() => onChange({ elements: [], kinds: [] })}>
-          Clear filters
-        </button>
-      </div>
+          </div>
+          <label>
+            Expansion
+            <select value={filter.expansion ?? ''} onChange={(e) => onChange({ ...filter, expansion: e.target.value || undefined })}>
+              <option value="">Any</option>
+              {expansions.map((exp) => (
+                <option key={exp} value={exp}>
+                  {exp}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      </details>
+
+      <button type="button" className="card-filters-clear" disabled={isCleared} onClick={() => onChange({ elements: [], kinds: [] })}>
+        Clear filters
+      </button>
     </div>
   )
 }

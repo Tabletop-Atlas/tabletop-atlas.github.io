@@ -12,6 +12,12 @@ const RIVER = 'river-surges-in-sunlight'
 const seedOf = (id: string) => OWNERS_BOARD.tiers[id]
 const notSeedOf = (id: string): string => (seedOf(id) === 'S' ? 'A' : 'S')
 
+// owners-board.json is now a `cited` transcription of Red's list (read-only). Edit-behaviour
+// tests drive this personal clone instead — same id and tiers, so seedOf/notSeedOf and the
+// override storage keys still describe it, but `origin: 'personal'` so it actually takes edits.
+const PERSONAL_BOARD: TierList = { ...OWNERS_BOARD, origin: 'personal', source: undefined }
+const personalStore = (storage = memoryStorage()) => createTierStore(storage, [PERSONAL_BOARD])
+
 const CITED_LIST: TierList = {
   id: 'cited-fixture',
   name: 'A Cited List',
@@ -83,7 +89,7 @@ describe('tierStore', () => {
   })
 
   it('round-trips setTier then getTier', () => {
-    const store = createTierStore(memoryStorage())
+    const store = personalStore()
     const override = notSeedOf(LIGHTNING)
     store.setTier(LIGHTNING, override)
     expect(store.getTier(LIGHTNING)).toBe(override)
@@ -99,13 +105,13 @@ describe('tierStore', () => {
   it('edits survive a simulated reload (same backing storage, fresh store instance)', () => {
     const storage = memoryStorage()
     const override = notSeedOf(LIGHTNING)
-    createTierStore(storage).setTier(LIGHTNING, override)
-    const reloaded = createTierStore(storage)
+    personalStore(storage).setTier(LIGHTNING, override)
+    const reloaded = personalStore(storage)
     expect(reloaded.getTier(LIGHTNING)).toBe(override)
   })
 
   it('getAll overlays edits on top of the full seeded set', () => {
-    const store = createTierStore(memoryStorage())
+    const store = personalStore()
     const override = notSeedOf(LIGHTNING)
     store.setTier(LIGHTNING, override)
     const all = store.getAll()
@@ -119,7 +125,7 @@ describe('tierStore', () => {
       `spirit-island:tier-overrides:${OWNERS_BOARD.id}`,
       JSON.stringify({ seed: 'a-stale-fingerprint', overrides: { [LIGHTNING]: 'F' } }),
     )
-    const store = createTierStore(storage)
+    const store = personalStore(storage)
     expect(store.getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
     expect(store.isCustomised()).toBe(false)
   })
@@ -130,7 +136,7 @@ describe('tierStore', () => {
       `spirit-island:tier-overrides:${OWNERS_BOARD.id}`,
       JSON.stringify({ seed: 'a-stale-fingerprint', overrides: { [LIGHTNING]: 'F' } }),
     )
-    const store = createTierStore(storage)
+    const store = personalStore(storage)
     expect(store.wasDiscarded()).toBe(true)
     expect(store.getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
     expect(store.wasDiscarded()).toBe(true)
@@ -146,11 +152,11 @@ describe('tierStore', () => {
   it('survives corrupt stored JSON', () => {
     const storage = memoryStorage()
     storage.setItem(`spirit-island:tier-overrides:${OWNERS_BOARD.id}`, '{not json')
-    expect(createTierStore(storage).getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
+    expect(personalStore(storage).getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
   })
 
   it('getOverrides returns only the user edits, empty when nothing changed', () => {
-    const store = createTierStore(memoryStorage())
+    const store = personalStore()
     expect(store.getOverrides()).toEqual({})
     const override = notSeedOf(LIGHTNING)
     store.setTier(LIGHTNING, override)
@@ -158,13 +164,13 @@ describe('tierStore', () => {
   })
 
   it('getOverrides excludes a no-op edit (assigning the tier a spirit already has)', () => {
-    const store = createTierStore(memoryStorage())
+    const store = personalStore()
     store.setTier(LIGHTNING, seedOf(LIGHTNING))
     expect(store.getOverrides()).toEqual({})
   })
 
   it('reports whether the user has customised the list', () => {
-    const store = createTierStore(memoryStorage())
+    const store = personalStore()
     expect(store.isCustomised()).toBe(false)
     store.setTier(LIGHTNING, notSeedOf(LIGHTNING))
     expect(store.isCustomised()).toBe(true)
@@ -173,7 +179,7 @@ describe('tierStore', () => {
   })
 
   it('a no-op edit is not a customisation - isCustomised agrees with getOverrides', () => {
-    const store = createTierStore(memoryStorage())
+    const store = personalStore()
     store.setTier(LIGHTNING, seedOf(LIGHTNING))
     expect(store.getOverrides()).toEqual({})
     expect(store.isCustomised()).toBe(false)
@@ -186,7 +192,7 @@ describe('tierStore', () => {
         'spirit-island:tier-overrides',
         JSON.stringify({ seed: 'whatever-the-old-fingerprint-was', overrides: { [LIGHTNING]: 'F' } }),
       )
-      const store = createTierStore(storage)
+      const store = personalStore(storage)
       expect(store.getTier(LIGHTNING)).toBe('F')
       expect(store.wasDiscarded()).toBe(false)
     })
@@ -227,6 +233,19 @@ describe('tierStore', () => {
       expect(store.getTier(LIGHTNING)).toBe(SIX_BAND_LIST.tiers[LIGHTNING])
     })
 
+    it('re-crediting a list from personal to cited stops its once-taken edits shadowing the citation', () => {
+      // The real owners-board case: edits saved while personal keep a fingerprint that still
+      // matches after the flip (tiers unchanged), so only the cited read-guard — not the
+      // fingerprint discard — can suppress them. Without it, a user's edits would render under
+      // the source's name.
+      const storage = memoryStorage()
+      personalStore(storage).setTier(LIGHTNING, notSeedOf(LIGHTNING))
+      const citedNow = createTierStore(storage, [{ ...PERSONAL_BOARD, origin: 'cited', source: CITED_LIST.source }])
+      expect(citedNow.getTier(LIGHTNING)).toBe(seedOf(LIGHTNING))
+      expect(citedNow.getAll()[LIGHTNING]).toBe(seedOf(LIGHTNING))
+      expect(citedNow.isCustomised()).toBe(false)
+    })
+
     it('setTier on a cited list is refused and leaves storage untouched', () => {
       const storage = memoryStorage()
       const store = createTierStore(storage, shipped)
@@ -247,7 +266,7 @@ describe('tierStore', () => {
 
     it('resetting one personal list leaves another personal list\'s overrides intact', () => {
       const storage = memoryStorage()
-      const store = createTierStore(storage, [OWNERS_BOARD, SIX_BAND_LIST])
+      const store = createTierStore(storage, [PERSONAL_BOARD, SIX_BAND_LIST])
       store.setTier(LIGHTNING, notSeedOf(LIGHTNING))
       store.setActiveListId(SIX_BAND_LIST.id)
       store.setTier(LIGHTNING, 'F')
@@ -273,7 +292,7 @@ describe('tierStore', () => {
 
   describe('clearTier — moving a configuration to unrated (#15)', () => {
     it('clearing a seed-rated configuration makes it unrated: getTier undefined, absent from getAll', () => {
-      const store = createTierStore(memoryStorage())
+      const store = personalStore()
       store.clearTier(LIGHTNING)
       expect(store.getTier(LIGHTNING)).toBeUndefined()
       expect(LIGHTNING in store.getAll()).toBe(false)
@@ -281,13 +300,13 @@ describe('tierStore', () => {
 
     it('an un-rating persists through the existing override machinery across a simulated reload', () => {
       const storage = memoryStorage()
-      createTierStore(storage).clearTier(LIGHTNING)
-      const reloaded = createTierStore(storage)
+      personalStore(storage).clearTier(LIGHTNING)
+      const reloaded = personalStore(storage)
       expect(reloaded.getTier(LIGHTNING)).toBeUndefined()
     })
 
     it('re-assigning a tier after clearing restores it', () => {
-      const store = createTierStore(memoryStorage())
+      const store = personalStore()
       store.clearTier(LIGHTNING)
       store.setTier(LIGHTNING, 'S')
       expect(store.getTier(LIGHTNING)).toBe('S')
@@ -319,17 +338,17 @@ describe('tierStore', () => {
 
     it('an un-rating survives a backup round-trip (export overrides, import them elsewhere)', () => {
       const storageA = memoryStorage()
-      const storeA = createTierStore(storageA)
+      const storeA = personalStore(storageA)
       storeA.clearTier(LIGHTNING)
       const exported = storeA.getOverrides()
 
-      const storeB = createTierStore(memoryStorage())
-      storeB.importOverrides({ [OWNERS_BOARD.id]: exported })
+      const storeB = personalStore()
+      storeB.importOverrides({ [PERSONAL_BOARD.id]: exported })
       expect(storeB.getTier(LIGHTNING)).toBeUndefined()
     })
 
     it('a cleared configuration never leaks into the rank prior', () => {
-      const store = createTierStore(memoryStorage())
+      const store = personalStore()
       store.clearTier(LIGHTNING)
       expect(store.getRankPrior()[LIGHTNING]).toBeUndefined()
     })

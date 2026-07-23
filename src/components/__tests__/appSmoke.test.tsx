@@ -104,10 +104,12 @@ describe('app smoke', () => {
   })
 
   it('the credit line renders for the default boot state, and a cited list credits author, title and link (#18)', () => {
-    // Default boot: the owner's board — a personal list shows its personal origin, no citation.
+    // Default boot is now Red's Final Tier List — a cited list credits its author, title and link.
     const board = renderToStaticMarkup(<TierBoard />)
-    expect(board).toContain('your list')
-    expect(board).toContain('By you')
+    expect(board).toContain('By Red')
+    // The apostrophe renders HTML-escaped (Red&#x27;s), so assert an apostrophe-free substring.
+    expect(board).toContain('Final Tier List: Part 11: UPDATED 2/20/2025')
+    expect(board).toContain('href="https://www.youtube.com/watch?v=LoP2T4GO4xo"')
 
     tierStore.setActiveListId('3mbg-strength-solo-2025')
     try {
@@ -137,14 +139,16 @@ describe('app smoke', () => {
   })
 
   it('the tier board offers Edit tiers only on a personal list; a cited list gets no affordance (#15)', () => {
-    // Default active list is the owner's board (personal).
-    expect(renderToStaticMarkup(<TierBoard />)).toContain('Edit tiers')
+    // Default boot is now Red's cited list — no edit affordance.
+    const citedBoard = renderToStaticMarkup(<TierBoard />)
+    expect(citedBoard).not.toContain('Edit tiers')
+    expect(citedBoard).toContain('switch to a personal list to make changes')
 
-    tierStore.setActiveListId('3mbg-strength-solo-2025')
+    // A personal list gets the affordance.
+    const created = tierStore.createList({ name: 'Smoke Personal', type: 'strength', subject: 'configurations' })
+    tierStore.setActiveListId(created.id)
     try {
-      const citedBoard = renderToStaticMarkup(<TierBoard />)
-      expect(citedBoard).not.toContain('Edit tiers')
-      expect(citedBoard).toContain('switch to a personal list to make changes')
+      expect(renderToStaticMarkup(<TierBoard />)).toContain('Edit tiers')
     } finally {
       tierStore.setActiveListId('owners-board')
     }

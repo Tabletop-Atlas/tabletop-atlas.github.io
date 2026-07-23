@@ -1,9 +1,17 @@
 {
   "id": "owners-board",
-  "name": "Owner's board (inspired by Red's Tier List)",
+  "name": "Red's Final Tier List",
   "type": "strength",
   "subject": "configurations",
-  "origin": "personal",
+  "origin": "cited",
+  "source": {
+    "author": "Red",
+    "title": "Spirit Island: Red's Final Tier List: Part 11: UPDATED 2/20/2025",
+    "url": "https://www.youtube.com/watch?v=LoP2T4GO4xo",
+    "published": "2025",
+    "retrievedAt": "2026-07-23",
+    "method": "video-transcription"
+  },
   "tierLabels": [
     "X",
     "S",
@@ -13,7 +21,7 @@
     "D",
     "F"
   ],
-  "methodology": "Transcribed from the owner's TierMaker board (all Spirit Island spirits and aspects up to Nature Incarnate). A personal read of raw power, not fact-checked against any published source. Grown to 68 keys in v2: base spirits plus one entry per aspect, keyed '<spiritId>::<Aspect Name>', so it faithfully reproduces the owner's full TierMaker board.",
+  "methodology": "Transcribed from Red's Final Tier List (all official Spirit Island spirits and aspects up to Nature Incarnate). The tiers are Red's, not a personal re-rating; 68 keys — base spirits plus one entry per aspect, keyed '<spiritId>::<Aspect Name>' — faithfully reproduce Red's board. (Formerly mislabelled the owner's personal board 'inspired by' Red; it is Red's list, now credited as such.)",
   "verified": true,
   "tiers": {
     "lightnings-swift-strike": "C",

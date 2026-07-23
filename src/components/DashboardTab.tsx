@@ -151,22 +151,28 @@ export function DashboardTab({ initialSegment, initialSpiritId }: { initialSegme
         </ul>
       </fieldset>
 
-      <label className="dashboard-spirit-picker dashboard-selectpill">
-        Highlight my spirit
-        <select value={spiritId} onChange={(e) => setSpiritId(e.target.value)}>
-          <option value="">No spirit</option>
-          {SPIRITS.map((spirit) => (
-            <option key={spirit.id} value={spirit.id}>
-              {spirit.name}
-            </option>
-          ))}
-        </select>
-      </label>
-      {spiritId && (
-        <label className="dashboard-spirit-picker">
-          <input type="checkbox" checked={includeUniques} onChange={(e) => setIncludeUniques(e.target.checked)} />
-          Fold this spirit's unique powers into the Minor deck (hypothetical — uniques start in hand)
-        </label>
+      {/* Both controls only affect the Minor/Major power decks (element demand + folding uniques
+        * into the minor pool) — on Fear/Event they're inert, so they're hidden there. */}
+      {(segment === 'Minor' || segment === 'Major') && (
+        <>
+          <label className="dashboard-spirit-picker dashboard-selectpill">
+            Highlight my spirit
+            <select value={spiritId} onChange={(e) => setSpiritId(e.target.value)}>
+              <option value="">No spirit</option>
+              {SPIRITS.map((spirit) => (
+                <option key={spirit.id} value={spirit.id}>
+                  {spirit.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          {spiritId && (
+            <label className="dashboard-spirit-picker">
+              <input type="checkbox" checked={includeUniques} onChange={(e) => setIncludeUniques(e.target.checked)} />
+              Fold this spirit's unique powers into the Minor deck (hypothetical — uniques start in hand)
+            </label>
+          )}
+        </>
       )}
 
       {activeComposition && (
