@@ -37,6 +37,22 @@ describe('computeDifficulty', () => {
     const result = computeDifficulty({ adversary: 'England', adversaryLevel: 0, scenario: 'Blitz' })
     expect(result.total).toBe(1) // Blitz difficulty "0"
   })
+
+  it('a qualified scenario (1*) adds its figure and shows the raw string', () => {
+    const result = computeDifficulty({ adversary: 'England', adversaryLevel: 0, scenario: 'Elemental Invocation' })
+    const line = result.lines.find((l) => l.label === 'Elemental Invocation')!
+    expect(line.amount).toBe(1)
+    expect(line.value).toBe('1*')
+    expect(result.total).toBe(2)
+  })
+
+  it('a "+/- 1" scenario (Second Wave) contributes 0 and shows ±1', () => {
+    const result = computeDifficulty({ adversary: 'England', adversaryLevel: 0, scenario: 'Second Wave' })
+    const line = result.lines.find((l) => l.label === 'Second Wave')!
+    expect(line.amount).toBe(0)
+    expect(line.value).toBe('±1')
+    expect(result.total).toBe(1) // England L0 (1) + 0
+  })
 })
 
 describe('parseScenarioDifficulty', () => {
