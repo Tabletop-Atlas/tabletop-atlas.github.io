@@ -9,6 +9,8 @@ export interface Adversary {
   expansion: string
   minLevel: number
   maxLevel: number
+  /** Official per-level difficulty, index = level 0-6. Absent when the wiki doesn't publish it. */
+  difficultyByLevel?: number[]
 }
 
 export const ADVERSARIES = adversariesData.adversaries as Adversary[]

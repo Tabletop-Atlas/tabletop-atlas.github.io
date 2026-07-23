@@ -2656,11 +2656,33 @@ button:disabled {
   text-transform: capitalize;
 }
 .log-outcome[data-outcome='win'] {
-  color: var(--deck-accent);
+  color: var(--deck-win, #2e9e5b);
+}
+.log-outcome[data-outcome='loss'] {
+  color: var(--deck-loss, #c94444);
+}
+.log-chip[data-outcome='win'][data-active='true'] {
+  background: color-mix(in srgb, var(--deck-win, #2e9e5b) 18%, transparent);
+  border-color: var(--deck-win, #2e9e5b);
+  color: var(--deck-win, #2e9e5b);
+  box-shadow: 0 0 0 1px var(--deck-win, #2e9e5b);
+}
+.log-chip[data-outcome='loss'][data-active='true'] {
+  background: color-mix(in srgb, var(--deck-loss, #c94444) 18%, transparent);
+  border-color: var(--deck-loss, #c94444);
+  color: var(--deck-loss, #c94444);
+  box-shadow: 0 0 0 1px var(--deck-loss, #c94444);
 }
 .log-outcome-meta {
   display: block;
   margin-top: 0.15rem;
+}
+.log-difficulty-badge {
+  font: 600 11px/1 var(--deck-mono);
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  color: var(--deck-dim);
 }
 .log-chip-cluster {
   display: flex;

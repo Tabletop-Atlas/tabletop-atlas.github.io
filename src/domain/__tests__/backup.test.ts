@@ -60,7 +60,7 @@ describe('backup', () => {
   it('stamps the current schema version (3) and an exportedAt timestamp', () => {
     const bundle = JSON.parse(serialise(fullState))
     expect(bundle.schemaVersion).toBe(CURRENT_SCHEMA_VERSION)
-    expect(CURRENT_SCHEMA_VERSION).toBe(3)
+    expect(CURRENT_SCHEMA_VERSION).toBe(4)
     expect(typeof bundle.exportedAt).toBe('string')
   })
 

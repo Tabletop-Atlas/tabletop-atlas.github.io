@@ -6,15 +6,21 @@ import { ADVERSARIES } from '../adversaries'
  * the fetch trail). This project has previously shipped fabricated data (five invented
  * aspects) that nothing caught - this test is the same tripwire for the adversary set.
  */
-const CANONICAL_ADVERSARIES: { name: string; expansion: string; minLevel: number; maxLevel: number }[] = [
-  { name: 'Brandenburg-Prussia', expansion: 'Base', minLevel: 0, maxLevel: 6 },
-  { name: 'England', expansion: 'Base', minLevel: 0, maxLevel: 6 },
-  { name: 'Sweden', expansion: 'Base', minLevel: 0, maxLevel: 6 },
-  { name: 'France', expansion: 'Branch and Claw', minLevel: 0, maxLevel: 6 },
-  { name: 'Habsburg Monarchy', expansion: 'Jagged Earth', minLevel: 0, maxLevel: 6 },
-  { name: 'Russia', expansion: 'Jagged Earth', minLevel: 0, maxLevel: 6 },
-  { name: 'Scotland', expansion: 'Promo Pack 2 / Feather and Flame', minLevel: 0, maxLevel: 6 },
-  { name: 'Habsburg Mining Expedition', expansion: 'Nature Incarnate', minLevel: 0, maxLevel: 6 },
+const CANONICAL_ADVERSARIES: {
+  name: string
+  expansion: string
+  minLevel: number
+  maxLevel: number
+  difficultyByLevel?: number[]
+}[] = [
+  { name: 'Brandenburg-Prussia', expansion: 'Base', minLevel: 0, maxLevel: 6, difficultyByLevel: [1, 2, 4, 6, 7, 9, 10] },
+  { name: 'England', expansion: 'Base', minLevel: 0, maxLevel: 6, difficultyByLevel: [1, 3, 4, 6, 7, 9, 11] },
+  { name: 'Sweden', expansion: 'Base', minLevel: 0, maxLevel: 6, difficultyByLevel: [1, 2, 3, 5, 6, 7, 8] },
+  { name: 'France', expansion: 'Branch and Claw', minLevel: 0, maxLevel: 6, difficultyByLevel: [2, 3, 5, 7, 8, 9, 10] },
+  { name: 'Habsburg Monarchy', expansion: 'Jagged Earth', minLevel: 0, maxLevel: 6, difficultyByLevel: [2, 3, 5, 6, 8, 9, 10] },
+  { name: 'Russia', expansion: 'Jagged Earth', minLevel: 0, maxLevel: 6, difficultyByLevel: [1, 3, 4, 6, 7, 9, 11] },
+  { name: 'Scotland', expansion: 'Promo Pack 2 / Feather and Flame', minLevel: 0, maxLevel: 6, difficultyByLevel: [1, 3, 4, 6, 7, 8, 10] },
+  { name: 'Habsburg Mining Expedition', expansion: 'Nature Incarnate', minLevel: 0, maxLevel: 6, difficultyByLevel: [1, 3, 4, 5, 7, 9, 10] },
 ]
 
 describe('adversary canon', () => {
@@ -30,6 +36,14 @@ describe('adversary canon', () => {
   it('every adversary has a sane level range', () => {
     for (const adversary of ADVERSARIES) {
       expect(adversary.minLevel, adversary.name).toBeLessThanOrEqual(adversary.maxLevel)
+    }
+  })
+
+  it('every present difficultyByLevel has length 7', () => {
+    for (const adversary of ADVERSARIES) {
+      if (adversary.difficultyByLevel) {
+        expect(adversary.difficultyByLevel, adversary.name).toHaveLength(7)
+      }
     }
   })
 })

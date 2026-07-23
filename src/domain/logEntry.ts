@@ -9,3 +9,17 @@ export function clampOptionalInt(raw: string, min: number, max = Infinity): numb
   if (!Number.isFinite(n)) return undefined
   return Math.min(Math.max(Math.round(n), min), max)
 }
+
+/** "HH:MM" start/end -> "2h 15m". An end before start is read as crossing midnight (+24h).
+ * Either input missing -> undefined, never "0m" or NaN. */
+export function formatDuration(start?: string, end?: string): string | undefined {
+  if (!start || !end) return undefined
+  const [sh, sm] = start.split(':').map(Number)
+  const [eh, em] = end.split(':').map(Number)
+  if (![sh, sm, eh, em].every(Number.isFinite)) return undefined
+  let minutes = eh * 60 + em - (sh * 60 + sm)
+  if (minutes < 0) minutes += 24 * 60
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  return h > 0 ? `${h}h ${m}m` : `${m}m`
+}

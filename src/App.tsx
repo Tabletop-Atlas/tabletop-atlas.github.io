@@ -4,6 +4,7 @@ import { Browser } from './components/Browser'
 import { CardsTab } from './components/CardsTab'
 import { DashboardTab } from './components/DashboardTab'
 import { GameLog } from './components/GameLog'
+import { GlossaryTab } from './components/GlossaryTab'
 import { Homepage } from './components/Homepage'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from './components/Recommender'
 import { Settings } from './components/Settings'
@@ -11,7 +12,7 @@ import { TierBoard } from './components/TierBoard'
 
 /** 'home' is not a nav tab (#01 decision 3): the clickable logo is the only route home, and
  * while it is current no nav item matches it, so none shows active. */
-type Tab = 'home' | 'recommender' | 'browser' | 'cards' | 'dashboard' | 'tiers' | 'log' | 'settings'
+type Tab = 'home' | 'recommender' | 'browser' | 'cards' | 'dashboard' | 'tiers' | 'log' | 'glossary' | 'settings'
 
 /** Nav is fixed at both ends (#02 decision 4): Browse first, Settings last. Customise tiers is
  * dissolved (#15): tier editing is an edit mode on the Tier list tab. */
@@ -22,6 +23,7 @@ const NAV: NavItem<Tab>[] = [
   { id: 'dashboard', label: 'Dashboard' },
   { id: 'tiers', label: 'Tier list' },
   { id: 'log', label: 'Log' },
+  { id: 'glossary', label: 'Glossary' },
   { id: 'settings', label: 'Settings' },
 ]
 
@@ -44,6 +46,7 @@ function App() {
         {tab === 'dashboard' && <DashboardTab />}
         {tab === 'tiers' && <TierBoard />}
         {tab === 'log' && <GameLog />}
+        {tab === 'glossary' && <GlossaryTab />}
         {tab === 'settings' && <Settings />}
       </AppShell>
     </RecommenderProvider>

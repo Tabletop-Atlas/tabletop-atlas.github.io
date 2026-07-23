@@ -1,6 +1,6 @@
 import type { Complexity, ExpansionName } from './types'
 
-export const CURRENT_SCHEMA_VERSION = 3
+export const CURRENT_SCHEMA_VERSION = 4
 
 /** Entry shape from the PRD's game log (Seam 6, issue #06). Declared here now so schema v1
  * ships every section it will ever need — later slices populate rather than force a version bump. */
@@ -16,6 +16,14 @@ export interface LogEntry {
   blightRemaining?: number
   /** Optional free-text recap. Absent on older entries; never stored as "". */
   notes?: string
+  /** v4 (difficulty-and-glossary): a second, supporting adversary + its level. */
+  secondaryAdversary?: string
+  secondaryAdversaryLevel?: number
+  boardType?: 'classic' | 'thematic-base' | 'thematic-rebalanced'
+  /** The computed suggestion, editable by the owner at submit time — see domain/difficulty.ts. */
+  difficulty?: number
+  startTime?: string
+  endTime?: string
 }
 
 /** listId -> configId -> label. A flat map can no longer say which list an edit belongs to,

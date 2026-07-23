@@ -1,13 +1,13 @@
 {
-  "_note": "Transcribed from the Spirit Island Wiki's adversary pages (spiritislandwiki.com), one fetch per adversary, 2026-07-09. Every adversary's level range is 0 (base difficulty) through 6, confirmed individually on each adversary's own wiki page rather than assumed from one. See the Comments section of .scratch/v2/issues/16-adversary-closed-set.md for the full fetch trail.",
+  "_note": "Transcribed from the Spirit Island Wiki's adversary pages (spiritislandwiki.com), one fetch per adversary, 2026-07-09. Every adversary's level range is 0 (base difficulty) through 6, confirmed individually on each adversary's own wiki page rather than assumed from one. See the Comments section of .scratch/v2/issues/16-adversary-closed-set.md for the full fetch trail. difficultyByLevel added 2026-07-23, one wiki fetch per adversary (spiritislandwiki.com, Level Effects / escalation section, plus each page's base/leveldifficulty0 value): Brandenburg-Prussia, England (wiki notes level 6 is officially 10 but the page's own escalation table and community consensus use 11 - we take the page's table value), Sweden, France (Plantation Colony), Habsburg Monarchy (Livestock Colony), Russia, Scotland, and Habsburg Mining Expedition (published on its own page despite not appearing on the 2022 fan chart).",
   "adversaries": [
-    { "name": "Brandenburg-Prussia", "expansion": "Base", "minLevel": 0, "maxLevel": 6 },
-    { "name": "England", "expansion": "Base", "minLevel": 0, "maxLevel": 6 },
-    { "name": "Sweden", "expansion": "Base", "minLevel": 0, "maxLevel": 6 },
-    { "name": "France", "expansion": "Branch and Claw", "minLevel": 0, "maxLevel": 6 },
-    { "name": "Habsburg Monarchy", "expansion": "Jagged Earth", "minLevel": 0, "maxLevel": 6 },
-    { "name": "Russia", "expansion": "Jagged Earth", "minLevel": 0, "maxLevel": 6 },
-    { "name": "Scotland", "expansion": "Promo Pack 2 / Feather and Flame", "minLevel": 0, "maxLevel": 6 },
-    { "name": "Habsburg Mining Expedition", "expansion": "Nature Incarnate", "minLevel": 0, "maxLevel": 6 }
+    { "name": "Brandenburg-Prussia", "expansion": "Base", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [1, 2, 4, 6, 7, 9, 10] },
+    { "name": "England", "expansion": "Base", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [1, 3, 4, 6, 7, 9, 11] },
+    { "name": "Sweden", "expansion": "Base", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [1, 2, 3, 5, 6, 7, 8] },
+    { "name": "France", "expansion": "Branch and Claw", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [2, 3, 5, 7, 8, 9, 10] },
+    { "name": "Habsburg Monarchy", "expansion": "Jagged Earth", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [2, 3, 5, 6, 8, 9, 10] },
+    { "name": "Russia", "expansion": "Jagged Earth", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [1, 3, 4, 6, 7, 9, 11] },
+    { "name": "Scotland", "expansion": "Promo Pack 2 / Feather and Flame", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [1, 3, 4, 6, 7, 8, 10] },
+    { "name": "Habsburg Mining Expedition", "expansion": "Nature Incarnate", "minLevel": 0, "maxLevel": 6, "difficultyByLevel": [1, 3, 4, 5, 7, 9, 10] }
   ]
 }

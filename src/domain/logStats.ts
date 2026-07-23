@@ -16,9 +16,21 @@ export interface LogStats {
   byConfiguration: Record<string, RateStat>
   byComplexity: Partial<Record<Complexity, RateStat>>
   byAdversary: Record<string, RateStat>
+  byDifficultyBand: Record<string, RateStat>
 }
 
 const SMALL_SAMPLE_THRESHOLD = 3
+
+const DIFFICULTY_BANDS: { label: string; min: number; max: number }[] = [
+  { label: '0-2', min: 0, max: 2 },
+  { label: '3-5', min: 3, max: 5 },
+  { label: '6-8', min: 6, max: 8 },
+  { label: '9+', min: 9, max: Infinity },
+]
+
+function difficultyBand(difficulty: number): string {
+  return DIFFICULTY_BANDS.find((b) => difficulty >= b.min && difficulty <= b.max)!.label
+}
 
 function rateStat(wins: number, total: number): RateStat {
   return { wins, total, rate: total >= SMALL_SAMPLE_THRESHOLD ? wins / total : undefined }
@@ -48,11 +60,13 @@ export function computeLogStats(entries: LogEntry[], spirits: Spirit[]): LogStat
   const byConfiguration = new Map<string, { wins: number; total: number }>()
   const byComplexity = new Map<string, { wins: number; total: number }>()
   const byAdversary = new Map<string, { wins: number; total: number }>()
+  const byDifficultyBand = new Map<string, { wins: number; total: number }>()
 
   for (const entry of entries) {
     const won = entry.outcome === 'win'
     if (won) overallWins += 1
     bump(byAdversary, entry.adversary, won)
+    if (entry.difficulty !== undefined) bump(byDifficultyBand, difficultyBand(entry.difficulty), won)
     for (const player of entry.players) {
       bump(byConfiguration, player.configId, won)
       const config = configById.get(player.configId)
@@ -66,5 +80,10 @@ export function computeLogStats(entries: LogEntry[], spirits: Spirit[]): LogStat
     byConfiguration: toRecord(byConfiguration),
     byComplexity: toRecord(byComplexity) as Partial<Record<Complexity, RateStat>>,
     byAdversary: toRecord(byAdversary),
+    byDifficultyBand: Object.fromEntries(
+      DIFFICULTY_BANDS.map((b) => b.label)
+        .filter((label) => byDifficultyBand.has(label))
+        .map((label) => [label, rateStat(byDifficultyBand.get(label)!.wins, byDifficultyBand.get(label)!.total)]),
+    ),
   }
 }

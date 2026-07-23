@@ -69,6 +69,39 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     text: 'No keyword matched — an empty tag set is Unclassified, never forced into a nearest bucket.',
     source: 'context',
   },
+
+  // Event classes — the upstream card source's own constructor per card (otherCardClassifier.ts
+  // eventClassFromConstructorName), not judgment: it draws the line the source data already draws.
+  'event-class-choice': {
+    text: 'A ChoiceEventCard — the players pick between two or more listed effects.',
+    source: 'context',
+  },
+  'event-class-stage': {
+    text: 'A StageEventCard — its effect depends on the current Invader stage (I/II/III).',
+    source: 'context',
+  },
+  'event-class-terrorLevel': {
+    text: 'A TerrorLevelEventCard — its effect depends on the current Terror Level.',
+    source: 'context',
+  },
+  'event-class-healthyBlightedLand': {
+    text: 'A HealthyBlightedLandEventCard — its effect depends on whether a land is healthy or Blighted.',
+    source: 'context',
+  },
+  'event-class-adversary': {
+    text: 'An AdversaryEvent — printed by the adversary deck rather than the base Event deck.',
+    source: 'context',
+  },
+  'event-class-unclassified': {
+    text: 'No event-class constructor matched — an empty class is Unclassified, never forced into a nearest bucket.',
+    source: 'context',
+  },
+
+  // Difficulty — the additive model computed by domain/difficulty.ts.
+  difficulty: {
+    text: 'An ≈ approximate suggestion, additive from: the primary adversary\'s printed per-level number, plus (if a second adversary is set) the higher of the two difficulties plus ~60% of the lower, plus a board modifier (Thematic·base +3, Thematic·rebalanced +1, Classic +0), plus the picked scenario\'s printed difficulty. Per-level adversary numbers are official (printed on the panel); the board and second-adversary modifiers are the community difficulty chart\'s own approximations. The stored value is editable — this is a starting point, not a locked score.',
+    source: 'owner',
+  },
 }
 
 export function glossaryEntry(id: string): GlossaryEntry | undefined {

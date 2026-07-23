@@ -3,11 +3,19 @@ import spiritsData from '../data/spirits.json'
 import { ADVERSARIES, findAdversary } from '../domain/adversaries'
 import type { LogEntry } from '../domain/backup'
 import { expand } from '../domain/configurations'
+import { type BoardType, computeDifficulty } from '../domain/difficulty'
 import { gameLog } from '../domain/gameLog'
-import { clampOptionalInt } from '../domain/logEntry'
+import { clampOptionalInt, formatDuration } from '../domain/logEntry'
 import { computeLogStats, type RateStat } from '../domain/logStats'
+import { SCENARIOS } from '../domain/scenarios'
 import type { Spirit } from '../domain/types'
 import { AvatarChip } from './AvatarChip'
+
+const BOARD_TYPES: { value: BoardType; label: string }[] = [
+  { value: 'classic', label: 'Classic' },
+  { value: 'thematic-base', label: 'Thematic · base' },
+  { value: 'thematic-rebalanced', label: 'Thematic · rebalanced' },
+]
 
 const spirits = spiritsData as Spirit[]
 const configurations = expand(spirits)
@@ -61,11 +69,17 @@ export function GameLog() {
   const [players, setPlayers] = useState<PlayerRow[]>([{ ...EMPTY_PLAYER }])
   const [adversary, setAdversary] = useState('')
   const [adversaryLevel, setAdversaryLevel] = useState(0)
+  const [secondaryAdversary, setSecondaryAdversary] = useState('')
+  const [secondaryAdversaryLevel, setSecondaryAdversaryLevel] = useState(0)
+  const [boardType, setBoardType] = useState<BoardType>('classic')
   const [scenario, setScenario] = useState('')
   const [outcome, setOutcome] = useState<'win' | 'loss'>('win')
   const [terrorLevel, setTerrorLevel] = useState('')
   const [blightRemaining, setBlightRemaining] = useState('')
   const [notes, setNotes] = useState('')
+  const [difficulty, setDifficulty] = useState('')
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
   const [undoEntry, setUndoEntry] = useState<LogEntry | null>(null)
   const undoTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
@@ -83,6 +97,9 @@ export function GameLog() {
 
   const canSubmit = adversary.trim().length > 0 && players.every((p) => p.name.trim() && p.configId)
   const selectedAdversary = findAdversary(adversary)
+  const selectedSecondaryAdversary = findAdversary(secondaryAdversary)
+  const selectedPlayerSpirits = players.map((p) => (p.configId ? spiritForConfig(p.configId) : undefined))
+  const duration = formatDuration(startTime, endTime)
 
   const handleSetAdversary = (name: string) => {
     setAdversary(name)
@@ -99,6 +116,40 @@ export function GameLog() {
     setAdversaryLevel(found ? Math.min(Math.max(level, found.minLevel), found.maxLevel) : level)
   }
 
+  const handleSetSecondaryAdversary = (name: string) => {
+    setSecondaryAdversary(name)
+    const found = findAdversary(name)
+    if (found) setSecondaryAdversaryLevel((level) => Math.min(Math.max(level, found.minLevel), found.maxLevel))
+  }
+
+  const handleSetSecondaryAdversaryLevel = (raw: string) => {
+    const level = Number(raw)
+    if (!Number.isFinite(level)) return
+    const found = findAdversary(secondaryAdversary)
+    setSecondaryAdversaryLevel(found ? Math.min(Math.max(level, found.minLevel), found.maxLevel) : level)
+  }
+
+  const difficultyBreakdown = useMemo(
+    () =>
+      computeDifficulty({
+        adversary,
+        adversaryLevel,
+        secondaryAdversary: secondaryAdversary || undefined,
+        secondaryAdversaryLevel: secondaryAdversary ? secondaryAdversaryLevel : undefined,
+        boardType,
+        scenario: scenario || undefined,
+      }),
+    [adversary, adversaryLevel, secondaryAdversary, secondaryAdversaryLevel, boardType, scenario],
+  )
+
+  // Re-seeds the editable difficulty field whenever the setup that produced the suggestion
+  // changes; doesn't fire on keystrokes in the difficulty field itself, so an override survives
+  // until the owner changes adversary/level/board/scenario again.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setDifficulty(difficultyBreakdown.total !== undefined ? String(difficultyBreakdown.total) : '')
+  }, [difficultyBreakdown.total])
+
   const handleSubmit = () => {
     if (!canSubmit) return
     gameLog.append({
@@ -106,6 +157,9 @@ export function GameLog() {
       players,
       adversary: adversary.trim(),
       adversaryLevel,
+      secondaryAdversary: secondaryAdversary || undefined,
+      secondaryAdversaryLevel: secondaryAdversary ? secondaryAdversaryLevel : undefined,
+      boardType,
       scenario: scenario.trim() || undefined,
       outcome,
       // #17: Terror Level only ever reaches 3 (confirmed against the rulebook - there is no
@@ -114,15 +168,24 @@ export function GameLog() {
       terrorLevel: clampOptionalInt(terrorLevel, 1, 3),
       blightRemaining: clampOptionalInt(blightRemaining, 0),
       notes: notes.trim() || undefined,
+      difficulty: clampOptionalInt(difficulty, 0),
+      startTime: startTime || undefined,
+      endTime: endTime || undefined,
     })
     setPlayers([{ ...EMPTY_PLAYER }])
     setAdversary('')
     setAdversaryLevel(0)
+    setSecondaryAdversary('')
+    setSecondaryAdversaryLevel(0)
+    setBoardType('classic')
     setScenario('')
     setOutcome('win')
     setTerrorLevel('')
     setBlightRemaining('')
     setNotes('')
+    setDifficulty('')
+    setStartTime('')
+    setEndTime('')
     setVersion((v) => v + 1)
   }
 
@@ -185,6 +248,9 @@ export function GameLog() {
                 ))}
               </select>
             </label>
+            {selectedPlayerSpirits[i] && (
+              <AvatarChip kind="spirit" spirit={selectedPlayerSpirits[i]!} name={configLabel(player.configId)} />
+            )}
             {players.length > 1 && (
               <button type="button" className="log-chip-button" onClick={() => setPlayers((rows) => rows.filter((_, j) => j !== i))}>
                 Remove
@@ -221,13 +287,71 @@ export function GameLog() {
               onChange={(e) => handleSetAdversaryLevel(e.target.value)}
             />
           </label>
+          {adversary && <AvatarChip kind="adversary" name={adversary} />}
+        </div>
+
+        <div className="log-row">
+          <label className="log-field log-field-grow">
+            <span className="log-field-label">Second adversary (optional)</span>
+            <select
+              className="log-select"
+              value={secondaryAdversary}
+              onChange={(e) => handleSetSecondaryAdversary(e.target.value)}
+            >
+              <option value="">None</option>
+              {ADVERSARIES.filter((a) => a.name !== adversary).map((a) => (
+                <option key={a.name} value={a.name}>
+                  {a.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="log-field">
+            <span className="log-field-label">Level</span>
+            <input
+              className="log-input log-input-narrow"
+              type="number"
+              min={selectedSecondaryAdversary?.minLevel ?? 0}
+              max={selectedSecondaryAdversary?.maxLevel ?? 6}
+              value={secondaryAdversaryLevel}
+              disabled={!secondaryAdversary}
+              onChange={(e) => handleSetSecondaryAdversaryLevel(e.target.value)}
+            />
+          </label>
+          {secondaryAdversary && <AvatarChip kind="adversary" name={secondaryAdversary} />}
+        </div>
+
+        <div className="log-row">
+          <span className="log-field-label">Board</span>
+          <div className="log-chip-group" role="group" aria-label="Board type">
+            {BOARD_TYPES.map(({ value, label }) => (
+              <button
+                key={value}
+                type="button"
+                className="log-chip"
+                aria-pressed={boardType === value}
+                data-active={boardType === value}
+                onClick={() => setBoardType(value)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="log-row">
           <label className="log-field log-field-grow">
             <span className="log-field-label">Scenario (optional)</span>
-            <input className="log-input" type="text" value={scenario} onChange={(e) => setScenario(e.target.value)} />
+            <select className="log-select" value={scenario} onChange={(e) => setScenario(e.target.value)}>
+              <option value="">None</option>
+              {SCENARIOS.map((s) => (
+                <option key={s.name} value={s.name}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
           </label>
+          {scenario && <AvatarChip kind="scenario" name={scenario} />}
         </div>
 
         <div className="log-row">
@@ -238,6 +362,7 @@ export function GameLog() {
                 key={value}
                 type="button"
                 className="log-chip"
+                data-outcome={value}
                 aria-pressed={outcome === value}
                 data-active={outcome === value}
                 onClick={() => setOutcome(value)}
@@ -269,6 +394,45 @@ export function GameLog() {
               min={0}
               value={blightRemaining}
               onChange={(e) => setBlightRemaining(e.target.value)}
+              placeholder="—"
+            />
+          </label>
+        </div>
+
+        <div className="log-row">
+          <label className="log-field">
+            <span className="log-field-label">Start (optional)</span>
+            <input className="log-input log-input-narrow" type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+          </label>
+          <label className="log-field">
+            <span className="log-field-label">End (optional)</span>
+            <input className="log-input log-input-narrow" type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+          </label>
+          {duration && <span className="meta">{duration}</span>}
+        </div>
+
+        <div className="log-field-block">
+          <span className="log-field-label">Difficulty (≈ approximate)</span>
+          {difficultyBreakdown.lines.length === 0 ? (
+            <p className="meta">Pick an adversary to see a suggestion.</p>
+          ) : (
+            <ul className="log-stat-list">
+              {difficultyBreakdown.lines.map((line, i) => (
+                <li key={i}>
+                  {line.label}: {line.value} ({line.amount >= 0 ? '+' : ''}
+                  {line.amount})
+                </li>
+              ))}
+            </ul>
+          )}
+          <label className="log-field">
+            <span className="log-field-label">Total</span>
+            <input
+              className="log-input log-input-narrow"
+              type="number"
+              min={0}
+              value={difficulty}
+              onChange={(e) => setDifficulty(e.target.value)}
               placeholder="—"
             />
           </label>
@@ -328,6 +492,18 @@ export function GameLog() {
                 </li>
               ))}
             </ul>
+            {Object.keys(stats.byDifficultyBand).length > 0 && (
+              <>
+                <p className="meta">Win rate by difficulty:</p>
+                <ul className="log-stat-list">
+                  {Object.entries(stats.byDifficultyBand).map(([band, stat]) => (
+                    <li key={band}>
+                      {band}: {formatRate(stat)}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </>
         )}
       </fieldset>
@@ -375,6 +551,9 @@ export function GameLog() {
                           {entry.blightRemaining !== undefined ? `Blight remaining ${entry.blightRemaining}` : null}
                         </span>
                       )}
+                      {formatDuration(entry.startTime, entry.endTime) && (
+                        <span className="meta log-outcome-meta">{formatDuration(entry.startTime, entry.endTime)}</span>
+                      )}
                     </td>
                     <td data-label="Spirits">
                       <span className="log-chip-cluster">
@@ -395,6 +574,7 @@ export function GameLog() {
                       <span className="log-chip-cluster">
                         <AvatarChip kind="adversary" name={entry.adversary} />
                         <span className="meta">Lv {entry.adversaryLevel}</span>
+                        {entry.difficulty !== undefined && <span className="log-difficulty-badge">Diff {entry.difficulty}</span>}
                       </span>
                     </td>
                     <td data-label="Scenario">

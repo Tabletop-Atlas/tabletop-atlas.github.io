@@ -51,6 +51,7 @@ describe('computeLogStats', () => {
     expect(stats.byConfiguration).toEqual({})
     expect(stats.byComplexity).toEqual({})
     expect(stats.byAdversary).toEqual({})
+    expect(stats.byDifficultyBand).toEqual({})
   })
 
   it('counts games played as the number of entries', () => {
@@ -126,5 +127,21 @@ describe('computeLogStats', () => {
     expect(stats.overall.total).toBe(1)
     expect(stats.byConfiguration[lowSpirit.id].total).toBe(1)
     expect(stats.byConfiguration[highSpirit.id].total).toBe(1)
+  })
+
+  it('buckets entries by difficulty band and excludes difficulty-less entries', () => {
+    const entries = [
+      entry({ outcome: 'win', difficulty: 1 }),
+      entry({ outcome: 'loss', difficulty: 4 }),
+      entry({ outcome: 'win', difficulty: 7 }),
+      entry({ outcome: 'win', difficulty: 12 }),
+      entry({ outcome: 'loss' }), // no difficulty - excluded from the band stat
+    ]
+    const stats = computeLogStats(entries, spirits)
+    expect(stats.byDifficultyBand['0-2']).toEqual({ wins: 1, total: 1, rate: undefined })
+    expect(stats.byDifficultyBand['3-5']).toEqual({ wins: 0, total: 1, rate: undefined })
+    expect(stats.byDifficultyBand['6-8']).toEqual({ wins: 1, total: 1, rate: undefined })
+    expect(stats.byDifficultyBand['9+']).toEqual({ wins: 1, total: 1, rate: undefined })
+    expect(stats.overall.total).toBe(5)
   })
 })

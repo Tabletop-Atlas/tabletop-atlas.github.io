@@ -14,6 +14,7 @@ import { DashboardTab } from '../DashboardTab'
 import { EventValenceView } from '../EventValenceView'
 import { FearImpactView } from '../FearImpactView'
 import { GameLog } from '../GameLog'
+import { GlossaryTab } from '../GlossaryTab'
 import { RecommenderMain, RecommenderProvider, RecommenderSide } from '../Recommender'
 import { Settings } from '../Settings'
 import { SpiritDetail } from '../SpiritDetail'
@@ -59,11 +60,11 @@ describe('app smoke', () => {
     expect(html.match(/>Home</g)).toBeNull()
   })
 
-  it('nav reads exactly Browse, Recommend, Archive, Dashboard, Tier list, Log, Settings (#13/#14/#15/deck-dashboard #06)', () => {
+  it('nav reads exactly Browse, Recommend, Archive, Dashboard, Tier list, Log, Glossary, Settings (#13/#14/#15/deck-dashboard #06)', () => {
     const html = renderToStaticMarkup(<App />)
     const nav = html.slice(html.indexOf('deck-nav'), html.indexOf('</nav>'))
     const labels = [...nav.matchAll(/<button[^>]*>([^<]+)<\/button>/g)].map((m) => m[1])
-    expect(labels).toEqual(['Browse', 'Recommend', 'Archive', 'Dashboard', 'Tier list', 'Log', 'Settings'])
+    expect(labels).toEqual(['Browse', 'Recommend', 'Archive', 'Dashboard', 'Tier list', 'Log', 'Glossary', 'Settings'])
   })
 
   it('phone shell: the hamburger toggle carries aria-expanded/aria-controls/label, and the closed drawer still holds the nav (mobile-panel)', () => {
@@ -75,7 +76,7 @@ describe('app smoke', () => {
     // lives inside the drawer element itself.
     const drawer = html.slice(html.indexOf('id="deck-drawer"'), html.indexOf('</nav>'))
     expect(drawer).toContain('deck-nav')
-    for (const label of ['Browse', 'Recommend', 'Archive', 'Dashboard', 'Tier list', 'Log', 'Settings']) {
+    for (const label of ['Browse', 'Recommend', 'Archive', 'Dashboard', 'Tier list', 'Log', 'Glossary', 'Settings']) {
       expect(drawer).toContain(`>${label}<`)
     }
     // The top bar's logo is a second Home button — still the only route home, no >Home< label.
@@ -376,8 +377,7 @@ describe('app smoke', () => {
     expect(event).toContain('>Harmful<')
     expect(event).toContain('>Mixed<')
     expect(event).toContain('>Beneficial<')
-    // Event classes have no in-repo definition → plain text (no term button wrapping Choice alone
-    // would be hard to assert; the owner-TODO list documents the absence). Labels still render.
+    // difficulty-and-glossary #06 filled the event-class-* entries → term button wraps the label.
     expect(event).toContain('Choice')
   })
 
@@ -478,9 +478,22 @@ describe('app smoke', () => {
       expect(html).toContain('log-delete')
       expect(html).toContain('only in this browser')
       expect(html).toContain('backup export')
+      // difficulty-and-glossary #03/#04: second adversary, board toggle, scenario dropdown, breakdown.
+      expect(html).toContain('Second adversary (optional)')
+      expect(html).toContain('Thematic · base')
+      expect(html).toContain('Difficulty (≈ approximate)')
     } finally {
       gameLog.replaceAll(previous)
     }
+  })
+
+  it('the Glossary tab renders its categories (difficulty-and-glossary #06)', () => {
+    const html = renderToStaticMarkup(<GlossaryTab />)
+    expect(html).toContain('Glossary')
+    for (const category of ['Fear impact', 'Event valence', 'Fear tags', 'Event classes', 'Difficulty']) {
+      expect(html).toContain(category)
+    }
+    expect(html).toContain('England')
   })
 
   it('the Dashboard Event segment states plainly that a base-game-only set has no events, rather than an error or blank screen (deck-dashboard #12)', () => {
