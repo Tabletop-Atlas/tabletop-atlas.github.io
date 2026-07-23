@@ -550,13 +550,13 @@ describe('app smoke', () => {
     expect(htmlNoCards).toContain('panels/no-cards-test-spirit-back.webp')
   })
 
-  it('gallery arrow-nav (#01): the keydown step clamps at both ends rather than wrapping (SpiritDetail delegates to this)', () => {
+  it('gallery arrow-nav (#01): the keydown step loops at both ends (SpiritDetail delegates to this)', () => {
     const length = 6
-    // Walking right past the last index stays clamped at the last index, not wraps to 0.
-    expect(stepGalleryIndex(length - 1, 'right', length)).toBe(length - 1)
+    // Walking right past the last index loops to the first.
+    expect(stepGalleryIndex(length - 1, 'right', length)).toBe(0)
     expect(stepGalleryIndex(3, 'right', length)).toBe(4)
-    // Walking left past the first index stays clamped at 0, not wraps to the last index.
-    expect(stepGalleryIndex(0, 'left', length)).toBe(0)
+    // Walking left past the first index loops to the last.
+    expect(stepGalleryIndex(0, 'left', length)).toBe(length - 1)
     expect(stepGalleryIndex(2, 'left', length)).toBe(1)
   })
 

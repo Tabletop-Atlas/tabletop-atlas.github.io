@@ -657,6 +657,60 @@ button:disabled {
   font-family: 'Reem Kufi', ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Shared search-field styling (#03/#04): a pill input with a drawn magnifying-glass icon, used
+ * by Browse's own search and both Archive filter panels (`.card-filters-row`) so all three read
+ * as one system rather than three one-off inputs. */
+.search-field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.search-field {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.search-field::before,
+.search-field::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+.search-field::before {
+  left: 0.7rem;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--deck-dim);
+  border-radius: 50%;
+}
+.search-field::after {
+  left: 1.32rem;
+  top: 1.05rem;
+  width: 6px;
+  height: 1.5px;
+  background: var(--deck-dim);
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+.search-field input[type='text'] {
+  background: var(--deck-panel);
+  border: 1px solid var(--deck-line);
+  border-radius: 999px;
+  color: var(--deck-text);
+  font: 13px/1.2 'Reem Kufi', ui-sans-serif, system-ui, sans-serif;
+  padding: 0.4rem 0.85rem 0.4rem 1.85rem;
+  min-width: 200px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.search-field input[type='text']::placeholder {
+  color: var(--deck-dim);
+}
+.search-field input[type='text']:focus {
+  outline: none;
+  border-color: var(--deck-accent);
+  box-shadow: 0 0 0 3px var(--deck-accent-bg);
+}
+
 .spirit-grid {
   list-style: none;
   margin: 0;

@@ -39,14 +39,16 @@ export function OtherCardFilters({
   return (
     <div className="card-filters">
       <div className="card-filters-row">
-        <label>
+        <label className="search-field-label">
           Search by name
-          <input
-            type="text"
-            value={filter.name ?? ''}
-            onChange={(e) => onChange({ ...filter, name: e.target.value || undefined })}
-            placeholder="Card name…"
-          />
+          <span className="search-field">
+            <input
+              type="text"
+              value={filter.name ?? ''}
+              onChange={(e) => onChange({ ...filter, name: e.target.value || undefined })}
+              placeholder="Card name…"
+            />
+          </span>
         </label>
       </div>
       {segment === 'Fear' && (

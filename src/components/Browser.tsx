@@ -78,14 +78,16 @@ export function Browser({
     <section>
       <h2>Browse spirits</h2>
       <div className="filters">
-        <label>
+        <label className="search-field-label">
           Search by name
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Spirit or aspect name…"
-          />
+          <span className="search-field">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Spirit or aspect name…"
+            />
+          </span>
         </label>
         <label>
           Expansion
