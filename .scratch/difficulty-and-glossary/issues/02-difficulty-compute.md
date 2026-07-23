@@ -1,6 +1,6 @@
 # 02 — Difficulty computation (pure domain function)
 
-Status: ready-for-agent
+Status: done
 Parent: ../PRD.md
 
 ## What to build
@@ -47,3 +47,11 @@ reusable elsewhere.
 ## Blocked by
 
 - 01 (needs `difficultyByLevel` on the dataset).
+
+## Comments
+
+- Implemented 2026-07-23 as `src/domain/difficulty.ts` (`computeDifficulty` + exported
+  `parseScenarioDifficulty`). No React/storage imports. `difficulty.test.ts` covers primary-only,
+  primary+second, each board type, a clean-integer scenario, a `1*` scenario, and the `+/- 1`
+  scenario end-to-end through `computeDifficulty` (added after code review flagged the pipeline
+  path as under-tested against the letter of the acceptance criteria).

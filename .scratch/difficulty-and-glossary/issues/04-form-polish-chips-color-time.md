@@ -1,6 +1,6 @@
 # 04 — Log form polish: preview chips, win/loss color, start/end time
 
-Status: ready-for-agent
+Status: done
 Parent: ../PRD.md
 
 ## What to build
@@ -34,3 +34,11 @@ Three independent quality-of-life touches on the form.
 ## Blocked by
 
 - 03 (schema fields + form structure). Independent of 05/06 otherwise.
+
+## Comments
+
+- Implemented 2026-07-23. `AvatarChip` previews added beside each player/adversary/second-adversary
+  picker (and, beyond the letter of this issue but consistent with its intent, the scenario picker
+  too). Win/loss colored via `data-outcome` on both the history badge and the form's Outcome chip
+  group, text label always present. `formatDuration` added to `logEntry.ts` with a unit test
+  (same-evening, past-midnight, missing input); shown in the form and the history row.

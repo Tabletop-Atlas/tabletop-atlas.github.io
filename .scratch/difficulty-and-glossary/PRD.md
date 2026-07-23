@@ -1,6 +1,6 @@
 # Game difficulty + browsable glossary
 
-Status: needs-triage
+Status: done
 
 ## Problem Statement
 
@@ -136,3 +136,10 @@ own approximations, which is why difficulty is surfaced as "≈" and stays edita
 discipline is the repo's standing one — a tripwire test on any new dataset, absence over estimation.
 Source chart: `Spirit_Island_Difficulty_Chart_with_Expansions_053122v2.pdf` (a community
 compilation; used for the modifier constants and cited, not for the per-level numbers).
+
+## Comments
+
+- All six issues implemented and merged 2026-07-23 (commits `9c7a82d`, `e2c5c6f`, pushed to
+  `main`). See each issue's own `## Comments` for specifics. Passed both code-review axes
+  (Standards, Spec) with only minor judgement-call findings; the one concrete gap (untested
+  end-to-end `+/- 1` scenario path) was closed before merge.

@@ -1,6 +1,6 @@
 # 05 — History difficulty badge + win-rate-by-difficulty stat
 
-Status: ready-for-agent
+Status: done
 Parent: ../PRD.md
 
 ## What to build
@@ -25,3 +25,11 @@ Surface the recorded difficulty in the two read views.
 ## Blocked by
 
 - 03 (entries must be able to carry `difficulty`). Independent of 04/06.
+
+## Comments
+
+- Implemented 2026-07-23. History row shows a "Diff N" badge next to the level when
+  `entry.difficulty` is present. `computeLogStats` gained `byDifficultyBand` (0-2/3-5/6-8/9+),
+  rendered under a "Win rate by difficulty" heading in band order; difficulty-less entries are
+  excluded from the band stat but still counted in `overall`, per
+  `logStats.test.ts`.

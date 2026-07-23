@@ -1,6 +1,6 @@
 # 03 — Log form: second adversary, board, scenario dropdown, difficulty field + schema v4
 
-Status: ready-for-agent
+Status: done
 Parent: ../PRD.md
 
 ## What to build
@@ -42,3 +42,12 @@ Form (`GameLog.tsx`):
 ## Blocked by
 
 - 02 (uses `computeDifficulty`).
+
+## Comments
+
+- Implemented 2026-07-23. `CURRENT_SCHEMA_VERSION` bumped to 4; all new `LogEntry` fields
+  optional. `GameLog.tsx` gained the second-adversary picker (mirrors the primary's clamp
+  behaviour), the board segmented control, and the scenario `<select>` over `scenarios.json`. The
+  difficulty breakdown re-seeds the editable total whenever the underlying setup changes (not on
+  every keystroke in the difficulty field itself), so an override survives until the setup
+  changes again. `appSmoke.test.tsx` asserts the new controls render.

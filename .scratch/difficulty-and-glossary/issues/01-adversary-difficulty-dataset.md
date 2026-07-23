@@ -1,6 +1,6 @@
 # 01 — Adversary per-level difficulty dataset
 
-Status: ready-for-agent
+Status: done
 Parent: ../PRD.md
 
 ## What to build
@@ -37,3 +37,12 @@ Habsburg Monarchy 2/3/5/6/8/9/10. Habsburg Mining Expedition: not on the chart �
 ## Blocked by
 
 - None. Foundation for 02 and 06.
+
+## Comments
+
+- Implemented 2026-07-23. Fetched each adversary's own Spirit Island Wiki page directly (raw
+  wikitext `leveldifficulty0`-`leveldifficulty6` params where present, escalation-table values
+  otherwise). All values match the PRD's 2022 fan-chart reference except Scotland L6 (wiki: 10,
+  chart: 9 — wiki wins) and Habsburg Mining Expedition, which the chart omits but the wiki
+  publishes in full (`[1, 3, 4, 5, 7, 9, 10]`) — included, since it's sourced. `_note` updated
+  with the fetch trail; `adversaryCanon.test.ts` pins all values and a length-7 tripwire.

@@ -1,6 +1,6 @@
 # 06 — Glossary tab + missing event-class & difficulty terms
 
-Status: ready-for-agent
+Status: done
 Parent: ../PRD.md
 
 ## What to build
@@ -40,3 +40,13 @@ Make the glossary browsable and fill its gaps. The `Term`/`GLOSSARY` infrastruct
 
 - 01 (Difficulty table reads `difficultyByLevel`). The glossary-entry + tab work is otherwise
   independent and can start in parallel.
+
+## Comments
+
+- Implemented 2026-07-23. Added the five `event-class-*` entries (sourced from
+  `otherCardClassifier.ts`'s `EVENT_CLASS_BY_CONSTRUCTOR` — the upstream card source's own
+  constructor per card, not judgment) plus a `difficulty` entry (owner-authored prose). New
+  `GlossaryTab.tsx` groups every `GLOSSARY` entry by id-prefix predicate (no hardcoded per-entry
+  list, so a future entry needs no page edit) and renders the Difficulty section as a table built
+  live from `ADVERSARIES`, citing both sources; an adversary with no `difficultyByLevel` shows a
+  blank cell. All event classes were sourceable — no owner-TODO list needed.
