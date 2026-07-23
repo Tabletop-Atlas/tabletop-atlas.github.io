@@ -140,12 +140,12 @@ describe('computeElementDemand', () => {
     expect(computeElementDemand('nope', [spirit('s', ['Fire'])], [], [], 4)).toBeUndefined()
   })
 
-  it('carries the aspect-modifies-innates flag through from innateThresholds', () => {
+  it('carries the aspect-modifies-innates flag through from innateThresholds, for the selected aspect', () => {
     const modified = {
       ...spirit('s', ['Fire']),
       aspects: [{ name: 'A', delta: 'Replaces its Innate power.', expansion: 'Base' }],
     } as Spirit
-    const result = must(computeElementDemand('s', [modified], [innate('s', [{ Fire: 1 }])], [], 4))
+    const result = must(computeElementDemand('s', [modified], [innate('s', [{ Fire: 1 }])], [], 4, 'A'))
     expect(result.aspectModifiesInnates).toBe(true)
   })
 })

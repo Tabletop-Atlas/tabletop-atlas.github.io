@@ -108,8 +108,9 @@ export function computeElementDemand(
   innatePowers: InnatePower[],
   cards: PowerCard[],
   requestedDrawCount: number,
+  aspectName?: string,
 ): ElementDemandSupply | undefined {
-  const thresholds = innateThresholdsFor(spiritId, spirits, innatePowers)
+  const thresholds = innateThresholdsFor(spiritId, spirits, innatePowers, aspectName)
   if (!thresholds) return undefined
 
   const affinity = new Set(spirits.find((s) => s.id === spiritId)?.elements ?? [])

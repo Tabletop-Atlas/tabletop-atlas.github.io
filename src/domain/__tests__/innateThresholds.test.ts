@@ -48,14 +48,19 @@ describe('innateThresholdsFor', () => {
     expect(innateThresholdsFor('nope', [LIGHTNING, RIVER], POWERS)).toBeUndefined()
   })
 
-  it('groups a spirit\'s own innate powers and flags an aspect whose delta mentions "innate"', () => {
+  it('groups a spirit\'s own innate powers, unflagged with no aspect selected', () => {
     const result = innateThresholdsFor('lightnings-swift-strike', [LIGHTNING, RIVER], POWERS)
     expect(result?.powers).toEqual([POWERS[0]])
+    expect(result?.aspectModifiesInnates).toBe(false)
+  })
+
+  it('flags the selected aspect when its own delta mentions "innate"', () => {
+    const result = innateThresholdsFor('lightnings-swift-strike', [LIGHTNING, RIVER], POWERS, 'Pandemonium')
     expect(result?.aspectModifiesInnates).toBe(true)
   })
 
-  it('does not flag a spirit whose aspects never mention "innate"', () => {
-    const result = innateThresholdsFor('river-surges-in-sunlight', [LIGHTNING, RIVER], POWERS)
+  it('does not flag a selected aspect whose delta never mentions "innate"', () => {
+    const result = innateThresholdsFor('river-surges-in-sunlight', [LIGHTNING, RIVER], POWERS, 'Sunshine')
     expect(result?.aspectModifiesInnates).toBe(false)
   })
 

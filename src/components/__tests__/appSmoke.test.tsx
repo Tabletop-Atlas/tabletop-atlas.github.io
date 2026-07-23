@@ -293,7 +293,7 @@ describe('app smoke', () => {
   })
 
   it('a spirit whose aspect modifies its innate(s) carries the base-thresholds caption (element-demand #02)', () => {
-    const html = renderToStaticMarkup(<DashboardTab initialSpiritId="lightnings-swift-strike" />)
+    const html = renderToStaticMarkup(<DashboardTab initialSpiritId="lightnings-swift-strike::Pandemonium" />)
     expect(html).toContain('Thresholds shown are the base spirit&#x27;s')
   })
 

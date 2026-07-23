@@ -17,12 +17,21 @@ export interface SpiritInnateThresholds {
  * picture. No modified-innate data exists to show instead (#15 transcribed base panels only) —
  * the caption states the limitation rather than guessing at the aspect's own numbers.
  */
-export function innateThresholdsFor(spiritId: string, spirits: Spirit[], innatePowers: InnatePower[]): SpiritInnateThresholds | undefined {
+export function innateThresholdsFor(
+  spiritId: string,
+  spirits: Spirit[],
+  innatePowers: InnatePower[],
+  aspectName?: string,
+): SpiritInnateThresholds | undefined {
   const spirit = spirits.find((s) => s.id === spiritId)
   if (!spirit) return undefined
 
   const powers = innatePowers.filter((p) => p.spirit === spiritId)
-  const aspectModifiesInnates = spirit.aspects.some((a) => a.delta?.toLowerCase().includes('innate') ?? false)
+  // With an aspect selected, the caption should warn about *that* aspect specifically, not "some
+  // aspect of this spirit somewhere" - a base-spirit view needs no warning at all.
+  const aspectModifiesInnates = aspectName
+    ? (spirit.aspects.find((a) => a.name === aspectName)?.delta?.toLowerCase().includes('innate') ?? false)
+    : false
 
   return { spiritId, powers, aspectModifiesInnates }
 }
